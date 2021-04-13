@@ -44,13 +44,13 @@ public class User {
     @JsonBackReference
     private List<FriendList> friends;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "members")
-    private List<GroupMembers> groupMembers;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
+    private List<GroupMember> groupMember;
 
     public User() {
     }
 
-    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMembers> groupMembers) {
+    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -58,7 +58,7 @@ public class User {
         this.password = password;
         this.profile_image = profile_image;
         this.friends = friends;
-        this.groupMembers = groupMembers;
+        this.groupMember = groupMember;
     }
 
     // Copy constructor an alternative for clone
@@ -104,9 +104,9 @@ public class User {
 
     public void setFriends(List<FriendList> friends) { this.friends = friends; }
 
-    public List<GroupMembers> getGroupMembers() { return groupMembers; }
+    public List<GroupMember> getGroupMember() { return groupMember; }
 
-    public void setGroupMembers(List<GroupMembers> groupMembers) { this.groupMembers = groupMembers; }
+    public void setGroupMember(List<GroupMember> groupMember) { this.groupMember = groupMember; }
 
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 package com.trippyTravel.controllers;
 
-import com.trippyTravel.models.Groups;
+import com.trippyTravel.models.Group;
 import com.trippyTravel.models.User;
 import com.trippyTravel.repositories.GroupMembersRepository;
 import com.trippyTravel.repositories.GroupsRepository;
@@ -26,7 +26,7 @@ public class GroupController {
 
     @GetMapping(path = "/groups")
     public String viewAllGroups(Model viewModel) {
-        List<Groups> allGroups = groupDao.findAll();
+        List<Group> allGroups = groupDao.findAll();
         viewModel.addAttribute("group", allGroups);
         return "groups/index";
     }
@@ -38,14 +38,14 @@ public class GroupController {
 
     @GetMapping(path = "/groups/create")
     public String createGroup(Model viewModel){
-        viewModel.addAttribute("createPost", new Groups());
+        viewModel.addAttribute("createPost", new Group());
         return "groups/create-group";
     }
     @PostMapping(path = "/groups/create")
-    public String viewPost(@ModelAttribute Groups newGroup) {
+    public String viewPost(@ModelAttribute Group newGroup) {
         User groupOwner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newGroup.setOwner(groupOwner);
-        Groups createdGroup = groupDao.save(newGroup);
-        return "redirect:/groups/";
+        Group createdGroup = groupDao.save(newGroup);
+        return "redirect:/groups/{id}";
     }
 }

@@ -1,14 +1,11 @@
 package com.trippyTravel.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "group_members")
-public class GroupMembers {
+@Table(name = "group_member")
+public class GroupMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -18,17 +15,17 @@ public class GroupMembers {
 
     @ManyToOne
     @JoinColumn (name = "user_id")
-    private User members;
+    private User member;
 
     @OneToOne
-    private Groups group;
+    private Group group;
 
-    public GroupMembers() {
+    public GroupMember() {
     }
 
-    public GroupMembers(boolean isAdmin, User members, Groups group) {
+    public GroupMember(boolean isAdmin, User member, Group group) {
         this.isAdmin = isAdmin;
-        this.members = members;
+        this.member = member;
         this.group = group;
     }
 
@@ -40,11 +37,11 @@ public class GroupMembers {
 
     public void setAdmin(boolean admin) { isAdmin = admin; }
 
-    public User getMembers() { return members; }
+    public User getMember() { return member; }
 
-    public void setMembers(User members) { this.members = members; }
+    public void setMember(User member) { this.member = member; }
 
-    public Groups getGroup() { return group; }
+    public Group getGroup() { return group; }
 
-    public void setGroup(Groups group) { this.group = group; }
+    public void setGroup(Group group) { this.group = group; }
 }
