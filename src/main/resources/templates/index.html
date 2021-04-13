@@ -1,7 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="custom.css">
+</head>
 <body>
-Howdy
+<div class="row" id="introDiv">
+    <div class="col-4" id="intro">
+        <h3>Trippy Travel</h3>
+        <h6>Collaborate with your friends to plan your group's next big adventure!</h6>
+        <button type="button" class="btn btn-primary btn-lg">Plan a Trip</button>
+        <button type="button" class="btn btn-secondary btn-lg">Create a Group</button>
+    </div>
+    <div class="col-8" id="homeLogo">
+        <img src="img/plane_globe.png">
+    </div>
+</div>
+<!--<h3 class="text-center m-4" th:if="${trips.size()>0}">-->
+<!--    Dive back into your active trips!-->
+<!--</h3>-->
+<!--<div id="activeTrips" th:each="trip: ${trips}">-->
+<!--    <div class="activeTrip" th:each="activity: ${trip.getActivities}:">-->
+
+<!--    </div>-->
+<!--</div>-->
+
+<!--<h3 class="text-center m-4" th:if="${trips.size()>0}">-->
+<!--    Explore your friends latest trips-->
+<!--    <br>-->
+<!--    <button type="button" class="btn btn-primary btn-lg text-center m-3">Explore</button>-->
+<!--</h3>-->
+<!--<div id="friendsTrips" th:each="trip: ${trips}">-->
+<!--    <div class="activeTrip" th:each="activity: ${trip.getActivities}:">-->
+
+<!--    </div>-->
+<!--</div>-->
+
+
+
 
 
 
