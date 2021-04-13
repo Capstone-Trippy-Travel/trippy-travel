@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit trips</title>
+</head>
+<main class="container">
+    <div class="row">
+        <div class="col l8 offset-l2">
+<form th:action="@{'/trip/'+ ${trip.id} +'/edit'}" method="post" th:object="${trip}" >
+
+    <h2>Edit Trip Form</h2>
+
+    <br>
+
+    <div class="input-field col s12">
+        <label >location</label>
+        <input  type="text" th:field="*{location}" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >name</label>
+        <input type="text"  th:field="*{name}" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >description</label>
+        <input type="text"  th:field="*{description}" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >Trip status</label>
+        <input type="text"  th:field="*{status}" />
+
+    </div>
+    <div class="input-field col s12">
+        <label >Start date</label>
+        <input type="date"  th:field="*{startDate}" />
+
+    </div>
+    <div class="input-field col s12">
+        <label >End Date</label>
+        <input type="date"  th:field="*{endDate}" />
+
+    </div>
+
+    <br>
+
+    <input type="submit" value="edit post">
+
+</form>
+        </div>
+    </div>
+</main>
+</html>
