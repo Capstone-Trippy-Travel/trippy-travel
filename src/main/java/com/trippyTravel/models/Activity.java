@@ -20,18 +20,18 @@ public class Activity {
     @ManyToOne
     @JoinColumn(name = "trip_id")
     @JsonManagedReference
-    private Trip trip;
+    private Trips trip;
 
 public Activity(){}
 
-    public Activity(Long id, String place, String description, Trip trip) {
+    public Activity(Long id, String place, String description, Trips trip) {
         this.id = id;
         this.place = place;
         this.description = description;
         this.trip = trip;
     }
 
-    public Activity(String place, String description, Trip trip) {
+    public Activity(String place, String description, Trips trip) {
         this.place = place;
         this.description = description;
         this.trip = trip;
@@ -61,11 +61,11 @@ public Activity(){}
         this.description = description;
     }
 
-    public Trip getTrip() {
+    public Trips getTrip() {
         return trip;
     }
 
-    public void setTrip(Trip trip) {
+    public void setTrip(Trips trip) {
         this.trip = trip;
     }
 }
