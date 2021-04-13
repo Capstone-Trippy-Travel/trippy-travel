@@ -1,10 +1,15 @@
 package com.trippyTravel.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
+@Table (name="groups")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +27,11 @@ public class Group {
     public Group() {
     }
 
-    public Group(String name, User owner, List<Trip> trip) {
-        this.name = name;
-        this.owner = owner;
-        this.trip = trip;
-    }
+//    public Group(String name, User owner, List<Trip> trip) {
+//        this.name = name;
+//        this.owner = owner;
+//        this.trip = trip;
+//    }
 
     public long getId() { return id; }
 
