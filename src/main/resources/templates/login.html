@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<head th:replace="fragments/header :: header(${'login-page'})"></head>
 
 <body>
 
-
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main class="container">
     <h4 class="page-title">Log In</h4>
