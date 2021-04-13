@@ -8,9 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by Fer on 1/3/17.
- */
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -23,6 +21,12 @@ public class User {
     @NotBlank(message = "Username can't be empty")
     private String username;
 
+    @Column(name = "first_name", nullable = false, length = 250)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 250)
+    private String lastName;
+
     @Column(nullable = false, unique = true)
     @Email(message = "Invalid email")
     @NotBlank(message = "Email can't be empty")
@@ -33,6 +37,8 @@ public class User {
     @JsonIgnore
     private String password;
 
+    @Column(columnDefinition = "TEXT")
+    private String profile_image;
 
     @OneToMany(mappedBy = "user")
     @JsonBackReference
@@ -42,10 +48,13 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password, List<FriendList> friends) {
+    public User(String username, String email, String password, String firstName, String lastName, String profile_image, List<FriendList> friends) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName =lastName;
+        this.profile_image = profile_image;
         this.friends = friends;
     }
 
@@ -55,7 +64,10 @@ public class User {
         this.username = user.username;
         this.password = user.password;
         this.email = user.email;
+        this.firstName =user.firstName;
+        this.lastName = user.lastName;
     }
+
 
     public long getId() {
         return id;
@@ -89,6 +101,17 @@ public class User {
         this.password = password;
     }
 
+    public String getFirstName() { return firstName; }
+
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public String getProfile_image() { return profile_image; }
+
+    public void setProfile_image(String profile_image) { this.profile_image = profile_image; }
 
     public List<FriendList> getFriends() {
         return friends;
