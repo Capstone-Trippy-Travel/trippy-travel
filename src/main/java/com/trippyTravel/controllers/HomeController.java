@@ -4,9 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-/**
- * Created by Fer on 1/2/17.
- */
+
 @Controller
 public class HomeController {
 

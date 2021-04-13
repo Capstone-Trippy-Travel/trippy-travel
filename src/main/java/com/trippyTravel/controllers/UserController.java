@@ -1,8 +1,6 @@
 package com.trippyTravel.controllers;
 
-/**
- * Created by Fer on 1/5/17.
- */
+
 
 import com.trippyTravel.models.FriendList;
 import com.trippyTravel.models.FriendStatus;
