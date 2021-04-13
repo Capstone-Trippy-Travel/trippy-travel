@@ -18,7 +18,7 @@ public class Image {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "trip_id")
+    @JoinColumn(name = "Trips_id")
     @JsonManagedReference
     private Trips trip;
 

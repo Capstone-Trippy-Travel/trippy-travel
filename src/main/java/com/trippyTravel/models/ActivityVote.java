@@ -21,7 +21,7 @@ public class ActivityVote {
     private boolean Vote;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "users_id")
     @JsonManagedReference
     private User user;
 
