@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Show all trips</title>
+</head>
+<body>
+
+
+<div sec:authorize="isAuthenticated()">
+
+    <h1>Welcome</h1>
+
+
+
+    <h2 th:text="${#authentication.principal.username}"></h2>
+
+
+</div>
+
+
+<br>
+<br>
+
+<main class="container ">
+    <h1>Latest Trips</h1>
+    <div class="d-flex flex-wrap justify-content-evenly">
+        <div class="trip" th:each="trip: ${trips}">
+
+            <div class="card" style="width: 18rem; margin-bottom: 10px ">
+
+                <img th:src="..." class="card-img-top"  alt="...">
+                <div class="card-body">
+
+
+                    <h1 th:text="${trip.name}" class="card-title"></h1>
+                    <p th:text="${trip.description}" class="card-body"></p>
+                    <p th:text="${trip.location}" class="card-text"></p>
+                    <p th:text="${trip.group}" class="card-text"></p>
+                    <p th:text="${trip.startDate}" class="card-text"></p>
+                    <p th:text="${trip.endDate}" class="card-text"></p>
+                    <p th:text="${trip.status}" class="card-text"></p>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>
