@@ -23,19 +23,19 @@ public class comment {
     @ManyToOne
     @JoinColumn(name = "trip_id")
     @JsonManagedReference
-    private Trips trip;
+    private Trip trip;
 
 
     public comment(){}
 
-    public comment(long id, String comment_text, User user, Trips trip) {
+    public comment(long id, String comment_text, User user, Trip trip) {
         this.id = id;
         this.comment_text = comment_text;
         this.user = user;
         this.trip = trip;
     }
 
-    public comment(String comment_text, User user, Trips trip) {
+    public comment(String comment_text, User user, Trip trip) {
         this.comment_text = comment_text;
         this.user = user;
         this.trip = trip;
@@ -65,11 +65,11 @@ public class comment {
         this.user = user;
     }
 
-    public Trips getTrip() {
+    public Trip getTrip() {
         return trip;
     }
 
-    public void setTrip(Trips trip) {
+    public void setTrip(Trip trip) {
         this.trip = trip;
     }
 }

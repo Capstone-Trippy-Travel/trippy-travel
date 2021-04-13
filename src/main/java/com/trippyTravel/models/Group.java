@@ -1,13 +1,11 @@
 package com.trippyTravel.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
-public class Groups {
+public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,12 +17,12 @@ public class Groups {
     private User owner;
 
     @OneToMany(mappedBy = "group")
-    private List<Trips> trip;
+    private List<Trip> trip;
 
-    public Groups() {
+    public Group() {
     }
 
-    public Groups(String name, User owner, List<Trips> trip) {
+    public Group(String name, User owner, List<Trip> trip) {
         this.name = name;
         this.owner = owner;
         this.trip = trip;
@@ -42,7 +40,7 @@ public class Groups {
 
     public void setOwner(User owner) { this.owner = owner; }
 
-    public List<Trips> getTrip() { return trip; }
+    public List<Trip> getTrip() { return trip; }
 
-    public void setTrip(List<Trips> trip) { this.trip = trip; }
+    public void setTrip(List<Trip> trip) { this.trip = trip; }
 }

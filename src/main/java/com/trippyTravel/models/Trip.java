@@ -1,14 +1,11 @@
 package com.trippyTravel.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table
-public class Trips {
+public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -34,12 +31,12 @@ public class Trips {
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Groups group;
+    private Group group;
 
-    public Trips() {
+    public Trip() {
     }
 
-    public Trips(String location, String name, String status, String description, Date startDate, Date endDate, Groups group) {
+    public Trip(String location, String name, String status, String description, Date startDate, Date endDate, Group group) {
         this.location = location;
         this.name = name;
         this.status = status;
@@ -77,7 +74,7 @@ public class Trips {
 
     public void setEndDate(Date endDate) { this.endDate = endDate; }
 
-    public Groups getGroup() { return group; }
+    public Group getGroup() { return group; }
 
-    public void setGroup(Groups group) { this.group = group; }
+    public void setGroup(Group group) { this.group = group; }
 }
