@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name ="activity_vote")
+@Table(name ="activity_votes")
 public class ActivityVote {
 
     @Id
@@ -21,7 +21,7 @@ public class ActivityVote {
     private boolean Vote;
 
     @OneToOne
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "user_id")
     @JsonManagedReference
     private User user;
 

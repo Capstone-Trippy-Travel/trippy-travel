@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "activity")
+@Table(name = "activities")
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Activity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "Trips_id")
+    @JoinColumn(name = "trip_id")
     @JsonManagedReference
     private Trips trip;
 
