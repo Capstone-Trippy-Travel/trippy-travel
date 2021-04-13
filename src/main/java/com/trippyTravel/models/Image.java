@@ -20,7 +20,7 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "trip_id")
     @JsonManagedReference
-    private Trip trip;
+    private Trips trip;
 
     @ManyToOne
     @JoinColumn( name= "activity_id")
@@ -32,7 +32,7 @@ public class Image {
 
 public Image(){}
 
-    public Image(long id, User user, Trip trip, Activity activity, String image_url) {
+    public Image(long id, User user, Trips trip, Activity activity, String image_url) {
         this.id = id;
         this.user = user;
         this.trip = trip;
@@ -40,7 +40,7 @@ public Image(){}
         this.image_url = image_url;
     }
 
-    public Image(User user, Trip trip, Activity activity, String image_url) {
+    public Image(User user, Trips trip, Activity activity, String image_url) {
         this.user = user;
         this.trip = trip;
         this.activity = activity;
@@ -63,11 +63,11 @@ public Image(){}
         this.user = user;
     }
 
-    public Trip getTrip() {
+    public Trips getTrip() {
         return trip;
     }
 
-    public void setTrip(Trip trip) {
+    public void setTrip(Trips trip) {
         this.trip = trip;
     }
 

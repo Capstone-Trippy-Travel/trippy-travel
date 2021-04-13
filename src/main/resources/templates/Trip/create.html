@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+
+<main class="container">
+    <div class="row">
+        <h4 class="page-title">Create Trip</h4>
+        <div class="col l8 offset-l2">
+            <form class="col s12" th:action="@{/templates/Trip/create}" th:method="POST" th:object="${trip}">
+
+
+                <div class="input-field col s12">
+                    <label >location</label>
+                    <input  type="text" th:field="*{location}" />
+
+                </div>
+
+                <div class="input-field col s12">
+                    <label >name</label>
+                    <input type="text"  th:field="*{name}" />
+
+                </div>
+
+                <div class="input-field col s12">
+                    <label >description</label>
+                    <input type="text"  th:field="*{description}" />
+
+                </div>
+
+                <div class="input-field col s12">
+                    <label >Trip status</label>
+                    <input type="text"  th:field="*{status}" />
+
+                </div>
+
+                <input class="btn" type="submit" />
+            </form>
+        </div>
+    </div>
+</main>
+
+
+</body>
+</html>
