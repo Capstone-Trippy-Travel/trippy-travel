@@ -7,7 +7,7 @@
     <div class="row">
         <h4 class="page-title">Create Trip</h4>
         <div class="col l8 offset-l2">
-            <form class="col s12" th:action="@{/templates/Trip/create}" th:method="POST" th:object="${trip}">
+            <form class="col s12" th:action="@{/templates/Trip/create}" th:method="POST" th:object="${Trips}">
 
 
                 <div class="input-field col s12">
@@ -31,6 +31,16 @@
                 <div class="input-field col s12">
                     <label >Trip status</label>
                     <input type="text"  th:field="*{status}" />
+
+                </div>
+                <div class="input-field col s12">
+                    <label >Start date</label>
+                    <input type="date"  th:field="*{startDate}" />
+
+                </div>
+                <div class="input-field col s12">
+                    <label >End Date</label>
+                    <input type="date"  th:field="*{endDate}" />
 
                 </div>
 

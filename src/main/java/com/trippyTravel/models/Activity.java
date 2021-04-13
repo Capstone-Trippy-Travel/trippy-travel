@@ -18,7 +18,7 @@ public class Activity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "trip_id")
+    @JoinColumn(name = "Trips_id")
     @JsonManagedReference
     private Trips trip;
 

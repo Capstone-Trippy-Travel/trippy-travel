@@ -13,12 +13,12 @@ public class Image {
     private Long id;
 
     @ManyToOne
-    @Column( name= "user_id")
+    @JoinColumn( name= "users_id")
     @JsonManagedReference
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "trip_id")
+    @JoinColumn(name = "Trips_id")
     @JsonManagedReference
     private Trips trip;
 
