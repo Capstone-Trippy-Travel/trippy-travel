@@ -1,5 +1,4 @@
 package com.trippyTravel.controllers;
-
 import com.trippyTravel.models.User;
 import com.trippyTravel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
