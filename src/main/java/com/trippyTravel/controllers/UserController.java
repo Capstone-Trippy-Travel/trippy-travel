@@ -2,10 +2,8 @@ package com.trippyTravel.controllers;
 
 
 
-import com.trippyTravel.models.FriendList;
-import com.trippyTravel.models.FriendStatus;
-import com.trippyTravel.models.User;
-import com.trippyTravel.models.UserRole;
+import com.trippyTravel.models.*;
+import com.trippyTravel.repositories.GroupsRepository;
 import com.trippyTravel.services.UserService;
 import com.trippyTravel.repositories.FriendListRepository;
 import com.trippyTravel.repositories.UserRoles;
@@ -25,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private GroupsRepository groupsRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -69,6 +70,8 @@ public class UserController {
         // Custom validation if the username is taken
 
         User newUser = usersRepository.save(user);
+        Group newGroup = new Group(newUser.getUsername(), newUser);
+        groupsRepository.save(newGroup);
 
         UserRole ur = new UserRole();
         ur.setRole("ROLE_USER");

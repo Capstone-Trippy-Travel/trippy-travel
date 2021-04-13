@@ -7,8 +7,17 @@
     <div class="row">
         <h4 class="page-title">Create Trip</h4>
         <div class="col l8 offset-l2">
-            <form class="col s12" th:action="@{/templates/Trip/create}" th:method="POST" th:object="${Trips}">
+            <form class="col s12" th:action="@{/trip/create}" th:method="POST" th:object="${trip}">
 
+
+                <div class="input-field col s12">
+                    <label >Group</label>
+                    <select class="form-control" th:field="*{group}">
+                        <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group}"></option>
+
+                    </select>
+
+                </div>
 
                 <div class="input-field col s12">
                     <label >location</label>
@@ -30,7 +39,11 @@
 
                 <div class="input-field col s12">
                     <label >Trip status</label>
-                    <input type="text"  th:field="*{status}" />
+                    <select class="form-control" th:field="*{status}">
+                        <option value="future">Future</option>
+                        <option value="past">past</option>
+
+                    </select>
 
                 </div>
                 <div class="input-field col s12">

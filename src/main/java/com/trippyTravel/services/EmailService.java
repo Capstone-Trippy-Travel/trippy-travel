@@ -22,7 +22,7 @@ public class EmailService {
     public void prepareAndSend(Trip trips, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
-        msg.setTo(trips.getGroup().getOwner().getEmail());
+//        msg.setTo(trips.getGroup().getOwner().getEmail());
         msg.setSubject(subject);
         msg.setText(body);
         try {

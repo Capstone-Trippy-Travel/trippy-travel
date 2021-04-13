@@ -9,6 +9,16 @@
         <div class="col l8 offset-l2">
             <form class="col s12" th:action="@{/users/create}" th:method="POST" th:object="${user}">
                 <div class="input-field col s12">
+                    <input type="text" class="validate" th:field="*{firstName}" />
+                    <label >firstName</label>
+<!--                    <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>-->
+                </div>
+                <div class="input-field col s12">
+                    <input type="text" class="validate" th:field="*{lastName}" />
+                    <label >lastName</label>
+<!--                    <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>-->
+                </div>
+                <div class="input-field col s12">
                     <input type="text" class="validate" th:field="*{username}" />
                     <label >Username</label>
                     <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
