@@ -45,7 +45,7 @@ private final EmailService emailService;
 
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel){
-        vModel.addAttribute("trip", tripRepository.getOne(id));
+        vModel.addAttribute("trips", tripRepository.getOne(id));
         return "Trip/show";
     }
 

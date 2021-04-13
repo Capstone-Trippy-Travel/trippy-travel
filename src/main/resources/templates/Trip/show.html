@@ -1,0 +1,35 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Individual post</title>
+</head>
+<body>
+<h6>View individual Post</h6>
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <main class="container">
+            <!--    <div class="post" th:each="image:${post.getImages()}">-->
+
+
+            <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
+
+            <h1 th:text="${post.title}" class="card-title"></h1>
+            <p th:text="${post.body}" class="card-text"></p>
+            <p>Contact me at <span th:text="${post.owner.email}"></span> </p>
+            <!--    </div>-->
+
+            <form th:action="${'/posts/'+ post.id +'/delete'}" method="POST">
+                <button type="submit" id="delete"  value="delete post" >delete</button>
+
+
+            </form>
+
+        </main>
+    </div>
+</div>
+</body>
+</html>
