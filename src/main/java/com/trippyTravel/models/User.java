@@ -44,18 +44,21 @@ public class User {
     @JsonBackReference
     private List<FriendList> friends;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "members")
+    private List<GroupMembers> groupMembers;
 
     public User() {
     }
 
-    public User(String username, String email, String password, String firstName, String lastName, String profile_image, List<FriendList> friends) {
+    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMembers> groupMembers) {
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName =lastName;
         this.profile_image = profile_image;
         this.friends = friends;
+        this.groupMembers = groupMembers;
     }
 
     // Copy constructor an alternative for clone
@@ -69,37 +72,21 @@ public class User {
     }
 
 
-    public long getId() {
-        return id;
-    }
+    public long getId() { return id; }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) { this.id = id; }
 
-    public String getUsername() {
-        return username;
-    }
+    public String getUsername() { return username; }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public void setUsername(String username) { this.username = username; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() { return password; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) { this.password = password; }
 
     public String getFirstName() { return firstName; }
 
@@ -113,13 +100,13 @@ public class User {
 
     public void setProfile_image(String profile_image) { this.profile_image = profile_image; }
 
-    public List<FriendList> getFriends() {
-        return friends;
-    }
+    public List<FriendList> getFriends() { return friends; }
 
-    public void setFriends(List<FriendList> friends) {
-        this.friends = friends;
-    }
+    public void setFriends(List<FriendList> friends) { this.friends = friends; }
+
+    public List<GroupMembers> getGroupMembers() { return groupMembers; }
+
+    public void setGroupMembers(List<GroupMembers> groupMembers) { this.groupMembers = groupMembers; }
 
     @Override
     public String toString() {
