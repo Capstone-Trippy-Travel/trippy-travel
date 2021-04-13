@@ -5,18 +5,15 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "comment")
-public class comment {
+@Table(name = "Image")
+public class Image {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column( name= "comment_text")
-    private String comment_text;
-
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @Column( name= "user_id")
     @JsonManagedReference
     private User user;
 
@@ -25,19 +22,29 @@ public class comment {
     @JsonManagedReference
     private Trip trip;
 
-    public comment(){}
+    @ManyToOne
+    @JoinColumn( name= "activity_id")
+    @JsonManagedReference
+    private Activity activity;
 
-    public comment(long id, String comment_text, User user, Trip trip) {
+    @Column( name= "image_url")
+    private String image_url;
+
+public Image(){}
+
+    public Image(long id, User user, Trip trip, Activity activity, String image_url) {
         this.id = id;
-        this.comment_text = comment_text;
         this.user = user;
         this.trip = trip;
+        this.activity = activity;
+        this.image_url = image_url;
     }
 
-    public comment(String comment_text, User user, Trip trip) {
-        this.comment_text = comment_text;
+    public Image(User user, Trip trip, Activity activity, String image_url) {
         this.user = user;
         this.trip = trip;
+        this.activity = activity;
+        this.image_url = image_url;
     }
 
     public long getId() {
@@ -46,14 +53,6 @@ public class comment {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getComment_text() {
-        return comment_text;
-    }
-
-    public void setComment_text(String comment_text) {
-        this.comment_text = comment_text;
     }
 
     public User getUser() {
@@ -70,5 +69,21 @@ public class comment {
 
     public void setTrip(Trip trip) {
         this.trip = trip;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }
