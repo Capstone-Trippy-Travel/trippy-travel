@@ -11,7 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class TripController {
@@ -24,12 +27,35 @@ private final EmailService emailService;
         this.tripRepository = tripRepository;
     }
 
+    @GetMapping("/trip")
+    public String SeeAllPostPage(Model model) {
+        List<Trips> tripFromDb= tripRepository.findAll();
+        model.addAttribute("posts",tripFromDb);
+
+        return "Trip/index";
+    }
+
+    @PostMapping("/trip")
+    public String index(Model model) {
+        List<Trips> tripFromDb= tripRepository.findAll();
+        model.addAttribute("trips",tripFromDb);
+
+        return "Trip/index";
+    }
+
+    @GetMapping("/trip/{id}")
+    public String showOnePost(@PathVariable Long id, Model vModel){
+        vModel.addAttribute("trip", tripRepository.getOne(id));
+        return "Trip/show";
+    }
+
     @GetMapping("/trip/create")
     public String createTrip(Model model){
         model.addAttribute("Trips", new Trips());
         return "Trip/create";
     }
-    @PostMapping("/Trip/create")
+
+    @PostMapping("/trip/create")
 
     public String createPostForm(@ModelAttribute Trips trips) {
         Groups groups=(Groups) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -47,5 +73,31 @@ private final EmailService emailService;
 //        imageRepo.save(image1ToSave);
         emailService.prepareAndSend(saveTrip, "new trip","hey where you wanna go");
         return "redirect:/Trips";
+    }
+    @GetMapping(path = "/trip/{id}/edit")
+    public String updateTrip(@PathVariable Long id ,Model model){
+
+        model.addAttribute("trip",tripRepository.getOne(id));
+        return "Trip/create";
+    }
+    @PostMapping(path = "/trip/{id}/edit")
+
+    public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trips trips) {
+        Groups groups=(Groups) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        trips.setId(id);
+        trips.setGroup(groups);
+        tripRepository.save(trips);
+        return "redirect:/trip";
+    }
+
+
+
+    @PostMapping("/trip/{id}/delete")
+
+    public String DeletePost(@PathVariable Long id) {
+        tripRepository.deleteById(id);
+        return "redirect:/trip";
+
     }
 }
