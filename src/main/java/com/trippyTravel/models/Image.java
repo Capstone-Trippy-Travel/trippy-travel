@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Image")
+@Table(name = "images")
 public class Image {
 
     @Id
@@ -13,12 +13,12 @@ public class Image {
     private Long id;
 
     @ManyToOne
-    @JoinColumn( name= "users_id")
+    @JoinColumn( name= "user_id")
     @JsonManagedReference
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "Trips_id")
+    @JoinColumn(name = "trip_id")
     @JsonManagedReference
     private Trips trip;
 
@@ -47,25 +47,15 @@ public Image(){}
         this.image_url = image_url;
     }
 
-    public long getId() {
-        return id;
-    }
+    public long getId() { return id; }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) { this.id = id; }
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() { return user; }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public void setUser(User user) { this.user = user; }
 
-    public Trips getTrip() {
-        return trip;
-    }
+    public Trips getTrip() { return trip; }
 
     public void setTrip(Trips trip) {
         this.trip = trip;
