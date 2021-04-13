@@ -13,7 +13,7 @@ public class Image {
     private Long id;
 
     @ManyToOne
-    @Column( name= "user_id")
+    @JoinColumn( name= "users_id")
     @JsonManagedReference
     private User user;
 
