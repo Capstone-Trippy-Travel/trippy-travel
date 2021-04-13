@@ -28,3 +28,4 @@ nbdist/
 ### node ###
 package-lock.json
 node_modules
+pom.xml
