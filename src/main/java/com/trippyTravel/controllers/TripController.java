@@ -1,7 +1,7 @@
 package com.trippyTravel.controllers;
 
-import com.trippyTravel.models.Groups;
-import com.trippyTravel.models.Trips;
+import com.trippyTravel.models.Group;
+import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
 import com.trippyTravel.repositories.TripRepository;
 import com.trippyTravel.services.EmailService;
@@ -29,7 +29,7 @@ private final EmailService emailService;
 
     @GetMapping("/trip")
     public String SeeAllTripsPage(Model model) {
-        List<Trips> tripFromDb= tripRepository.findAll();
+        List<Trip> tripFromDb= tripRepository.findAll();
         model.addAttribute("posts",tripFromDb);
 
         return "Trip/index";
@@ -37,7 +37,7 @@ private final EmailService emailService;
 
     @PostMapping("/trip")
     public String index(Model model) {
-        List<Trips> tripFromDb= tripRepository.findAll();
+        List<Trip> tripFromDb= tripRepository.findAll();
         model.addAttribute("trips",tripFromDb);
 
         return "Trip/index";
@@ -45,20 +45,20 @@ private final EmailService emailService;
 
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel){
-        vModel.addAttribute("trip", tripRepository.getOne(id));
+        vModel.addAttribute("trips", tripRepository.getOne(id));
         return "Trip/show";
     }
 
     @GetMapping("/trip/create")
     public String createTrip(Model model){
-        model.addAttribute("Trips", new Trips());
+        model.addAttribute("Trips", new Trip());
         return "Trip/create";
     }
 
     @PostMapping("/trip/create")
 
-    public String createTripForm(@ModelAttribute Trips trips) {
-        Groups groups=(Groups) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String createTripForm(@ModelAttribute Trip trips) {
+        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         trips.setGroup(groups);
@@ -68,7 +68,7 @@ private final EmailService emailService;
 //        image1ToSave.setPost(post);
 //      post.setImages(imagesToSave);
 
-        Trips saveTrip= tripRepository.save(trips);
+        Trip saveTrip= tripRepository.save(trips);
 //        imageRepo.save(imagesToSave);
 //        imageRepo.save(image1ToSave);
         emailService.prepareAndSend(saveTrip, "new trip","hey where you wanna go");
@@ -82,8 +82,8 @@ private final EmailService emailService;
     }
     @PostMapping(path = "/trip/{id}/edit")
 
-    public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trips trips) {
-        Groups groups=(Groups) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trip trips) {
+        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         trips.setId(id);
         trips.setGroup(groups);

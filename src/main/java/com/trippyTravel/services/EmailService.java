@@ -1,7 +1,8 @@
 package com.trippyTravel.services;
 
 
-import com.trippyTravel.models.Trips;
+import com.trippyTravel.models.Trip;
+
 import com.trippyTravel.repositories.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,7 @@ public class EmailService {
     @Value("${spring.mail.from}")
     private String from;
 
-    public void prepareAndSend(Trips trips, String subject, String body) {
+    public void prepareAndSend(Trip trips, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
         msg.setTo(trips.getGroup().getOwner().getEmail());
