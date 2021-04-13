@@ -26,6 +26,11 @@ public class Group {
 
     public Group() {
     }
+    public Group(String name, User owner){
+        this.name=name;
+        this.owner=owner;
+    }
+
 
 //    public Group(String name, User owner, List<Trip> trip) {
 //        this.name = name;
