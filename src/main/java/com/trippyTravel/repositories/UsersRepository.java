@@ -5,9 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-/**
- * Created by Fer on 1/10/17.
- */
+
 @Repository
 public interface UsersRepository extends JpaRepository<User, Long> {
 

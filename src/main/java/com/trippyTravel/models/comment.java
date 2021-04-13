@@ -25,6 +25,7 @@ public class comment {
     @JsonManagedReference
     private Trips trip;
 
+
     public comment(){}
 
     public comment(long id, String comment_text, User user, Trips trip) {
