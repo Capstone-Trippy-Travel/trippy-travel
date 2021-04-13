@@ -78,7 +78,7 @@ private final EmailService emailService;
     public String updateTrip(@PathVariable Long id ,Model model){
 
         model.addAttribute("trip",tripRepository.getOne(id));
-        return "Trip/create";
+        return "Trip/edit";
     }
     @PostMapping(path = "/trip/{id}/edit")
 
