@@ -20,6 +20,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -144,6 +145,11 @@ public class UserController {
     @GetMapping("/users/{id}/friend-request")
     public void sendFriendRequest(@PathVariable long id ) {
         friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.getOne(id), FriendStatus.PENDING));
+    }
+
+    @GetMapping("/users.json")
+    public @ResponseBody List<User> viewAllUsersWithAjax() {
+        return usersRepository.findAll();
     }
 
 }
