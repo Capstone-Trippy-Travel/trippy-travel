@@ -5,10 +5,10 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Individual post</title>
+    <title>Individual Trip</title>
 </head>
 <body>
-<h6>View individual Post</h6>
+<h6>View individual Trip</h6>
 <div class="card" style="width: 18rem;">
     <div class="card-body">
         <main class="container">
@@ -17,13 +17,18 @@
 
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 
-            <h1 th:text="${post.title}" class="card-title"></h1>
-            <p th:text="${post.body}" class="card-text"></p>
-            <p>Contact me at <span th:text="${post.owner.email}"></span> </p>
+            <h1 th:text="${trips.name}" class="card-title"></h1>
+            <p th:text="${trips.description}" class="card-text"></p>
+            <p th:text="${trips.location}" class="card-text"></p>
+            <p th:text="${trips.group}" class="card-text"></p>
+            <p th:text="${trips.status}" class="card-text"></p>
+            <p th:text="${trips.startDate}" class="card-text"></p>
+            <p th:text="${trips.endDate}" class="card-text"></p>
+
             <!--    </div>-->
 
-            <form th:action="${'/posts/'+ post.id +'/delete'}" method="POST">
-                <button type="submit" id="delete"  value="delete post" >delete</button>
+            <form th:action="${'/trip/'+ trips.id +'/delete'}" method="POST">
+                <button type="submit" id="delete" >delete</button>
 
 
             </form>
