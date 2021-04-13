@@ -1,7 +1,7 @@
 package com.trippyTravel.repositories;
 
-import com.trippyTravel.models.Trips;
+import com.trippyTravel.models.Trip;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TripRepository extends JpaRepository<Trips,Long> {
+public interface TripRepository extends JpaRepository<Trip,Long> {
 }
