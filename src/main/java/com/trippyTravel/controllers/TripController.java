@@ -28,7 +28,7 @@ private final EmailService emailService;
     }
 
     @GetMapping("/trip")
-    public String SeeAllPostPage(Model model) {
+    public String SeeAllTripsPage(Model model) {
         List<Trips> tripFromDb= tripRepository.findAll();
         model.addAttribute("posts",tripFromDb);
 
@@ -44,7 +44,7 @@ private final EmailService emailService;
     }
 
     @GetMapping("/trip/{id}")
-    public String showOnePost(@PathVariable Long id, Model vModel){
+    public String showOneTrip(@PathVariable Long id, Model vModel){
         vModel.addAttribute("trip", tripRepository.getOne(id));
         return "Trip/show";
     }
@@ -57,7 +57,7 @@ private final EmailService emailService;
 
     @PostMapping("/trip/create")
 
-    public String createPostForm(@ModelAttribute Trips trips) {
+    public String createTripForm(@ModelAttribute Trips trips) {
         Groups groups=(Groups) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -72,7 +72,7 @@ private final EmailService emailService;
 //        imageRepo.save(imagesToSave);
 //        imageRepo.save(image1ToSave);
         emailService.prepareAndSend(saveTrip, "new trip","hey where you wanna go");
-        return "redirect:/Trips";
+        return "redirect:/trip";
     }
     @GetMapping(path = "/trip/{id}/edit")
     public String updateTrip(@PathVariable Long id ,Model model){
@@ -95,7 +95,7 @@ private final EmailService emailService;
 
     @PostMapping("/trip/{id}/delete")
 
-    public String DeletePost(@PathVariable Long id) {
+    public String DeleteTrip(@PathVariable Long id) {
         tripRepository.deleteById(id);
         return "redirect:/trip";
 
