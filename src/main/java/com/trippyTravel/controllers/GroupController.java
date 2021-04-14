@@ -38,7 +38,7 @@ public class GroupController {
 
     @GetMapping(path = "/groups/create")
     public String createGroup(Model viewModel){
-        viewModel.addAttribute("createPost", new Group());
+        viewModel.addAttribute("group", new Group());
         return "groups/create-group";
     }
     @PostMapping(path = "/groups/create")
