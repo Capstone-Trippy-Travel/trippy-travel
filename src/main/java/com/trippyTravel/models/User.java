@@ -47,10 +47,17 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
     private List<GroupMember> groupMember;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Image> images;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<comment> comments;
+
+
     public User() {
     }
 
-    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember) {
+    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<comment> comments) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,6 +66,8 @@ public class User {
         this.profile_image = profile_image;
         this.friends = friends;
         this.groupMember = groupMember;
+        this.images = images;
+        this.comments = comments;
     }
 
     // Copy constructor an alternative for clone
@@ -107,6 +116,14 @@ public class User {
     public List<GroupMember> getGroupMember() { return groupMember; }
 
     public void setGroupMember(List<GroupMember> groupMember) { this.groupMember = groupMember; }
+
+    public List<Image> getImages() { return images; }
+
+    public void setImages(List<Image> images) { this.images = images; }
+
+    public List<comment> getComments() { return comments; }
+
+    public void setComments(List<comment> comments) { this.comments = comments; }
 
     @Override
     public String toString() {
