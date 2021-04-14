@@ -24,16 +24,16 @@ public class GroupController {
         this.groupMemberDao = groupMemberDao;
     }
 
-    @GetMapping(path = "/groups")
-    public String viewAllGroups(Model viewModel) {
-        List<Group> allGroups = groupDao.findAll();
-        viewModel.addAttribute("group", allGroups);
-        return "groups/index";
-    }
+//    @GetMapping(path = "/groups")
+//    public String viewAllGroups(Model viewModel) {
+//        List<Group> allGroups = groupDao.findAll();
+//        viewModel.addAttribute("group", allGroups);
+//        return "groups/index";
+//    }
     @GetMapping(path = "/groups/{id}")
     public String viewGroup(@PathVariable Long id, Model viewModel) {
-        viewModel.addAttribute("post", groupDao.getOne(id));
-        return "groups/show";
+        viewModel.addAttribute("group", groupDao.getOne(id));
+        return "groups/view";
     }
 
     @GetMapping(path = "/groups/create")

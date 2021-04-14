@@ -62,5 +62,4 @@ public class Group {
 
     public void setGroupMembers(List<GroupMember> groupMembers) { this.groupMembers = groupMembers; }
 
-
 }
