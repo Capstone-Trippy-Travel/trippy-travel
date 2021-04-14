@@ -1,8 +1,23 @@
-
 .navbar {
     font-family: "Arial Rounded MT Bold";
     margin-left: 100px;
     margin-right: 100px;
+}
+
+img {
+    max-height: 30px;
+    max-width: 30px;
+    margin-right: 10px;
+}
+
+@media screen and (min-width: 100px) and (max-width: 576px) {
+    .navbar {
+        overflow: hidden;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
 }
 
 
