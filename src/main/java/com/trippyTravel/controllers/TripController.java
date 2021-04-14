@@ -83,8 +83,9 @@ public class TripController {
     }
     @GetMapping(path = "/trip/{id}/edit")
     public String updateTrip(@PathVariable Long id ,Model model){
-
-        model.addAttribute("trip",tripRepository.getOne(id));
+        Trip trip=tripRepository.getOne(id);
+        System.out.println(trip.getName());
+        model.addAttribute("trip", trip);
         return "Trip/edit";
     }
     @PostMapping(path = "/trip/{id}/edit")
@@ -106,5 +107,12 @@ public class TripController {
         tripRepository.deleteById(id);
         return "redirect:/trip";
 
+    }
+
+    @GetMapping(path = "/trip/{id}/activities")
+    public String tripActivities(@PathVariable Long id ,Model model){
+        Trip trip=tripRepository.getOne(id);
+        model.addAttribute("trip", trip);
+        return "Trip/activities";
     }
 }
