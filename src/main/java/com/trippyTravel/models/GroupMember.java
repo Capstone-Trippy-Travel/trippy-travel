@@ -13,11 +13,19 @@ public class GroupMember {
     @Column(name="admin")
     private boolean isAdmin;
 
+//    @ManyToOne
+//    @JoinColumn (name = "user_id")
+//    private User member;
+//
+//    @OneToOne
+//    private Group group;
+
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User member;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn (name = "group_id")
     private Group group;
 
     public GroupMember() {
