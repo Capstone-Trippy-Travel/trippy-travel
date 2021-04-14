@@ -24,6 +24,8 @@ public class Group {
     @OneToMany(mappedBy = "group")
     private List<Trip> trip;
 
+
+
     @OneToMany(mappedBy = "group")
     private List<GroupMember> groupMembers;
 
@@ -59,5 +61,6 @@ public class Group {
     public List<GroupMember> getGroupMembers() { return groupMembers; }
 
     public void setGroupMembers(List<GroupMember> groupMembers) { this.groupMembers = groupMembers; }
+
 
 }
