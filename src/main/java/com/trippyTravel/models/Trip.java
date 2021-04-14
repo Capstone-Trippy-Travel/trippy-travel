@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -37,10 +38,16 @@ public class Trip {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Image> images;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<comment> comments;
+
     public Trip() {
     }
 
-    public Trip(String location, String name, String status, String description, Date startDate, Date endDate, Group group) {
+    public Trip(String location, String name, String status, String description, Date startDate, Date endDate, Group group, List<Image> images, List<comment> comments) {
         this.location = location;
         this.name = name;
         this.status = status;
@@ -48,6 +55,8 @@ public class Trip {
         this.startDate = startDate;
         this.endDate = endDate;
         this.group = group;
+        this.images = images;
+        this.comments = comments;
     }
 
     public long getId() { return id; }
@@ -81,4 +90,12 @@ public class Trip {
     public Group getGroup() { return group; }
 
     public void setGroup(Group group) { this.group = group; }
+
+    public List<Image> getImages() { return images; }
+
+    public void setImages(List<Image> images) { this.images = images; }
+
+    public List<comment> getComments() { return comments; }
+
+    public void setComments(List<comment> comments) { this.comments = comments; }
 }

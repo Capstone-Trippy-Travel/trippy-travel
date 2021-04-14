@@ -31,12 +31,11 @@ public class Group {
         this.owner=owner;
     }
 
-
-//    public Group(String name, User owner, List<Trip> trip) {
-//        this.name = name;
-//        this.owner = owner;
-//        this.trip = trip;
-//    }
+    public Group(String name, User owner, List<Trip> trip) {
+        this.name = name;
+        this.owner = owner;
+        this.trip = trip;
+    }
 
     public long getId() { return id; }
 

@@ -25,6 +25,11 @@ public class comment {
     @JsonManagedReference
     private Trip trip;
 
+    @ManyToOne
+    @JoinColumn( name= "activity_id")
+    @JsonManagedReference
+    private Activity activity;
+
 
     public comment(){}
 
