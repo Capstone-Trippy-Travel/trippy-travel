@@ -55,6 +55,6 @@ public class GroupController {
             groupMemberDao.save(new GroupMember(false, userDao.getOne(memberId), newGroup) );
         }
 
-        return "redirect:/groups/create";
+        return "redirect:/groups/"+createdGroup.getId();
     }
 }
