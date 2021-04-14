@@ -148,9 +148,14 @@ public class UserController {
         friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.getOne(id), FriendStatus.PENDING));
     }
 
-    @GetMapping("/users.json")
-    public @ResponseBody List<User> viewAllUsersWithAjax() {
-        return usersRepository.findAll();
-    }
+//    @GetMapping("/users.json")
+//    public @ResponseBody List<User> viewAllUsersWithAjax() {
+//        return usersRepository.findAll();
+//    }
 
+    @RequestMapping(value="/users.json", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody List<User> viewSearchedUsersWithAjax(@RequestParam("name") String name) {
+
+        return usersRepository.findByFirstNameContainingOrLastNameContainingOrUsernameContaining(name, name, name);
+    }
 }
