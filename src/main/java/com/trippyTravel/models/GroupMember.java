@@ -31,6 +31,8 @@ public class GroupMember {
     public GroupMember() {
     }
 
+
+
     public GroupMember(boolean isAdmin, User member, Group group) {
         this.isAdmin = isAdmin;
         this.member = member;
