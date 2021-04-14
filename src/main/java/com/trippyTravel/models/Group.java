@@ -24,6 +24,11 @@ public class Group {
     @OneToMany(mappedBy = "group")
     private List<Trip> trip;
 
+
+
+    @OneToMany(mappedBy = "group")
+    private List<GroupMember> groupMembers;
+
     public Group() {
     }
     public Group(String name, User owner){
@@ -52,4 +57,12 @@ public class Group {
     public List<Trip> getTrip() { return trip; }
 
     public void setTrip(List<Trip> trip) { this.trip = trip; }
+
+    public List<GroupMember> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(List<GroupMember> groupMembers) {
+        this.groupMembers = groupMembers;
+    }
 }
