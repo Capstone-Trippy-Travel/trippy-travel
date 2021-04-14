@@ -24,10 +24,11 @@ public class Group {
     @OneToMany(mappedBy = "group")
     private List<Trip> trip;
 
-
-
     @OneToMany(mappedBy = "group")
     private List<GroupMember> groupMembers;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip_id")
+    private List<Activity> activities;
 
     public Group() {
     }
@@ -40,6 +41,14 @@ public class Group {
         this.name = name;
         this.owner = owner;
         this.trip = trip;
+    }
+
+    public Group(String name, User owner, List<Trip> trip, List<GroupMember> groupMembers, List<Activity> activities) {
+        this.name = name;
+        this.owner = owner;
+        this.trip = trip;
+        this.groupMembers = groupMembers;
+        this.activities = activities;
     }
 
     public long getId() { return id; }
@@ -58,11 +67,11 @@ public class Group {
 
     public void setTrip(List<Trip> trip) { this.trip = trip; }
 
-    public List<GroupMember> getGroupMembers() {
-        return groupMembers;
-    }
+    public List<GroupMember> getGroupMembers() { return groupMembers; }
 
-    public void setGroupMembers(List<GroupMember> groupMembers) {
-        this.groupMembers = groupMembers;
-    }
+    public void setGroupMembers(List<GroupMember> groupMembers) { this.groupMembers = groupMembers; }
+
+    public List<Activity> getActivities() { return activities; }
+
+    public void setActivities(List<Activity> activities) { this.activities = activities; }
 }
