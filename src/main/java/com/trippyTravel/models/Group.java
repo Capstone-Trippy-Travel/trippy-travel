@@ -58,11 +58,9 @@ public class Group {
 
     public void setTrip(List<Trip> trip) { this.trip = trip; }
 
-    public List<GroupMember> getGroupMembers() {
-        return groupMembers;
-    }
+    public List<GroupMember> getGroupMembers() { return groupMembers; }
 
-    public void setGroupMembers(List<GroupMember> groupMembers) {
-        this.groupMembers = groupMembers;
-    }
+    public void setGroupMembers(List<GroupMember> groupMembers) { this.groupMembers = groupMembers; }
+
+
 }

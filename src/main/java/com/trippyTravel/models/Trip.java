@@ -44,10 +44,13 @@ public class Trip {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<comment> comments;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+    private List<Activity> activities;
+
     public Trip() {
     }
 
-    public Trip(String location, String name, String status, String description, Date startDate, Date endDate, Group group, List<Image> images, List<comment> comments) {
+    public Trip(String location, String name, String status, String description, Date startDate, Date endDate, Group group, List<Image> images, List<comment> comments, List<Activity> activities) {
         this.location = location;
         this.name = name;
         this.status = status;
@@ -57,6 +60,7 @@ public class Trip {
         this.group = group;
         this.images = images;
         this.comments = comments;
+        this.activities = activities;
     }
 
     public long getId() { return id; }
@@ -98,4 +102,8 @@ public class Trip {
     public List<comment> getComments() { return comments; }
 
     public void setComments(List<comment> comments) { this.comments = comments; }
+
+    public List<Activity> getActivities() { return activities; }
+
+    public void setActivities(List<Activity> activities) { this.activities = activities; }
 }
