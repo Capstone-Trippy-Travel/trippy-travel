@@ -7,7 +7,7 @@
     <div class="row">
         <h4 class="page-title">Create Trip</h4>
         <div class="col l8 offset-l2">
-            <form class="col s12" id="pick-form" th:action="@{/trip/create}" th:method="POST" th:object="${trip}">
+            <form class="col s12"  th:action="@{/trip/create}" th:method="POST" th:object="${trip}">
 
 
                 <div class="input-field col s12">
@@ -56,25 +56,18 @@
                     <input type="date"  th:field="*{endDate}" />
 
                 </div>
+                <img id="imagePreview" src="" alt="" >
 
-                <div class="box">
+                <!--    this is our hidden input field and this is what we want to actually pass our image url in. -->
+                <input type="hidden" id="image"  name="image_url">
 
-                    <div class="field">
-                        <div class="control">
-                            <label for="fileupload">Select a file to upload</label>
-                            <input type="hidden" id="fileupload">
-                            <button id="picker">Pick file</button>
-                            <div id="thumbnail-container"></div>
-                        </div>
-                        <div class="control" id="nameBox"></div>
-                        <div class="control" id="urlBox"></div>
-                    </div>
-                    <div class="field">
-                        <div class="control">
-                        </div>
-                    </div>
+                <!--    This is the button a user will press if they want to open the filepicker -->
+                <!--    note: you might want to change the text in the button after -->
+                <!--    they have uploaded a image with the filepicker to "change picture" or file. -->
+                <button id="addPicture">addPicture</button>
 
-                </div>
+                <br>
+
 
                 <input class="btn" type="submit" />
             </form>
@@ -86,72 +79,71 @@
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script>
     // Set up the picker
-    const client = filestack.init('A8enoNg0YSje3UTPTDdF8z');
-    const options = {
-        onUploadDone: updateForm,
-        maxSize: 10 * 1024 * 1024,
-        accept: 'image/*',
-        uploadInBackground: false,
-    };
-    const picker = client.picker(options);
+<!--    const client = filestack.init(api);-->
+<!--    const options = {-->
+<!--        onUploadDone: updateForm,-->
+<!--        maxSize: 10 * 1024 * 1024,-->
+<!--        accept: 'image/*',-->
+<!--        uploadInBackground: false,-->
+<!--    };-->
+<!--    const picker = client.picker(options);-->
 
-    // Get references to the DOM elements
+<!--    // Get references to the DOM elements-->
 
-    const form = document.getElementById('pick-form');
-    const fileInput = document.getElementById('fileupload');
-    const btn = document.getElementById('picker');
-    const nameBox = document.getElementById('nameBox');
-    const urlBox = document.getElementById('urlBox');
+<!--    const form = document.getElementById('UploadImage');-->
+<!--    const fileInput = document.getElementById('fileupload');-->
+<!--    const btn = document.getElementById('picker');-->
+<!--    const nameBox = document.getElementById('nameBox');-->
+<!--    const urlBox = document.getElementById('urlBox');-->
 
-    // Add our event listeners
+<!--    // Add our event listeners-->
 
-    btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        picker.open();
-    });
+<!--    btn.addEventListener('click', function (e) {-->
+<!--        e.preventDefault();-->
+<!--        picker.open();-->
+<!--    });-->
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        alert('Submitting: ' + fileInput.value);
-    });
+<!--    form.addEventListener('click', function (e) {-->
+<!--        e.preventDefault();-->
+<!--        alert('Submitting: ' + fileInput.value);-->
+<!--    });-->
 
-    // Helper to overwrite the field input value
+<!--    // Helper to overwrite the field input value-->
 
-    function updateForm (result) {
-        const fileData = result.filesUploaded[0];
-        fileInput.value = fileData.url;
+<!--    function updateForm (result) {-->
+<!--        const fileData = result.filesUploaded[0];-->
+<!--        fileInput.value = fileData.url;-->
 
-        if (['jpeg', 'png'].indexOf(fileData.mimetype.split('/')[1]) !== -1) {
-            const container = document.getElementById('thumbnail-container');
-            const thumbnail = document.getElementById('thumbnail') || new Image();
-            thumbnail.id = 'thumbnail';
-            thumbnail.src = client.transform(fileData.handle, {
-                resize: {
-                    width: 200
-                }
-            });
+<!--        if (['jpeg', 'png'].indexOf(fileData.mimetype.split('/')[1]) !== -1) {-->
+<!--            const container = document.getElementById('thumbnail-container');-->
+<!--            const thumbnail = document.getElementById('thumbnail') || new Image();-->
+<!--            thumbnail.id = 'thumbnail';-->
+<!--            thumbnail.src = client.transform(fileData.handle, {-->
+<!--                resize: {-->
+<!--                    width: 200-->
+<!--                }-->
+<!--            });-->
 
-            if (!container.contains(thumbnail)) {
-                container.appendChild(thumbnail);
-            }
-        }
+<!--            if (!container.contains(thumbnail)) {-->
+<!--                container.appendChild(thumbnail);-->
+<!--            }-->
+<!--        }-->
 
-        // Some ugly DOM code to show some data.
-        const name = document.createTextNode('Selected: ' + fileData.filename);
-        const url = document.createElement('a');
-        url.href = fileData.url;
-        url.appendChild(document.createTextNode(fileData.url));
-        nameBox.appendChild(name);
-        urlBox.appendChild(document.createTextNode('Uploaded to: '));
-        urlBox.appendChild(url);
-    };
-
-
-</script>
-<script>
+<!--        // Some ugly DOM code to show some data.-->
+<!--        const name = document.createTextNode('Selected: ' + fileData.filename);-->
+<!--        const url = document.createElement('a');-->
+<!--        url.href = fileData.url;-->
+<!--        url.appendChild(document.createTextNode(fileData.url));-->
+<!--        nameBox.appendChild(name);-->
+<!--        urlBox.appendChild(document.createTextNode('Uploaded to: '));-->
+<!--        urlBox.appendChild(url);-->
+<!--    };-->
 
 
+<!--</script >-->
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src ="/keys.js"></script>
+<script src="/js/fileStack.js"></script>
 
-</script>
 </body>
 </html>

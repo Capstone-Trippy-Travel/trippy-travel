@@ -29,4 +29,4 @@ pom.xml
 ### node ###
 package-lock.json
 node_modules
-fileStackApi.js
+src/main/resources/static/js/fileStackAPI.js
