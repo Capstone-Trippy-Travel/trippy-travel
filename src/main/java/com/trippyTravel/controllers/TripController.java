@@ -3,6 +3,7 @@ package com.trippyTravel.controllers;
 import com.trippyTravel.models.Group;
 import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
+import com.trippyTravel.repositories.ActivityRepository;
 import com.trippyTravel.repositories.GroupsRepository;
 import com.trippyTravel.repositories.TripRepository;
 import com.trippyTravel.services.EmailService;
@@ -23,11 +24,13 @@ public class TripController {
     private final EmailService emailService;
     private final TripRepository tripRepository;
     private final GroupsRepository groupsRepository;
+    private final ActivityRepository activityRepository;
 
-    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository) {
+    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ActivityRepository activityRepository) {
         this.emailService = emailService;
         this.tripRepository = tripRepository;
         this.groupsRepository=groupsRepository;
+        this.activityRepository=activityRepository;
 
     }
 
@@ -50,6 +53,7 @@ public class TripController {
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel){
         vModel.addAttribute("trips", tripRepository.getOne(id));
+        vModel.addAttribute("activity", activityRepository.getOne(1L));
         return "Trip/show";
     }
 
