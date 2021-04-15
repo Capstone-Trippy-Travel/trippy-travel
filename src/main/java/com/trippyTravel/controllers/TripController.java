@@ -4,6 +4,7 @@ import com.trippyTravel.models.Group;
 import com.trippyTravel.models.Image;
 import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
+import com.trippyTravel.repositories.ActivityRepository;
 import com.trippyTravel.repositories.GroupsRepository;
 import com.trippyTravel.repositories.TripRepository;
 import com.trippyTravel.services.EmailService;
@@ -23,12 +24,18 @@ public class TripController {
     private final EmailService emailService;
     private final TripRepository tripRepository;
     private final GroupsRepository groupsRepository;
+
     @Value("${fileStackApiKey}")
     private String fileStackApiKey;
-    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository) {
+   
+
+    private final ActivityRepository activityRepository;
+
+    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ActivityRepository activityRepository) {
         this.emailService = emailService;
         this.tripRepository = tripRepository;
         this.groupsRepository=groupsRepository;
+        this.activityRepository=activityRepository;
 
     }
 
@@ -56,6 +63,7 @@ public class TripController {
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel){
         vModel.addAttribute("trips", tripRepository.getOne(id));
+        vModel.addAttribute("activity", activityRepository.getOne(1L));
         return "Trip/show";
     }
 
@@ -94,8 +102,9 @@ trips.setImages(imageList);
     }
     @GetMapping(path = "/trip/{id}/edit")
     public String updateTrip(@PathVariable Long id ,Model model){
-
-        model.addAttribute("trip",tripRepository.getOne(id));
+        Trip trip=tripRepository.getOne(id);
+        System.out.println(trip.getName());
+        model.addAttribute("trip", trip);
         return "Trip/edit";
     }
     @PostMapping(path = "/trip/{id}/edit")
@@ -117,5 +126,12 @@ trips.setImages(imageList);
         tripRepository.deleteById(id);
         return "redirect:/trip";
 
+    }
+
+    @GetMapping(path = "/trip/{id}/activities")
+    public String tripActivities(@PathVariable Long id ,Model model){
+        Trip trip=tripRepository.getOne(id);
+        model.addAttribute("trip", trip);
+        return "Trip/activities";
     }
 }

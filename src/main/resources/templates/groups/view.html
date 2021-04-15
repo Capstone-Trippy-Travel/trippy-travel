@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header(${'Group Page'})"></head>
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container">
+        <h2>Group name: <span th:text="${group.name}"></span></h2>
+
+        <h3>Group Members</h3>
+        <div th:each="groupMember : ${group.getGroupMembers()}">
+            <div th:text="${groupMember.getMember().getFirstName()}"></div>
+        </div>
+
+        <h3>Trips</h3>
+        <p>Group trips displayed here</p>
+    <!--    <div th:each="trip : ${trip}">-->
+    <!--        <div th:text="${groupMember.getMember().getFirstName()}"></div>-->
+    <!--    </div>-->
+
+        <form th:action="${'/trip/create'}" method="GET">
+            <button>Create Trip</button>
+        </form>
+
+
+    </div>
+
+</body>
+</html>

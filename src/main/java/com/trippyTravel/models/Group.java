@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +26,6 @@ public class Group {
     private List<Trip> trip;
 
 
-
     @OneToMany(mappedBy = "group")
     private List<GroupMember> groupMembers;
 
@@ -35,6 +35,8 @@ public class Group {
         this.name=name;
         this.owner=owner;
     }
+
+
 
     public Group(String name, User owner, List<Trip> trip) {
         this.name = name;
@@ -58,11 +60,9 @@ public class Group {
 
     public void setTrip(List<Trip> trip) { this.trip = trip; }
 
-    public List<GroupMember> getGroupMembers() {
-        return groupMembers;
-    }
+    public List<GroupMember> getGroupMembers() { return groupMembers; }
 
-    public void setGroupMembers(List<GroupMember> groupMembers) {
-        this.groupMembers = groupMembers;
-    }
+    public void setGroupMembers(List<GroupMember> groupMembers) { this.groupMembers = groupMembers; }
+
+
 }
