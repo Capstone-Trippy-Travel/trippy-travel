@@ -4,6 +4,7 @@ import com.trippyTravel.models.Group;
 import com.trippyTravel.models.User;
 import com.trippyTravel.repositories.GroupMembersRepository;
 import com.trippyTravel.repositories.GroupsRepository;
+import com.trippyTravel.repositories.UsersRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +19,15 @@ import java.util.List;
 public class GroupController {
     private GroupsRepository groupDao;
     private GroupMembersRepository groupMemberDao;
+    private UsersRepository userDao;
 
-    public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao) {
+    public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao) {
         this.groupDao = groupDao;
         this.groupMemberDao = groupMemberDao;
+        this.userDao = userDao;
     }
 
-//    @GetMapping(path = "/groups")
+    //    @GetMapping(path = "/groups")
 //    public String viewAllGroups(Model viewModel) {
 //        List<Group> allGroups = groupDao.findAll();
 //        viewModel.addAttribute("group", allGroups);
