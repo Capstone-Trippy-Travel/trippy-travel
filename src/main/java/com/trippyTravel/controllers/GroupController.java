@@ -25,7 +25,7 @@ public class GroupController {
         this.userDao = userDao;
     }
 
-//    @GetMapping(path = "/groups")
+    //    @GetMapping(path = "/groups")
 //    public String viewAllGroups(Model viewModel) {
 //        List<Group> allGroups = groupDao.findAll();
 //        viewModel.addAttribute("group", allGroups);

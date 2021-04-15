@@ -9,7 +9,16 @@
 
 <p>This is the group show page</p>
 <div>
-    <h2  th:text="${group.name}"></h2>
+    <h2>Group name: <span th:text="${group.name}"></span></h2>
+
+    <div th:each="groupMember : ${group.getGroupMembers()}">
+<!--        <h3>Group Members</h3>-->
+        <div th:text="${groupMember.getMember().getFirstName()}"></div>
+
+    </div>
+
+
+
 </div>
 
 </body>
