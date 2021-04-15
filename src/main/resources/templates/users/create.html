@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header(${'register-page'})"></head>
 <body>
-
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main class="container">
     <div class="row">
@@ -10,12 +11,12 @@
             <form class="col s12" th:action="@{/users/create}" th:method="POST" th:object="${user}">
                 <div class="input-field col s12">
                     <input type="text" class="validate" th:field="*{firstName}" />
-                    <label >firstName</label>
+                    <label >First Name</label>
 <!--                    <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>-->
                 </div>
                 <div class="input-field col s12">
                     <input type="text" class="validate" th:field="*{lastName}" />
-                    <label >lastName</label>
+                    <label >Last Name</label>
 <!--                    <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>-->
                 </div>
                 <div class="input-field col s12">
@@ -35,6 +36,7 @@
                     <input type="password" class="validate" th:field="*{password}" />
                     <p class="card-panel  red darken-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                 </div>
+
 
                 <input class="btn" type="submit" />
             </form>

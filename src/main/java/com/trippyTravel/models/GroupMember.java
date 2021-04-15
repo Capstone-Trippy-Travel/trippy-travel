@@ -4,7 +4,7 @@ package com.trippyTravel.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "group_member")
+@Table(name = "group_members")
 public class GroupMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +30,8 @@ public class GroupMember {
 
     public GroupMember() {
     }
+
+
 
     public GroupMember(boolean isAdmin, User member, Group group) {
         this.isAdmin = isAdmin;

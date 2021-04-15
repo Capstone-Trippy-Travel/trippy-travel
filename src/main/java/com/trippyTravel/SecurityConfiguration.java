@@ -35,14 +35,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll() // Anyone can go to the login page
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/", "/logout", "/async-login", "/posts/remove-tag") // anyone can see the home and logout page
+                    .antMatchers("/", "/logout") // anyone can see the home and logout page
                     .permitAll()
                 .and()
                     .logout()
                     .logoutSuccessUrl("/login?logout") // append a query string value
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/posts/create", "/posts/?/edit", "/users/?/friend-request", "/users/friends") // only authenticated users can visit this urls
+                    .antMatchers("/groups/create", "/groups/{id}", "/trip/create", "/trip/{id}", "/trip/{id}/edit", "/show") // only authenticated users can visit this urls
                     .authenticated()
         ;
     }
