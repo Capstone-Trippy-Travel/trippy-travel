@@ -30,7 +30,13 @@ public class Image {
     @Column( name= "image_url")
     private String image_url;
 
-public Image(String imgUrl){}
+    public Image(){}
+
+    public Image(String imgUrl, User user, Trip trip){
+    this.image_url=imgUrl;
+    this.user=user;
+    this.trip=trip;
+}
 
     public Image(long id, User user, Trip trip, Activity activity, String image_url) {
         this.id = id;
