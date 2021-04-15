@@ -26,7 +26,6 @@ public class Group {
     private List<Trip> trip;
 
 
-
     @OneToMany(mappedBy = "group")
     private List<GroupMember> groupMembers;
 

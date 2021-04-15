@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="custom.css">
-</head>
-<div th:replace="fragments/navbar :: navbar"></div>
+<head th:replace="fragments/header :: header(${'Group Page'})"></head>
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
 
-<p>This is the group show page</p>
-<div>
-    <h2>Group name: <span th:text="${group.name}"></span></h2>
+    <div class="container">
+        <h2>Group name: <span th:text="${group.name}"></span></h2>
 
-    <div th:each="groupMember : ${group.getGroupMembers()}">
-<!--        <h3>Group Members</h3>-->
-        <div th:text="${groupMember.getMember().getFirstName()}"></div>
+        <h3>Group Members</h3>
+        <div th:each="groupMember : ${group.getGroupMembers()}">
+            <div th:text="${groupMember.getMember().getFirstName()}"></div>
+        </div>
+
+        <h3>Trips</h3>
+        <p>Group trips displayed here</p>
+    <!--    <div th:each="trip : ${trip}">-->
+    <!--        <div th:text="${groupMember.getMember().getFirstName()}"></div>-->
+    <!--    </div>-->
+
+        <form th:action="${'/trip/create'}" method="GET">
+            <button>Create Trip</button>
+        </form>
+
 
     </div>
-
-
-
-</div>
 
 </body>
 </html>
