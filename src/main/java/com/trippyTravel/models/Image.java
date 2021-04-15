@@ -10,7 +10,7 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn( name= "user_id")
@@ -22,12 +22,12 @@ public class Image {
     @JsonManagedReference
     private Trip trip;
 
-    @ManyToOne
+    @ManyToOne (optional = true)
     @JoinColumn( name= "activity_id")
     @JsonManagedReference
     private Activity activity;
 
-    @Column( name= "image_url")
+    @Column( name= "image_url", columnDefinition = "text")
     private String image_url;
 
     public Image(){}
