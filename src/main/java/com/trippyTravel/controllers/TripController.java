@@ -1,6 +1,7 @@
 package com.trippyTravel.controllers;
 
 import com.trippyTravel.models.Group;
+import com.trippyTravel.models.Image;
 import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
 import com.trippyTravel.repositories.ActivityRepository;
@@ -8,14 +9,13 @@ import com.trippyTravel.repositories.GroupsRepository;
 import com.trippyTravel.repositories.TripRepository;
 import com.trippyTravel.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,6 +24,11 @@ public class TripController {
     private final EmailService emailService;
     private final TripRepository tripRepository;
     private final GroupsRepository groupsRepository;
+
+    @Value("${fileStackApiKey}")
+    private String fileStackApiKey;
+   
+
     private final ActivityRepository activityRepository;
 
     public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ActivityRepository activityRepository) {
@@ -49,7 +54,12 @@ public class TripController {
 
         return "Trip/index";
     }
-
+    @RequestMapping(path = "/keys.js", produces = "application/javascript")
+    @ResponseBody
+    public String apikey(){
+        System.out.println(fileStackApiKey);
+        return "const FileStackApiKey = `" + fileStackApiKey + "`";
+    }
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel){
         vModel.addAttribute("trips", tripRepository.getOne(id));
@@ -62,22 +72,27 @@ public class TripController {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("trip", new Trip());
         model.addAttribute("groups", groupsRepository.findByOwner(user));
+
         return "Trip/create";
     }
 
     @PostMapping("/trip/create")
 
-    public String createTripForm(@ModelAttribute Trip trips) {
+    public String createTripForm(@ModelAttribute Trip trips,@RequestParam(name = "product_image_url") String ImgUrl
+    ) {
+        Image imagetosave = new Image(ImgUrl);
+       List<Image>imageList= new ArrayList<>();
+imageList.add(imagetosave);
 //        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+trips.setImages(imageList);
 //        trips.setGroup(groups);
 //        Image imagesToSave= new Image(image0);
 //        Image image1ToSave= new Image(image1);
 //        imagesToSave.setPost(post);
 //        image1ToSave.setPost(post);
 //      post.setImages(imagesToSave);
-
+        System.out.println(imageList);
         Trip saveTrip= tripRepository.save(trips);
 //        imageRepo.save(imagesToSave);
 //        imageRepo.save(image1ToSave);
