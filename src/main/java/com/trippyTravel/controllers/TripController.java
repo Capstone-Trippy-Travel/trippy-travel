@@ -6,6 +6,7 @@ import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
 import com.trippyTravel.repositories.ActivityRepository;
 import com.trippyTravel.repositories.GroupsRepository;
+import com.trippyTravel.repositories.ImageRepository;
 import com.trippyTravel.repositories.TripRepository;
 import com.trippyTravel.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +25,20 @@ public class TripController {
     private final EmailService emailService;
     private final TripRepository tripRepository;
     private final GroupsRepository groupsRepository;
+    private final ImageRepository imagesRepository;
 
     @Value("${fileStackApiKey}")
     private String fileStackApiKey;
-   
+
 
     private final ActivityRepository activityRepository;
 
-    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ActivityRepository activityRepository) {
+    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ActivityRepository activityRepository, ImageRepository imagesRepository) {
         this.emailService = emailService;
         this.tripRepository = tripRepository;
         this.groupsRepository=groupsRepository;
         this.activityRepository=activityRepository;
+        this.imagesRepository=imagesRepository;
 
     }
 
@@ -63,7 +66,7 @@ public class TripController {
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel){
         vModel.addAttribute("trips", tripRepository.getOne(id));
-        vModel.addAttribute("activity", activityRepository.getOne(1L));
+//        vModel.addAttribute("activity", activityRepository.getOne(1L));
         return "Trip/show";
     }
 
@@ -78,24 +81,27 @@ public class TripController {
 
     @PostMapping("/trip/create")
 
-    public String createTripForm(@ModelAttribute Trip trips,@RequestParam(name = "image_url") String ImgUrl
-            , @RequestParam(name="group")Group group) {
 
-        Image imagetosave = new Image(ImgUrl);
-       List<Image>imageList= new ArrayList<>();
-imageList.add(imagetosave);
+
+    public String createTripForm(@ModelAttribute Trip trips,@RequestParam(name = "image_url",  required = false) String ImgUrl
+    ) {
+        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Trip saveTrip= tripRepository.save(trips);
+
+        Image imagetosave = new Image(ImgUrl, user, saveTrip);
+        System.out.println(imagetosave.getImage_url());
+        System.out.println(imagetosave.getUser().getUsername());
+        Image newImage=imagesRepository.save(imagetosave);
+        System.out.println("new image id: "+newImage.getId());
 //        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-trips.setImages(imageList);
-trips.setGroup(group);
+
 //        trips.setGroup(groups);
 //        Image imagesToSave= new Image(image0);
 //        Image image1ToSave= new Image(image1);
 //        imagesToSave.setPost(post);
 //        image1ToSave.setPost(post);
 //      post.setImages(imagesToSave);
-        System.out.println(imageList);
-        Trip saveTrip= tripRepository.save(trips);
 //        imageRepo.save(imagesToSave);
 //        imageRepo.save(image1ToSave);
 //        emailService.prepareAndSend(saveTrip, "new trip","hey where you wanna go");
