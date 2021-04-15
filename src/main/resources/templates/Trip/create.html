@@ -12,8 +12,8 @@
 
                 <div class="input-field col s12">
                     <label >Group</label>
-                    <select class="form-control" th:field="*{group}">
-                        <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}"></option>
+                    <select class="form-control" >
+                        <option th:each="group: ${groups}" th:text="${group.getName()}" name = "group" th:value="${group.getId()}"></option>
 
                     </select>
 

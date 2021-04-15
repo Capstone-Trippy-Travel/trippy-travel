@@ -70,14 +70,16 @@ public class TripController {
 
     @PostMapping("/trip/create")
 
-    public String createTripForm(@ModelAttribute Trip trips,@RequestParam(name = "product_image_url") String ImgUrl
-    ) {
+    public String createTripForm(@ModelAttribute Trip trips,@RequestParam(name = "image_url") String ImgUrl
+            , @RequestParam(name="group")Group group) {
+
         Image imagetosave = new Image(ImgUrl);
        List<Image>imageList= new ArrayList<>();
 imageList.add(imagetosave);
 //        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 trips.setImages(imageList);
+trips.setGroup(group);
 //        trips.setGroup(groups);
 //        Image imagesToSave= new Image(image0);
 //        Image image1ToSave= new Image(image1);
