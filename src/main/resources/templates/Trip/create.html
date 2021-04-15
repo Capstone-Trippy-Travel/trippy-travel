@@ -7,7 +7,7 @@
     <div class="row">
         <h4 class="page-title">Create Trip</h4>
         <div class="col l8 offset-l2">
-            <form class="col s12" th:action="@{/trip/create}" th:method="POST" th:object="${trip}">
+            <form class="col s12" id="pick-form" th:action="@{/trip/create}" th:method="POST" th:object="${trip}">
 
 
                 <div class="input-field col s12">
@@ -57,13 +57,101 @@
 
                 </div>
 
+                <div class="box">
+
+                    <div class="field">
+                        <div class="control">
+                            <label for="fileupload">Select a file to upload</label>
+                            <input type="hidden" id="fileupload">
+                            <button id="picker">Pick file</button>
+                            <div id="thumbnail-container"></div>
+                        </div>
+                        <div class="control" id="nameBox"></div>
+                        <div class="control" id="urlBox"></div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                        </div>
+                    </div>
+
+                </div>
+
                 <input class="btn" type="submit" />
             </form>
         </div>
     </div>
 </main>
+
+
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-const client = filestack.init(YOUR_API_KEY);
-client.picker().open();
+<script>
+    // Set up the picker
+    const client = filestack.init('A8enoNg0YSje3UTPTDdF8z');
+    const options = {
+        onUploadDone: updateForm,
+        maxSize: 10 * 1024 * 1024,
+        accept: 'image/*',
+        uploadInBackground: false,
+    };
+    const picker = client.picker(options);
+
+    // Get references to the DOM elements
+
+    const form = document.getElementById('pick-form');
+    const fileInput = document.getElementById('fileupload');
+    const btn = document.getElementById('picker');
+    const nameBox = document.getElementById('nameBox');
+    const urlBox = document.getElementById('urlBox');
+
+    // Add our event listeners
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        picker.open();
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Submitting: ' + fileInput.value);
+    });
+
+    // Helper to overwrite the field input value
+
+    function updateForm (result) {
+        const fileData = result.filesUploaded[0];
+        fileInput.value = fileData.url;
+
+        if (['jpeg', 'png'].indexOf(fileData.mimetype.split('/')[1]) !== -1) {
+            const container = document.getElementById('thumbnail-container');
+            const thumbnail = document.getElementById('thumbnail') || new Image();
+            thumbnail.id = 'thumbnail';
+            thumbnail.src = client.transform(fileData.handle, {
+                resize: {
+                    width: 200
+                }
+            });
+
+            if (!container.contains(thumbnail)) {
+                container.appendChild(thumbnail);
+            }
+        }
+
+        // Some ugly DOM code to show some data.
+        const name = document.createTextNode('Selected: ' + fileData.filename);
+        const url = document.createElement('a');
+        url.href = fileData.url;
+        url.appendChild(document.createTextNode(fileData.url));
+        nameBox.appendChild(name);
+        urlBox.appendChild(document.createTextNode('Uploaded to: '));
+        urlBox.appendChild(url);
+    };
+
+
+</script>
+<script>
+
+
+
+</script>
 </body>
 </html>
