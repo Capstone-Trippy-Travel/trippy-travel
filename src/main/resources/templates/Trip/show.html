@@ -25,16 +25,22 @@
 
             <!--    </div>-->
             <h4>Comments</h4>
-            <div th:each="comment :  ${trips.comments}">
-                <p th:text="${comment.getComment_text()}"></p>
+<!--            <div th:text="${}"></div>-->
+            <div th:each="comment :  ${trips.getComments()}">
+                <p th:text="${comment.getComment_text()}"> </p>
+                <!--                <span><i class='far fa-comments'></i></span>-->
             </div>
+<!--            <div th:each="comment :  ${trips.comments}">-->
+<!--                <p th:text="${comment.getComment_text()}"> </p>-->
+<!--&lt;!&ndash;                <span><i class='far fa-comments'></i></span>&ndash;&gt;-->
+<!--            </div>-->
 
             <div class="row">
                 <div class="col">
                     <i class='far fa-comment' style='font-size:36px' id="formButton"></i>
                     <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm">
                         <textarea name="comment" placeholder="Enter comment here"></textarea>
-                        <button type="button" id="comment">Submit</button>
+                        <button type="submit" id="comment">Submit</button>
                     </form>
                 </div>
                 <div class="col-last">

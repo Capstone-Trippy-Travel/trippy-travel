@@ -1,15 +1,17 @@
 package com.trippyTravel.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "comments")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column( name= "comment_text")
     private String comment_text;
@@ -25,11 +27,10 @@ public class Comment {
     @JsonManagedReference
     private Trip trip;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JoinColumn( name= "activity_id")
     @JsonManagedReference
     private Activity activity;
-
 
     public Comment(){}
 

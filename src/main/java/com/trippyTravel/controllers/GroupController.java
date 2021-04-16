@@ -1,8 +1,10 @@
 package com.trippyTravel.controllers;
 
+import com.trippyTravel.models.Comment;
 import com.trippyTravel.models.Group;
 import com.trippyTravel.models.GroupMember;
 import com.trippyTravel.models.User;
+import com.trippyTravel.repositories.CommentRepository;
 import com.trippyTravel.repositories.GroupMembersRepository;
 import com.trippyTravel.repositories.GroupsRepository;
 import com.trippyTravel.repositories.UsersRepository;
@@ -18,11 +20,13 @@ public class GroupController {
     private GroupsRepository groupDao;
     private GroupMembersRepository groupMemberDao;
     private UsersRepository userDao;
+    private CommentRepository commentDao;
 
-    public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao) {
+    public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao) {
         this.groupDao = groupDao;
         this.groupMemberDao = groupMemberDao;
         this.userDao = userDao;
+        this.commentDao = commentDao;
     }
 
     //    @GetMapping(path = "/groups")
@@ -45,7 +49,6 @@ public class GroupController {
     @PostMapping(path = "/groups/create")
     public String viewPost(@ModelAttribute Group newGroup, @RequestParam(name = "groupMembersList", required = false) Integer[] groupMembers) {
 
-
         User groupOwner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
        newGroup.setOwner(groupOwner);
 
@@ -57,4 +60,5 @@ public class GroupController {
 
         return "redirect:/groups/"+createdGroup.getId();
     }
+
 }
