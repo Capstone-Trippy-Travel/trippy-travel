@@ -32,15 +32,12 @@ public class CommentController {
 
     @PostMapping("/trip/{id}/comment")
     public String createComment(@RequestParam(name = "comment") String comment, @PathVariable long id, Model model){
-        System.out.println("start process");
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Comment newComment =new Comment();
         newComment.setComment_text(comment);
         newComment.setUser(user);
         newComment.setTrip(tripDao.getOne(id));
-        System.out.println("before save");
         commentDao.save(newComment);
-        System.out.println("after save");
         return "redirect:/trip/" + id;
     }
 }

@@ -24,12 +24,17 @@
             <p th:text="${trips.endDate}" class="card-text"></p>
 
             <!--    </div>-->
+            <h4>Comments</h4>
+            <div th:each="comment :  ${trips.comments}">
+                <p th:text="${comment.getComment_text()}"></p>
+            </div>
+
             <div class="row">
                 <div class="col">
                     <i class='far fa-comment' style='font-size:36px' id="formButton"></i>
-                    <form th:action="@{'/trip/'+ ${trips.id}+'/comment'}" method="post" id="commentForm">
+                    <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm">
                         <textarea name="comment" placeholder="Enter comment here"></textarea>
-                        <button type="button" id="submit">Submit</button>
+                        <button type="button" id="comment">Submit</button>
                     </form>
                 </div>
                 <div class="col-last">
