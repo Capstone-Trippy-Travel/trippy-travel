@@ -31,9 +31,7 @@
 
             <button type="button" id="formButton">Comment</button>
             <form th:action="@{'/trip/'+ ${trips.id}+'/comment'}" method="post" id="commentForm">
-                    <textarea name="comment">
-                        Enter your comment here
-                    </textarea>
+                    <textarea name="comment" placeholder="Enter comment here"></textarea>
                 <button type="button" id="submit">Submit</button>
             </form>
 
