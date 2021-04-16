@@ -2,10 +2,10 @@ package com.trippyTravel.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 
@@ -18,7 +18,7 @@ public class User {
     private long id;
 
     @Column(nullable = false, length = 20, unique = true)
-    @NotBlank(message = "Username can't be empty")
+    @javax.validation.constraints.NotBlank(message = "Username can't be empty")
     private String username;
 
     @Column(name = "first_name", nullable = false, length = 250)
@@ -28,19 +28,19 @@ public class User {
     private String lastName;
 
     @Column(nullable = false, unique = true)
-    @Email(message = "Invalid email")
-    @NotBlank(message = "Email can't be empty")
+    @javax.validation.constraints.Email(message = "Invalid email")
+    @javax.validation.constraints.NotBlank(message = "Email can't be empty")
     private String email;
 
     @Column(nullable = false)
-    @NotBlank(message = "Password can't be empty")
+    @javax.validation.constraints.NotBlank(message = "Password can't be empty")
     @JsonIgnore
     private String password;
 
     @Column(columnDefinition = "TEXT")
     private String profile_image;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     @JsonBackReference
     private List<FriendList> friends;
 
@@ -57,7 +57,7 @@ public class User {
     public User() {
     }
 
-    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<Comment> Comments) {
+    public User(@javax.validation.constraints.NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @javax.validation.constraints.NotBlank(message = "Email can't be empty") String email, @javax.validation.constraints.NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<comment> comments) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

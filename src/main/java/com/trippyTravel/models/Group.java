@@ -22,11 +22,14 @@ public class Group {
     @OneToOne
     private User owner;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "group")
     private List<Trip> trip;
 
 
-    @OneToMany(mappedBy = "group")
+
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "group")
+
     private List<GroupMember> groupMembers;
 
     public Group() {
