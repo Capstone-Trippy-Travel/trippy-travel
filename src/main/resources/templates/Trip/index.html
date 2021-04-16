@@ -26,12 +26,12 @@
 <main class="container ">
     <h1>Latest Trips</h1>
     <div class="d-flex flex-wrap justify-content-evenly">
-        <div class="trip" th:each="trip: ${trips}">
+        <div class="trip" >
 
-            <div class="card" style="width: 18rem; margin-bottom: 10px ">
+            <div class="card" th:each="trip: ${trips}" style="width: 18rem; margin-bottom: 10px ">
 
-                <img th:src="..." class="card-img-top"  alt="...">
-                <div class="card-body">
+<!--                <img th:src="${trip.getImages().get(0).getImage_url()}" class="card-img-top"  alt="...">-->
+                <div class="card-body" >
 
 
                     <h1 th:text="${trip.name}" class="card-title"></h1>

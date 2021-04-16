@@ -71,6 +71,31 @@ public class TripController {
 //        vModel.addAttribute("activity", activityRepository.getOne(1L));
         return "Trip/show";
     }
+    @PostMapping(path = "/trip/{id}")
+    public String addPicture(@ModelAttribute Trip trip,@RequestParam(name = "image_url",  required = false) String ImgUrl
+    ) {
+        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+
+        System.out.println(ImgUrl);
+        Image imageToSave = new Image(ImgUrl, user, trip);
+        System.out.println(imageToSave.getImage_url());
+        System.out.println(imageToSave.getUser().getUsername());
+        System.out.println("about to save image");
+        imagesRepository.save(imageToSave);
+        System.out.println("saved image");
+
+//
+        return "redirect:/trip/"+trip.getId();
+    }
+
+//    @GetMapping(path = "/trip/{id}/edit")
+//    public String updateTrip(@PathVariable Long id ,Model model){
+//        Trip trip=tripRepository.getOne(id);
+//        System.out.println(trip.getName());
+//        model.addAttribute("trip", trip);
+//        return "Trip/edit";
+//    }
 
     @GetMapping("/trip/create")
     public String createTrip(Model model){
@@ -112,6 +137,7 @@ public class TripController {
 
         return "redirect:/trip/"+saveTrip.getId();
     }
+
     @GetMapping(path = "/trip/{id}/edit")
     public String updateTrip(@PathVariable Long id ,Model model){
         Trip trip=tripRepository.getOne(id);
