@@ -4,16 +4,14 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Individual Trip</title>
-</head>
+<head th:replace="fragments/header :: header(${'View Trip'})"></head>
 <body>
+<div th:replace="fragments/navbar :: navbar"></div>
 <h6>View individual Trip</h6>
 <div class="card" style="width: 18rem;">
     <div class="card-body">
         <main class="container">
             <!--    <div class="post" th:each="image:${post.getImages()}">-->
-
 
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 <img th:src="${trips.getImages().get(0).getImage_url()}"  alt="...">
@@ -31,9 +29,25 @@
                 <button type="submit" id="delete" >delete</button>
             </form>
 
+            <button type="button" id="formButton">Comment</button>
+            <form th:action="@{'/trip/'+ ${trips.id}+'/comment'}" method="post" id="commentForm">
+                    <textarea name="comment">
+                        Enter your comment here
+                    </textarea>
+                <button type="button" id="submit">Submit</button>
+            </form>
+
         </main>
     </div>
 </div>
 <!--    <div th:replace="fragments/activity :: mainAct"></div>-->
+<!--script for comment toggle-->
+<script>
+    $(document).ready(function() {
+        $("#formButton").click(function() {
+            $("#commentForm").toggle();
+        });
+    });
+</script>
 </body>
 </html>
