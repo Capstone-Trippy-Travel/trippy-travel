@@ -1,0 +1,66 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    background-color: lightblue;
+    font-family: "Arial Rounded MT Bold";
+    font-size: small;
+    /*background-image: url('/static/imgs/tt_background_mod.jpg');*/
+}
+
+body {
+    background-image: url("../imgs/tt_background_mod.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+form {
+    padding: 3em;
+}
+
+fieldset {
+    -webkit-box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
+    border-radius: 10px;
+    background-color: white;
+    opacity: 0.9;
+    padding: 1em;
+    margin: 1em;
+    border: 0;
+}
+
+.width-80 {
+    width: 80%;
+    margin: auto;
+    max-width: 500px;
+}
+
+.form-group {
+    width: 100%;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn {
+    background-color: lightskyblue;
+    padding: 8px;
+    color: white;
+    border: 1px;
+    border-color: lightgray;
+}
+
+.navbar {
+    font-family: "Arial Rounded MT Bold";
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+img {
+    max-height: 30px;
+    max-width: 30px;
+    margin-right: 10px;
+}
