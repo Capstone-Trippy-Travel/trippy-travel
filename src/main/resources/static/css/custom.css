@@ -19,7 +19,9 @@ img.logo {
     }
 
 }
-
+#commentForm {
+    display:none;
+}
 
 
 /*body > .container {*/
