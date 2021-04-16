@@ -57,7 +57,7 @@ public class User {
     public User() {
     }
 
-    public User(@javax.validation.constraints.NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @javax.validation.constraints.NotBlank(message = "Email can't be empty") String email, @javax.validation.constraints.NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<comment> comments) {
+    public User(@javax.validation.constraints.NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @javax.validation.constraints.NotBlank(message = "Email can't be empty") String email, @javax.validation.constraints.NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<Comment> comments) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
