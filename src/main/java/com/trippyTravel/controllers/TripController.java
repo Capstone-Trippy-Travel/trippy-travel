@@ -182,6 +182,6 @@ public class TripController {
     public String tripActivities(@PathVariable Long id ,Model model){
         Trip trip=tripRepository.getOne(id);
         model.addAttribute("trip", trip);
-        return "Trip/activities";
+        return "Trip/activities_google";
     }
 }
