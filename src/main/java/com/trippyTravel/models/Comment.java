@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "comments")
-public class comment {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,16 +31,16 @@ public class comment {
     private Activity activity;
 
 
-    public comment(){}
+    public Comment(){}
 
-    public comment(long id, String comment_text, User user, Trip trip) {
+    public Comment(long id, String comment_text, User user, Trip trip) {
         this.id = id;
         this.comment_text = comment_text;
         this.user = user;
         this.trip = trip;
     }
 
-    public comment(String comment_text, User user, Trip trip) {
+    public Comment(String comment_text, User user, Trip trip) {
         this.comment_text = comment_text;
         this.user = user;
         this.trip = trip;

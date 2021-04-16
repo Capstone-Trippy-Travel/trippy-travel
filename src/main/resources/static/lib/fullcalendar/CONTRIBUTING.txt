@@ -93,7 +93,7 @@ var o = { a: 1, b: 2, c: 3 };
 Other exceptions:
 
 - please ignore anything about Google Closure Compiler or the `goog` library
-- please do not write JSDoc comments
+- please do not write JSDoc Comments
 
 Notes about whitespace:
 

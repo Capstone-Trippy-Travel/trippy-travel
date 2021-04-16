@@ -5,10 +5,14 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 <div class="row" id="introDiv">
     <div class="col-4" id="intro">
-        <h3>Trippy Travel</h3>
+<!--        <h3>Trippy Travel</h3>-->
         <h6>Collaborate with your friends to plan your group's next big adventure!</h6>
-        <button type="button" class="btn btn-primary btn-lg">Plan a Trip</button>
-        <button type="button" class="btn btn-secondary btn-lg">Create a Group</button>
+
+            <a class="btn btn-primary btn-sm" th:href="@{/trip/create}">Plan A Trip!<span class="sr-only">(current)</span></a>
+            <a class="btn btn-primary btn-sm" th:href="@{/groups/create}">Create A Group!<span class="sr-only">(current)</span></a>
+
+<!--        <button type="button" class="btn btn-primary btn-lg" th:href="@{/trip/create}">Plan a Trip</button>-->
+<!--        <button type="button" class="btn btn-secondary btn-lg" th:href="@{/groups/create}">Create a Group</button>-->
     </div>
     <div class="col-8" id="homeLogo">
         <img src="img/plane_globe.png">

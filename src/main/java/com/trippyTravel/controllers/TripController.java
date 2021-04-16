@@ -4,10 +4,7 @@ import com.trippyTravel.models.Group;
 import com.trippyTravel.models.Image;
 import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
-import com.trippyTravel.repositories.ActivityRepository;
-import com.trippyTravel.repositories.GroupsRepository;
-import com.trippyTravel.repositories.ImageRepository;
-import com.trippyTravel.repositories.TripRepository;
+import com.trippyTravel.repositories.*;
 import com.trippyTravel.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,20 +22,34 @@ public class TripController {
     private final TripRepository tripRepository;
     private final GroupsRepository groupsRepository;
     private final ImageRepository imagesRepository;
+    private final CommentRepository commentRepository;
+
+    @Value("${mapBoxToken}")
+    private String mapBoxToken;
 
     @Value("${fileStackApiKey}")
     private String fileStackApiKey;
 
 
+    @Value("${fourSquareId}")
+    private String fourSquareId;
+
+    @Value("${fourSquarePassword}")
+    private String fourSquarePassword;
+
+    @Value("${googleMapsKey}")
+    private String googleMapsKey;
+   
+
     private final ActivityRepository activityRepository;
 
-    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ActivityRepository activityRepository, ImageRepository imagesRepository) {
+    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ImageRepository imagesRepository, CommentRepository commentRepository, ActivityRepository activityRepository) {
         this.emailService = emailService;
         this.tripRepository = tripRepository;
-        this.groupsRepository=groupsRepository;
-        this.activityRepository=activityRepository;
-        this.imagesRepository=imagesRepository;
-
+        this.groupsRepository = groupsRepository;
+        this.imagesRepository = imagesRepository;
+        this.commentRepository = commentRepository;
+        this.activityRepository = activityRepository;
     }
 
     @GetMapping("/trip")
@@ -61,13 +70,14 @@ public class TripController {
     @RequestMapping(path = "/keys.js", produces = "application/javascript")
     @ResponseBody
     public String apikey(){
-        System.out.println(fileStackApiKey);
-        return "const FileStackApiKey = `" + fileStackApiKey + "`";
+
+        return "const FileStackApiKey = `" + fileStackApiKey +"`\n" +"const mapBoxToken = `" + mapBoxToken+"`\n"+"const fourSquareId = `" + fourSquareId+"`\n"+ "const fourSquarePassword = `" + fourSquarePassword+"`\n"+ "const googleMapsKey = `" + googleMapsKey+"`";
     }
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel){
         System.out.println("numbe of images for trip: "+ tripRepository.getOne(id).getImages().size());
         vModel.addAttribute("trips", tripRepository.getOne(id));
+        vModel.addAttribute("comments", commentRepository.findAll());
 //        vModel.addAttribute("activity", activityRepository.getOne(1L));
         return "Trip/show";
     }
@@ -111,7 +121,6 @@ public class TripController {
     public String createTripForm(@ModelAttribute Trip trip,@RequestParam(name = "image_url",  required = false) String ImgUrl, @RequestParam(name="groupId")String groupId
     ) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         Group group = groupsRepository.getOne(Long.parseLong(groupId));
         trip.setGroup(group);
         Trip saveTrip= tripRepository.save(trip);
