@@ -1,7 +1,7 @@
 package com.trippyTravel.controllers;
 
 
-import com.trippyTravel.models.comment;
+import com.trippyTravel.models.Comment;
 import com.trippyTravel.repositories.ActivityRepository;
 import com.trippyTravel.repositories.CommentRepository;
 import com.trippyTravel.repositories.TripRepository;
@@ -29,7 +29,7 @@ public class CommentController {
     @PostMapping("/trip/{id}/comment")
     public String editSaveComment(@RequestParam("comment") String comment, @PathVariable long id, Model model){
 
-
+        Comment newComment =new Comment();
 
         return "redirect:/trip/" + id;
     }

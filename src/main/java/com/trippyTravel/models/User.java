@@ -51,13 +51,13 @@ public class User {
     private List<Image> images;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<comment> comments;
+    private List<Comment> Comments;
 
 
     public User() {
     }
 
-    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<comment> comments) {
+    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<Comment> Comments) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -67,7 +67,7 @@ public class User {
         this.friends = friends;
         this.groupMember = groupMember;
         this.images = images;
-        this.comments = comments;
+        this.Comments = Comments;
     }
 
     // Copy constructor an alternative for clone
@@ -121,9 +121,9 @@ public class User {
 
     public void setImages(List<Image> images) { this.images = images; }
 
-    public List<comment> getComments() { return comments; }
+    public List<Comment> getComments() { return Comments; }
 
-    public void setComments(List<comment> comments) { this.comments = comments; }
+    public void setComments(List<Comment> Comments) { this.Comments = Comments; }
 
     @Override
     public String toString() {
