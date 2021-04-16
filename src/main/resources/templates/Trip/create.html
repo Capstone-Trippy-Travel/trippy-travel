@@ -12,13 +12,11 @@
 
                 <div class="input-field col s12">
                     <label >Group</label>
-<<<<<<< HEAD
-                    <select class="form-control" >
-                        <option th:each="group: ${groups}" th:text="${group.getName()}" name = "group" th:value="${group.getId()}"></option>
-=======
+
+
                     <select class="form-control" name="groupId">
                         <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}"></option>
->>>>>>> c3605b468b10999054ec52f9237d6832cfed41fb
+
 
                     </select>
 
@@ -70,7 +68,7 @@
 <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
 <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
 <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
-<!--                <button id="addPicture">addPicture</button>-->
+                <button id="addPicture">addPicture</button>
                 <input type="text"  name="image_url">
 
                 <br>
