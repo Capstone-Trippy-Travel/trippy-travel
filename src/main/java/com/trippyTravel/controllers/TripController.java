@@ -1,9 +1,6 @@
 package com.trippyTravel.controllers;
 
-import com.trippyTravel.models.Group;
-import com.trippyTravel.models.Image;
-import com.trippyTravel.models.Trip;
-import com.trippyTravel.models.User;
+import com.trippyTravel.models.*;
 import com.trippyTravel.repositories.*;
 import com.trippyTravel.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 @Controller
 public class TripController {
@@ -79,6 +78,11 @@ public class TripController {
         vModel.addAttribute("trips", tripRepository.getOne(id));
         vModel.addAttribute("comments", commentRepository.findAll());
 //        vModel.addAttribute("activity", activityRepository.getOne(1L));
+        List<Comment> commentsList = new ArrayList<>();
+        ListIterator<Comment> commentListIterator = commentsList.listIterator();
+//        while (commentListIterator.hasNext()) {
+//            System.out.println(commentListIterator.next());
+//        }
         return "Trip/show";
     }
     @PostMapping(path = "/trip/{id}")
@@ -112,7 +116,6 @@ public class TripController {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("trip", new Trip());
         model.addAttribute("groups", groupsRepository.findByOwner(user));
-
         return "Trip/create";
     }
 
