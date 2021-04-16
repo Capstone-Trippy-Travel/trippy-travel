@@ -1,4 +1,4 @@
-
+console.log('accessing file stack file')
 // Make sure to put your personal FileStackKey in the keys.js file
 const client = filestack.init(FileStackApiKey);
 
@@ -22,6 +22,7 @@ const options = {
 }
 // This is an event listen for listening to a click on a button
 $('#addPicture').click(function (event){
+    console.log('adding picture')
 
     // this is what prevents the button from submiting the form
     event.preventDefault();
