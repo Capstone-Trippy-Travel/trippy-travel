@@ -1,6 +1,4 @@
 mapboxgl.accessToken = mapBoxToken
-// let fourSquareId=""
-// let fourSquarePassword=""
 
 let venueButton=document.getElementById("venueButton");
 let venue=document.getElementById("venue");
@@ -32,6 +30,14 @@ function getSearchLocation(location) {
         map.setCenter(result)
     })
 }
+
+function getSearchCoordinates(location){
+    geocode(location, mapBoxToken).then(function (result) {
+        console.log(result)
+        return result;
+    })
+
+    }
 
 
 
@@ -140,7 +146,7 @@ function searchMapForVenues(venue) {
     });
 }
 
-searchMapForVenues("restaurants")
+// searchMapForVenues("restaurants")
 
 
 
@@ -151,14 +157,29 @@ searchButton.addEventListener("click", ()=>{
     getSearchLocation(searchValue.value)
 
     //will add markers and venues to screen
-    searchMapForVenues(venue.value)
+    // searchMapForVenues(venue.value)
 
 })
 
 venueButton.addEventListener("click", ()=>{
     console.log(venue.value)
+    getSearchCoordinates(searchValue.value)
 
     //will add markers and venues to screen
-    searchMapForVenues(venue.value)
+    // searchMapForVenues(venue.value)
+    // $.ajax({
+    //     dataType: "json",
+    //     url: `https://api.foursquare.com/v2/venues/${singleVenue.id}?client_id=${fourSquareId}&client_secret=${fourSquarePassword}&v=20180323&limit=10&near=${searchValue.value}&query=${venue}`,
+    //     data: {},
+    //     success: function (data) {
+    //         console.log(data)
+    //         let venueDetailsDiv=document.createElement("div");
+    //
+    //     },
+    //     error: function (jqXHR, textStatus, errorThrown) {
+    //         // Code for handling errors
+    //     }
+    // });
+
 
 })

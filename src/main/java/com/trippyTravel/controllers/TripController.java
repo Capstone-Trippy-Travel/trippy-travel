@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +66,7 @@ public class TripController {
     }
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel){
+        System.out.println("numbe of images for trip: "+ tripRepository.getOne(id).getImages().size());
         vModel.addAttribute("trips", tripRepository.getOne(id));
 //        vModel.addAttribute("activity", activityRepository.getOne(1L));
         return "Trip/show";
@@ -81,21 +83,23 @@ public class TripController {
 
     @PostMapping("/trip/create")
 
-
-
-    public String createTripForm(@ModelAttribute Trip trips,@RequestParam(name = "image_url",  required = false) String ImgUrl
+    public String createTripForm(@ModelAttribute Trip trip,@RequestParam(name = "image_url",  required = false) String ImgUrl, @RequestParam(name="groupId")String groupId
     ) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Trip saveTrip= tripRepository.save(trips);
 
-        Image imagetosave = new Image(ImgUrl, user, saveTrip);
-        System.out.println(imagetosave.getImage_url());
-        System.out.println(imagetosave.getUser().getUsername());
-        Image newImage=imagesRepository.save(imagetosave);
-        System.out.println("new image id: "+newImage.getId());
+        Group group = groupsRepository.getOne(Long.parseLong(groupId));
+        trip.setGroup(group);
+        Trip saveTrip= tripRepository.save(trip);
+        System.out.println();
+        Image imageToSave = new Image(ImgUrl, user, saveTrip);
+        System.out.println(imageToSave.getImage_url());
+        System.out.println(imageToSave.getUser().getUsername());
+        System.out.println("about to save image");
+        imagesRepository.save(imageToSave);
+        System.out.println("saved image");
+
 //        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 //        trips.setGroup(groups);
 //        Image imagesToSave= new Image(image0);
 //        Image image1ToSave= new Image(image1);

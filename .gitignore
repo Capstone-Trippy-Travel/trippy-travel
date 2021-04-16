@@ -31,3 +31,4 @@ pom.xml
 package-lock.json
 node_modules
 src/main/resources/static/js/fileStackAPI.js
+src/main/resources/static/js/keys.js

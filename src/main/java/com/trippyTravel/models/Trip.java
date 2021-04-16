@@ -38,7 +38,7 @@ public class Trip {
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
     private List<Image> images;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
