@@ -2,6 +2,7 @@ mapboxgl.accessToken = mapBoxToken
 // let fourSquareId=""
 // let fourSquarePassword=""
 
+
 let venueButton=document.getElementById("venueButton");
 let venue=document.getElementById("venue");
 let venueList=document.getElementById("venueList")

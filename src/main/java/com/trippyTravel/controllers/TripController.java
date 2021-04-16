@@ -28,8 +28,20 @@ public class TripController {
     private final GroupsRepository groupsRepository;
     private final ImageRepository imagesRepository;
 
+    @Value("${mapBoxToken}")
+    private String mapBoxToken;
+
     @Value("${fileStackApiKey}")
     private String fileStackApiKey;
+
+    @Value("${fourSquareId}")
+    private String fourSquareId;
+
+    @Value("${fourSquarePassword}")
+    private String fourSquarePassword;
+
+    @Value("${googleMapsKey}")
+    private String googleMapsKey;
    
 
     private final ActivityRepository activityRepository;
@@ -61,8 +73,8 @@ public class TripController {
     @RequestMapping(path = "/keys.js", produces = "application/javascript")
     @ResponseBody
     public String apikey(){
-        System.out.println(fileStackApiKey);
-        return "const FileStackApiKey = `" + fileStackApiKey + "`";
+
+        return "const FileStackApiKey = `" + fileStackApiKey +"`\n" +"const mapBoxToken = `" + mapBoxToken+"`\n"+"const fourSquareId = `" + fourSquareId+"`\n"+ "const fourSquarePassword = `" + fourSquarePassword+"`\n"+ "const googleMapsKey = `" + googleMapsKey+"`";
     }
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel){
