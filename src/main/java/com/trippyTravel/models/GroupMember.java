@@ -1,6 +1,8 @@
 package com.trippyTravel.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,6 +23,7 @@ public class GroupMember {
 //    private Group group;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "user_id")
     private User member;
 
