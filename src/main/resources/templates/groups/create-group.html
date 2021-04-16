@@ -46,6 +46,7 @@
     //this function will search the database for the name being typed in the find a group member input
     // It will return a list of names that can be picked in html.
         function searchDatabaseForUsers(name) {
+            console.log("searching for "+name)
             jQuery.ajax({
                 'url': `/users.json?name=${name}`,
                 success: function (users) {
