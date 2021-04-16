@@ -362,7 +362,7 @@ v2.7.2 (2016-05-20)
   dayClick/dragging/resizing (#3154, #3149)
 - fixed dayClick incorrectly triggered on touch scroll (#3152)
 - fixed touch event dragging wrongfully beginning upon scrolling document (#3160)
-- fixed minified JS still contained comments
+- fixed minified JS still contained Comments
 - UI change: mouse users must hover over an event to reveal its resizers
 
 
@@ -602,7 +602,7 @@ v2.1.1 (2014-08-29)
 v2.1.0 (2014-08-25)
 -------------------
 
-Large code refactor with better OOP, better code reuse, and more comments.
+Large code refactor with better OOP, better code reuse, and more Comments.
 **No more reliance on jQuery UI** for event dragging, resizing, or anything else.
 
 Significant changes to HTML/CSS skeleton:
