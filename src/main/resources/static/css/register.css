@@ -8,7 +8,7 @@ body, html {
 }
 
 body {
-    background-image: url("../imgs/tt_background_mod.jpg");
+    /*background-image: url("../imgs/tt_background_mod.jpg");*/
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -63,4 +63,11 @@ img {
     max-height: 30px;
     max-width: 30px;
     margin-right: 10px;
+}
+
+#register-body {
+    background-image: url("../imgs/tt_background_mod.jpg");
+}
+#login-body {
+    background-image: url("../imgs/tt_background_login.jpg");
 }

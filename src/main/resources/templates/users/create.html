@@ -11,10 +11,10 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 
-<body>
+<body id="register-body">
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main>
+<main class="container" style="max-width: 500px">
     <form class="col s12" th:action="@{/users/create}" th:method="POST" th:object="${user}">
         <fieldset class="width-80">
             <div class="form-group">
@@ -49,7 +49,7 @@
                 <p class="card-panel red darken-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </div><br>
 
-            <button class="btn btn-block">Register</button>
+            <button class="btn btn-block" type="submit">Register</button>
         </fieldset>
     </form>
 </main>

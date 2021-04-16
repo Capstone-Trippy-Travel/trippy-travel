@@ -3,12 +3,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Show all trips</title>
-</head>
+<head th:replace="fragments/header :: header(${'trips-index-page'})"></head>
 <body>
-
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div sec:authorize="isAuthenticated()">
 
