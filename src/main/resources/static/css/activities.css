@@ -40,3 +40,9 @@
     top:55px;
     left: 1px;
 }
+
+.detailsButton{
+    position: absolute;
+    top: 5%;
+    right: 1%;
+}
