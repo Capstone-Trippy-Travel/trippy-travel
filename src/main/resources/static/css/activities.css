@@ -46,3 +46,24 @@
     top: 5%;
     right: 1%;
 }
+
+#venueDiv{
+    width:50%;
+    float: left;
+}
+
+.navbar {
+    font-family: "Arial Rounded MT Bold";
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+@media screen and (min-width: 100px) and (max-width: 576px) {
+    .navbar {
+        overflow: hidden;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+}

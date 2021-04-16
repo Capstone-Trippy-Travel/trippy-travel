@@ -44,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                     .antMatchers("/groups/create", "/groups/{id}", "/trip/create", "/trip/{id}", "/trip/{id}/edit", "/show") // only authenticated users can visit this urls
                     .authenticated()
+        .and().csrf().disable()
         ;
     }
 
