@@ -88,7 +88,7 @@
             <div class="row">
                 <div class="col">
                     <i class='far fa-comment' style='font-size:36px' id="formButton"></i>
-                    <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm">
+                    <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm" style="display: none">
                         <textarea name="comment" placeholder="Enter comment here"></textarea>
                         <button type="submit" id="comment">Submit</button>
                     </form>
