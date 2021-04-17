@@ -21,7 +21,7 @@
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
             <!-- Button trigger modal -->
-            <img th:src="${trips.getImages().get(0).getImage_url()}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="...">
+            <img th:src="${trips.getImages().get(0).getImage_url()}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trips.getImages().size()>0}">
 
 
             <!-- Modal -->

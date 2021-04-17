@@ -146,10 +146,5 @@ public class TripController {
         tripRepository.deleteById(id);
         return "redirect:/trip";
     }
-    @GetMapping(path = "/trip/{id}/activities")
-    public String tripActivities(@PathVariable Long id ,Model model){
-        Trip trip=tripRepository.getOne(id);
-        model.addAttribute("trip", trip);
-        return "Trip/activities_google";
-    }
+
 }

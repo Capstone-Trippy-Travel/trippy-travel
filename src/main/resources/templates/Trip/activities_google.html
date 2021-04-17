@@ -13,6 +13,60 @@
 <body>
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
+<<form th:action="@{'/trip/'+ ${trip.id} +'/activities'}" method="post" th:object="${activity}" id="activityForm">
+
+    <div class="input-field col s12">
+        <label >Name</label>
+        <input  type="text" th:field="*{place}" id="place" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >address</label>
+        <input type="text"  th:field="*{address}" id="address" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >rating</label>
+        <input type="number"  th:field="*{rating}" id="rating" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >reviews</label>
+        <input type="number"  th:field="*{reviews}" id="reviews" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >website</label>
+        <input type="text"  th:field="*{website}" id="website" />
+
+    </div>
+    <div class="input-field col s12">
+        <label >Phone number</label>
+        <input type="text"  th:field="*{phone}" id="phone" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >Hours</label>
+        <input type="text"  th:field="*{hours}" id="hours" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >Place Id</label>
+        <input type="text"  th:field="*{placeId}" id="placeId" />
+
+    </div>
+
+    <br>
+
+    <input type="submit">
+
+</form>
 <div class="card text-center">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
@@ -49,39 +103,35 @@
 </form>
 
 <!--</form>-->
-<div class="container">
-    <div id="venueDiv">
-        <div class="row">
-            <div class="form-group col-9">
-                <label class="sr-only" for="venue">Address</label>
+<div class="row">
+    <div id="venueDiv" class="col-6">
+            <div class="form-group">
                 <input type="text" class="form-control" id="venue" placeholder="Restaurants">
+                <button type="button" class="btn btn-primary float-right btn-sm" id="venueButton">Search Venue</button>
             </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-primary float-left" id="venueButton">Search Venue</button>
-            </div>
-        </div>
-
 
         <div id="venueList">
 
         </div>
     </div>
-    <div class="col-6" id="map" >
+    <div class="col-6"  >
         <div id="clickedPlace"></div>
+        <div id="map"></div>
     </div>
 
 
 </div>
 <!--<div id="map"></div>-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/trip_activities_google.js"></script>
 <script
-        src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=places&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
         async
 ></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <!--<script src="/js/trip_activities_google.js"></script>-->
 
 
