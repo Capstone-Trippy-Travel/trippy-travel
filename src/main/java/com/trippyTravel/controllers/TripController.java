@@ -76,15 +76,8 @@ public class TripController {
     public String showOneTrip(@PathVariable Long id, Model vModel){
         System.out.println("numbe of images for trip: "+ tripRepository.getOne(id).getImages().size());
         vModel.addAttribute("trips", tripRepository.getOne(id));
-        Trip oneTrip = tripRepository.getOne(id);
-        List<Comment> comments = oneTrip.getComments();
-//        vModel.addAttribute("comments", commentRepository.);
+//        vModel.addAttribute("comments", commentRepository.getOne(id));
 //        vModel.addAttribute("activity", activityRepository.getOne(1L));
-//        List<Comment> commentsList = new ArrayList<>();
-//        ListIterator<Comment> commentListIterator = commentsList.listIterator();
-//        while (commentListIterator.hasNext()) {
-//            System.out.println(commentListIterator.next());
-//        }
         return "Trip/show";
     }
     @PostMapping(path = "/trip/{id}")
