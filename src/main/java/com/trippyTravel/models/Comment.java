@@ -1,9 +1,11 @@
 package com.trippyTravel.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,19 +34,33 @@ public class Comment {
     @JsonManagedReference
     private Activity activity;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column()
+    private Date createdAt;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentComment")
+    private List<CommentReplies> replies;
+
     public Comment(){}
 
-    public Comment(long id, String comment_text, User user, Trip trip) {
+    public Comment(long id, String comment_text, User user, Trip trip, Activity activity, Date createdAt, List<CommentReplies> replies) {
         this.id = id;
         this.comment_text = comment_text;
         this.user = user;
         this.trip = trip;
+        this.activity = activity;
+        this.createdAt = createdAt;
+        this.replies = replies;
     }
 
-    public Comment(String comment_text, User user, Trip trip) {
+    public Comment(String comment_text, User user, Trip trip, Activity activity, Date createdAt, List<CommentReplies> replies) {
         this.comment_text = comment_text;
         this.user = user;
         this.trip = trip;
+        this.activity = activity;
+        this.createdAt = createdAt;
+        this.replies = replies;
     }
 
     public long getId() {
@@ -78,4 +94,16 @@ public class Comment {
     public void setTrip(Trip trip) {
         this.trip = trip;
     }
+
+    public Activity getActivity() { return activity; }
+
+    public void setActivity(Activity activity) { this.activity = activity; }
+
+    public Date getCreatedAt() { return createdAt; }
+
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+
+    public List<CommentReplies> getReplies() { return replies; }
+
+    public void setReplies(List<CommentReplies> replies) { this.replies = replies; }
 }
