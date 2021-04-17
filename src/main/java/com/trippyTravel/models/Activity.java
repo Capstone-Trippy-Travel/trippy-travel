@@ -10,7 +10,7 @@ import java.util.List;
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "place")
     private String place;
@@ -97,4 +97,82 @@ public class Activity {
     public List<ActivityVote> getActivityVotes() { return activityVotes; }
 
     public void setActivityVotes(List<ActivityVote> activityVotes) {this.activityVotes = activityVotes; }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public int getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(int reviews) {
+        this.reviews = reviews;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "rating")
+    private double rating;
+
+    @Column(name = "reviews")
+    private int reviews;
+
+    @Column(name = "website")
+    private String website;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "hours")
+    private String hours;
+
+    @Column(name = "placeId")
+    private String placeId;
 }

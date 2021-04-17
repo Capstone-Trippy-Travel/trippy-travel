@@ -1,6 +1,6 @@
 
 mapboxgl.accessToken = mapBoxToken
-
+console.log(window.location.pathname)
 
 let venueButton=document.getElementById("venueButton");
 let venue=document.getElementById("venue");
@@ -24,66 +24,7 @@ function geocode(search, token) {
             return data.features[0].center;
         });
 }
-//
-//
-// //moves the map to the searched area
-//
-//
-//
-// let map;
-// let service;
-// let infowindow;
-//
-// function initMap() {
-//     function getSearchLocation(location) {
-//         geocode(location, mapBoxToken).then(function (result) {
-//             console.log(result)
-//             const zoomLocation = new google.maps.LatLng(result[0], result[1]);
-//             infowindow = new google.maps.InfoWindow();
-//             map = new google.maps.Map(document.getElementById("map"), {
-//                 center: zoomLocation,
-//                 zoom: 10,
-//             });
-//             const location = {
-//                 lat: Number(result[0]),
-//                 long: Number(result[1])
-//             };
-//             service = new google.maps.places.PlacesService(map);
-//             service.nearbySearch({
-//                 location: new google.maps.LatLng(result[0], result[1]),
-//                 radius: 1000,
-//                 keyword: venue.value
-//             }, (results, status) => {
-//                 console.log(results)
-//                 if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-//                     for (let i = 0; i < results.length; i++) {
-//                         createMarker(results[i]);
-//                     }
-//                     // map.setCenter(results[0].geometry.location);
-//                 }
-//             });
-//
-//
-//         })
-//
-//     }
-//     getSearchLocation(searchValue.value)
-//
-// }
-// console.log("about to create map")
-// initMap();
-//
-// function createMarker(place) {
-//     if (!place.geometry || !place.geometry.location) return;
-//     const marker = new google.maps.Marker({
-//         map,
-//         position: place.geometry.location,
-//     });
-//     google.maps.event.addListener(marker, "click", () => {
-//         infowindow.setContent(place.name || "");
-//         infowindow.open(map);
-//     });
-// }
+
 
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
@@ -94,23 +35,16 @@ let infowindow;
 
 function initMap() {
     geocode(searchValue.value, mapBoxToken).then(function (result) {
-        console.log(result)
         let lat=result[0];
         let long=result[1];
-        let newLat=lat-1.1;
-        let newLong=long+1.1;
-        console.log(newLat);
-        console.log(newLong);
+
     const location = new google.maps.LatLng(long,lat);
     infowindow = new google.maps.InfoWindow();
     map = new google.maps.Map(document.getElementById("map"), {
         center: location,
-        zoom: 15,
+        zoom: 14,
     });
-    const request = {
-        query: "Museum of Contemporary Art Australia",
-        fields: ["name", "geometry"],
-    };
+
     service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
                 location: location,
@@ -119,10 +53,12 @@ function initMap() {
         }, (results, status) => {
             console.log(results)
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            venueList.innerHTML="";
             for (let i = 0; i < results.length; i++) {
                 createMarker(results[i]);
+                createVenueCard(results[i], i)
             }
-            // map.setCenter(results[0].geometry.location);
+            map.setCenter(results[0].geometry.location);
         }
     });
 })
@@ -139,3 +75,158 @@ function createMarker(place) {
         infowindow.open(map);
     });
 }
+
+function createVenueCard(place, index){
+    // console.log(place.opening_hours.isOpen)
+    // console.log(place.photos[0].getUrl);
+
+
+        let venueCard = document.createElement("div");
+        venueCard.setAttribute("class", "card venueCard");
+
+
+        let html = "";
+        if(place.photos.length>0) {
+            imageUrl = place.photos[0].getUrl({maxHeight: 300});
+            html += `<img class="card-img-top" src="${imageUrl}" alt="Card image cap">`
+        }
+        html += `<div class="card-body">`
+        html += `<h5 class="card-title">${place.name}</h5>`
+        html += `<p class="card-text">${place.vicinity}</p>`
+        html += `<p class="card-text">${place.rating} stars - ${place.user_ratings_total} reviews</p>`
+
+
+    html += `</div>`
+        venueCard.innerHTML = html;
+
+        let buttonsDiv=document.createElement("div");
+        buttonsDiv.setAttribute("class", "buttonsDiv")
+
+        let venueDetailsButton=document.createElement("button");
+        venueDetailsButton.setAttribute("class", "btn btn-primary float-left venueDetailsButton btn-sm" )
+        venueDetailsButton.innerText="See Details"
+
+    let saveButton=document.createElement("button");
+    saveButton.setAttribute("class", "saveButton btn btn-success btn-sm float-right ")
+    saveButton.innerHTML="save"
+
+    saveButton.addEventListener("click",()=>{
+        clickedPlace.innerHTML="";
+    })
+
+    buttonsDiv.appendChild(venueDetailsButton);
+    buttonsDiv.appendChild(saveButton)
+    venueCard.appendChild(buttonsDiv)
+
+        venueList.appendChild(venueCard)
+
+        // venueCard.addEventListener("click", () => {
+        //      getVenueDetails(place.place_id)
+        // })
+
+    venueDetailsButton.addEventListener("click", ()=>{
+        getVenueDetails(place.place_id)
+    })
+}
+
+function getVenueDetails(id){
+    service = new google.maps.places.PlacesService(map);
+    service.getDetails({
+        placeId:id
+    }, (results, status) => {
+        console.log(results)
+        let place=results;
+
+        let html = "";
+        let venueDetailsCard = document.createElement("div");
+        venueDetailsCard.setAttribute("class", "card");
+        html+=`<div class="cardImages">`
+        if(place.photos.length>0) {
+            for (let i=0; i<place.photos.length&&i<3; i++) {
+                imageUrl = place.photos[i].getUrl({maxHeight: 300});
+
+                html += `<img src="${imageUrl}" alt="Card image cap">`
+            }
+        }
+        html+="</div>"
+        html += `<div class="card-body">`
+        html += `<h5 class="card-title">${place.name}</h5>`
+        html += `<p class="card-text">${place.formatted_address}</p>`
+        html += `<p class="card-text">${place.rating} stars - ${place.user_ratings_total} reviews</p>`
+        html += `<p class="card-text"><a href="${place.website}">Visit Website</a></p>`
+        html += `<p class="card-text">${place.formatted_phone_number}</p>`
+        html += `<p class="card-text">${place.opening_hours.weekday_text}</p>`
+
+        venueDetailsCard.innerHTML=html;
+
+
+
+        let exitButton=document.createElement("button");
+        exitButton.setAttribute("class", "exitButton btn btn-danger")
+        exitButton.innerHTML="close"
+        exitButton.addEventListener("click",()=>{
+            clickedPlace.innerHTML="";
+        })
+
+        let saveButton=document.createElement("button");
+        saveButton.setAttribute("class", "saveButton btn btn-success btn-sm text-center")
+        saveButton.innerHTML="save"
+
+        saveButton.addEventListener("click",()=>{
+
+            let placeName=document.getElementById("place");
+            placeName.value=place.name;
+
+            let address=document.getElementById("address");
+            address.value=place.formatted_address;
+
+            let rating= document.getElementById("rating");
+            rating.value=place.rating;
+
+            let reviews=document.getElementById("reviews");
+            reviews.value=place.user_ratings_total;
+
+            let website=document.getElementById("website");
+            website.value=place.website;
+
+            let phone=document.getElementById("phone");
+            phone.value=place.formatted_phone_number;
+
+            let hours=document.getElementById("hours");
+            hours.value=place.opening_hours.weekday_text;
+            // place.opening_hours.weekday_text
+
+            let placeId=document.getElementById("placeId")
+            placeId.value=place.placeId;
+
+            clickedPlace.innerHTML="";
+
+            $.ajax({
+                type: "POST",
+                url: window.location.pathname,
+                data: $("#activityForm").serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    console.log(data);
+                    console.log("sucess!!")
+                }
+            });
+
+
+        })
+
+        venueDetailsCard.appendChild(exitButton);
+        venueDetailsCard.appendChild(saveButton)
+
+        let clickedPlace=document.getElementById("clickedPlace");
+        clickedPlace.appendChild(venueDetailsCard)
+})
+}
+
+searchButton.addEventListener("click", ()=>{
+    initMap();
+})
+
+venueButton.addEventListener("click", ()=>{
+    initMap();
+})
