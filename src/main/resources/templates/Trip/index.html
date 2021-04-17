@@ -34,7 +34,7 @@
                 <div class="card-body" >
 
 
-                    <h1 th:text="${trip.name}" class="card-title"></h1>
+                    <a th:href="${'/trip/'+trip.getId()}"><h1 th:text="${trip.name}" class="card-title"></h1></a>
                     <p th:text="${trip.description}" class="card-text"></p>
                     <p th:text="${trip.location}" class="card-text"></p>
 <!--                    figure out how to target the group name -->

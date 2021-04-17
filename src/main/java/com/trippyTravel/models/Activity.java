@@ -155,11 +155,33 @@ public class Activity {
         this.placeId = placeId;
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
     @Column(name = "address")
     private String address;
 
     @Column(name = "rating")
     private double rating;
+
+    @Column(name = "lat")
+    private double lat;
+
+    @Column(name = "lng")
+    private double lng;
 
     @Column(name = "reviews")
     private int reviews;

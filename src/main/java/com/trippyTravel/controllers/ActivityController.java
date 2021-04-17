@@ -62,7 +62,7 @@ public class ActivityController {
 
 
     @PostMapping(path = "/trip/{id}/activities")
-    public void addActivity( @PathVariable Long id, @RequestParam(name = "place", required = false) String place, @RequestParam(name = "address", required = false) String address, @RequestParam(name = "rating", required = false) double rating, @RequestParam(name = "reviews", required = false) int reviews, @RequestParam(name = "website", required = false) String website, @RequestParam(name = "phone", required = false) String phone, @RequestParam(name = "hours", required = false) String hours, @RequestParam(name = "placeId", required = false) String placeId) {
+    public void addActivity( @PathVariable Long id, @RequestParam(name = "place", required = false) String place, @RequestParam(name = "address", required = false) String address, @RequestParam(name = "rating", required = false) double rating, @RequestParam(name = "reviews", required = false) int reviews, @RequestParam(name = "website", required = false) String website, @RequestParam(name = "phone", required = false) String phone, @RequestParam(name = "hours", required = false) String hours, @RequestParam(name = "placeId", required = false) String placeId, @RequestParam(name = "lat", required = false) double lat, @RequestParam(name = "lng", required = false) double lng) {
         Activity activity = new Activity();
         activity.setTrip(tripRepository.getOne(id));
         activity.setPlace(place);
@@ -73,6 +73,8 @@ public class ActivityController {
         activity.setPhone(phone);
         activity.setHours(hours);
         activity.setPlaceId(placeId);
+        activity.setLat(lat);
+        activity.setLng(lng);
 
         activityRepository.save(activity);
 

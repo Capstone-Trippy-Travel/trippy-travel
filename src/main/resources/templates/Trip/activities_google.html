@@ -13,7 +13,7 @@
 <body>
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<<form th:action="@{'/trip/'+ ${trip.id} +'/activities'}" method="post"  id="activityForm">
+<form th:action="@{'/trip/'+ ${trip.id} +'/activities'}" method="post"  id="activityForm">
 
     <div class="input-field col s12">
         <label >Name</label>
@@ -61,6 +61,17 @@
         <input type="text"  name="placeId" id="placeId" />
 
     </div>
+    <div class="input-field col s12">
+        <label >latitude</label>
+        <input type="number"  name="lat" id="lat" />
+
+    </div>
+
+    <div class="input-field col s12">
+        <label >longitude</label>
+        <input type="number"  name="lng" id="lng" />
+
+    </div>
 
     <br>
 
@@ -71,7 +82,7 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="#">Trip Profile</a>
+                <a class="nav-link" th:href="${'/trip/'+trip.getId()}">Trip Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="#">Add activities</a>
@@ -79,10 +90,10 @@
         </ul>
     </div>
     <div class="card-body">
-        <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><h5 class="card-title" th:text="${trip.getName()}"></h5></a>
+        <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>
         <div id="tripDate" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
         <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>
-        <p class="card-text" th:text="${trip.getDescription()}"></p>
+<!--        <p class="card-text" th:text="${trip.getDescription()}"></p>-->
 
     </div>
 </div>
