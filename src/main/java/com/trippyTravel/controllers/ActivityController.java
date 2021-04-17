@@ -62,8 +62,18 @@ public class ActivityController {
 
 
     @PostMapping(path = "/trip/{id}/activities")
-    public void addActivity(@ModelAttribute Activity activity, @PathVariable Long id) {
+    public void addActivity( @PathVariable Long id, @RequestParam(name = "place", required = false) String place, @RequestParam(name = "address", required = false) String address, @RequestParam(name = "rating", required = false) double rating, @RequestParam(name = "reviews", required = false) int reviews, @RequestParam(name = "website", required = false) String website, @RequestParam(name = "phone", required = false) String phone, @RequestParam(name = "hours", required = false) String hours, @RequestParam(name = "placeId", required = false) String placeId) {
+        Activity activity = new Activity();
         activity.setTrip(tripRepository.getOne(id));
+        activity.setPlace(place);
+        activity.setAddress(address);
+        activity.setRating(rating);
+        activity.setReviews(reviews);
+        activity.setWebsite(website);
+        activity.setPhone(phone);
+        activity.setHours(hours);
+        activity.setPlaceId(placeId);
+
         activityRepository.save(activity);
 
     }
