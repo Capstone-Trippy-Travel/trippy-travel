@@ -160,12 +160,20 @@
         $("#formButton").click(function() {
             $("#commentForm").toggle();
         });
-    });
-    $(document).ready(function() {
+
         $(".replyButton").click(function() {
-            $(".replyForm").toggle();
+            $(this)('.replyForm').toggle();
+            // $(".replyForm").toggle();
         });
+
+        // $(".replyButton").click( function(e) {
+        //     $(this).children(".replyButton").toggleClass("replyForm");
+        // })
+        //     .children(".replyButton").click(function(e) {
+        //     e.stopPropagation();
+        // });
     });
+
 </script>
 </body>
 </html>
