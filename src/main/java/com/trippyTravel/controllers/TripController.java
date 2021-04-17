@@ -41,13 +41,14 @@ public class TripController {
     @GetMapping("/trip")
     public String SeeAllTripsPage(Model model) {
         List<Trip> tripFromDb= tripRepository.findAll();
-        model.addAttribute("posts",tripFromDb);
+        model.addAttribute("trips",tripFromDb);
+        System.out.println();
         return "Trip/index";
     }
     @PostMapping("/trip")
     public String index(Model model) {
         List<Trip> tripFromDb= tripRepository.findAll();
-        model.addAttribute("trips",tripFromDb);
+        model.addAttribute("trip",tripFromDb);
         return "Trip/index";
     }
     @RequestMapping(path = "/keys.js", produces = "application/javascript")
