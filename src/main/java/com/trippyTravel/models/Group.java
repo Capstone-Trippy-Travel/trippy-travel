@@ -23,13 +23,14 @@ public class Group {
     private User owner;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "group")
+    @JsonBackReference
     private List<Trip> trip;
 
 
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "group")
-
+    @JsonBackReference
     private List<GroupMember> groupMembers;
 
     public Group() {

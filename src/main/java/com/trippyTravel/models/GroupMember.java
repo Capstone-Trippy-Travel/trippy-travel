@@ -28,6 +28,7 @@ public class GroupMember {
     private User member;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "group_id")
     private Group group;
 

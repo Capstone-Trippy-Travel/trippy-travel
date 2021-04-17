@@ -1,5 +1,6 @@
 package com.trippyTravel.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -19,17 +20,20 @@ public class Activity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "trip_id")
     @JsonManagedReference
+    @JoinColumn(name = "trip_id")
     private Trip trip;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
+    @JsonBackReference
     private List<Image> images;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
+    @JsonBackReference
     private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
+    @JsonBackReference
     private List<ActivityVote> activityVotes;
 
     public Activity(){}
@@ -54,11 +58,11 @@ public class Activity {
         this.activityVotes = activityVotes;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -171,6 +175,14 @@ public class Activity {
         this.lng = lng;
     }
 
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
     @Column(name = "address")
     private String address;
 
@@ -197,4 +209,7 @@ public class Activity {
 
     @Column(name = "placeId")
     private String placeId;
+
+    @Column(name = "photoURL", columnDefinition = "TEXT")
+    private String photoURL;
 }

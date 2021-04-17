@@ -1,6 +1,7 @@
 package com.trippyTravel.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -40,6 +41,7 @@ public class Comment {
     private Date createdAt;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentComment")
+    @JsonBackReference
     private List<CommentReplies> replies;
 
     public Comment(){}

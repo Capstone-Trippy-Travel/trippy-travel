@@ -242,6 +242,9 @@ function addActivityToDatabase(place){
     let lng=document.getElementById("lng")
     lng.value=place.geometry.viewport.Ua.g
 
+    let photoURL=document.getElementById("photoURL");
+    photoURL.value=place.photos[0].getUrl({maxHeight: 300});
+
     clickedPlace.innerHTML="";
 
     $.ajax({

@@ -147,4 +147,12 @@ public class TripController {
         return "redirect:/trip";
     }
 
+    @RequestMapping(value="/trip.json", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody List<Activity> retrieveActivitiesWithAjax(@RequestParam("tripId") String tripId) {
+        System.out.println(tripId);
+        List<Activity> activities= tripRepository.getOne(Long.parseLong(tripId)).getActivities();
+        System.out.println("about to return activities");
+        return activities;
+    }
+
 }
