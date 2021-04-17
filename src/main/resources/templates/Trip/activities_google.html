@@ -13,52 +13,52 @@
 <body>
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<<form th:action="@{'/trip/'+ ${trip.id} +'/activities'}" method="post" th:object="${activity}" id="activityForm">
+<<form th:action="@{'/trip/'+ ${trip.id} +'/activities'}" method="post"  id="activityForm">
 
     <div class="input-field col s12">
         <label >Name</label>
-        <input  type="text" th:field="*{place}" id="place" />
+        <input  type="text" name="place" id="place" />
 
     </div>
 
     <div class="input-field col s12">
         <label >address</label>
-        <input type="text"  th:field="*{address}" id="address" />
+        <input type="text"  name="address" id="address" />
 
     </div>
 
     <div class="input-field col s12">
         <label >rating</label>
-        <input type="number"  th:field="*{rating}" id="rating" />
+        <input type="number"  name="rating" id="rating" />
 
     </div>
 
     <div class="input-field col s12">
         <label >reviews</label>
-        <input type="number"  th:field="*{reviews}" id="reviews" />
+        <input type="number"  name="reviews" id="reviews" />
 
     </div>
 
     <div class="input-field col s12">
         <label >website</label>
-        <input type="text"  th:field="*{website}" id="website" />
+        <input type="text"  name="website" id="website" />
 
     </div>
     <div class="input-field col s12">
         <label >Phone number</label>
-        <input type="text"  th:field="*{phone}" id="phone" />
+        <input type="text"  name="phone" id="phone" />
 
     </div>
 
     <div class="input-field col s12">
         <label >Hours</label>
-        <input type="text"  th:field="*{hours}" id="hours" />
+        <input type="text"  name="hours" id="hours" />
 
     </div>
 
     <div class="input-field col s12">
         <label >Place Id</label>
-        <input type="text"  th:field="*{placeId}" id="placeId" />
+        <input type="text"  name="placeId" id="placeId" />
 
     </div>
 
@@ -106,8 +106,8 @@
 <div class="row">
     <div id="venueDiv" class="col-6">
             <div class="form-group">
-                <input type="text" class="form-control" id="venue" placeholder="Restaurants">
-                <button type="button" class="btn btn-primary float-right btn-sm" id="venueButton">Search Venue</button>
+                <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants">
+                <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>
             </div>
 
         <div id="venueList">

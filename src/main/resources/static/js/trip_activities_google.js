@@ -42,13 +42,13 @@ function initMap() {
     infowindow = new google.maps.InfoWindow();
     map = new google.maps.Map(document.getElementById("map"), {
         center: location,
-        zoom: 14,
+        zoom: 12,
     });
 
     service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
                 location: location,
-                radius: 1000,
+                radius: 3000,
                 keyword: venue.value
         }, (results, status) => {
             console.log(results)
@@ -110,9 +110,7 @@ function createVenueCard(place, index){
     saveButton.setAttribute("class", "saveButton btn btn-success btn-sm float-right ")
     saveButton.innerHTML="save"
 
-    saveButton.addEventListener("click",()=>{
-        clickedPlace.innerHTML="";
-    })
+
 
     buttonsDiv.appendChild(venueDetailsButton);
     buttonsDiv.appendChild(saveButton)
@@ -124,6 +122,19 @@ function createVenueCard(place, index){
         //      getVenueDetails(place.place_id)
         // })
 
+    saveButton.addEventListener("click",()=>{
+        console.log("clicked saved button")
+        clickedPlace.innerHTML="";
+
+        service = new google.maps.places.PlacesService(map);
+        service.getDetails({
+            placeId:place.place_id
+        }, (place, status) => {
+            console.log(place);
+            addActivityToDatabase(place);
+        })
+    })
+
     venueDetailsButton.addEventListener("click", ()=>{
         getVenueDetails(place.place_id)
     })
@@ -133,9 +144,7 @@ function getVenueDetails(id){
     service = new google.maps.places.PlacesService(map);
     service.getDetails({
         placeId:id
-    }, (results, status) => {
-        console.log(results)
-        let place=results;
+    }, (place, status) => {
 
         let html = "";
         let venueDetailsCard = document.createElement("div");
@@ -174,44 +183,7 @@ function getVenueDetails(id){
 
         saveButton.addEventListener("click",()=>{
 
-            let placeName=document.getElementById("place");
-            placeName.value=place.name;
-
-            let address=document.getElementById("address");
-            address.value=place.formatted_address;
-
-            let rating= document.getElementById("rating");
-            rating.value=place.rating;
-
-            let reviews=document.getElementById("reviews");
-            reviews.value=place.user_ratings_total;
-
-            let website=document.getElementById("website");
-            website.value=place.website;
-
-            let phone=document.getElementById("phone");
-            phone.value=place.formatted_phone_number;
-
-            let hours=document.getElementById("hours");
-            hours.value=place.opening_hours.weekday_text;
-            // place.opening_hours.weekday_text
-
-            let placeId=document.getElementById("placeId")
-            placeId.value=place.placeId;
-
-            clickedPlace.innerHTML="";
-
-            $.ajax({
-                type: "POST",
-                url: window.location.pathname,
-                data: $("#activityForm").serialize(), // serializes the form's elements.
-                success: function(data)
-                {
-                    console.log(data);
-                    console.log("sucess!!")
-                }
-            });
-
+            addActivityToDatabase(place);
 
         })
 
@@ -230,3 +202,43 @@ searchButton.addEventListener("click", ()=>{
 venueButton.addEventListener("click", ()=>{
     initMap();
 })
+
+function addActivityToDatabase(place){
+    let placeName=document.getElementById("place");
+    placeName.value=place.name;
+
+    let address=document.getElementById("address");
+    address.value=place.formatted_address;
+
+    let rating= document.getElementById("rating");
+    rating.value=place.rating;
+
+    let reviews=document.getElementById("reviews");
+    reviews.value=place.user_ratings_total;
+
+    let website=document.getElementById("website");
+    website.value=place.website;
+
+    let phone=document.getElementById("phone");
+    phone.value=place.formatted_phone_number;
+    if(place.opening_hours!=undefined) {
+        let hours = document.getElementById("hours");
+        hours.value = place.opening_hours.weekday_text;
+    }
+    console.log(place.place_id)
+    let placeId=document.getElementById("placeId")
+    placeId.value=place.place_id;
+
+    clickedPlace.innerHTML="";
+
+    $.ajax({
+        type: "POST",
+        url: window.location.pathname,
+        data: $("#activityForm").serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+            console.log(data);
+            console.log("sucess!!")
+        }
+    });
+}
