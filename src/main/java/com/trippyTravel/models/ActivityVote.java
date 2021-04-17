@@ -22,7 +22,6 @@ public class ActivityVote {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
     private User user;
 
     public ActivityVote(){}

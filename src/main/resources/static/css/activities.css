@@ -126,3 +126,31 @@ html, body, .container{
     display: none;
 }
 
+#tripLocation{
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+}
+
+#mapContainer #map{
+    height: 30%;
+    width: 100%;
+}
+
+#activityList{
+    white-space: nowrap;
+    overflow: auto;
+}
+
+
+
+#activityList .venueCard{
+    max-width: 250px;
+    max-height: 350px;
+    display: inline-block;
+}
+
+#activityList .venueCard img{
+    object-fit: scale-down;
+    max-height: 150px;
+}

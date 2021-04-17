@@ -1,5 +1,7 @@
 package com.trippyTravel.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -34,16 +36,21 @@ public class Trip {
     private Date endDate;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "group_id")
     private Group group;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+    @JsonBackReference
     private List<Image> images;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+    @JsonBackReference
     private List<Comment> comments;
 
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+    @JsonBackReference
     private List<Activity> activities;
 
     public Trip() {
