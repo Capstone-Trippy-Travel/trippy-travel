@@ -51,13 +51,15 @@ public class User {
     private List<Image> images;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Comment> Comments;
+    private List<Comment> comments;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<CommentReplies> commentReplies;
 
     public User() {
     }
 
-    public User(@javax.validation.constraints.NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @javax.validation.constraints.NotBlank(message = "Email can't be empty") String email, @javax.validation.constraints.NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<Comment> comments) {
+    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<Comment> comments, List<CommentReplies> commentReplies) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -67,7 +69,8 @@ public class User {
         this.friends = friends;
         this.groupMember = groupMember;
         this.images = images;
-        this.Comments = Comments;
+        this.comments = comments;
+        this.commentReplies = commentReplies;
     }
 
     // Copy constructor an alternative for clone
@@ -121,9 +124,13 @@ public class User {
 
     public void setImages(List<Image> images) { this.images = images; }
 
-    public List<Comment> getComments() { return Comments; }
+    public List<Comment> getComments() { return comments; }
 
-    public void setComments(List<Comment> Comments) { this.Comments = Comments; }
+    public void setComments(List<Comment> Comments) { this.comments = Comments; }
+
+    public List<CommentReplies> getCommentReplies() { return commentReplies; }
+
+    public void setCommentReplies(List<CommentReplies> commentReplies) { this.commentReplies = commentReplies; }
 
     @Override
     public String toString() {

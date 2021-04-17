@@ -76,20 +76,20 @@ public class TripController {
     public String showOneTrip(@PathVariable Long id, Model vModel){
         System.out.println("numbe of images for trip: "+ tripRepository.getOne(id).getImages().size());
         vModel.addAttribute("trips", tripRepository.getOne(id));
-        vModel.addAttribute("comments", commentRepository.findAll());
+        Trip oneTrip = tripRepository.getOne(id);
+        List<Comment> comments = oneTrip.getComments();
+//        vModel.addAttribute("comments", commentRepository.);
 //        vModel.addAttribute("activity", activityRepository.getOne(1L));
-        List<Comment> commentsList = new ArrayList<>();
-        ListIterator<Comment> commentListIterator = commentsList.listIterator();
+//        List<Comment> commentsList = new ArrayList<>();
+//        ListIterator<Comment> commentListIterator = commentsList.listIterator();
 //        while (commentListIterator.hasNext()) {
 //            System.out.println(commentListIterator.next());
 //        }
         return "Trip/show";
     }
     @PostMapping(path = "/trip/{id}")
-    public String addPicture(@ModelAttribute Trip trip,@RequestParam(name = "image_url",  required = false) String ImgUrl
-    ) {
+    public String addPicture(@ModelAttribute Trip trip,@RequestParam(name = "image_url",  required = false) String ImgUrl) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 
         System.out.println(ImgUrl);
         Image imageToSave = new Image(ImgUrl, user, trip);
@@ -99,7 +99,6 @@ public class TripController {
         imagesRepository.save(imageToSave);
         System.out.println("saved image");
 
-//
         return "redirect:/trip/"+trip.getId();
     }
 
