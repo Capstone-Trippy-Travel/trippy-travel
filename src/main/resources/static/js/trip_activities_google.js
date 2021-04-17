@@ -145,6 +145,13 @@ function getVenueDetails(id){
     service.getDetails({
         placeId:id
     }, (place, status) => {
+        console.log(place);
+        console.log(place.geometry.location);
+        console.log(place.geometry.location.lat)
+        console.log(place.geometry.viewport)
+        console.log(place.geometry.viewport.La.g)
+        console.log(place.geometry.viewport.Ua.g)
+
 
         let html = "";
         let venueDetailsCard = document.createElement("div");
@@ -228,6 +235,12 @@ function addActivityToDatabase(place){
     console.log(place.place_id)
     let placeId=document.getElementById("placeId")
     placeId.value=place.place_id;
+
+    let lat=document.getElementById("lat");
+    lat.value= place.geometry.viewport.La.g
+
+    let lng=document.getElementById("lng")
+    lng.value=place.geometry.viewport.Ua.g
 
     clickedPlace.innerHTML="";
 
