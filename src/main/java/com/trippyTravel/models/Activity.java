@@ -27,7 +27,7 @@ public class Activity {
     private List<Image> images;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
-    private List<Comment> Comments;
+    private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
     private List<ActivityVote> activityVotes;
@@ -40,17 +40,17 @@ public class Activity {
         this.description = description;
         this.trip = trip;
         this.images = images;
-        this.Comments = Comments;
+        this.comments = comments;
         this.activityVotes = activityVotes;
     }
 
-    public Activity(Long id, String place, String description, Trip trip, List<Image> images, List<Comment> Comments, List<ActivityVote> activityVotes) {
+    public Activity(Long id, String place, String description, Trip trip, List<Image> images, List<Comment> comments, List<ActivityVote> activityVotes) {
         this.id = id;
         this.place = place;
         this.description = description;
         this.trip = trip;
         this.images = images;
-        this.Comments = Comments;
+        this.comments = comments;
         this.activityVotes = activityVotes;
     }
 
@@ -90,9 +90,9 @@ public class Activity {
 
     public void setImages(List<Image> images) { this.images = images; }
 
-    public List<Comment> getComments() { return Comments; }
+    public List<Comment> getComments() { return comments; }
 
-    public void setComments(List<Comment> Comments) { this.Comments = Comments; }
+    public void setComments(List<Comment> comments) { this.comments = comments; }
 
     public List<ActivityVote> getActivityVotes() { return activityVotes; }
 

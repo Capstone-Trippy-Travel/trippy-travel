@@ -33,7 +33,6 @@ public class Trip {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
-
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
@@ -41,8 +40,8 @@ public class Trip {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
     private List<Image> images;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Comment> Comments;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+    private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
     private List<Activity> activities;
@@ -50,7 +49,7 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(String location, String name, String status, String description, Date startDate, Date endDate, Group group, List<Image> images, List<Comment> Comments, List<Activity> activities) {
+    public Trip(String location, String name, String status, String description, Date startDate, Date endDate, Group group, List<Image> images, List<Comment> comments, List<Activity> activities) {
         this.location = location;
         this.name = name;
         this.status = status;
@@ -59,7 +58,7 @@ public class Trip {
         this.endDate = endDate;
         this.group = group;
         this.images = images;
-        this.Comments = Comments;
+        this.comments = comments;
         this.activities = activities;
     }
 
@@ -99,9 +98,9 @@ public class Trip {
 
     public void setImages(List<Image> images) { this.images = images; }
 
-    public List<Comment> getComments() { return Comments; }
+    public List<Comment> getComments() { return comments; }
 
-    public void setComments(List<Comment> Comments) { this.Comments = Comments; }
+    public void setComments(List<Comment> comments) { this.comments = comments; }
 
     public List<Activity> getActivities() { return activities; }
 
