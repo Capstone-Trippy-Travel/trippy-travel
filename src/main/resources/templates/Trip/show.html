@@ -9,11 +9,32 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <title>Individual Trip</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/activities.css">
 </head>
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
-<h6>View individual Trip</h6>
-<div class="card" style="width: 18rem;">
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" >Trip Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="${'/trip/'+trips.getId()}+'/activities'">Add activities</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <a th:href="${'/trip/'+trips.getId()}" class="btn btn-primary"><div th:text="${trips.getName()}"></div></a>
+        <div id="tripDate" th:text="${trips.getStartDate().toGMTString().substring(0,11)+ ' - '+trips.getEndDate().toGMTString().substring(0,11)}"></div>
+        <a th:href="${'/groups/'+trips.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trips.getGroup().getName()}"></div></a>
+                <p class="card-text" th:text="${trips.getDescription()}"></p>
+        <div id="tripLocation" th:text="${trips.getLocation()}"></div>
+
+    </div>
+</div>
+<div class="row">
+<div class="card col-4" style="width: 18rem;">
     <div class="card-body">
         <main class="container">
             <!--    <div class="post" th:each="image:${post.getImages()}">-->
@@ -21,7 +42,7 @@
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
             <!-- Button trigger modal -->
-            <img th:src="${trips.getImages().get(0).getImage_url()}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="...">
+            <img th:src="${trips.getImages().get(0).getImage_url()}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trips.getImages().size()>0}">
 
 
             <!-- Modal -->
@@ -109,15 +130,29 @@
         </main>
     </div>
 </div>
+    <div class="col-8" id="mapContainer">
+        <div id="map">
+
+        </div>
+        <div id="activityList"></div>
+    </div>
+</div>
 <!--    <div th:replace="fragments/activity :: mainAct"></div>-->
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script src="/js/showModal.js"></script>
 <script src ="/keys.js"></script>
 
 <script src="/js/fileStack.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+<script src="/js/trip_profile.js"></script>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
+        async
+></script>
 
 <!--script for comment toggle-->
 <script>
@@ -125,12 +160,20 @@
         $("#formButton").click(function() {
             $("#commentForm").toggle();
         });
-    });
-    $(document).ready(function() {
+
         $(".replyButton").click(function() {
-            $(".replyForm").toggle();
+            $(this)('.replyForm').toggle();
+            // $(".replyForm").toggle();
         });
+
+        // $(".replyButton").click( function(e) {
+        //     $(this).children(".replyButton").toggleClass("replyForm");
+        // })
+        //     .children(".replyButton").click(function(e) {
+        //     e.stopPropagation();
+        // });
     });
+
 </script>
 </body>
 </html>

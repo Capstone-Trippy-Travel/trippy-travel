@@ -1,5 +1,6 @@
 package com.trippyTravel.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.List;
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "place")
     private String place;
@@ -19,17 +20,20 @@ public class Activity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "trip_id")
     @JsonManagedReference
+    @JoinColumn(name = "trip_id")
     private Trip trip;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
+    @JsonBackReference
     private List<Image> images;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
+    @JsonBackReference
     private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
+    @JsonBackReference
     private List<ActivityVote> activityVotes;
 
     public Activity(){}
@@ -54,11 +58,11 @@ public class Activity {
         this.activityVotes = activityVotes;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -97,4 +101,115 @@ public class Activity {
     public List<ActivityVote> getActivityVotes() { return activityVotes; }
 
     public void setActivityVotes(List<ActivityVote> activityVotes) {this.activityVotes = activityVotes; }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public int getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(int reviews) {
+        this.reviews = reviews;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "rating")
+    private double rating;
+
+    @Column(name = "lat")
+    private double lat;
+
+    @Column(name = "lng")
+    private double lng;
+
+    @Column(name = "reviews")
+    private int reviews;
+
+    @Column(name = "website")
+    private String website;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "hours")
+    private String hours;
+
+    @Column(name = "placeId")
+    private String placeId;
+
+    @Column(name = "photoURL", columnDefinition = "TEXT")
+    private String photoURL;
 }
