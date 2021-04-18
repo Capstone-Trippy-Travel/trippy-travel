@@ -32,6 +32,7 @@ function geocode(search, token) {
 let map;
 let service;
 let infowindow;
+let pageLoads=0;
 
 function initMap() {
     geocode(searchValue.value, mapBoxToken).then(function (result) {
@@ -40,15 +41,17 @@ function initMap() {
 
     const location = new google.maps.LatLng(long,lat);
     infowindow = new google.maps.InfoWindow();
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: location,
-        zoom: 12,
-    });
+    if (pageLoads===0) {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: location,
+            zoom: 12,
+        });
+    }
+    pageLoads++;
 
     service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
-                location: location,
-                radius: 3000,
+                bounds: map.getBounds(),
                 keyword: venue.value
         }, (results, status) => {
             console.log(results)
@@ -61,6 +64,25 @@ function initMap() {
             map.setCenter(results[0].geometry.location);
         }
     });
+
+        //when map changes, re-run this function
+        google.maps.event.addListener(map,'bounds_changed', function() {
+            console.log("map bounds changed")
+            service.nearbySearch({
+                bounds: map.getBounds(),
+                keyword: venue.value
+            }, (results, status) => {
+                console.log(results)
+                if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+                    venueList.innerHTML = "";
+                    for (let i = 0; i < results.length; i++) {
+                        createMarker(results[i]);
+                        createVenueCard(results[i], i)
+                    }
+                    // map.setCenter(results[0].geometry.location);
+                }
+            })
+        })
 })
 }
 
@@ -86,7 +108,7 @@ function createVenueCard(place, index){
 
 
         let html = "";
-        if(place.photos.length>0) {
+        if(place.photos!=undefined) {
             imageUrl = place.photos[0].getUrl({maxHeight: 300});
             html += `<img class="card-img-top" src="${imageUrl}" alt="Card image cap">`
         }
