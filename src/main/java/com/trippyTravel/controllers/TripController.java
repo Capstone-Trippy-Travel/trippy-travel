@@ -147,10 +147,13 @@ public class TripController {
         tripRepository.deleteById(id);
         return "redirect:/trip";
     }
-    @GetMapping(path = "/trip/{id}/activities")
-    public String tripActivities(@PathVariable Long id ,Model model){
-        Trip trip=tripRepository.getOne(id);
-        model.addAttribute("trip", trip);
-        return "Trip/activities_google";
+
+    @RequestMapping(value="/trip.json", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody List<Activity> retrieveActivitiesWithAjax(@RequestParam("tripId") String tripId) {
+        System.out.println(tripId);
+        List<Activity> activities= tripRepository.getOne(Long.parseLong(tripId)).getActivities();
+        System.out.println("about to return activities");
+        return activities;
     }
+
 }

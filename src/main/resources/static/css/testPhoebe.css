@@ -1,0 +1,15 @@
+.items{
+    overflow-x: scroll;
+    width: auto;
+    white-space: nowrap;
+}
+.item{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin: 3px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
