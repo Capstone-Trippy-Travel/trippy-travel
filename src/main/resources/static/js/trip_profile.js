@@ -4,6 +4,9 @@ mapboxgl.accessToken = mapBoxToken
 let tripLocation=document.getElementById("tripLocation").innerText;
 console.log(tripLocation)
 
+let mapContainer=document.getElementById("map");
+
+
 function geocode(search, token) {
     var baseUrl = 'https://api.mapbox.com';
     var endPoint = '/geocoding/v5/mapbox.places/';
