@@ -48,6 +48,7 @@ public class TripController {
     @PostMapping("/trip")
     public String index(Model model) {
         List<Trip> tripFromDb= tripRepository.findAll();
+
         model.addAttribute("trip",tripFromDb);
         return "Trip/index";
     }
