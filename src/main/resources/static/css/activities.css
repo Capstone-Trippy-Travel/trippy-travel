@@ -60,15 +60,15 @@
     margin-right: 100px;
 }
 
-@media screen and (min-width: 100px) and (max-width: 576px) {
-    .navbar {
-        overflow: hidden;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
+/*@media screen and (min-width: 100px) and (max-width: 576px) {*/
+/*    .navbar {*/
+/*        overflow: hidden;*/
+/*        position: absolute;*/
+/*        bottom: 0;*/
+/*        width: 100%;*/
+/*    }*/
 
-}
+/*}*/
 
 #venueList{
     display: flex;

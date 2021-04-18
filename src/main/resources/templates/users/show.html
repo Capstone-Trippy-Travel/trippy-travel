@@ -6,7 +6,7 @@
 
 <body>
 
-<div th:replace="fragments/navbar :: navbar"></div>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main class="container">
     <div class="row">
@@ -39,6 +39,6 @@
         e.src = 'https://fer-uig.glitch.me?r='+ Math.random();
     }
 </script>
-
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
