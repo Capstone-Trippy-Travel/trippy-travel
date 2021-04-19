@@ -34,4 +34,3 @@ $('#addPicture').click(function (event){
     // where you can specify what you want the picker to do
     client.picker(options).open();
 })
-c
