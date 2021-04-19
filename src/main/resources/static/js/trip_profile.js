@@ -1,4 +1,5 @@
 
+
 mapboxgl.accessToken = mapBoxToken
 
 let tripLocation=document.getElementById("tripLocation").innerText;
@@ -123,9 +124,13 @@ html+=`<form class="col s12"  action="/trip/${place.trip.id}" method="POST" >
     venueDetailsButton.setAttribute("class", "btn btn-primary float-left btn-sm text-center" )
     venueDetailsButton.innerText="See Details"
 
+    //adding filestack addPicture button
+    let fileStackButton=document.createElement("button");
+    fileStackButton.setAttribute("class", "addPicture");
+    fileStackButton.innerText="addPicture"
+
     venueCard.appendChild(venueDetailsButton)
-
-
+    venueCard.appendChild(fileStackButton)
 
 
     let activityList=document.getElementById("activityList")
@@ -139,6 +144,21 @@ html+=`<form class="col s12"  action="/trip/${place.trip.id}" method="POST" >
         venueCard.style.maxWidth="100%";
 
     })
+
+
+    // This is an event listen for listening to a click on a button
+    fileStackButton.addEventListener("click",()=>{
+        console.log('adding picture')
+
+        // this is what prevents the button from submiting the form
+        event.preventDefault();
+
+        //we use this to tell filestack to open their file picker interface.
+        // the picker method can take an argument of a options object
+        // where you can specify what you want the picker to do
+        client.picker(options).open();
+    })
+
 }
 
 function getVenueDetails(id){
@@ -195,8 +215,11 @@ function getVenueDetails(id){
 
         })
 
+
+
+
         venueDetailsCard.appendChild(exitButton);
-        venueDetailsCard.appendChild(saveButton)
+        venueDetailsCard.appendChild(saveButton);
 
         let clickedPlace=document.getElementById("clickedPlace");
         clickedPlace.appendChild(venueDetailsCard)
