@@ -19,14 +19,18 @@ public class Group {
     @Column(nullable = false, unique = true, length = 250)
     private String name;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(columnDefinition = "TEXT")
+    private String profile_image;
+
     @OneToOne
     private User owner;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "group")
     @JsonBackReference
     private List<Trip> trip;
-
-
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "group")
@@ -40,10 +44,19 @@ public class Group {
         this.owner=owner;
     }
 
-
-
-    public Group(String name, User owner, List<Trip> trip) {
+    public Group(String name, String description, String profile_image, User owner, List<Trip> trip, List<GroupMember> groupMembers) {
         this.name = name;
+        this.description = description;
+        this.profile_image = profile_image;
+        this.owner = owner;
+        this.trip = trip;
+        this.groupMembers = groupMembers;
+    }
+
+    public Group(String name, String description, String profile_image, User owner, List<Trip> trip) {
+        this.name = name;
+        this.description = description;
+        this.profile_image = profile_image;
         this.owner = owner;
         this.trip = trip;
     }
@@ -68,5 +81,11 @@ public class Group {
 
     public void setGroupMembers(List<GroupMember> groupMembers) { this.groupMembers = groupMembers; }
 
+    public String getDescription() { return description; }
 
+    public void setDescription(String description) { this.description = description; }
+
+    public String getProfile_image() { return profile_image; }
+
+    public void setProfile_image(String profile_image) { this.profile_image = profile_image; }
 }
