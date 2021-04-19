@@ -1,8 +1,20 @@
-#mapContainer{
-    height: 600px;
+#mapContainerProfile{
+    height: 450px;
 }
 
-#activityCard{
-    width: 100px;
-    max-height: 150px;
+.activityCard{
+    margin: 10px;
+}
+
+#trips .card-body{
+    display: flex;
+    white-space: nowrap;
+    overflow: auto;
+
+}
+
+.activityImage{
+    height:150px;
+    object-fit: scale-down;
+
 }

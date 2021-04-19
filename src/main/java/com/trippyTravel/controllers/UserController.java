@@ -6,6 +6,7 @@ import com.trippyTravel.models.*;
 import com.trippyTravel.repositories.*;
 import com.trippyTravel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,12 @@ public class UserController {
 
     @Autowired
     private FriendListRepository friendListRepository;
+
+    @Value("${mapBoxToken}")
+    private String mapBoxToken;
+
+    @Value("${fileStackApiKey}")
+    private String fileStackApiKey;
 
     @PostMapping("/users/create")
     public String saveUser(@Valid User user, Errors validation, Model m){
@@ -103,9 +110,15 @@ public class UserController {
         for (int i=0; i<groups.size(); i++){
             List<Trip> groupTrips = groups.get(i).getTrip();
             for (int j=0; j<groupTrips.size(); j++){
-                trips.add(groupTrips.get(i));
+                trips.add(groupTrips.get(j));
             }
         }
+        for (int i=0; i<trips.size(); i++){
+            if (trips.get(i).getName()!=null) {
+                System.out.println(trips.get(i).getName());
+            }
+        }
+
         System.out.println(trips.size());
         viewModel.addAttribute("trips", trips);
 
