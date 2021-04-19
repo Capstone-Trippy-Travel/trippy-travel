@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Montserrat&family=Raleway:wght@300&family=Roboto+Mono&display=swap" rel="stylesheet">
-<!--    <link rel="stylesheet" href="/css/activities.css">-->
+
+    <!--    <link rel="stylesheet" href="/css/activities.css">-->
 </head>
 <body>
 
@@ -15,7 +16,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-10">
-                <h1>Group <span th:text="${group.name}"></span></h1>
+<!--                <h1><span th:text="${group.name}"></span> Group</h1>-->
             </div>
             <div class="col-2">
                 <form th:action="${'/trip/create'}" method="GET">
@@ -25,22 +26,23 @@
         </div>
         <div class="row">
             <div class="col-3 side-profile">
-                <img th:src="${group.getProfile_image()}" alt="" class="profile-image"/>
-                <h4>More About Group<span th:text="${group.name}"></span></h4>
-                <p th:text="${group.description}"></p>
-                <h4 class="">Group Members</h4>
-                <div class="">
+                <h3 id="heading"><span th:text="${group.name}"></span> Group</h3>
+                <img th:src="${group.getProfile_image()}" alt="" class="profile-image side-item"/>
+                <h4 class="side-item">More About Group<span th:text="${group.name}"></span></h4>
+                <p th:text="${group.description}" class="side-item"></p>
+                <h4 class="side-item">Group Members</h4>
+                <div class="side-item">
                     <div th:each="groupMember : ${group.getGroupMembers()}" class="item">
                         <img src="" alt="" class="circle user-icon" />
                         <a th:href="${'/users/'+ groupMember.member.getId()}" > <div th:text="${groupMember.getMember().getFirstName()}"></div></a>
                     </div>
                 </div>
-                <form th:action="${'/groups/'+ group.id +'/update'}" method="GET" class="button">
+                <form th:action="${'/groups/'+ group.id +'/update'}" method="GET" class="button side-item">
                     <button>Edit Group</button>
                 </form>
             </div>
             <div class="col-8 " >
-                <h3>Map Here</h3>
+                <h4>Map Here</h4>
                 <div id="mapContainer">
                     <div id="map"></div>
                 </div>
@@ -49,7 +51,7 @@
                     <div class="items">
                         <div th:each="trip : ${group.getTrip()}" class="item">
                             <a th:href="${'/trip/'+ trip.id}">
-                                <p th:text="${trip.name}"></p>
+                                <p><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="trip-location"></span></p>
                                 <img th:src="${trip.getImages().get(0).getImage_url()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trip.getImages().size()>0}">
                             </a>
                         </div>
