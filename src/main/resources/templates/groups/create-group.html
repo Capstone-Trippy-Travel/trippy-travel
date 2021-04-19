@@ -7,35 +7,51 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<form th:action="@{/groups/create}" th:method="post" th:object="${group}">
-    <div class="form-group">
-        <label >Group Name</label>
-        <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
-    </div>
-    <div class="row">
-
-    <div class="form-group col-6">
-        <label >Add a group member</label>
-        <input id="searchUsers" type="text" class="form-control" name="name" placeholder="">
-        <ul id="databaseMatches" class="list-group"></ul>
-
-<!--        <button type="submit" class="btn btn-primary">Submit Post</button>-->
-    </div>
-        <div class="col-6">
-            <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">
-            </select>
-            <h4>Current Group Members</h4>
-            <ul id="groupMembers" class="list-group"></ul>
+<div class="container">
+    <form th:action="@{/groups/create}" th:method="post" th:object="${group}">
+        <div class="form-group">
+            <label >Group Name</label>
+            <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
         </div>
-    </div>
+        <div class="form-group">
+            <label >Group Description</label>
+            <textarea class="form-control" th:field="*{description}" id="post" rows="10" name="name"></textarea>
+
+        </div>
+
+        <div class="row">
+
+            <div class="form-group col-6">
+                <label >Add a group member</label>
+                <input id="searchUsers" type="text" class="form-control" name="name" placeholder="">
+                <ul id="databaseMatches" class="list-group"></ul>
+
+                <!--        <button type="submit" class="btn btn-primary">Submit Post</button>-->
+            </div>
+            <div class="col-6">
+                <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">
+                </select>
+                <h4>Current Group Members</h4>
+                <ul id="groupMembers" class="list-group"></ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <img id="imagePreview" src="" alt="" >
+            <input type="hidden" id="image"  name="profile_mage" th:field="*{profile_image}" >
+            <button id="addPicture">Group Profile Picture</button>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Group</button>
+    </form>
+</div>
 
 
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src ="/keys.js"></script>
+<script src="/js/fileStack.js"></script>
 
-    <button type="submit" class="btn btn-primary">Submit Post</button>
-</form>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script th:inline="javascript">
@@ -104,10 +120,8 @@
 
         });
 
-
-
-
 </script>
+
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

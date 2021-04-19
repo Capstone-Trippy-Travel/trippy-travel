@@ -1,5 +1,6 @@
 package com.trippyTravel.repositories;
 
+import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +10,8 @@ import java.util.List;
 
 
 @Repository
-public interface UsersRepository extends JpaRepository<User, Long> {
+public interface
+UsersRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
     User findByEmail(String email);
