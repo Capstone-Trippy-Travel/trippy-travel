@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface GroupsRepository extends JpaRepository<Group, Long> {
     List<Group> findByOwner(User owner);
+
 }
