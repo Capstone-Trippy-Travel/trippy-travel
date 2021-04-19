@@ -3,11 +3,8 @@ package com.trippyTravel.controllers;
 
 
 import com.trippyTravel.models.*;
-import com.trippyTravel.repositories.GroupsRepository;
+import com.trippyTravel.repositories.*;
 import com.trippyTravel.services.UserService;
-import com.trippyTravel.repositories.FriendListRepository;
-import com.trippyTravel.repositories.UserRoles;
-import com.trippyTravel.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +13,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,6 +24,9 @@ public class UserController {
 
     @Autowired
     private GroupsRepository groupsRepository;
+
+    @Autowired
+    private GroupMembersRepository groupMembersRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -90,6 +91,24 @@ public class UserController {
     public String showUser(@PathVariable Long id, Model viewModel){
         User user = usersRepository.getOne(id);
         viewModel.addAttribute("user", user);
+        List<GroupMember> groupMembers=groupMembersRepository.findGroupMembersByMember(user);
+        List<Group> groups = new ArrayList<>();
+        for (int i=0; i<groupMembers.size(); i++){
+            groups.add(groupMembers.get(i).getGroup());
+        }
+        System.out.println(groups.size());
+        viewModel.addAttribute("groups", groups);
+
+        List<Trip> trips = new ArrayList<>();
+        for (int i=0; i<groups.size(); i++){
+            List<Trip> groupTrips = groups.get(i).getTrip();
+            for (int j=0; j<groupTrips.size(); j++){
+                trips.add(groupTrips.get(i));
+            }
+        }
+        System.out.println(trips.size());
+        viewModel.addAttribute("trips", trips);
+
         viewModel.addAttribute("sessionUser", usersService.loggedInUser());
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
         return "users/show";
