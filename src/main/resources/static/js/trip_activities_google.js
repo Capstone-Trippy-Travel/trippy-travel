@@ -75,6 +75,7 @@ function initMap() {
                 console.log(results)
                 if (status === google.maps.places.PlacesServiceStatus.OK && results) {
                     venueList.innerHTML = "";
+                    clearMarkers();
                     for (let i = 0; i < results.length; i++) {
                         createMarker(results[i]);
                         createVenueCard(results[i], i)
@@ -92,10 +93,22 @@ function createMarker(place) {
         map,
         position: place.geometry.location,
     });
+    markers.push(marker);
     google.maps.event.addListener(marker, "click", () => {
         infowindow.setContent(place.name || "");
         infowindow.open(map);
     });
+}
+
+function setMapOnAll(map) {
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+    setMapOnAll(null);
 }
 
 function createVenueCard(place, index){
