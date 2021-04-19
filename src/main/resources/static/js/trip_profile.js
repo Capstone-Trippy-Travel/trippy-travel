@@ -4,6 +4,11 @@ mapboxgl.accessToken = mapBoxToken
 let tripLocation=document.getElementById("tripLocation").innerText;
 console.log(tripLocation)
 
+let mapContainer=document.getElementById("map");
+
+let markers=[];
+let venueCards=[];
+
 function geocode(search, token) {
     var baseUrl = 'https://api.mapbox.com';
     var endPoint = '/geocoding/v5/mapbox.places/';
@@ -33,7 +38,7 @@ function initMap() {
         infowindow = new google.maps.InfoWindow();
         map = new google.maps.Map(document.getElementById("map"), {
             center: location,
-            zoom: 12,
+            zoom: 11,
         });
 
         let pathUrl=window.location.pathname;
@@ -47,8 +52,8 @@ function initMap() {
                 for (let i=0; i<activities.length; i++){
                     let lng=activities[i].lng;
                     let lat=activities[i].lat;
-                    createMarker(new google.maps.LatLng(lng,lat));
-                    createVenueCard(activities[i])
+                    let newMarker=createMarker(new google.maps.LatLng(lng,lat));
+                    createVenueCard(activities[i], newMarker)
                 }
             },
             error: function (data) {
@@ -67,9 +72,24 @@ function createMarker(location) {
         map,
         position: location,
     });
+    markers.push(marker);
+    return marker
 }
 
-function createVenueCard(place){
+function toggleBounce(marker) {
+    if (markers!=undefined) {
+        for (let i = 0; i < markers.length; i++) {
+            markers[i].setAnimation(null)
+        }
+    }
+    if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+}
+
+function createVenueCard(place, marker){
     // console.log(place.opening_hours.isOpen)
     // console.log(place.photos[0].getUrl);
 
@@ -96,13 +116,19 @@ function createVenueCard(place){
 
     venueCard.appendChild(venueDetailsButton)
 
+
+
+
     let activityList=document.getElementById("activityList")
     activityList.appendChild(venueCard)
 
 
 
     venueDetailsButton.addEventListener("click", ()=>{
-        getVenueDetails(place.place_id)
+        marker.addListener("click", toggleBounce(marker))
+        venueCard.style.width="100%";
+        venueCard.style.maxWidth="100%";
+
     })
 }
 

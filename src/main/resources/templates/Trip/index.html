@@ -23,20 +23,29 @@
 <br>
 <br>
 
-<main class="container ">
+<main class="container" >
     <h1>Latest Trips</h1>
-    <div class="d-flex flex-wrap justify-content-around">
-        <div class="row" >
 
-            <div class="card" th:each="trip: ${trips}" style="width: 18rem; margin-bottom: 10px ">
+
+        <div class="row g-2 " >
+
+            <div class="card col-4 " th:each="trip: ${trips}" style="width: 30rem;  margin-bottom: 10px ;margin-right: 5px;">
+
 <!--cant get image to show -->
-<!--                <img th:src="${trip.images.get(0).getImage_url()}" class="card-img-top" alt="...">-->
+                <div class="card-header">
+                    <a th:href="${'/trip/'+trip.getId()}"><h1 th:text="${trip.name}" class="card-title"></h1></a>
+
+                </div>
+                <img th:src="${trip.getImages().get(0).getImage_url()}" th:if="${trip.getImages().size()>0}" class="card-img-top" style="height: 150px" alt="...">
                 <div class="card-body" >
 
 
-                    <a th:href="${'/trip/'+trip.getId()}"><h1 th:text="${trip.name}" class="card-title"></h1></a>
+
+
+
                     <p th:text="${trip.description}" class="card-text"></p>
                     <p th:text="${trip.location}" class="card-text"></p>
+
 <!--                    figure out how to target the group name -->
 <!--                    <p th:text="${trip.group.name}" class="card-text"></p>-->
                     <p th:text="${trip.startDate}" class="card-text"></p>

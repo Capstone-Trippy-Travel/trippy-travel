@@ -78,7 +78,7 @@
 
 .venueCard{
     max-width: 250px;
-    max-height: 350px;
+    max-height: 375px;
     align-items: center;
     justify-content: space-evenly;
 }
@@ -146,7 +146,7 @@ html, body, .container{
 
 #activityList .venueCard{
     max-width: 250px;
-    max-height: 350px;
+    max-height: 375px;
     display: inline-block;
 }
 
