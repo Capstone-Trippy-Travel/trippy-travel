@@ -34,39 +34,4 @@ $('#addPicture').click(function (event){
     // where you can specify what you want the picker to do
     client.picker(options).open();
 })
-console.log('accessing file stack file')
-// Make sure to put your personal FileStackKey in the keys.js file
-const client1 = filestack.init(FileStackApiKey);
-
-// we will pass this object as an argument in the picker method.
-const options1 = {
-
-    //onFileUploadFinished is called when the the user uploads a image in the
-    // picker and they have successfully uploaded the image to filestack servers.
-    //
-    onFileUploadFinished: callback =>{
-        console.log(callback);
-        // I save the filestack image url to a const because I plan to use it in multiple places.
-        const imgURL = callback.url;
-        console.log(imgURL);
-
-        // this sets my hidden input to the value of my new image url.
-        $('image').val(imgURL);
-
-        // this lets the user see a preview of the image that they uploaded.
-        $('#imagePreview').attr('src',imgURL);
-        console.log(callback);
-    }
-}
-// This is an event listen for listening to a click on a button
-$('addPicture').click(function (event){
-    console.log('adding picture')
-
-    // this is what prevents the button from submiting the form
-    event.preventDefault();
-
-    //we use this to tell filestack to open their file picker interface.
-    // the picker method can take an argument of a options object
-    // where you can specify what you want the picker to do
-    client.picker(options1).open();
-})
+c

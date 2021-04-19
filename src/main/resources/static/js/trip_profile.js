@@ -101,22 +101,57 @@ function createVenueCard(place, marker){
 
     let html = "";
     if(place.photoURL) {
-        html += `<img class="card-img-top" src="${place.photoURL}" alt="Card image cap">`
+        html += `<img class="card-img-top" src="${place.photoURL}" alt="Card image cap" data-bs-toggle="modal" data-bs-target="#exampleModal1">`
     }
     html += `<div class="card-body">`
     html += `<h5 class="card-title">${place.place}</h5>`
     html += `<p class="card-text">${place.rating} stars - ${place.reviews} reviews</p>`
-
+    "/trip/${place.trip.id}"
 
     html += `</div>`
-html+=`<form class="col s12"  action="/trip/${place.trip.id}" method="POST" >
- <div class="modal-footer">
+html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form class="col s12"  th:action="/trip/${place.trip.id}" th:method="POST" >
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Albums</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" th:each="image : ${place.image.}">
+                            <table class="table">
  <input type="hidden" value="${place.id}">
+ <input type="hidden" value="${}">
+                                    <a th:href="">
+                                    <img th:src="${}" id="" class="img-thumbnail"  alt="...">
+                                    </a>
+
+                                <img id="imagePreview" src="" alt="" >
+
+                                <!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
+<!--                                <input type="hidden" id="image"  name="image_url">-->
+
+                                <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
+                                <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
+                                <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
+                                <!--                <input type="text"  name="image_url">-->
+
+                                <br>
+
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" id="image"  name="image_url">
+                           
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
                                  <img id="imagePreview" src="" alt="" >
 
-                            <input type="hidden" class="image"  name="image_url">
-                            <button class="addPicture">addPicture</button>
-                            <input class="btn" type="submit" />
+                            <input type="hidden" id="image"  name="image_url">
+<!--                            <button id="addPicture">addPicture</button>-->
+<!--                            <input class="btn" type="submit" />-->
                         </div> </form>`
     venueCard.innerHTML = html;
 
