@@ -51,7 +51,7 @@
                     <div class="items">
                         <div th:each="trip : ${group.getTrip()}" class="item">
                             <a th:href="${'/trip/'+ trip.id}">
-                                <p><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="trip-location"></span></p>
+                                <p><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="tripLocation"></span></p>
                                 <img th:src="${trip.getImages().get(0).getImage_url()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trip.getImages().size()>0}">
                             </a>
                         </div>
@@ -84,12 +84,16 @@
     <script src ="/keys.js"></script>
 
     <script src="/js/fileStack.js"></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
-    <script src="/js/trip_profile.js"></script>
-    <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
-            async
-    ></script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src ="/keys.js"></script>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+        <script src="/js/mapDisplay.js"></script>
+        <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
+                async
+        ></script>
 <div th:replace="fragments/footer :: footer"></div>
 
     <script th:inline="javascript">
