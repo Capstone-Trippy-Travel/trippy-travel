@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:include="fragments/header :: header('Show User')">
 </head>
@@ -24,13 +25,13 @@
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="trips" role="tabpanel" aria-labelledby="trips-tab">
-        <div id="mapContainer">
+        <div id="mapContainerProfile">
          <div id="map"></div>
         </div>
-        <div th:each="trip : ${trips}" class="tripCard card">
+        <div th:each="trip : ${trips}" class="tripCard card" >
                 <div class="card-header">
-                    <h5 th:text="${trip.getName()}" class="float-left"></h5>
-                    <h5 th:text="${trip.getLocation()}" class="float-rigth"></h5>
+                    <h5 th:text="${trip.getName()}" class="float-left" ></h5>
+                    <h5 th:text="${trip.getLocation()}" class="float-right tripLocation"></h5>
                 </div>
                 <div class="card-body">
                     <div class="activityCard" th:each="activity: ${trip.getActivities()}">
@@ -47,6 +48,7 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/mapDisplay.js"></script>
 <script
