@@ -108,6 +108,15 @@ function createVenueCard(place, marker){
 
 
     html += `</div>`
+html+=`<form class="col s12"  action="/trip/${place.trip.id}" method="POST" >
+ <div class="modal-footer">
+ <input type="hidden" value="${place.id}">
+                                 <img id="imagePreview" src="" alt="" >
+
+                            <input type="hidden" class="image"  name="image_url">
+                            <button class="addPicture">addPicture</button>
+                            <input class="btn" type="submit" />
+                        </div> </form>`
     venueCard.innerHTML = html;
 
     let venueDetailsButton=document.createElement("button");

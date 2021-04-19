@@ -73,11 +73,11 @@ public class TripController {
         return "Trip/show";
     }
     @PostMapping(path = "/trip/{id}")
-    public String addPicture(@ModelAttribute Trip trip,@RequestParam(name = "image_url",  required = false) String ImgUrl) {
+    public String addPicture(@ModelAttribute Trip trip,@RequestParam(name = "image_url",  required = false) String ImgUrl,@ModelAttribute Activity activity  ) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         System.out.println(ImgUrl);
-        Image imageToSave = new Image(ImgUrl, user, trip);
+        Image imageToSave = new Image( user, trip,activity,ImgUrl);
         System.out.println(imageToSave.getImage_url());
         System.out.println(imageToSave.getUser().getUsername());
         System.out.println("about to save image");
