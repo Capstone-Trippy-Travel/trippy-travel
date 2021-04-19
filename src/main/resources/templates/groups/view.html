@@ -12,62 +12,66 @@
 <body>
 
     <div th:replace="fragments/navbar :: navbar"></div>
-    <div class="row">
-        <div class="col-9">
-            <h1>Group <span th:text="${group.name}"></span></h1>
-        </div>
-        <div class="col-last">
-            <form th:action="${'/trip/create'}" method="GET">
-                <button>Plan a Trip!</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3 side-profile">
-            <h5>Group information goes here</h5>
-            <p>Group profile picture goes here</p>
-            <img src="" alt="" class="circle user-icon" id="profile-image"/>
-            <h4>Sample Group description</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <h4 class="">Group Members</h4>
-            <div class="">
-                <div th:each="groupMember : ${group.getGroupMembers()}" class="item">
-                    <img src="" alt="" class="circle user-icon" />
-                    <a th:href="${'/users/'+ groupMember.member.getId()}" > <div th:text="${groupMember.getMember().getFirstName()}"></div></a>
-                </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-10">
+                <h1>Group <span th:text="${group.name}"></span></h1>
+            </div>
+            <div class="col-2">
+                <form th:action="${'/trip/create'}" method="GET">
+                    <button>Plan a Trip!</button>
+                </form>
             </div>
         </div>
-        <div class="col-8 " >
-            <h3>Map Here</h3>
-            <div id="mapContainer">
-                <div id="map"></div>
-            </div>
-            <div>
-                <h4>Trips</h4>
-                <div class="items">
-                    <div th:each="trip : ${group.getTrip()}" class="item">
-                        <a th:href="${'/trip/'+ trip.id}">
-                            <p th:text="${trip.name}"></p>
-                            <img th:src="${trip.getImages().get(0).getImage_url()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trip.getImages().size()>0}">
-                        </a>
+        <div class="row">
+            <div class="col-3 side-profile">
+                <img th:src="${group.getProfile_image()}" alt="" class="profile-image"/>
+                <h4>More About Group<span th:text="${group.name}"></span></h4>
+                <p th:text="${group.description}"></p>
+                <h4 class="">Group Members</h4>
+                <div class="">
+                    <div th:each="groupMember : ${group.getGroupMembers()}" class="item">
+                        <img src="" alt="" class="circle user-icon" />
+                        <a th:href="${'/users/'+ groupMember.member.getId()}" > <div th:text="${groupMember.getMember().getFirstName()}"></div></a>
                     </div>
                 </div>
-                <div class="card">
+                <form th:action="${'/groups/'+ group.id +'/update'}" method="GET" class="button">
+                    <button>Edit Group</button>
+                </form>
+            </div>
+            <div class="col-8 " >
+                <h3>Map Here</h3>
+                <div id="mapContainer">
+                    <div id="map"></div>
+                </div>
+                <div>
+                    <h4>Trips</h4>
+                    <div class="items">
+                        <div th:each="trip : ${group.getTrip()}" class="item">
+                            <a th:href="${'/trip/'+ trip.id}">
+                                <p th:text="${trip.name}"></p>
+                                <img th:src="${trip.getImages().get(0).getImage_url()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trip.getImages().size()>0}">
+                            </a>
+                        </div>
+                    </div>
                     <h4>Group Pictures</h4>
-                    <div class="group pics">
-                        <div th:each="groupMember : ${group.getGroupMembers()}" class="group pics">
-                            <div th:each="userImage : ${groupMember.getMember().getImages()}">
-                                <img th:src="${userImage.getImage_url()}" class="viewAll" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
+                    <div class="card group-card ">
+                        <div class="group-pics">
+                            <div th:each="groupMember : ${group.getGroupMembers()}" class="" >
+                                <div th:each="userImage : ${groupMember.getMember().getImages()}">
+                                    <img th:src="${userImage.getImage_url()}" class="viewAll" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
                 </div>
+
+
             </div>
-
-        </div>
-
-
     </div>
+
 
     <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

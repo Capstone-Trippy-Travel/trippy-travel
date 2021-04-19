@@ -60,17 +60,17 @@ public class GroupController {
 
         return "redirect:/groups/"+createdGroup.getId();
     }
-    @GetMapping(path = "/groups/edit")
-    public String editGroup(Model viewModel){
-        viewModel.addAttribute("group", new Group());
+    @GetMapping(path = "/groups/{id}/update")
+    public String editGroup(Model viewModel, @PathVariable long id){
+        Group oneGroup = groupDao.getOne(id);
+        viewModel.addAttribute("editGroup", oneGroup);
         return "groups/edit-group";
     }
-    @PostMapping(path = "/groups/edit")
+    @PostMapping(path = "/groups/{id}/update")
     public String editGroup(@ModelAttribute Group newGroup, @RequestParam(name = "groupMembersList", required = false) Integer[] groupMembers) {
 
         User groupOwner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newGroup.setOwner(groupOwner);
-
         Group createdGroup = groupDao.save(newGroup);
         for (int i=0; i<groupMembers.length; i++){
             Long memberId = Long.valueOf(groupMembers[i]);
