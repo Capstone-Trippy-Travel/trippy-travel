@@ -33,12 +33,17 @@ a{
     width: 75px;
     height: 75px;
 }
-#profile-image{
-    width: 200px;
+.profile-image{
+    width: 250px;
     height: 200px;
+    border-radius: 5%;
+    /*border: .5px solid #ddd;*/
+    /*border-radius: 4px;*/
+    margin: 5px;
+
 }
 .side-profile{
-    padding: 20px;
+    padding: 20px 10px 20px 5px;
     margin: 10px;
 }
 #map {
@@ -47,14 +52,19 @@ a{
     height: 400px;
 }
 .group-pics{
-
-    width:100px;
-    height:100px;
-    overflow:scroll;
-}
-.group-pics img{
     display: flex;
+    /*width:100px;*/
+    /*height:100px;*/
+    /*overflow:scroll;*/
 }
+.group-card{
+    height: 600px;
+    width: 100%;
+    overflow-y: scroll;
+}
+/*.group-pics img{*/
+/*    display: flex;*/
+/*}*/
 /*#mapContainer #map{*/
 /*    height: 30%;*/
 /*    width: 100%;*/
