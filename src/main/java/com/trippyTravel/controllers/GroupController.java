@@ -53,10 +53,13 @@ public class GroupController {
        newGroup.setOwner(groupOwner);
 
         Group createdGroup = groupDao.save(newGroup);
-        for (int i=0; i<groupMembers.length; i++){
-            Long memberId = Long.valueOf(groupMembers[i]);
-            groupMemberDao.save(new GroupMember(false, userDao.getOne(memberId), newGroup) );
+        if (groupMembers!=null) {
+            for (int i = 0; i < groupMembers.length; i++) {
+                Long memberId = Long.valueOf(groupMembers[i]);
+                groupMemberDao.save(new GroupMember(false, userDao.getOne(memberId), newGroup));
+            }
         }
+        groupMemberDao.save(new GroupMember(true, groupOwner, newGroup));
 
         return "redirect:/groups/"+createdGroup.getId();
     }
