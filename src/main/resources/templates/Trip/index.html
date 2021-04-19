@@ -26,9 +26,11 @@
 <main class="container" >
     <h1>Latest Trips</h1>
 
+
         <div class="row g-2 " >
 
             <div class="card col-4 " th:each="trip: ${trips}" style="width: 30rem;  margin-bottom: 10px ;margin-right: 5px;">
+
 <!--cant get image to show -->
                 <div class="card-header">
                     <a th:href="${'/trip/'+trip.getId()}"><h1 th:text="${trip.name}" class="card-title"></h1></a>
@@ -36,6 +38,7 @@
                 </div>
                 <img th:src="${trip.getImages().get(0).getImage_url()}" th:if="${trip.getImages().size()>0}" class="card-img-top" style="height: 150px" alt="...">
                 <div class="card-body" >
+
 
 
 
