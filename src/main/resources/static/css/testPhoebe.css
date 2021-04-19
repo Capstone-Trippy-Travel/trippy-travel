@@ -3,6 +3,9 @@ body {
     font-family: 'Crimson Text', serif;
     font-size: 20px;
 }
+#heading{
+    text-align: center;
+}
 .items{
     overflow-x: scroll;
     width: auto;
@@ -43,8 +46,11 @@ a{
 
 }
 .side-profile{
-    padding: 20px 10px 20px 5px;
+    /*padding: 20px 10px 20px 5px;*/
     margin: 10px;
+}
+.side-item{
+    padding: 10px;
 }
 #map {
     /* the width and height may be set to any size */
