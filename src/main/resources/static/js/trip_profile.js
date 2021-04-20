@@ -142,14 +142,12 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" id="image"  name="image_url">
                            
                         </div>
-                        </form>
+                        
                     </div>
                 </div>
 
-                                 <img id="imagePreview" src="" alt="" >
 
                             <input type="hidden" id="image"  name="image_url">
 <!--                            <button id="addPicture">addPicture</button>-->
