@@ -8,14 +8,14 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container">
-    <form th:action="@{/groups/edit}" th:method="post" th:object="${group}">
+    <form th:action="${'/groups/'+ editGroup.id +'/update'}" th:method="post" th:object="${editGroup}">
         <div class="form-group">
             <label >Group Name</label>
             <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
         </div>
         <div class="form-group">
             <label >Group Description</label>
-            <textarea class="form-control" th:field="*{description}" id="post" rows="10" name="name"></textarea>
+            <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>
 
         </div>
 
@@ -41,7 +41,7 @@
             <button id="addPicture">Group Profile Picture</button>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Group</button>
+        <button type="submit" class="btn btn-primary">Update Group</button>
     </form>
 </div>
 

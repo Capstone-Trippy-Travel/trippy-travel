@@ -156,4 +156,12 @@ public class TripController {
         return activities;
     }
 
+    @GetMapping("/")
+    public String SeeAllTripsHome(Model model) {
+        List<Trip> tripFromDb= tripRepository.findAll();
+        model.addAttribute("trips",tripFromDb);
+        System.out.println();
+        return "index";
+    }
+
 }
