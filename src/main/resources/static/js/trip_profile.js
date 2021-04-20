@@ -31,6 +31,7 @@ let service;
 let infowindow;
 
 function initMap() {
+    console.log("about to create activity cards")
     geocode(tripLocation, mapBoxToken).then(function (result) {
         let lat=result[0];
         let long=result[1];
@@ -101,9 +102,9 @@ function createVenueCard(place, marker){
 
 
     let html = "";
-    if(place.photoURL) {
-        html += `<img class="card-img-top" id="photo" src="${place.photoURL}" alt="Card image cap">`
-    }
+    // if(place.photoURL) {
+    //     html += `<img class="card-img-top" id="photo" src="${place.photoURL}" alt="Card image cap">`
+    // }
     html += `<div class="card-body">`
     html += `<h5 class="card-title">${place.place}</h5>`
     html += `<p class="card-text">${place.rating} stars - ${place.reviews} reviews</p>`
