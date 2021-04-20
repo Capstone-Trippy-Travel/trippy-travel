@@ -90,11 +90,12 @@
                         //will check and see if user is a friend already.
                         if (users[i].friendStatus==="approved") {
                             html += '<button id="addGroupMember' + i + '" class="float-right btn btn-primary btn-sm" type="button">' + 'Add to Group' + '</button>'
-                        } else if (users[i].friendStatus==="pending"){
-                            html += '<button class="float-right btn btn-warning btn-sm" type="button">Friend Request Pending</button>'
+                        } else if (users[i].friendStatus==="PENDING"){
+                            html += '<button class="float-right btn btn-warning btn-sm" type="button" disabled>Friend Request Pending</button>'
                             html += '<button id="addGroupMember' + i + '" class="float-right btn btn-primary btn-sm" type="button" disabled>' + 'Add to Group' + '</button>'
                         } else{
-
+                            html += '<button class="float-right btn btn-warning btn-sm addFriendButton" id="user='+users[i].id+'" type="button">Add Friend</button>'
+                            html += '<button id="addGroupMember' + i + '" class="float-right btn btn-primary btn-sm" type="button" disabled>' + 'Add to Group' + '</button>'
                         }
                         html+= '</li>'
                     }
@@ -122,6 +123,29 @@
                             groupMembersSelectList.appendChild(newGroupMember);
                         })
                     }
+
+                        //add eventListener to add friend button
+                    let addFriendButtons=document.getElementsByClassName("addFriendButton");
+                        for (let addFriendButton of addFriendButtons){
+                            addFriendButton.addEventListener("click", (event)=>{
+                                event.preventDefault();
+                                let buttonId=addFriendButton.id.split("=")[1]
+                                console.log(buttonId)
+                                jQuery.ajax({
+                                    'url': `/users/${buttonId}/friend-request`,
+                                    success: function (users) {
+                                        console.log("success!")
+                                        console.log(users)
+                                        addFriendButton.innerText="Friend Request Pending"
+                                    },
+                                    error: function (data) {
+                                        console.log("failure")
+                                        console.log(data)
+                                    }
+                                })
+                            })
+
+                        }
 
 
 
