@@ -68,6 +68,10 @@ fieldset {
     margin-right: 100px;
 }
 
+#comments-header {
+    justify-content: center;
+}
+
 .log-button {
     padding: 0;
     border: none;
