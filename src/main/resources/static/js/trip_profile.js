@@ -119,10 +119,12 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
                         </div>
                         <div class="modal-body" th:each="image : ${place.image}">
                             <table class="table">
-                                    <input type="hidden" value="${place.id}">
-                                    <input type="hidden" value="">
+
                                     <a th:href="">
-                                     <img th:src="" id="" class="img-thumbnail"  alt="...">
+                                    <img th:src="" id="" class="img-thumbnail"  alt="...">
+
+                                    <input type="hidden" value="${place.id}">
+
                                     </a>
 
                                 <img id="imagePreview" src="" alt="" >
