@@ -33,14 +33,14 @@ a{
     margin: 1px;
 }
 .trip-image{
-    width: 300px;
-    height: 200px;
+    width: 200px;
+    height: 150px;
     margin: 1px;
 }
-.user-icon{
+.profile-icon{
     border-radius: 50%;
-    width: 75px;
-    height: 75px;
+    width: 80px;
+    height: 80px;
 }
 .profile-image{
     width: 250px;
@@ -48,13 +48,19 @@ a{
     border-radius: 5%;
     /*border: .5px solid #ddd;*/
     /*border-radius: 4px;*/
-    margin: 5px;
+    /*margin: 5px;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 
 }
 #profileImage{
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .side-profile{
     /*padding: 20px 10px 20px 5px;*/
