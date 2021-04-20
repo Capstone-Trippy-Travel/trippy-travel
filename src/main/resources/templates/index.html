@@ -14,20 +14,28 @@
 
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav><br>
-<h3 class="col-lg-12 text-center">Collaborate with your friends to plan your group's next big adventure!</h3>
-<div class="container" id="introDiv">
-    <div class="row" id="intro">
-        <div class="col-lg-12 text-center">
-<!--        <h3>Trippy Travel</h3>-->
-            <h5 class="mt-5">You could always plan a future trip!</h5>
-            <a class="btn btn-primary btn-sm" th:href="@{/trip/create}">Plan A Trip!<span class="sr-only">(current)</span></a>
-            <h5 class="mt-5">You can create a group to travel with!</h5>
-            <a class="btn btn-primary btn-sm" th:href="@{/groups/create}">Create A Group!<span class="sr-only">(current)</span></a>
-<!--        <button type="button" class="btn btn-primary btn-lg" th:href="@{/trip/create}">Plan a Trip</button>-->
-<!--        <button type="button" class="btn btn-secondary btn-lg" th:href="@{/groups/create}">Create a Group</button>-->
-        </div>
-    </div>
-</div>
+
+<!--<h3 class="col-lg-12 text-center">Collaborate with your friends to plan your group's next big adventure!</h3>-->
+<!--<div class="container" id="introDiv">-->
+<!--    <div class="row" id="intro">-->
+<!--        <div class="col-lg-12 text-center">-->
+<!--&lt;!&ndash;        <h3>Trippy Travel</h3>&ndash;&gt;-->
+<!--            <h5 class="mt-5">You could always plan a future trip!</h5>-->
+<!--            <a class="btn btn-primary btn-sm" th:href="@{/trip/create}">Plan A Trip!<span class="sr-only">(current)</span></a>-->
+<!--            <h5 class="mt-5">You can create a group to travel with!</h5>-->
+<!--            <a class="btn btn-primary btn-sm" th:href="@{/groups/create}">Create A Group!<span class="sr-only">(current)</span></a>-->
+<!--&lt;!&ndash;        <button type="button" class="btn btn-primary btn-lg" th:href="@{/trip/create}">Plan a Trip</button>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button type="button" class="btn btn-secondary btn-lg" th:href="@{/groups/create}">Create a Group</button>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+
+
+
+
 
 <!--    <div class="col-8" id="homeLogo">-->
 <!--        <img src="img/plane_globe.png">-->
@@ -53,6 +61,127 @@
 <!--</div>-->
 
 
+
+
+
+
+
+
+<!--<div sec:authorize="isAuthenticated()">-->
+<!--        <h4 style="margin: 0; display: inline;">Welcome, </h4>-->
+<!--        <h4 style="margin: 0; display: inline;" th:text="${#authentication.principal.username}"></h4>-->
+<!--        <div class="card col-4 " th:each="trip: ${trips}">-->
+<!--            <div class="card-header">-->
+<!--                <a th:href="${'/trip/'+trip.getId()}"><h4 th:text="${trip.name}" class="card-title"></h4></a>-->
+<!--                <p th:text="${trip.description}" class="card-text"></p>-->
+<!--                <p th:text="${trip.location}" class="card-text"></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="profile-head">
+                    <div sec:authorize="isAuthenticated()">
+                            <h4 style="margin: 0; display: inline;">Welcome, </h4>
+                            <h4 style="margin: 0; display: inline;" th:text="${#authentication.principal.username}"></h4>
+                    </div><br>
+                    <h6>
+                        Here, you can view your trips, activities. Don't have any? Create some!
+                    </h6><br>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="welcome-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Your Current Trips</a>
+                        </li>
+                        <li class="welcome-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Your Current Activities</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4" id="create-button">
+<!--                <button type="button" class="btn btn-primary btn-sm" th:href="@{/groups/create}">Create a Group</button>-->
+<!--                <button type="button" class="btn btn-secondary btn-sm" th:href="@{/trip/create}">Create a Trip</button>-->
+                <ul class="group-trips-link mr-auto">
+                        <a style="margin: 0; display: inline;" class="nav-link" th:href="@{/groups/create}">Create a Group</a>
+                        <a style="margin: 0; display: inline;" class="nav-link" th:href="@{/trip/create}">Create a Trip</a>
+                </ul>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Trip Name</label>
+                            </div>
+                            <div class="col-md-8">
+                                <p>Trip Description</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet doloremque enim fuga illo iste iusto, mollitia non obcaecati officiis quia quis quisquam reiciendis saepe sint tempora temporibus unde voluptatum!</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Trip Name</label>
+                            </div>
+                            <div class="col-md-8">
+                                <p>Trip Description</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur doloremque eligendi est et facere fuga necessitatibus nesciunt, nihil odio porro, quod reprehenderit soluta sunt tempore unde vel voluptates. Tempore, voluptate.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label></label>
+                            </div>
+                            <div class="col-md-6">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Activity 1</label>
+                            </div>
+                            <div class="col-md-8">
+                                <p>Activity Place</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad commodi cumque, delectus enim esse est, explicabo facere iusto magni nemo nisi odit optio porro quae, qui rem sunt! Quasi, repellendus?</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Activity 2</label>
+                            </div>
+                            <div class="col-md-8">
+                                <p>Activity Place</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, assumenda aut, consequatur consequuntur dignissimos dolorum, error iusto minus nihil quibusdam quisquam sunt tenetur. A aliquid debitis, dolore ex veritatis vero.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
 
 
