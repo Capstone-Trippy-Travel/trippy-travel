@@ -21,6 +21,12 @@
     margin-bottom: 0;
 }
 
+.log-button {
+    padding: 0;
+    border: none;
+    background: none;
+}
+
 #clickedPlace{
     position: absolute;
     top: 0;
@@ -54,11 +60,11 @@
     overflow: scroll;
 }
 
-.navbar {
-    font-family: "Arial Rounded MT Bold";
-    margin-left: 100px;
-    margin-right: 100px;
-}
+/*.navbar {*/
+/*    font-family: "Arial Rounded MT Bold";*/
+/*    margin-left: 100px;*/
+/*    margin-right: 100px;*/
+/*}*/
 
 /*@media screen and (min-width: 100px) and (max-width: 576px) {*/
 /*    .navbar {*/

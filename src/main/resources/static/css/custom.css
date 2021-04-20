@@ -2,6 +2,7 @@
     font-family: "Arial Rounded MT Bold";
     margin-left: 100px;
     margin-right: 100px;
+    /*margin-bottom: 5px;*/
 }
 
 img.logo {
@@ -10,14 +11,19 @@ img.logo {
     margin-right: 10px;
 }
 
-@media screen and (min-width: 100px) and (max-width: 576px) {
-    .navbar {
-        /*overflow: hidden;*/
-        position: absolute;
-        bottom: 0;
-        /*width: 100%;*/
-    }
+.log-button {
+    padding: 0;
+    border: none;
+    background: none;
 }
+/*@media screen and (min-width: 100px) and (max-width: 576px) {*/
+/*    .navbar {*/
+/*        overflow: hidden;*/
+/*        position: absolute;*/
+/*        bottom: 0;*/
+/*        width: 100%;*/
+/*    }*/
+/*}*/
 
 #commentForm {
     display:none;

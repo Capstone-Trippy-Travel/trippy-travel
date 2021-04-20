@@ -73,18 +73,22 @@ public class TripController {
         return "Trip/show";
     }
     @PostMapping(path = "/trip/{id}")
-    public String addPicture(@ModelAttribute Trip trip,@RequestParam(name = "image_url",  required = false) String ImgUrl,@ModelAttribute Activity activity  ) {
+    public String addPicture(@PathVariable Long id,@RequestParam(name = "image_url",  required = false) String ImgUrl, @RequestParam(name = "activity_id",  required = false) String activityId  ) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         System.out.println(ImgUrl);
-        Image imageToSave = new Image( user, trip,activity,ImgUrl);
+        Image imageToSave = new Image(ImgUrl, user, tripRepository.getOne(id));
+
+        if (activityId!=null){
+            imageToSave.setActivity(activityRepository.getOne(Long.parseLong(activityId)));
+        }
         System.out.println(imageToSave.getImage_url());
         System.out.println(imageToSave.getUser().getUsername());
         System.out.println("about to save image");
         imagesRepository.save(imageToSave);
         System.out.println("saved image");
 
-        return "redirect:/trip/"+trip.getId();
+        return "redirect:/trip/"+id;
     }
     //    @GetMapping(path = "/trip/{id}/edit")
 //    public String updateTrip(@PathVariable Long id ,Model model){
@@ -154,6 +158,14 @@ public class TripController {
         List<Activity> activities= tripRepository.getOne(Long.parseLong(tripId)).getActivities();
         System.out.println("about to return activities");
         return activities;
+    }
+
+    @GetMapping("/")
+    public String SeeAllTripsHome(Model model) {
+        List<Trip> tripFromDb= tripRepository.findAll();
+        model.addAttribute("trips",tripFromDb);
+        System.out.println();
+        return "index";
     }
 
 }
