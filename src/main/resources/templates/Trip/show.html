@@ -125,6 +125,17 @@
         <div id="activityList"></div>
     </div>
 </div>
+<div class="card ">
+    <div class="activity-pics">
+        <div th:each="activity : ${trips.getActivities()}" class="" >
+
+            <div th:each="userImage : ${activity.getImages()}">
+                <img th:src="${userImage.getImage_url()}"  class="viewAll"  alt=".."/>
+            </div>
+        </div>
+
+    </div>
+</div>
 <!--    <div th:replace="fragments/activity :: mainAct"></div>-->
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -163,6 +174,7 @@
     });
 
 </script>
+
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 </body>
 </html>

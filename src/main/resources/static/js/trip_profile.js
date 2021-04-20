@@ -36,11 +36,11 @@ function initMap() {
         let long=result[1];
 
         const location = new google.maps.LatLng(long,lat);
-        infowindow = new google.maps.InfoWindow();
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: location,
-            zoom: 11,
-        });
+        // infowindow = new google.maps.InfoWindow();
+        // map = new google.maps.Map(document.getElementById("map"), {
+        //     center: location,
+        //     zoom: 11,
+        // });
 
         let pathUrl=window.location.pathname;
         let pathUrlArray=pathUrl.split("/");
@@ -53,7 +53,8 @@ function initMap() {
                 for (let i=0; i<activities.length; i++){
                     let lng=activities[i].lng;
                     let lat=activities[i].lat;
-                    let newMarker=createMarker(new google.maps.LatLng(lng,lat));
+                    // let newMarker=createMarker(new google.maps.LatLng(lng,lat));
+                    let newMarker='';
                     createVenueCard(activities[i], newMarker)
                 }
             },
@@ -101,7 +102,7 @@ function createVenueCard(place, marker){
 
     let html = "";
     if(place.photoURL) {
-        html += `<img class="card-img-top" src="${place.photoURL}" alt="Card image cap" data-bs-toggle="modal" data-bs-target="#exampleModal1">`
+        html += `<img class="card-img-top" id="photo" src="${place.photoURL}" alt="Card image cap">`
     }
     html += `<div class="card-body">`
     html += `<h5 class="card-title">${place.place}</h5>`
@@ -151,7 +152,7 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
                                 <!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
 <!--                                <input type="hidden" id="image"  name="image_url">-->
 
-                                <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
+                                 <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
                                 <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
                                 <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
                                 <!--                <input type="text"  name="image_url">-->
@@ -194,11 +195,19 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
 
 
     venueDetailsButton.addEventListener("click", ()=>{
-        marker.addListener("click", toggleBounce(marker))
+        // marker.addListener("click", toggleBounce(marker))
         venueCard.style.width="100%";
         venueCard.style.maxWidth="100%";
 
     })
+    // var listener = function (event) {
+    //     document.createElement('image')
+    //
+    //     alert('You clicked the button!');
+    // }
+// document.getElementById('photo').addEventListener('click');
+
+
 
 
     const options = {
