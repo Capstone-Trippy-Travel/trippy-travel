@@ -149,4 +149,15 @@ public class User {
         return String.format("%s email is %s and its ID is %d", username, email, id);
     }
 
+    public String getFriendStatus() {
+        return friendStatus;
+    }
+
+    public void setFriendStatus(String friendStatus) {
+        this.friendStatus = friendStatus;
+    }
+
+    public String friendStatus;
+
+
 }
