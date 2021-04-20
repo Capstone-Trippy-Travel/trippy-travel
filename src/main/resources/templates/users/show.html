@@ -80,9 +80,13 @@
                                   <div th:each="group : ${user.getGroupMember()}" class="item ">
                                       <a th:href="${'/trip/'+ group.id}">
                                           <h5><span th:text="${group.getGroup().getName()}"></span></h5>
-
                                               <img th:src="${group.getGroup().getProfile_image()}" alt="" class="trip-image">
-
+                                      </a>
+                                  </div>
+                                  <div th:each="group : ${user.getGroupMember()}" class="item ">
+                                      <a th:href="${'/trip/'+ group.id}">
+                                          <h5><span th:text="${group.getGroup().getName()}"></span></h5>
+                                          <img th:src="${group.getGroup().getProfile_image()}" alt="" class="trip-image">
                                       </a>
                                   </div>
                               </div>
