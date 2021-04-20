@@ -33,7 +33,7 @@
                 <h4 class="side-item">Group Members</h4>
                 <div class="side-item">
                     <div th:each="groupMember : ${group.getGroupMembers()}" class="item">
-                        <img src="" alt="" class="circle user-icon" />
+                        <img th:src="${groupMember.getMember().getProfile_image()}" alt="" class="profile-icon" />
                         <a th:href="${'/users/'+ groupMember.member.getId()}" > <div th:text="${groupMember.getMember().getFirstName()}"></div></a>
                     </div>
                 </div>
@@ -102,10 +102,10 @@
         <script src ="/keys.js"></script>
         <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
         <script src="/js/mapDisplay.js"></script>
-        <script
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
-                async
-        ></script>
+<!--        <script-->
+<!--                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
+<!--                async-->
+<!--        ></script>-->
 <div th:replace="fragments/footer :: footer"></div>
 
     <script th:inline="javascript">

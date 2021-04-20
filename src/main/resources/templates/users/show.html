@@ -32,7 +32,6 @@
 <!--                <form class="navbar-form " th:action="@{}" th:method="POST">-->
                     <div class="input-group side-item">
                         <input type="text" class="form-control"  name="search" placeholder="Search Friends">
-
                         <button type="submit">Go</button>
                     </div>
 <!--                </form>-->
@@ -47,74 +46,58 @@
                         <a class="nav-link active" id="trips-tab" data-toggle="tab" href="#trips" role="tab" aria-controls="trips" aria-selected="true">Your trips</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="groups-tab" data-toggle="tab" href="#groups" role="tab" aria-controls="groups" aria-selected="false">Group trips</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="planning-tab" data-toggle="tab" href="#planning" role="tab" aria-controls="planning" aria-selected="false">Planning Trips</a>
+                        <a class="nav-link" id="planning-tab" data-toggle="tab" href="#planning" role="tab" aria-controls="planning" aria-selected="false">Planned Trips</a>
                     </li>
                 </ul>
 
-
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="trips" role="tabpanel" aria-labelledby="trips-tab">
-<!--                        <div th:each="trip : ${trips}" class="tripCard card" >-->
-<!--                            <div class="card-header">-->
-<!--                                <h5 th:text="${trip.getName()}" class="float-left" ></h5>-->
-<!--                                <h5 th:text="${trip.getLocation()}" class="float-right tripLocation"></h5>-->
-<!--                            </div>-->
-<!--                            <div class="card-body">-->
-<!--                                <div class="activityCard" th:each="activity: ${trip.getActivities()}">-->
-<!--                                    <div class="activityName" th:text="${activity.getPlace()}"></div>-->
-<!--                                    <img class="activityImage" th:src="${activity.getPhotoURL()}">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
                         <div class="items main-item">
                             <div th:each="trip : ${trips}" class="item ">
                                 <a th:href="${'/trip/'+ trip.id}">
                                     <h5><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
                                     <img th:src="${trip.getImages().get(0).getImage_url()}" alt="" class="trip-image">
                                 </a>
-
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="groups" role="tabpanel" aria-labelledby="groups-tab">
-                        <p>Something goes here</p>
-<!--                        <div th:each="trip : ${user.getGroupMember()}">&ndash;&gt;-->
-<!--                            <p th:src="${trip.getGroup().}" ></p>-->
-<!--                        </div>-->
-                    </div>
-
                      <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
                          <p>Something goes here</p>
                      </div>
 
                       <ul class="nav nav-tabs" id="socialTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="groups" data-toggle="tab" href="#groups" role="tab" aria-controls="groups" aria-selected="true">Your Groups</a>
+                                </li>
                                <li class="nav-item">
-                                   <a class="nav-link active" id="friends-tab" data-toggle="tab" href="#freinds" role="tab" aria-controls="friends" aria-selected="true">Your Friends</a>
-                               </li>
-                               <li class="nav-item">
-                                   <a class="nav-link" id="mygroups-tab" data-toggle="tab" href="#your-groups" role="tab" aria-controls="your-groups" aria-selected="true">Your Groups</a>
+                                   <a class="nav-link" id="friends" data-toggle="tab" href="#freinds" role="tab" aria-controls="friends" aria-selected="false">Your Friends</a>
                                </li>
                       </ul>
 
-                    <div class="tab-content" id="myTabContent2">
-                          <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="planning-tab">
-                              <p>Something goes here</p>
+                     <div class="tab-content" id="myTabContent2">
+                          <div class="tab-pane fade show active" id="your-groups" role="tabpanel" aria-labelledby="groups-tab">
+                              <div class="items main-item">
+                                  <div th:each="group : ${user.getGroupMember()}" class="item ">
+                                      <a th:href="${'/trip/'+ group.id}">
+                                          <h5><span th:text="${group.getGroup().getName()}"></span></h5>
+
+                                              <img th:src="${group.getGroup().getProfile_image()}" alt="" class="trip-image">
+
+                                      </a>
+                                  </div>
+                              </div>
                           </div>
 
-                           <div class="tab-pane fade" id="your-groups" role="tabpanel" aria-labelledby="planning-tab">
-                               <p>Something goes here</p>
+                           <div class="tab-pane fade" id="your-friends" role="tabpanel" aria-labelledby="friends-tab">
+                               <p>Friends goes here</p>
                            </div>
-                    </div>
+                     </div>
                     <h4 class="main-item">Your Pictures</h4>
                     <div class="card group-card main-item">
                         <div class="group-pics">
                             <div th:each="userImage : ${user.getImages()}">
                                 <img th:src="${userImage.getImage_url()}" class="viewAll" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -130,10 +113,10 @@
 <script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/mapDisplay.js"></script>
-<script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
-        async
-></script>
+<!--<script-->
+<!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
+<!--        async-->
+<!--&gt;</script>-->
 
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 </body>
