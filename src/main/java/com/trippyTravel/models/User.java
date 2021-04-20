@@ -27,6 +27,9 @@ public class User {
     @Column(name = "last_name", nullable = false, length = 250)
     private String lastName;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
     @Column(nullable = false, unique = true)
     @javax.validation.constraints.Email(message = "Invalid email")
     @javax.validation.constraints.NotBlank(message = "Email can't be empty")
@@ -63,10 +66,11 @@ public class User {
     public User() {
     }
 
-    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<Comment> comments, List<CommentReplies> commentReplies) {
+    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, String description, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<Comment> comments, List<CommentReplies> commentReplies) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.description = description;
         this.email = email;
         this.password = password;
         this.profile_image = profile_image;
@@ -127,6 +131,10 @@ public class User {
     public List<Image> getImages() { return images; }
 
     public void setImages(List<Image> images) { this.images = images; }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 
     public List<Comment> getComments() { return comments; }
 
