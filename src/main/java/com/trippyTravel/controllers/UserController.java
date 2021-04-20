@@ -187,7 +187,20 @@ public class UserController {
 
     @RequestMapping(value="/users.json", method=RequestMethod.GET, produces="application/json")
     public @ResponseBody List<User> viewSearchedUsersWithAjax(@RequestParam("name") String name) {
+        User loggedInUser = usersService.loggedInUser();
 
-        return usersRepository.findByFirstNameContainingOrLastNameContainingOrUsernameContaining(name, name, name);
+        List<User> users= usersRepository.findByFirstNameContainingOrLastNameContainingOrUsernameContaining(name, name, name);
+        for (User user: users){
+            List<FriendList> usersFriends= user.getFriends();
+            String status="not friends";
+            int i=0;
+            for (FriendList friend: usersFriends){
+                if (friend.getFriend()==loggedInUser){
+                    status=friend.getStatus().name();
+                }
+            }
+            user.setFriendStatus(status);
+        }
+        return users;
     }
 }
