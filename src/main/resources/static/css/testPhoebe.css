@@ -93,3 +93,14 @@ a{
 /*    height: 30%;*/
 /*    width: 100%;*/
 /*}*/
+#activity-pics {
+    display: flex;
+}
+.activity-card{
+    height: 600px;
+    width: 100%;
+    overflow-y: scroll;
+}
+/*width:100px;*/
+/*height:100px;*/
+/*overflow:scroll;*/
