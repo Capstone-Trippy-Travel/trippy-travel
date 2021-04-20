@@ -24,6 +24,33 @@
                 <div class="side-item">
                     <p th:text="${user.description}" ></p>
                 </div>
+                <div id="friend-requests" th:if="${friendRequests.size()>0}">
+                    <h5>Friend Requests</h5>
+<!--                    <div th:each="friend : ${user.getFriends()}">-->
+<!--                        <div th:text="${friend.getFriend().getFirstName()+ ' '+ friend.getFriend().getLastName()}"></div>-->
+<!--                        <div th:text="${friend.getStatus()}"></div>-->
+<!--                    </div>-->
+                    <div class="card" th:each="friend : ${friendRequests}" th:id="${'friendRequestCard'+friend.getId()}" >
+                        <div class="card" style="max-width: 500px;">
+                            <div class="row no-gutters">
+                                <div class="col-sm-5" >
+                                    <img th:src="${friend.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()!= null}">
+                                    <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()==null}">
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${friend.getUser().getFirstName()+ ' '+ friend.getUser().getLastName()}"></h5>
+                                        <p class="card-text" th:text="${friend.getUser().getUsername()}"></p>
+                                        <div class="friendRequestButtons">
+                                            <button class="approveRequest btn btn-sm btn-success" th:id="${friend.getId()}" >Approve</button>
+                                            <button class="rejectButton btn btn-sm btn-success" th:id="${friend.getId()}" >Reject</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="side-item">
                     <i class='fas fa-user-friends' style='font-size:36px'></i>
                     <i class='fas fa-user-plus' style='font-size:36px'></i>
@@ -113,6 +140,7 @@
 <script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/mapDisplay.js"></script>
+<script src="/js/userProfile.js"
 <!--<script-->
 <!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
 <!--        async-->
