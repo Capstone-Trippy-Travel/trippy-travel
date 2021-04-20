@@ -16,7 +16,16 @@ body {
 }
 
 form {
-    padding: 3em;
+    padding: .5em;
+}
+.logout-button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: dodgerblue;
+}
+.logout-button:hover {
+    color: black;
 }
 
 fieldset {
@@ -57,6 +66,12 @@ fieldset {
     font-family: "Arial Rounded MT Bold";
     margin-left: 100px;
     margin-right: 100px;
+}
+
+.log-button {
+    padding: 0;
+    border: none;
+    background: none;
 }
 
 img {

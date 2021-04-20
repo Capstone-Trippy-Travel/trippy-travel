@@ -13,22 +13,25 @@
 </head>
 
 <body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
-<div class="row" id="introDiv">
-    <div class="col-4" id="intro">
+<nav th:replace="fragments/navbar :: navbar"></nav><br>
+<h3 class="col-lg-12 text-center">Collaborate with your friends to plan your group's next big adventure!</h3>
+<div class="container" id="introDiv">
+    <div class="row" id="intro">
+        <div class="col-lg-12 text-center">
 <!--        <h3>Trippy Travel</h3>-->
-        <h6>Collaborate with your friends to plan your group's next big adventure!</h6>
-
+            <h5 class="mt-5">You could always plan a future trip!</h5>
             <a class="btn btn-primary btn-sm" th:href="@{/trip/create}">Plan A Trip!<span class="sr-only">(current)</span></a>
+            <h5 class="mt-5">You can create a group to travel with!</h5>
             <a class="btn btn-primary btn-sm" th:href="@{/groups/create}">Create A Group!<span class="sr-only">(current)</span></a>
-
 <!--        <button type="button" class="btn btn-primary btn-lg" th:href="@{/trip/create}">Plan a Trip</button>-->
 <!--        <button type="button" class="btn btn-secondary btn-lg" th:href="@{/groups/create}">Create a Group</button>-->
-    </div>
-    <div class="col-8" id="homeLogo">
-        <img src="img/plane_globe.png">
+        </div>
     </div>
 </div>
+
+<!--    <div class="col-8" id="homeLogo">-->
+<!--        <img src="img/plane_globe.png">-->
+
 <!--<h3 class="text-center m-4" th:if="${trips.size()>0}">-->
 <!--    Dive back into your active trips!-->
 <!--</h3>-->
