@@ -200,14 +200,42 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
         venueCard.style.maxWidth="100%";
 
     })
-    // var listener = function (event) {
-    //     document.createElement('image')
-    //
-    //     alert('You clicked the button!');
-    // }
-// document.getElementById('photo').addEventListener('click');
+    var listener = function (event) {
+        let imageDiv = document.getElementById(place.place)
+        let activityPic = document.getElementById("activity-pics")
+    let activityDiv= document.getElementsByClassName("activityImageDiv")
+        for (let i =0;i<activityDiv.length;i++){
+            let singleActivityDiv = activityDiv[i]
+            if (singleActivityDiv != imageDiv){
+                singleActivityDiv.style.display = "none"
+            }else{
+                singleActivityDiv.style.display = "inline-block"
+            }
+        }
+        activityPic.innerHTML;
 
 
+    }
+venueCard.addEventListener('click', listener);
+
+
+    var listener1 = function (event) {
+        let imageDiv = document.getElementById(place.place)
+        let activityPic = document.getElementById("activity-pics")
+        let activityDiv= document.getElementsByClassName("activityImageDiv")
+        for (let i =0;i<activityDiv.length;i++){
+            let singleActivityDiv = activityDiv[i]
+            if (singleActivityDiv != imageDiv){
+                singleActivityDiv.style.display = "inline-block"
+            }else{
+                singleActivityDiv.style.display = "inline-block"
+            }
+        }
+        activityPic.innerHTML;
+
+
+    }
+    venueCard.addEventListener('dblclick', listener1);
 
 
     const options = {

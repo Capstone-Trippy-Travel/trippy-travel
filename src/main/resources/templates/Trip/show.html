@@ -124,12 +124,13 @@
         <div id="activityList"></div>
     </div>
 </div>
-<div class="card ">
-    <div class="activity-pics">
-        <div th:each="activity : ${trips.getActivities()}" class="" >
 
-            <div th:each="userImage : ${activity.getImages()}">
-                <img th:src="${userImage.getImage_url()}"  class="viewAll"  alt=".."/>
+<div class="card">
+    <div id="activity-pics">
+        <div th:each="activity : ${trips.getActivities()}" class="activityImageDiv" th:id = "${activity.getPlace()}">
+
+            <div th:each="userImage : ${activity.getImages()}" th:class="${'imageDiv ' + activity.getPlace()}">
+                <img th:src="${userImage.getImage_url()}"  class="viewAll"  alt=".." style="width: 200px; height: 200px"/>
             </div>
         </div>
 
