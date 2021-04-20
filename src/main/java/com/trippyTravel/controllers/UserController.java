@@ -175,9 +175,10 @@ public class UserController {
         return "users/friends";
     }
 
-    @GetMapping("/users/{id}/friend-request")
-    public void sendFriendRequest(@PathVariable long id ) {
-        friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.getOne(id), FriendStatus.PENDING));
+    @RequestMapping(value="/users/{id}/friend-request", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody FriendList sendFriendRequest(@PathVariable long id ) {
+        FriendList friendRequest=friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.getOne(id), FriendStatus.PENDING));
+        return friendRequest;
     }
 
 //    @GetMapping("/users.json")
@@ -190,17 +191,33 @@ public class UserController {
         User loggedInUser = usersService.loggedInUser();
 
         List<User> users= usersRepository.findByFirstNameContainingOrLastNameContainingOrUsernameContaining(name, name, name);
+        List<User> filteredUsers = new ArrayList<>();
+//        List<FriendList> friends = loggedInUser.getFriends();
+//        HashMap<>
+//        for (int i=0; i<friends.size(); i++){
+//
+//        }
         for (User user: users){
-            List<FriendList> usersFriends= user.getFriends();
+//            List<FriendList> usersFriends= user.getFriends();
             String status="not friends";
-            int i=0;
-            for (FriendList friend: usersFriends){
-                if (friend.getFriend()==loggedInUser){
-                    status=friend.getStatus().name();
-                }
+            FriendList friend=friendListRepository.findFriendListByFriend_Id(user.getId());
+            System.out.println(friend);
+            if (friend!=null){
+                status=friend.getStatus().name();
             }
+
+//            for (FriendList friend: usersFriends){
+//
+//                if (friend.getUser().getId()==loggedInUser.getId()){
+//
+//                    status=friend.getStatus().name();
+//                }
+//            }
             user.setFriendStatus(status);
+            if (user!=loggedInUser) {
+                filteredUsers.add(user);
+            }
         }
-        return users;
+        return filteredUsers;
     }
 }

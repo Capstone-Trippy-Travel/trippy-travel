@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface FriendListRepository extends JpaRepository<FriendList, Long> {
     List<FriendList> findAllByStatus(String status);
+    FriendList findFriendListByFriend_Id(Long id);
 }
