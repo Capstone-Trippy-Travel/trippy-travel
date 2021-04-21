@@ -39,6 +39,9 @@ public class UserController {
     private UserService usersService;
 
     @Autowired
+    private TripRepository tripRepository;
+
+    @Autowired
     private FriendListRepository friendListRepository;
 
     @Value("${mapBoxToken}")
@@ -125,6 +128,9 @@ public class UserController {
 
         viewModel.addAttribute("sessionUser", usersService.loggedInUser());
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
+
+        viewModel.addAttribute("plannedTrips", tripRepository.findTripsByStatus("future"));
+        viewModel.addAttribute("completedTrips", tripRepository.findTripsByStatus("past"));
         return "users/show";
     }
 

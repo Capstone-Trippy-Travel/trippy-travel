@@ -58,7 +58,7 @@ public class TripController {
         return "const FileStackApiKey = `" + fileStackApiKey +"`\n" +"const mapBoxToken = `" + mapBoxToken+"`\n"+"const fourSquareId = `" + fourSquareId+"`\n"+ "const fourSquarePassword = `" + fourSquarePassword+"`\n"+ "const googleMapsKey = `" + googleMapsKey+"`";
     }
     @GetMapping("/trip/{id}")
-    public String showOneTrip(@PathVariable Long id, Model vModel){
+    public String showOneTrip(@PathVariable Long id, Model vModel ){
         System.out.println("numbe of images for trip: "+ tripRepository.getOne(id).getImages().size());
         vModel.addAttribute("trips", tripRepository.getOne(id));
 //        vModel.addAttribute("comments", commentRepository.getOne(id));
@@ -69,7 +69,6 @@ public class TripController {
 //        while (commentListIterator.hasNext()) {
 //            System.out.println(commentListIterator.next());
 //        }
-
         return "Trip/show";
     }
     @PostMapping(path = "/trip/{id}")
@@ -87,6 +86,8 @@ public class TripController {
         System.out.println("about to save image");
         imagesRepository.save(imageToSave);
         System.out.println("saved image");
+
+
 
         return "redirect:/trip/"+id;
     }
