@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <nav th:fragment="navbar(friendRequests)" class="navbar navbar-expand-lg navbar-light">
+    <nav th:fragment="navbar(friendRequests, unreadCommentTrips)" class="navbar navbar-expand-lg navbar-light">
         <img src="/imgs/tt_icon.png" class="logo" alt="logo">
         <a class="navbar-brand">Trippi Travel</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,7 @@
                 </li>
                 <ul sec:authorize="isAuthenticated()" class="navbar-nav mr-auto">
                     <li type="button" class="nav-item" data-toggle="modal" data-target="#myAct">
-                        <a class="nav-link">Comments</a>
+                        <a class="nav-link">Notificaitons</a>
                     </li>
                 </ul>
             </ul>
@@ -30,7 +30,7 @@
                     <div class="modal-dialog modal-md">
                         <div class="modal-content">
                             <div id="comments-header" class="modal-header" style="border-bottom: none">
-                                <h4 class="modal-title" id="mySubModalLabel">Comments</h4>
+                                <h4 class="modal-title" id="mySubModalLabel">Notifications</h4>
 
                             </div>
                             <div class="modal-body">
@@ -41,28 +41,23 @@
                                             <a class="nav-link active" id="convo-tab" data-toggle="tab" href="#convo" role="tab" aria-controls="convo" aria-selected="true">Conversations</a>
                                         </li>
                                         <li class="welcome-item">
-                                            <a class="nav-link" id="notif-tab" data-toggle="tab" href="#notif" role="tab" aria-controls="notif" aria-selected="false">Notifications</a>
+                                            <a class="nav-link" id="notif-tab" data-toggle="tab" href="#notif" role="tab" aria-controls="notif" aria-selected="false">Friend Requests</a>
                                         </li>
                                     </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content notif-tab" id="myTabContent">
                                         <div class="tab-pane fade show active" id="convo" role="tabpanel" aria-labelledby="convo-tab">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label>Trip Conversation:</label>
+                                            <div class="row" th:each="trip: ${unreadCommentTrips}">
+                                                <div class="col-md-3" >
+                                                    <label th:text="${trip.getName()}"></label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae corporis culpa doloribus ea fugit illum impedit inventore magni minima modi molestias nulla numquam, obcaecati odit sequi ut veniam vero</p>
+                                                    <div th:each="comment:${trip.getComments()}">
+                                                        <div th:text="${comment.getComment_text()}"></div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label>Group Conversation:</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam, architecto consequatur expedita facere fugiat id minus non perferendis provident quibusdam quisquam, voluptate voluptates! Autem cumque distinctio molestiae sed voluptate</p>
-                                                </div>
-                                            </div>
+
                                         </div>
                                         <div class="tab-pane fade" id="notif" role="tabpanel" aria-labelledby="notif-tab">
 <!--                                            <div class="row">-->

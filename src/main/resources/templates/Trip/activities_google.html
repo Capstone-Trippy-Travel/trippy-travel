@@ -12,7 +12,7 @@
 
 <body>
 
-<nav th:replace="fragments/navbar :: navbar( ${friendRequests} )"></nav>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <form th:action="@{'/trip/'+ ${trip.id} +'/activities'}" method="post"  id="activityForm">
 
     <div class="input-field col s12">

@@ -11,7 +11,7 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar( ${friendRequests} )"></nav>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 
 <main class="container">
     <div class="row">

@@ -42,6 +42,9 @@ public class UserController {
     @Autowired
     private FriendListRepository friendListRepository;
 
+    @Autowired
+    private TripRepository tripRepository;
+
     @Value("${mapBoxToken}")
     private String mapBoxToken;
 
@@ -122,13 +125,16 @@ public class UserController {
 
         System.out.println(trips.size());
         viewModel.addAttribute("trips", trips);
-        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
-
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             viewModel.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
         }
         viewModel.addAttribute("sessionUser", usersService.loggedInUser());
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
@@ -152,6 +158,17 @@ public class UserController {
         User user = usersRepository.getOne(id);
         viewModel.addAttribute("user", user);
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
+            List<FriendList> friendRequests= new ArrayList<>();
+            viewModel.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+        }
         return "users/edit";
     }
 
