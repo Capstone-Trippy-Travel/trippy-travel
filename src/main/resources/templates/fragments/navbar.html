@@ -20,7 +20,10 @@
                 </li>
                 <ul sec:authorize="isAuthenticated()" class="navbar-nav mr-auto">
                     <li type="button" class="nav-item" data-toggle="modal" data-target="#myAct">
-                        <a class="nav-link">Notificaitons</a>
+                        <a class="nav-link" style="position:relative">
+                            Notifications
+                            <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:red " th:if="${unreadCommentTrips.size()>0 || friendRequests.size()>0}"></div>
+                        </a>
                     </li>
                 </ul>
             </ul>
@@ -30,7 +33,9 @@
                     <div class="modal-dialog modal-md">
                         <div class="modal-content">
                             <div id="comments-header" class="modal-header" style="border-bottom: none">
-                                <h4 class="modal-title" id="mySubModalLabel">Notifications</h4>
+                                <h4 class="modal-title" id="mySubModalLabel">
+                                    Notifications
+                                </h4>
 
                             </div>
                             <div class="modal-body">
@@ -38,10 +43,16 @@
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs" id="myTab" role="tablist" style="justify-content: center">
                                         <li class="welcome-item">
-                                            <a class="nav-link active" id="convo-tab" data-toggle="tab" href="#convo" role="tab" aria-controls="convo" aria-selected="true">Conversations</a>
+                                            <a class="nav-link active" id="convo-tab" data-toggle="tab" href="#convo" role="tab" aria-controls="convo" aria-selected="true" style="position:relative">
+                                                <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:red " th:if="${unreadCommentTrips.size()>0}"></div>
+                                                Conversations
+                                            </a>
                                         </li>
                                         <li class="welcome-item">
-                                            <a class="nav-link" id="notif-tab" data-toggle="tab" href="#notif" role="tab" aria-controls="notif" aria-selected="false">Friend Requests</a>
+                                            <a class="nav-link" id="notif-tab" data-toggle="tab" href="#notif" role="tab" aria-controls="notif" aria-selected="false" style="position:relative">
+                                                <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:red " th:if="${friendRequests.size()>0}"></div>
+                                                Friend Requests
+                                            </a>
                                         </li>
                                     </ul>
                                     <!-- Tab panes -->
