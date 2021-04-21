@@ -103,18 +103,13 @@
 
                      <div class="tab-content" id="myTabContent2">
                           <div class="tab-pane fade show active" id="your-groups" role="tabpanel" aria-labelledby="groups-tab">
+<!--                              <h3>Groups</h3>-->
                               <div class="items main-item">
-                                  <div th:each="group : ${user.getGroupMember()}" class="item ">
-                                      <a th:href="${'/trip/'+ group.id}">
-                                          <h5><span th:text="${group.getGroup().getName()}"></span></h5>
-                                              <img th:src="${group.getGroup().getProfile_image()}" alt="" class="trip-image">
-                                      </a>
-                                  </div>
-                                  <div th:each="group : ${user.getGroupMember()}" class="item ">
-                                      <a th:href="${'/trip/'+ group.id}">
-                                          <h5><span th:text="${group.getGroup().getName()}"></span></h5>
-                                          <img th:src="${group.getGroup().getProfile_image()}" alt="" class="trip-image">
-                                      </a>
+                                  <div th:each="userGroup : ${user.getGroupMember()}" class="item ">
+                                          <a th:href="${'/groups/'+ userGroup.getGroup().getId()}">
+                                              <h5><span th:text="${userGroup.getGroup().getName()}"></span></h5>
+                                              <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" class="trip-image">
+                                          </a>
                                   </div>
                               </div>
                           </div>
@@ -144,7 +139,7 @@
 <script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/mapDisplay.js"></script>
-<script src="/js/userProfile.js"
+<script src="/js/userProfile.js"></script>
 <!--<script-->
 <!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
 <!--        async-->
