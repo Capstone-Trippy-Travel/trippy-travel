@@ -22,7 +22,4 @@ UsersRepository extends JpaRepository<User, Long> {
 
     List<User> findByFirstNameContainingOrLastNameContainingOrUsernameContaining(String name, String name1, String name2);
 
-
-
-
 }
