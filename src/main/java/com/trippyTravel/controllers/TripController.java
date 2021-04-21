@@ -19,6 +19,7 @@ public class TripController {
     private final GroupsRepository groupsRepository;
     private final ImageRepository imagesRepository;
     private final CommentRepository commentRepository;
+    private final FriendListRepository friendListRepository;
     @Value("${mapBoxToken}")
     private String mapBoxToken;
     @Value("${fileStackApiKey}")
@@ -30,25 +31,39 @@ public class TripController {
     @Value("${googleMapsKey}")
     private String googleMapsKey;
     private final ActivityRepository activityRepository;
-    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ImageRepository imagesRepository, CommentRepository commentRepository, ActivityRepository activityRepository) {
+    public TripController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ImageRepository imagesRepository, CommentRepository commentRepository, ActivityRepository activityRepository, FriendListRepository friendListRepository) {
         this.emailService = emailService;
         this.tripRepository = tripRepository;
         this.groupsRepository = groupsRepository;
         this.imagesRepository = imagesRepository;
         this.commentRepository = commentRepository;
         this.activityRepository = activityRepository;
+        this.friendListRepository=friendListRepository;
     }
     @GetMapping("/trip")
     public String SeeAllTripsPage(Model model) {
         List<Trip> tripFromDb= tripRepository.findAll();
         model.addAttribute("trips",tripFromDb);
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+            List<FriendList> friendRequests= new ArrayList<>();
+            model.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
         System.out.println();
         return "Trip/index";
     }
     @PostMapping("/trip")
     public String index(Model model) {
         List<Trip> tripFromDb= tripRepository.findAll();
-
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+            List<FriendList> friendRequests= new ArrayList<>();
+            model.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
         model.addAttribute("trip",tripFromDb);
         return "Trip/index";
     }
@@ -61,6 +76,13 @@ public class TripController {
     public String showOneTrip(@PathVariable Long id, Model vModel){
         System.out.println("numbe of images for trip: "+ tripRepository.getOne(id).getImages().size());
         vModel.addAttribute("trips", tripRepository.getOne(id));
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+            List<FriendList> friendRequests= new ArrayList<>();
+            vModel.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            vModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
 //        vModel.addAttribute("comments", commentRepository.getOne(id));
 //        vModel.addAttribute("activity", activityRepository.getOne(1L));
 
@@ -102,6 +124,13 @@ public class TripController {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("trip", new Trip());
         model.addAttribute("groups", groupsRepository.findByOwner(user));
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+            List<FriendList> friendRequests= new ArrayList<>();
+            model.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
         return "Trip/create";
     }
     @PostMapping("/trip/create")
@@ -136,6 +165,13 @@ public class TripController {
         Trip trip=tripRepository.getOne(id);
         System.out.println(trip.getName());
         model.addAttribute("trip", trip);
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+            List<FriendList> friendRequests= new ArrayList<>();
+            model.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
         return "Trip/edit";
     }
     @PostMapping(path = "/trip/{id}/edit")
@@ -164,6 +200,15 @@ public class TripController {
     public String SeeAllTripsHome(Model model) {
         List<Trip> tripFromDb= tripRepository.findAll();
         model.addAttribute("trips",tripFromDb);
+
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+            List<FriendList> friendRequests= new ArrayList<>();
+            model.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
+
         System.out.println();
         return "index";
     }

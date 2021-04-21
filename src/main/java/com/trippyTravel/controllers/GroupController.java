@@ -1,18 +1,13 @@
 package com.trippyTravel.controllers;
 
-import com.trippyTravel.models.Comment;
-import com.trippyTravel.models.Group;
-import com.trippyTravel.models.GroupMember;
-import com.trippyTravel.models.User;
-import com.trippyTravel.repositories.CommentRepository;
-import com.trippyTravel.repositories.GroupMembersRepository;
-import com.trippyTravel.repositories.GroupsRepository;
-import com.trippyTravel.repositories.UsersRepository;
+import com.trippyTravel.models.*;
+import com.trippyTravel.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,12 +16,14 @@ public class GroupController {
     private GroupMembersRepository groupMemberDao;
     private UsersRepository userDao;
     private CommentRepository commentDao;
+    private FriendListRepository friendListRepository;
 
-    public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao) {
+    public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao, FriendListRepository friendListRepository) {
         this.groupDao = groupDao;
         this.groupMemberDao = groupMemberDao;
         this.userDao = userDao;
         this.commentDao = commentDao;
+        this.friendListRepository=friendListRepository;
     }
 
     //    @GetMapping(path = "/groups")
@@ -38,12 +35,26 @@ public class GroupController {
     @GetMapping(path = "/groups/{id}")
     public String viewGroup(@PathVariable Long id, Model viewModel) {
         viewModel.addAttribute("group", groupDao.getOne(id));
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+            List<FriendList> friendRequests= new ArrayList<>();
+            viewModel.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
         return "groups/view";
     }
 
     @GetMapping(path = "/groups/create")
     public String createGroup(Model viewModel){
         viewModel.addAttribute("group", new Group());
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+            List<FriendList> friendRequests= new ArrayList<>();
+            viewModel.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
         return "groups/create-group";
     }
     @PostMapping(path = "/groups/create")
@@ -67,6 +78,13 @@ public class GroupController {
     public String editGroup(Model viewModel, @PathVariable long id){
         Group oneGroup = groupDao.getOne(id);
         viewModel.addAttribute("editGroup", oneGroup);
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+            List<FriendList> friendRequests= new ArrayList<>();
+            viewModel.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
         return "groups/edit-group";
     }
     @PostMapping(path = "/groups/{id}/update")
@@ -79,6 +97,7 @@ public class GroupController {
             Long memberId = Long.valueOf(groupMembers[i]);
             groupMemberDao.save(new GroupMember(false, userDao.getOne(memberId), newGroup) );
         }
+
 
         return "redirect:/groups/"+createdGroup.getId();
     }

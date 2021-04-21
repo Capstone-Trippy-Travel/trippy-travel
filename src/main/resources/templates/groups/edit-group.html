@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="custom.css">
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests} )"></nav>
 <div class="container">
     <form th:action="${'/groups/'+ editGroup.id +'/update'}" th:method="post" th:object="${editGroup}">
         <div class="form-group">
