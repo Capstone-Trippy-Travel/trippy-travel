@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Create Trip</title>
@@ -10,88 +10,112 @@
     <link rel="stylesheet" href="/css/register.css">
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
 </head>
-<body>
+
+<body id="create-trip-body">
 <nav th:replace="fragments/navbar :: navbar"></nav>
+<hr class="rounded" style="width: 90%">
 
-<main class="container">
-    <div class="row">
-        <h4 class="page-title">Create Trip</h4>
-        <div class="col l8 offset-l2">
-            <form class="col s12"  th:action="@{/trip/create}" th:method="POST" th:object="${trip}">
-
-
-                <div class="input-field col s12">
-                    <label >Group</label>
+<fieldset class="col-6">
+    <main class="container">
+        <div class="row">
+            <div class="form-group col-12" style="padding: 0">
+                <form class="col s12"  th:action="@{/trip/create}" th:method="POST" th:object="${trip}">
 
 
-                    <select class="form-control" name="groupId">
-                        <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}"></option>
+                    <div class="input-field col s12">
+                        <label >Group</label>
 
 
-                    </select>
-
-                </div>
-
-                <div class="input-field col s12">
-                    <label >location</label>
-                    <input  type="text" th:field="*{location}" />
-
-                </div>
-
-                <div class="input-field col s12">
-                    <label >name</label>
-                    <input type="text"  th:field="*{name}" />
-
-                </div>
-
-                <div class="input-field col s12">
-                    <label >description</label>
-                    <input type="text"  th:field="*{description}" />
-
-                </div>
-
-                <div class="input-field col s12">
-                    <label >Trip status</label>
-                    <select class="form-control" th:field="*{status}">
-                        <option value="future">Future</option>
-                        <option value="past">past</option>
-
-                    </select>
-
-                </div>
-                <div class="input-field col s12">
-                    <label >Start date</label>
-                    <input type="date"  th:field="*{startDate}" />
-
-                </div>
-                <div class="input-field col s12">
-                    <label >End Date</label>
-                    <input type="date"  th:field="*{endDate}" />
-
-                </div>
-
-                <img id="imagePreview" src="" alt="" >
-
-<!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
-                <input type="hidden" id="image"  name="image_url">
-
-<!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
-<!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
-<!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
-
-                <button id="addPicture">addPicture</button>
-<!--                <input type="text"  name="image_url">-->
-
-                <br>
+                        <select class="form-control" name="groupId">
+                            <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}"></option>
 
 
-                <input class="btn" type="submit" />
-            </form>
+                        </select><br>
+
+                    </div>
+
+                    <div class="input-field col s12 col-10" style="margin: 5px">
+                        <input class="form-control form-control-sm" type="text" placeholder="Location" th:field="*{location}" />
+
+                    </div>
+
+                    <div class="input-field col s12 col-10" style="margin: 5px">
+                        <input class="form-control form-control-sm" type="text" placeholder="Name" th:field="*{name}" />
+
+                    </div>
+
+                    <div class="input-field col s12 col-10" style="margin: 5px">
+                        <input class="form-control form-control-sm" type="text" placeholder="Description" th:field="*{description}" />
+
+                    </div>
+
+                    <img id="imagePreview" src="" alt="" >
+
+                    <!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
+                    <input type="hidden" id="image"  name="image_url">
+
+                    <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
+                    <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
+                    <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
+
+                    <button id="addPicture" class="logout-button" style="margin-left: 8px">Add a Picture</button>
+                    <!--                <input type="text"  name="image_url">-->
+
+                    <div class="input-field col s12"><br>
+                        <label >Trip Status</label>
+                        <select class="form-control" th:field="*{status}">
+                            <option value="future">Future Trip</option>
+                            <option value="past">Past Trip</option>
+
+                        </select><br>
+
+                    </div>
+
+                    <div class="container">
+                        <div class="row" style="justify-content: space-around">
+                            <div>
+                                <label style="margin-bottom: 0">Start Date</label><br>
+                                <input type="date"  th:field="*{startDate}" />
+
+                            </div>
+                            <div>
+                                <label style="margin-bottom: 0">End Date</label><br>
+                                <input type="date"  th:field="*{endDate}" />
+
+                            </div>
+                        </div>
+                    </div><br>
+
+
+
+                    <!------------- ORIGINAL ADDING IMAGES FOR TRIPS --------------->
+                    <!--                <div class="container">-->
+                    <!--                    <div class="row" style="justify-content: center">-->
+                    <!--                <img id="imagePreview" src="" alt="" >-->
+
+                    <!--                &lt;!&ndash;                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;&ndash;&gt;-->
+                    <!--                <input type="hidden" id="image"  name="image_url">-->
+
+                    <!--                &lt;!&ndash;                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;&ndash;&gt;-->
+                    <!--                &lt;!&ndash;                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;&ndash;&gt;-->
+                    <!--                &lt;!&ndash;                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;&ndash;&gt;-->
+
+                    <!--                <button id="addPicture">Add a Picture</button>-->
+                    <!--                &lt;!&ndash;                <input type="text"  name="image_url">&ndash;&gt;-->
+                    <!------------- ORIGINAL ADDING IMAGES FOR TRIPS --------------->
+
+
+                    <br>
+
+
+                    <input class="btn btn-primary btn-block" data-toggle="button" aria-pressed="false" autocomplete="off" type="submit" />
+            </div>
         </div>
-    </div>
-</main>
-
-
+        </form>
+        </div>
+        </div>
+    </main>
+</fieldset>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <!--<script>-->
 <!--    // Set up the picker-->

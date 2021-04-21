@@ -86,7 +86,7 @@
 
 
                 <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post" class="d-flex">
-                        <li type="button" class="nav-link">
+                        <li class="nav-link" data-toggle="modal" data-target="#myPro">
                             <a class="nav-link" th:href="@{/users/profile}">Profile</a>
                         </li>
                     <button class="logout-button" type="submit">Logout</button>
