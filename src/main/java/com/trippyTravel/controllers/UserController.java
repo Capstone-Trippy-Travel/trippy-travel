@@ -140,7 +140,7 @@ public class UserController {
         viewModel.addAttribute("sessionUser", usersService.loggedInUser());
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
 
-        viewModel.addAttribute("plannedTrips", tripRepository.findTripsByStatus(user, "future"));
+        viewModel.addAttribute("plannedTrips", tripRepository.findTripsByStatus(id, "future"));
 
         return "users/show";
     }
