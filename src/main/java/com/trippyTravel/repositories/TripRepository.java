@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface TripRepository extends JpaRepository<Trip,Long> {
 
+    List<Trip> findTripsByStatus(String status);
+
+
     @Query("select t from Trip t, Group g, GroupMember gm where t.group=g AND gm.unreadCommentTrip=t AND gm.member=?1")
     List<Trip> getUnreadCommentTrips(User user);
+
 }
