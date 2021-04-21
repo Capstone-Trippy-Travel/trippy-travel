@@ -228,12 +228,12 @@ public class UserController {
             String status="not friends";
 
             //checking to see if user is a friend in database, or if friend request is pending
-            Boolean friendExists = friendListRepository.existsFriendListByFriend_Id(user.getId());
+            Boolean friendExists = friendListRepository.existsFriendListByFriend_IdAndUser_Id(user.getId(), loggedInUser.getId());
                 System.out.println("friendExists boolean: "+friendExists);
             //if friend does exist, will pass the friend request status to page
             if (friendExists){
                 System.out.println("finding friends");
-                FriendList friend=friendListRepository.findFriendListByFriend_Id(user.getId());
+                FriendList friend=friendListRepository.findFriendListByFriend_IdAndUser_Id(user.getId(), loggedInUser.getId());
                 status=friend.getStatus().name();
             }
 
