@@ -108,12 +108,13 @@ function createVenueCard(place, marker){
     html += `<div class="card-body">`
     html += `<h5 class="card-title">${place.place}</h5>`
     html += `<p class="card-text">${place.rating} stars - ${place.reviews} reviews</p>`
-    "/trip/${place.trip.id}"
+   html+=``
 
     let activityImageForm=document.createElement("form");
     activityImageForm.setAttribute("class", "col s12" );
     activityImageForm.setAttribute("action", '/trip/'+place.trip.id);
     activityImageForm.setAttribute("method", "Post")
+
 
     let activityInput=document.createElement("input");
     activityInput.setAttribute("value", place.id);
@@ -125,6 +126,7 @@ function createVenueCard(place, marker){
     imageUrlInput.setAttribute("name", "image_url")
     imageUrlInput.setAttribute("type", "hidden")
     activityImageForm.appendChild(imageUrlInput)
+
 
     let submitButton=document.createElement("button")
     submitButton.setAttribute("type", "submit")
@@ -175,8 +177,10 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
                         </div> </form>`
     venueCard.innerHTML = html;
 
+    let venueDetailsDiv=document.createElement("div");
     let venueDetailsButton=document.createElement("button");
     venueDetailsButton.setAttribute("class", "btn btn-primary float-left btn-sm text-center" )
+    venueDetailsDiv.appendChild(venueDetailsButton)
     venueDetailsButton.innerText="See Details"
 
     //adding filestack addPicture button
@@ -186,7 +190,7 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
 
     activityImageForm.appendChild(fileStackButton)
 
-    venueCard.appendChild(venueDetailsButton)
+    venueCard.appendChild(venueDetailsDiv)
     venueCard.appendChild(activityImageForm)
 
 
@@ -306,9 +310,39 @@ function getVenueDetails(id){
         html += `<p class="card-text"><a href="${place.website}">Visit Website</a></p>`
         html += `<p class="card-text">${place.formatted_phone_number}</p>`
         html += `<p class="card-text">${place.opening_hours.weekday_text}</p>`
+html+=`<h3 id="results">
+  total: 0
+  yes: 0
+  no: 0
+</h3>
+<button type="button" id="yes-button">Click to vote yes</button>
+<button type="button" id="no-button">Click to vote no</button>`
 
         venueDetailsCard.innerHTML=html;
 
+
+
+});
+
+    let yes = 0;
+    let no = 0;
+
+    function refreshResults () {
+            var results = document.getElementById('results');
+            results.innerHTML = 'total: ' + (yes + no);
+            results.innerHTML += '<br />yes: ' + yes;
+            results.innerHTML += '<br />no: ' + no;
+        }
+
+        document.getElementById('yes-button').addEventListener('click', function () {
+           yes++;
+            refreshResults();
+        });
+
+        document.getElementById('no-button').addEventListener('click', function () {
+            no++;
+            refreshResults();
+        });
 
 
         let exitButton=document.createElement("button");
@@ -336,8 +370,8 @@ function getVenueDetails(id){
 
         let clickedPlace=document.getElementById("clickedPlace");
         clickedPlace.appendChild(venueDetailsCard)
-    })
-}
+    }
+
 
 
 
