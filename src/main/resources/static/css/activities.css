@@ -160,3 +160,11 @@ html, body, .container{
     object-fit: scale-down;
     max-height: 150px;
 }
+
+#tripProfileInfo .row{
+    height:auto;
+}
+
+#tripContainer{
+    height: auto;
+}

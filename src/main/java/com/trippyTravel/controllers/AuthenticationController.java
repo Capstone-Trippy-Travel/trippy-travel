@@ -1,14 +1,20 @@
 package com.trippyTravel.controllers;
+import com.trippyTravel.models.FriendList;
+import com.trippyTravel.models.FriendStatus;
+import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
 import com.trippyTravel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.trippyTravel.repositories.UsersRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Fer on 1/10/17.
@@ -26,7 +32,11 @@ public class AuthenticationController {
     private UsersRepository usersRepository;
 
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model){
+        List<FriendList> friendRequests= new ArrayList<>();
+        model.addAttribute("friendRequests", friendRequests);
+        List<Trip> unreadCommentTrips = new ArrayList<>();
+        model.addAttribute("unreadCommentTrips", unreadCommentTrips );
         return "login";
     }
 
@@ -52,6 +62,10 @@ public class AuthenticationController {
     @GetMapping("/register")
     public String showForm(Model m){
         m.addAttribute("user", new User());
+        List<FriendList> friendRequests= new ArrayList<>();
+        m.addAttribute("friendRequests", friendRequests);
+        List<Trip> unreadCommentTrips = new ArrayList<>();
+        m.addAttribute("unreadCommentTrips", unreadCommentTrips);
         return "users/create";
     }
 
