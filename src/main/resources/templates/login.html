@@ -12,7 +12,7 @@
 </head>
 
 <body id="login-body">
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests} )"></nav>
 <hr class="rounded" style="width: 85%">
 
 <main class="container" style="max-width: 500px">

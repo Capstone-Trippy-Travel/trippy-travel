@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests} )"></nav>
 <main class="container">
     <div class="row">
         <div class="col l12">

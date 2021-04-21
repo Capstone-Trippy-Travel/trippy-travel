@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light">
+    <nav th:fragment="navbar(friendRequests)" class="navbar navbar-expand-lg navbar-light">
         <img src="/imgs/tt_icon.png" class="logo" alt="logo">
         <a class="navbar-brand">Trippi Travel</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,12 +65,35 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="notif" role="tabpanel" aria-labelledby="notif-tab">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <br><p>Notification 1</p>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <br><p>Notification 2</p>
+<!--                                            <div class="row">-->
+<!--                                                <div class="col-md-10">-->
+<!--                                                    <br><p>Notification 1</p>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-md-10">-->
+<!--                                                    <br><p>Notification 2</p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+                                            <div id="friend-requests" th:if="${friendRequests.size()>0}">
+                                                <h5>Friend Requests</h5>
+                                                <div class="card" th:each="friend : ${friendRequests}" th:id="${'friendRequestCard'+friend.getId()}" >
+                                                    <div class="card" style="max-width: 500px;">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-sm-5" >
+                                                                <img th:src="${friend.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()!= null}">
+                                                                <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()==null}">
+                                                            </div>
+                                                            <div class="col-sm-7">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title" th:text="${friend.getUser().getFirstName()+ ' '+ friend.getUser().getLastName()}"></h5>
+                                                                    <p class="card-text" th:text="${friend.getUser().getUsername()}"></p>
+                                                                    <div class="friendRequestButtons">
+                                                                        <button class="approveRequest btn btn-sm btn-success" th:id="${friend.getId()}" >Approve</button>
+                                                                        <button class="rejectButton btn btn-sm btn-success" th:id="${friend.getId()}" >Reject</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

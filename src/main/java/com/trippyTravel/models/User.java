@@ -47,6 +47,8 @@ public class User {
     @JsonBackReference
     private List<FriendList> friends;
 
+
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
     @JsonBackReference
     private List<GroupMember> groupMember;

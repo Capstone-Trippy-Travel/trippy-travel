@@ -5,7 +5,7 @@
 
 <body>
 
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests} )"></nav>
 <div class="card text-center">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">

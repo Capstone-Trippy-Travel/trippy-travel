@@ -7,6 +7,7 @@ import com.trippyTravel.repositories.*;
 import com.trippyTravel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +59,6 @@ public class UserController {
         if(existingUsername != null){
 
             validation.rejectValue("username", "user.username", "Duplicated username " + username);
-
         }
 
         if(existingEmail != null){
@@ -80,6 +80,7 @@ public class UserController {
         User newUser = usersRepository.save(user);
         Group newGroup = new Group(newUser.getUsername(), newUser);
         groupsRepository.save(newGroup);
+        groupMembersRepository.save(new GroupMember(true, user, newGroup));
 
         UserRole ur = new UserRole();
         ur.setRole("ROLE_USER");
@@ -121,8 +122,14 @@ public class UserController {
 
         System.out.println(trips.size());
         viewModel.addAttribute("trips", trips);
-        viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(user, FriendStatus.PENDING));
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
 
+            List<FriendList> friendRequests= new ArrayList<>();
+            viewModel.addAttribute("friendRequests", friendRequests);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+        }
         viewModel.addAttribute("sessionUser", usersService.loggedInUser());
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
         return "users/show";
@@ -207,7 +214,7 @@ public class UserController {
 
         //grabbing all users in database that match searched term
         List<User> users= usersRepository.findByFirstNameContainingOrLastNameContainingOrUsernameContaining(name, name, name);
-
+        System.out.println(users.size());
         //creating filtered list to pass to page (not including you if you searched)
         List<User> filteredUsers = new ArrayList<>();
 
@@ -222,10 +229,10 @@ public class UserController {
 
             //checking to see if user is a friend in database, or if friend request is pending
             Boolean friendExists = friendListRepository.existsFriendListByFriend_Id(user.getId());
-
+                System.out.println("friendExists boolean: "+friendExists);
             //if friend does exist, will pass the friend request status to page
             if (friendExists){
-
+                System.out.println("finding friends");
                 FriendList friend=friendListRepository.findFriendListByFriend_Id(user.getId());
                 status=friend.getStatus().name();
             }
