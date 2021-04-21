@@ -121,6 +121,7 @@ public class UserController {
 
         System.out.println(trips.size());
         viewModel.addAttribute("trips", trips);
+        viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(user, FriendStatus.PENDING));
 
         viewModel.addAttribute("sessionUser", usersService.loggedInUser());
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
@@ -181,6 +182,20 @@ public class UserController {
         return friendRequest;
     }
 
+    @RequestMapping(value="/users/friend-requests/{id}", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody FriendList sendFriendRequestResponse(@PathVariable long id, @RequestParam("response") String response ) {
+        FriendList friendRequestResponse=friendListRepository.getOne(id);
+        if (response.equalsIgnoreCase("approve")){
+            friendRequestResponse.setStatus(FriendStatus.ACCEPTED);
+            friendListRepository.save(new FriendList(friendRequestResponse.getFriend(), friendRequestResponse.getUser(), FriendStatus.ACCEPTED));
+        } else{
+            System.out.println("rejecting friend request");
+            friendRequestResponse.setStatus(FriendStatus.REJECTED);
+            friendListRepository.save(friendRequestResponse);
+        }
+        return friendRequestResponse;
+    }
+
 //    @GetMapping("/users.json")
 //    public @ResponseBody List<User> viewAllUsersWithAjax() {
 //        return usersRepository.findAll();
@@ -190,31 +205,34 @@ public class UserController {
     public @ResponseBody List<User> viewSearchedUsersWithAjax(@RequestParam("name") String name) {
         User loggedInUser = usersService.loggedInUser();
 
+        //grabbing all users in database that match searched term
         List<User> users= usersRepository.findByFirstNameContainingOrLastNameContainingOrUsernameContaining(name, name, name);
+
+        //creating filtered list to pass to page (not including you if you searched)
         List<User> filteredUsers = new ArrayList<>();
-//        List<FriendList> friends = loggedInUser.getFriends();
-//        HashMap<>
-//        for (int i=0; i<friends.size(); i++){
-//
-//        }
+
+        //will loop through users list created above
         for (User user: users){
-//            List<FriendList> usersFriends= user.getFriends();
+
+            //will not add signed in user to list
+            if (user.getId()!=loggedInUser.getId()) {
+
+                //default status
             String status="not friends";
-            FriendList friend=friendListRepository.findFriendListByFriend_Id(user.getId());
-            System.out.println(friend);
-            if (friend!=null){
+
+            //checking to see if user is a friend in database, or if friend request is pending
+            Boolean friendExists = friendListRepository.existsFriendListByFriend_Id(user.getId());
+
+            //if friend does exist, will pass the friend request status to page
+            if (friendExists){
+
+                FriendList friend=friendListRepository.findFriendListByFriend_Id(user.getId());
                 status=friend.getStatus().name();
             }
 
-//            for (FriendList friend: usersFriends){
-//
-//                if (friend.getUser().getId()==loggedInUser.getId()){
-//
-//                    status=friend.getStatus().name();
-//                }
-//            }
-            user.setFriendStatus(status);
-            if (user!=loggedInUser) {
+                //will set status to user and pass to page
+                 user.setFriendStatus(status);
+
                 filteredUsers.add(user);
             }
         }

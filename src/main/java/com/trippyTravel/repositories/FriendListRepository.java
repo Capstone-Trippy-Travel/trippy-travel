@@ -1,6 +1,8 @@
 package com.trippyTravel.repositories;
 
 import com.trippyTravel.models.FriendList;
+import com.trippyTravel.models.FriendStatus;
+import com.trippyTravel.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +15,6 @@ import java.util.List;
 public interface FriendListRepository extends JpaRepository<FriendList, Long> {
     List<FriendList> findAllByStatus(String status);
     FriendList findFriendListByFriend_Id(Long id);
+    Boolean existsFriendListByFriend_Id(Long id);
+    List<FriendList> findFriendListByFriendAndStatus(User friend, FriendStatus status);
 }
