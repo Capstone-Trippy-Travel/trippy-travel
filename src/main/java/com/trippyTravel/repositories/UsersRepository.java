@@ -22,4 +22,7 @@ UsersRepository extends JpaRepository<User, Long> {
 
     List<User> findByFirstNameContainingOrLastNameContainingOrUsernameContaining(String name, String name1, String name2);
 
+//    @Query("select t from Trip t, Group g, GroupMember gm where t.group=g AND gm.member=?1 AND t.status=?2")
+//    List<Trip> findTripsByStatus(User user, String string);
+
 }

@@ -89,14 +89,14 @@
                     </div>
                      <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
                          <p>Planned trips go here</p>
-<!--                         <div class="items main-item">-->
-<!--                             <div th:each="trip : ${plannedTrips}" class="item ">-->
-<!--                                 <a th:href="${'/trip/'+ trip.id}">-->
-<!--                                     <h5><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>-->
-<!--                                     <img th:src="${trip.getImages().get(0).getImage_url()}" alt="" class="trip-image">-->
-<!--                                 </a>-->
-<!--                             </div>-->
-<!--                         </div>-->
+                         <div class="items main-item">
+                             <div th:each="trip : ${plannedTrips}" class="item ">
+                                 <a th:href="${'/trip/'+ trip.id}">
+                                     <h5><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
+                                     <img th:src="${trip.getImages().get(0).getImage_url()}" alt="" class="trip-image">
+                                 </a>
+                             </div>
+                         </div>
                      </div>
                 </div>
                 <ul class="nav nav-tabs" id="myTab2" role="tablist">
