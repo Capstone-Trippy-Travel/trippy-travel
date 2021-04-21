@@ -15,6 +15,30 @@ public class GroupMember {
     @Column(name="admin")
     private boolean isAdmin;
 
+    public boolean isUnreadComment() {
+        return unreadComment;
+    }
+
+    public void setUnreadComment(boolean unreadComment) {
+        this.unreadComment = unreadComment;
+    }
+
+    public Trip getUnreadCommentTrip() {
+        return unreadCommentTrip;
+    }
+
+    public void setUnreadCommentTrip(Trip unreadCommentTrip) {
+        this.unreadCommentTrip = unreadCommentTrip;
+    }
+
+    @Column(name="unreadComment")
+    private boolean unreadComment;
+
+    @ManyToOne (optional = true)
+    @JsonManagedReference
+    @JoinColumn (name = "trip_id")
+    private Trip unreadCommentTrip;
+
 //    @ManyToOne
 //    @JoinColumn (name = "user_id")
 //    private User member;
@@ -41,6 +65,7 @@ public class GroupMember {
         this.isAdmin = isAdmin;
         this.member = member;
         this.group = group;
+        this.unreadComment=false;
     }
 
     public long getId() { return id; }

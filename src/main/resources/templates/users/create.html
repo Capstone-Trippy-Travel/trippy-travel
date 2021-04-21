@@ -12,7 +12,7 @@
 </head>
 
 <body id="register-body">
-<nav th:replace="fragments/navbar :: navbar( ${friendRequests} )"></nav>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <hr class="rounded" style="width: 85%">
 <main class="container" style="max-width: 500px">
     <form class="col s12" th:action="@{/users/create}" th:method="POST" th:object="${user}">

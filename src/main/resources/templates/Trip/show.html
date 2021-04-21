@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/activities.css">
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar( ${friendRequests} )"></nav>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <div class="card text-center">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
@@ -36,10 +36,10 @@
 
     </div>
 </div>
-<div class="row">
+<div class="row" id="tripContainer">
 <div class="card col-4" style="width: 18rem;">
     <div class="card-body">
-        <main class="container">
+        <main class="container" id="tripProfileInfo">
             <!--    <div class="post" th:each="image:${post.getImages()}">-->
 
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
@@ -90,15 +90,25 @@
 
 
             <h1 th:text="${trips.name}" class="card-title"></h1>
-            <p th:text="${trips.description}" class="card-text"></p>
-            <p th:text="${trips.location}" class="card-text"></p>
-            <p th:text="${trips.group.getName()}" class="card-text"></p>
-            <p th:text="${trips.status}" class="card-text"></p>
-            <p th:text="${trips.startDate}" class="card-text"></p>
-            <p th:text="${trips.endDate}" class="card-text"></p>
 
             <!--    </div>-->
 
+            <div id="comments">
+                <div th:each="comment : ${trips.getComments()}" class="card">
+                    <div class="row no-gutters">
+                        <div class="col-sm-2" >
+                            <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
+                            <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="">
+                                <div class=""><strong th:text="${comment.getUser().getFirstName()+ ' '+ comment.getUser().getLastName()}"></strong></div>
+                                <div th:text="${comment.getComment_text()}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <form th:action="${'/trip/'+ trips.id +'/delete'}" method="POST">
@@ -113,6 +123,7 @@
                     </form>
                 </div>
             </div>
+
 
 
 

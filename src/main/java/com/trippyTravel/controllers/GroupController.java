@@ -17,13 +17,15 @@ public class GroupController {
     private UsersRepository userDao;
     private CommentRepository commentDao;
     private FriendListRepository friendListRepository;
+    private TripRepository tripRepository;
 
-    public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao, FriendListRepository friendListRepository) {
+    public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao, FriendListRepository friendListRepository, TripRepository tripRepository) {
         this.groupDao = groupDao;
         this.groupMemberDao = groupMemberDao;
         this.userDao = userDao;
         this.commentDao = commentDao;
         this.friendListRepository=friendListRepository;
+        this.tripRepository=tripRepository;
     }
 
     //    @GetMapping(path = "/groups")
@@ -35,12 +37,16 @@ public class GroupController {
     @GetMapping(path = "/groups/{id}")
     public String viewGroup(@PathVariable Long id, Model viewModel) {
         viewModel.addAttribute("group", groupDao.getOne(id));
-        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             viewModel.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
         }
         return "groups/view";
     }
@@ -48,12 +54,16 @@ public class GroupController {
     @GetMapping(path = "/groups/create")
     public String createGroup(Model viewModel){
         viewModel.addAttribute("group", new Group());
-        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             viewModel.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
         }
         return "groups/create-group";
     }
@@ -78,12 +88,16 @@ public class GroupController {
     public String editGroup(Model viewModel, @PathVariable long id){
         Group oneGroup = groupDao.getOne(id);
         viewModel.addAttribute("editGroup", oneGroup);
-        if (SecurityContextHolder.getContext().getAuthentication().getName()==null){
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             viewModel.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
         }
         return "groups/edit-group";
     }
