@@ -53,6 +53,10 @@ public class Trip {
     @JsonBackReference
     private List<Activity> activities;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "unreadCommentTrip")
+    @JsonBackReference
+    private List<GroupMember> groupMembers;
+
     public Trip() {
     }
 

@@ -22,6 +22,7 @@ public class ActivityController {
     private final GroupsRepository groupsRepository;
     private final ImageRepository imagesRepository;
     private final CommentRepository commentRepository;
+    private final FriendListRepository friendListRepository;
 
     @Value("${mapBoxToken}")
     private String mapBoxToken;
@@ -42,13 +43,14 @@ public class ActivityController {
 
     private final ActivityRepository activityRepository;
 
-    public ActivityController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ImageRepository imagesRepository, CommentRepository commentRepository, ActivityRepository activityRepository) {
+    public ActivityController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ImageRepository imagesRepository, CommentRepository commentRepository, ActivityRepository activityRepository, FriendListRepository friendListRepository) {
         this.emailService = emailService;
         this.tripRepository = tripRepository;
         this.groupsRepository = groupsRepository;
         this.imagesRepository = imagesRepository;
         this.commentRepository = commentRepository;
         this.activityRepository = activityRepository;
+        this.friendListRepository=friendListRepository;
     }
 
     @GetMapping(path = "/trip/{id}/activities")
@@ -56,6 +58,17 @@ public class ActivityController {
         Trip trip=tripRepository.getOne(id);
         model.addAttribute("trip", trip);
         model.addAttribute("activity", new Activity());
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
+            List<FriendList> friendRequests= new ArrayList<>();
+            model.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+        }
         return "Trip/activities_google";
     }
 
