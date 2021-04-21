@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/register.css">
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
 </head>
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <main class="container">
     <div class="row">
         <div class="col l8 offset-l2">

@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <div th:replace="fragments/navbar :: navbar"></div>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
     <div class="container-fluid">
 <!--        <div class="row">-->
 <!--            <div class="col-10">-->
