@@ -8,7 +8,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Montserrat&family=Raleway:wght@300&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
 
 </head>
 
@@ -146,10 +146,12 @@
                     </div>
                 </div>
 <!--                Trying picture modal-->
-                <div id="myModal" class="modal">
-                    <span class="close">&times;</span>
-                    <img class="modal-content" id="img01">
-                    <div id="caption"></div>
+                <div id="myModal" class="modal" >
+                    <span class="close" style="position: fixed">&times;</span>
+                    <div th:each="userImage : ${user.getImages()}">
+                        <img class="modal-content" id="img01" th:src="${userImage.getImage_url()}" th:alt="${userImage.getDescription()}">
+                        <p th:text="${userImage.getDescription()}" class="text-center" style="color: white"></p>
+                    </div>
                 </div>
                 <!--                end modal tryout-->
             </div>

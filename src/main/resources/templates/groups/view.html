@@ -6,7 +6,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Montserrat&family=Raleway:wght@300&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
 
     <!--    <link rel="stylesheet" href="/css/activities.css">-->
 </head>
@@ -28,11 +28,11 @@
             <div class="col-3 side-profile">
                 <h3 id="heading"><span th:text="${group.name}"></span> Group</h3>
                 <img th:src="${group.getProfile_image()}" alt="" class="profile-image side-item"/>
-                <h4 class="side-item">More About Group <span th:text="${group.name}"></span></h4>
-                <p th:text="${group.description}" class="side-item"></p>
-                <h4 class="side-item">Group Members</h4>
-                <div class="side-item">
-                    <div th:each="groupMember : ${group.getGroupMembers()}" class="item">
+                <h4 class="side-item text-center">More About Group <span th:text="${group.name}"></span></h4>
+                <p th:text="${group.description}" class="side-item "></p>
+                <h4 class="side-item text-center">Group Members</h4>
+                <div class="side-item" style="margin: auto;">
+                    <div th:each="groupMember : ${group.getGroupMembers()}" class="item" >
                         <img th:src="${groupMember.getMember().getProfile_image()}" alt="" class="profile-icon" />
                         <a th:href="${'/users/'+ groupMember.member.getId()}" > <div th:text="${groupMember.getMember().getFirstName()}" class="text-center"></div></a>
                     </div>
@@ -80,9 +80,13 @@
                     </div>
                     <!--                Trying picture modal-->
                     <div id="myModal" class="modal">
-                        <span class="close">&times;</span>
-                        <img class="modal-content" id="img01">
-                        <div id="caption"></div>
+                        <span class="close" style="position: fixed">&times;</span>
+                        <div th:each="groupMember : ${group.getGroupMembers()}" >
+                            <div th:each="userImage : ${groupMember.getMember().getImages()}">
+                                <img class="modal-content" id="img01" th:src="${userImage.getImage_url()}">
+                                <p th:text="${userImage.getDescription()}" class="text-center" style="color: white"></p>
+                            </div>
+                        </div>
                     </div>
                     <!--                end modal tryout-->
 
