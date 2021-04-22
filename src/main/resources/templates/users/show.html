@@ -61,6 +61,18 @@
 
                     </div>
 <!--                </form>-->
+                <div class="row">
+                    <div class="col">
+                        <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item">
+                            <button>Edit User</button>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <form th:action="${'/groups/create'}" method="GET" class="button side-item">
+                            <button>Create Group</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="col-8 main-profile">
                 <h3 class="side-item">Your Places</h3>
@@ -88,7 +100,6 @@
                         </div>
                     </div>
                      <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
-                         <p>Planned trips go here</p>
                          <div class="items main-item">
                              <div th:each="trip : ${plannedTrips}" class="item ">
                                  <a th:href="${'/trip/'+ trip.id}">
@@ -125,17 +136,28 @@
                     </div>
                 </div>
                 <h4 class="main-item">Your Pictures</h4>
-                <div class="card group-card main-item">
-                    <div class="group-pics">
-                        <div th:each="userImage : ${user.getImages()}">
-                            <img th:src="${userImage.getImage_url()}" class="viewAll" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
+                <div class=" main-item items" >
+                    <div id="cardPic">
+                        <div th:each="userImage : ${user.getImages()}" class="group-pics ">
+
+                            <img  class="viewAll myImg" onclick="image(event)"  th:src="${userImage.getImage_url()}" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
+
                         </div>
                     </div>
                 </div>
+<!--                Trying picture modal-->
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                    <div id="caption"></div>
+                </div>
+                <!--                end modal tryout-->
             </div>
-        </div>
 
+
+        </div>
     </div>
+
 
 
 
@@ -149,7 +171,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
-
+<script src ="/js/alternateModal.js"></script>
 <script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/mapDisplay.js"></script>
@@ -160,5 +182,6 @@
 <!--&gt;</script>-->
 
 <!--<div th:replace="fragments/footer :: footer"></div>-->
+
 </body>
 </html>

@@ -34,7 +34,7 @@
                 <div class="side-item">
                     <div th:each="groupMember : ${group.getGroupMembers()}" class="item">
                         <img th:src="${groupMember.getMember().getProfile_image()}" alt="" class="profile-icon" />
-                        <a th:href="${'/users/'+ groupMember.member.getId()}" > <div th:text="${groupMember.getMember().getFirstName()}"></div></a>
+                        <a th:href="${'/users/'+ groupMember.member.getId()}" > <div th:text="${groupMember.getMember().getFirstName()}" class="text-center"></div></a>
                     </div>
                 </div>
                 <br>
@@ -45,7 +45,7 @@
                         </form>
                     </div>
                     <div class="col">
-                        <form th:action="${'/trip/create'}" method="GET">
+                        <form th:action="${'/trip/create'}" method="GET" class="button side-item">
                             <button>Plan a Trip!</button>
                         </form>
                     </div>
@@ -68,16 +68,23 @@
                         </div>
                     </div>
                     <h4 class="main-item">Group Pictures</h4>
-                    <div class="card group-card main-item">
-                        <div class="group-pics">
+                    <div class=" main-item">
+                        <div id="cardPic">
                             <div th:each="groupMember : ${group.getGroupMembers()}" class="" >
-                                <div th:each="userImage : ${groupMember.getMember().getImages()}">
-                                    <img th:src="${userImage.getImage_url()}" class="viewAll" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
+                                <div th:each="userImage : ${groupMember.getMember().getImages()}" class="group-pics">
+                                    <img class="viewAll myImg" onclick="image(event)" th:src="${userImage.getImage_url()}"  data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
                                 </div>
                             </div>
 
                         </div>
                     </div>
+                    <!--                Trying picture modal-->
+                    <div id="myModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="img01">
+                        <div id="caption"></div>
+                    </div>
+                    <!--                end modal tryout-->
 
                 </div>
 
@@ -92,7 +99,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    <script src="/js/showModal.js"></script>
+<script src ="/js/alternateModal.js"></script>
     <script src ="/keys.js"></script>
 
     <script src="/js/fileStack.js"></script>
