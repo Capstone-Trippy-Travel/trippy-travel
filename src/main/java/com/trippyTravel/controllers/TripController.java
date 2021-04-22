@@ -212,6 +212,9 @@ public class TripController {
     public @ResponseBody List<Activity> retrieveActivitiesWithAjax(@RequestParam("tripId") String tripId) {
         System.out.println(tripId);
         List<Activity> activities= tripRepository.getOne(Long.parseLong(tripId)).getActivities();
+        for (Activity activity: activities){
+            System.out.println(activity.getActivityVotes().size());
+        }
         System.out.println("about to return activities");
         return activities;
     }

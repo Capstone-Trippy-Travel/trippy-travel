@@ -23,6 +23,7 @@ public class ActivityController {
     private final ImageRepository imagesRepository;
     private final CommentRepository commentRepository;
     private final FriendListRepository friendListRepository;
+    private final ActivityVoteRepository activityVoteRepository;
 
     @Value("${mapBoxToken}")
     private String mapBoxToken;
@@ -43,7 +44,7 @@ public class ActivityController {
 
     private final ActivityRepository activityRepository;
 
-    public ActivityController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ImageRepository imagesRepository, CommentRepository commentRepository, ActivityRepository activityRepository, FriendListRepository friendListRepository) {
+    public ActivityController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ImageRepository imagesRepository, CommentRepository commentRepository, ActivityRepository activityRepository, FriendListRepository friendListRepository, ActivityVoteRepository activityVoteRepository) {
         this.emailService = emailService;
         this.tripRepository = tripRepository;
         this.groupsRepository = groupsRepository;
@@ -51,6 +52,7 @@ public class ActivityController {
         this.commentRepository = commentRepository;
         this.activityRepository = activityRepository;
         this.friendListRepository=friendListRepository;
+        this.activityVoteRepository=activityVoteRepository;
     }
 
     @GetMapping(path = "/trip/{id}/activities")
@@ -92,6 +94,25 @@ public class ActivityController {
 
         activityRepository.save(activity);
 
+    }
+
+    @RequestMapping(value="/activity/{id}/activityVote", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody List<ActivityVote> retrieveActivitiesWithAjax(@PathVariable long id, @RequestParam("vote") Boolean vote) {
+        System.out.println("about to save activity vote!!");
+        User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Activity activity = activityRepository.getOne(id);
+        ActivityVote activityVote;
+        if (activityVoteRepository.existsActivityVoteByActivityAndUser(activity, loggedInuser)){
+            activityVote = activityVoteRepository.findActivityVoteByActivityAndUser(activity, loggedInuser);
+            activityVote.setVote(vote);
+        } else {
+            activityVote = new ActivityVote(activity, vote, loggedInuser);
+        }
+        System.out.println("saving activity vote!!");
+
+        activityVoteRepository.save(activityVote);
+        List<ActivityVote> activityVotes= activityVoteRepository.findActivityVotesByActivity(activity);
+        return activityVotes;
     }
 }
 
