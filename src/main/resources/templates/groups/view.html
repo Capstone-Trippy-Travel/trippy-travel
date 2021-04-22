@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 side-profile">
-                <h3 id="heading"><span th:text="${group.name}"></span> Group</h3>
+                <h3 id="heading"><span th:text="${group.name}"></span></h3>
                 <img th:src="${group.getProfile_image()}" alt="" class="profile-image side-item"/>
                 <h4 class="side-item text-center">More About Group <span th:text="${group.name}"></span></h4>
                 <p th:text="${group.description}" class="side-item "></p>
@@ -103,10 +103,10 @@
         <script src ="/keys.js"></script>
         <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
         <script src="/js/mapDisplay.js"></script>
-<!--        <script-->
-<!--                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
-<!--                async-->
-<!--        ></script>-->
+        <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
+                async
+        ></script>
 <div th:replace="fragments/footer :: footer"></div>
 
     <script th:inline="javascript">

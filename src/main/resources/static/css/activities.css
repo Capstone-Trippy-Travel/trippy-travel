@@ -139,7 +139,7 @@ html, body, .container{
 }
 
 #mapContainer #map{
-    height: 30%;
+    height: 400px;
     width: 100%;
 }
 
@@ -152,7 +152,7 @@ html, body, .container{
 
 #activityList .venueCard{
     max-width: 250px;
-    max-height: 375px;
+    height:400px;
     display: inline-block;
 }
 
