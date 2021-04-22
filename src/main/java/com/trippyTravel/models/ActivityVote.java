@@ -14,7 +14,7 @@ public class ActivityVote {
 
     @ManyToOne
     @JoinColumn(name = "activity_id")
-    @JsonManagedReference
+//    @JsonManagedReference
     private Activity activity;
 
     @Column(name = "vote")

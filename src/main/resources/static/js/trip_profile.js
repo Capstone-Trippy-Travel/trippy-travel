@@ -204,14 +204,22 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
 
     let yesButton=document.createElement("button");
     yesButton.setAttribute("id", "yes-button");
-    yesButton.setAttribute("class", "btn btn-primary")
+    if (place.usersPreviousVote==="like"){
+        yesButton.setAttribute("class", "btn btn-success")
+    } else {
+        yesButton.setAttribute("class", "btn btn-primary")
+    }
     yesButton.innerText="Like";
     let counter=document.createElement("div")
     counter.setAttribute("id", "counter");
-    counter.innerText=0;
+    counter.innerText=place.voteCount;
 
     let noButton=document.createElement("button");
-    noButton.setAttribute("class", "btn btn-primary")
+    if (place.usersPreviousVote==="dislike") {
+        noButton.setAttribute("class", "btn btn-danger")
+    } else{
+        noButton.setAttribute("class", "btn btn-primary")
+    }
     noButton.setAttribute("id", "no-button");
     noButton.innerText="Dislike";
 
