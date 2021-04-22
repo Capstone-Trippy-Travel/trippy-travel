@@ -8,13 +8,16 @@ body, html {
 }
 
 body {
-    /*background-image: url("../imgs/tt_background_mod.jpg");*/
+    background-image: url("../imgs/Toddler-looking-out-from-SUV-during-road-trip.jpeg");
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
     position: relative;
 }
-
+.now{
+    background-color: #d7d7d7;
+    border-left: 12px;
+}
 form {
     padding: .5em;
 }
