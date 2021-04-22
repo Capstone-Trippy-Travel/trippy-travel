@@ -14,16 +14,6 @@
 
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
     <div class="container-fluid">
-<!--        <div class="row">-->
-<!--            <div class="col-10">-->
-<!--&lt;!&ndash;                <h1><span th:text="${group.name}"></span> Group</h1>&ndash;&gt;-->
-<!--            </div>-->
-<!--            <div class="col-2">-->
-<!--&lt;!&ndash;                <form th:action="${'/trip/create'}" method="GET">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button>Plan a Trip!</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                </form>&ndash;&gt;-->
-<!--            </div>-->
-<!--        </div>-->
         <div class="row">
             <div class="col-3 side-profile">
                 <h3 id="heading"><span th:text="${group.name}"></span> Group</h3>
@@ -113,10 +103,10 @@
         <script src ="/keys.js"></script>
         <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
         <script src="/js/mapDisplay.js"></script>
-<!--        <script-->
-<!--                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
-<!--                async-->
-<!--        ></script>-->
+        <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
+                async
+        ></script>
 <div th:replace="fragments/footer :: footer"></div>
 
     <script th:inline="javascript">

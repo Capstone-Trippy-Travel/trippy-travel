@@ -95,7 +95,7 @@ public class UserController {
         usersService.authenticate(user);
 
         m.addAttribute("user", user);
-        return "redirect:/";
+        return "redirect:/users/"+ newUser.getId() +"/edit";
 
     }
 
