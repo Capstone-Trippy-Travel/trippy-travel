@@ -98,7 +98,7 @@
 
 
 <div class="container emp-profile">
-    <form method="post">
+    <form method="post" >
         <div class="row">
             <div class="col-md-8">
                 <div class="profile-head">
@@ -128,26 +128,26 @@
                 </ul>
             </div>
         </div><br>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label>Trip Name</label>
+        <div class="row now">
+            <div class="col-md-10">
+                <div class="tab-content profile-tab " th:each="trip: ${trips}" id="myTabContent">
+                    <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <label>Trip Name</label>
+                        <div class="row" >
+                            <div class="col-md-4" >
+
+                                <p th:text="${trip.name}"></p>
                             </div>
-                            <div class="col-md-8">
-                                <p>Trip Description</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet doloremque enim fuga illo iste iusto, mollitia non obcaecati officiis quia quis quisquam reiciendis saepe sint tempora temporibus unde voluptatum!</p>
+                            <div class="col-md-6 " >
+                            <label >Trip Description</label>
+
+                                <p th:text="${trip.description}"></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <label>Trip Name</label>
-                            </div>
+                                </div>
                             <div class="col-md-8">
-                                <p>Trip Description</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur doloremque eligendi est et facere fuga necessitatibus nesciunt, nihil odio porro, quod reprehenderit soluta sunt tempore unde vel voluptates. Tempore, voluptate.</p>
                             </div>
                         </div>
                         <div class="row">
