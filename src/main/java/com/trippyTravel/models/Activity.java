@@ -212,4 +212,5 @@ public class Activity {
 
     @Column(name = "photoURL", columnDefinition = "TEXT")
     private String photoURL;
+
 }
