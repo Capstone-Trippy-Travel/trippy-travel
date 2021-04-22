@@ -11,4 +11,7 @@ import java.util.List;
 @Repository
 public interface GroupMembersRepository extends JpaRepository<GroupMember, Long> {
     List <GroupMember> findGroupMembersByMember(User member);
+    Boolean existsGroupMemberByMemberAndUnreadCommentTripAndUnreadComment(User user, Trip trip, Boolean existsUnreadComments);
+    GroupMember findGroupMemberByMemberAndUnreadCommentTripAndUnreadComment(User user, Trip trip, Boolean existsUnreadComments);
+
 }
