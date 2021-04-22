@@ -45,8 +45,6 @@ public class UserController {
     @Autowired
     private FriendListRepository friendListRepository;
 
-    @Autowired
-    private TripRepository tripRepository;
 
     @Value("${mapBoxToken}")
     private String mapBoxToken;
