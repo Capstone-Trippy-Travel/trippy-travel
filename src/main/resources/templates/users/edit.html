@@ -27,6 +27,12 @@
                     <input class="form-control" th:field="*{email}" />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 
+                    <div class="form-group">
+                        <label >Group Description</label>
+                        <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>
+
+                    </div>
+
                     <label for="password">Password</label>
                     <input type="password" class="form-control" th:field="*{password}" />
                     <p class="card-panel red lighten-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
