@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/" method="post"><button type="submit"  class="btn-increment"  id="increment" name="increment"  value="true">Yes</button></form>
+<form action="/" method="post">
+    <button type="submit" class="btn-decrement" name="decrement" id="decrement" value="false">No</button> </form></td>
+<div id="poll">
+    <h3>Do you like PHP and AJAX so far?</h3>
+    <form>
+        Yes: <input type="radio" name="vote" value="0" onClick="getVote(this.value)"><br>
+        No: <input type="radio" name="vote" value="1" onClick="getVote(this.value)">
+    </form>
+</div>
+<td>
+    <form action="/products/delete" method="post">
+        <input type="hidden" name="product_id" value="${product.id}">
+        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+    </form>
+
+</body>
+</html>

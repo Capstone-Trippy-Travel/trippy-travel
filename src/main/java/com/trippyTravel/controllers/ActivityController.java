@@ -54,8 +54,8 @@ public class ActivityController {
     }
 
     @GetMapping(path = "/trip/{id}/activities")
-    public String tripActivities(@PathVariable Long id ,Model model){
-        Trip trip=tripRepository.getOne(id);
+    public String tripActivities(@PathVariable Long id, Model model) {
+        Trip trip = tripRepository.getOne(id);
         model.addAttribute("trip", trip);
         model.addAttribute("activity", new Activity());
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
@@ -73,9 +73,8 @@ public class ActivityController {
     }
 
 
-
     @PostMapping(path = "/trip/{id}/activities")
-    public void addActivity( @PathVariable Long id, @RequestParam(name = "place", required = false) String place, @RequestParam(name = "address", required = false) String address, @RequestParam(name = "rating", required = false) double rating, @RequestParam(name = "reviews", required = false) int reviews, @RequestParam(name = "website", required = false) String website, @RequestParam(name = "phone", required = false) String phone, @RequestParam(name = "hours", required = false) String hours, @RequestParam(name = "placeId", required = false) String placeId, @RequestParam(name = "lat", required = false) double lat, @RequestParam(name = "lng", required = false) double lng, @RequestParam(name = "photoURL", required = false) String photoURL) {
+    public void addActivity(@PathVariable Long id, @RequestParam(name = "place", required = false) String place, @RequestParam(name = "address", required = false) String address, @RequestParam(name = "rating", required = false) double rating, @RequestParam(name = "reviews", required = false) int reviews, @RequestParam(name = "website", required = false) String website, @RequestParam(name = "phone", required = false) String phone, @RequestParam(name = "hours", required = false) String hours, @RequestParam(name = "placeId", required = false) String placeId, @RequestParam(name = "lat", required = false) double lat, @RequestParam(name = "lng", required = false) double lng, @RequestParam(name = "photoURL", required = false) String photoURL) {
         System.out.println("trying to add activity");
         Activity activity = new Activity();
         activity.setTrip(tripRepository.getOne(id));
@@ -95,3 +94,4 @@ public class ActivityController {
 
     }
 }
+
