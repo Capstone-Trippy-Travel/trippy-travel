@@ -38,10 +38,10 @@ function initMap() {
 
         const location = new google.maps.LatLng(long,lat);
         // infowindow = new google.maps.InfoWindow();
-        // map = new google.maps.Map(document.getElementById("map"), {
-        //     center: location,
-        //     zoom: 11,
-        // });
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: location,
+            zoom: 11,
+        });
 
         let pathUrl=window.location.pathname;
         let pathUrlArray=pathUrl.split("/");
@@ -54,8 +54,8 @@ function initMap() {
                 for (let i=0; i<activities.length; i++){
                     let lng=activities[i].lng;
                     let lat=activities[i].lat;
-                    // let newMarker=createMarker(new google.maps.LatLng(lng,lat));
-                    let newMarker='';
+                    let newMarker=createMarker(new google.maps.LatLng(lng,lat));
+                    // let newMarker='';
                     createVenueCard(activities[i], newMarker)
                 }
             },
@@ -107,9 +107,9 @@ function createVenueCard(place, marker){
 
 
     let html = "";
-    // if(place.photoURL) {
-    //     html += `<img class="card-img-top" id="photo" src="${place.photoURL}" alt="Card image cap">`
-    // }
+    if(place.photoURL) {
+        html += `<img class="card-img-top" id="photo" src="${place.photoURL}" alt="Card image cap">`
+    }
     html += `<h5 class="card-title">${place.place}</h5>`
     html += `<p class="card-text">${place.rating} stars - ${place.reviews} reviews</p>`
 
@@ -268,7 +268,7 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
 
 
     venueDetailsButton.addEventListener("click", ()=>{
-        // marker.addListener("click", toggleBounce(marker))
+        marker.addListener("click", toggleBounce(marker))
         venueCard.style.width="100%";
         venueCard.style.maxWidth="100%";
 
