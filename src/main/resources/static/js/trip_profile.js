@@ -108,7 +108,14 @@ function createVenueCard(place, marker){
     html += `<div class="card-body">`
     html += `<h5 class="card-title">${place.place}</h5>`
     html += `<p class="card-text">${place.rating} stars - ${place.reviews} reviews</p>`
-   html+=``
+   html+=`<h3 id="results">
+  total: 0
+  yes: 0
+  no: 0
+</h3>
+<button type="button" id="yes-button">Click to vote yes</button>
+<button type="button" id="no-button">Click to vote no</button>`
+
 
     let activityImageForm=document.createElement("form");
     activityImageForm.setAttribute("class", "col s12" );
@@ -203,6 +210,7 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
         // marker.addListener("click", toggleBounce(marker))
         venueCard.style.width="100%";
         venueCard.style.maxWidth="100%";
+
 
     })
     var listener = function (event) {
