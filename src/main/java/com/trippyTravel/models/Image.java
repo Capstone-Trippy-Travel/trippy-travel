@@ -30,6 +30,9 @@ public class Image {
     @Column( name= "image_url", columnDefinition = "text")
     private String image_url;
 
+    @Column(columnDefinition = "text")
+    private String description;
+
     public Image(){}
 
     public Image(String imgUrl, User user, Trip trip){
@@ -46,11 +49,12 @@ public class Image {
         this.image_url = image_url;
     }
 
-    public Image(User user, Trip trip, Activity activity, String image_url) {
+    public Image(User user, Trip trip, Activity activity, String image_url, String description) {
         this.user = user;
         this.trip = trip;
         this.activity = activity;
         this.image_url = image_url;
+        this.description = description;
     }
 
     public long getId() { return id; }
@@ -82,4 +86,8 @@ public class Image {
     public void setImage_url(String image_url) {
         this.image_url = image_url;
     }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 }
