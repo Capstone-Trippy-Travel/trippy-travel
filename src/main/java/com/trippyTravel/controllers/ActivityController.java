@@ -24,6 +24,7 @@ public class ActivityController {
     private final CommentRepository commentRepository;
     private final FriendListRepository friendListRepository;
     private final ActivityVoteRepository activityVoteRepository;
+    private final GroupMembersRepository groupMembersRepository;
 
     @Value("${mapBoxToken}")
     private String mapBoxToken;
@@ -44,7 +45,7 @@ public class ActivityController {
 
     private final ActivityRepository activityRepository;
 
-    public ActivityController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ImageRepository imagesRepository, CommentRepository commentRepository, ActivityRepository activityRepository, FriendListRepository friendListRepository, ActivityVoteRepository activityVoteRepository) {
+    public ActivityController(EmailService emailService, TripRepository tripRepository, GroupsRepository groupsRepository, ImageRepository imagesRepository, CommentRepository commentRepository, ActivityRepository activityRepository, FriendListRepository friendListRepository, ActivityVoteRepository activityVoteRepository, GroupMembersRepository groupMembersRepository) {
         this.emailService = emailService;
         this.tripRepository = tripRepository;
         this.groupsRepository = groupsRepository;
@@ -53,6 +54,7 @@ public class ActivityController {
         this.activityRepository = activityRepository;
         this.friendListRepository=friendListRepository;
         this.activityVoteRepository=activityVoteRepository;
+        this.groupMembersRepository=groupMembersRepository;
     }
 
     @GetMapping(path = "/trip/{id}/activities")
@@ -113,6 +115,29 @@ public class ActivityController {
         activityVoteRepository.save(activityVote);
         List<ActivityVote> activityVotes= activityVoteRepository.findActivityVotesByActivity(activity);
         return activityVotes;
+    }
+
+    @RequestMapping(value="/trip/{id}/commentNotifications", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody GroupMember updateCommentNotifications(@PathVariable long id) {
+        System.out.println("about to update group member comment notifications");
+        GroupMember savedGroupMember=new GroupMember();
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName() == null);
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser"));
+        if (SecurityContextHolder.getContext().getAuthentication().getName() == null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")) {
+        }else{
+            System.out.println("about to grab user");
+
+            User loggedInUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (groupMembersRepository.existsGroupMemberByMemberAndUnreadCommentTripAndUnreadComment(loggedInUser, tripRepository.getOne(id), true)){
+                System.out.println("about to update group member");
+                GroupMember groupMember = groupMembersRepository.findGroupMemberByMemberAndUnreadCommentTripAndUnreadComment(loggedInUser, tripRepository.getOne(id), true);
+               groupMember.setUnreadCommentTrip(null);
+               groupMember.setUnreadComment(false);
+               groupMembersRepository.save(groupMember);
+               savedGroupMember=groupMember;
+            }
+        }
+        return savedGroupMember;
     }
 }
 

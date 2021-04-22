@@ -19,10 +19,10 @@
                     <a class="nav-link" th:href="@{/trip}">Trips</a>
                 </li>
                 <ul sec:authorize="isAuthenticated()" class="navbar-nav mr-auto">
-                    <li type="button" class="nav-item" data-toggle="modal" data-target="#myAct">
+                    <li type="button" class="nav-item" data-toggle="modal" data-target="#myAct" id="notificationsModalButton">
                         <a class="nav-link" style="position:relative">
                             Notifications
-                            <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:red " th:if="${unreadCommentTrips.size()>0 || friendRequests.size()>0}"></div>
+                            <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:#ff0000 " th:if="${unreadCommentTrips.size()>0 || friendRequests.size()>0}" id="modalNotificationIcon"></div>
                         </a>
                     </li>
                 </ul>
@@ -44,13 +44,13 @@
                                     <ul class="nav nav-tabs" id="myTab" role="tablist" style="justify-content: center">
                                         <li class="welcome-item">
                                             <a class="nav-link active" id="convo-tab" data-toggle="tab" href="#convo" role="tab" aria-controls="convo" aria-selected="true" style="position:relative">
-                                                <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:red " th:if="${unreadCommentTrips.size()>0}"></div>
+                                                <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:red " th:if="${unreadCommentTrips.size()>0}" id="commentNotificationIcon"></div>
                                                 Conversations
                                             </a>
                                         </li>
                                         <li class="welcome-item">
                                             <a class="nav-link" id="notif-tab" data-toggle="tab" href="#notif" role="tab" aria-controls="notif" aria-selected="false" style="position:relative">
-                                                <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:red " th:if="${friendRequests.size()>0}"></div>
+                                                <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:red " th:if="${friendRequests.size()>0}" id="friendRequestsNotificationIcon"></div>
                                                 Friend Requests
                                             </a>
                                         </li>
@@ -59,6 +59,7 @@
                                     <div class="tab-content notif-tab" id="myTabContent">
                                         <div class="tab-pane fade show active" id="convo" role="tabpanel" aria-labelledby="convo-tab">
                                             <div class="row" th:each="trip: ${unreadCommentTrips}">
+                                                <div class="tripIdHolder" style="display: none" th:text="${trip.getId()}"></div>
                                                 <div class="col-md-3" >
                                                     <label th:text="${trip.getName()}"></label>
                                                 </div>
@@ -107,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-sm" data-dismiss="modal" id="closeModalButton">Close</button>
                             </div>
                         </div>
                     </div>
