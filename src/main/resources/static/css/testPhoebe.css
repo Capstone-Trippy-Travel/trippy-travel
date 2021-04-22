@@ -7,7 +7,7 @@ body {
     text-align: center;
 }
 .container-fluid{
-    padding: 5px;
+    /*padding: 5px;*/
 }
 .text-center{
     text-align: center;
@@ -31,6 +31,12 @@ a{
     border-radius: 50%;
     width: 90px;
     height: 85px;
+    object-fit: scale-down;
+}
+.profile-icon-small{
+    border-radius: 50%;
+    width: 50px;
+    height: 40px;
 }
 .profile-image{
     width: 250px;
@@ -51,6 +57,7 @@ a{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    object-fit: scale-down;
 }
 .side-profile{
     /*padding: 20px 10px 20px 5px;*/
@@ -93,13 +100,6 @@ a{
     width: 100%;
     overflow-y: scroll;
 }
-/*.group-pics img{*/
-/*    display: flex;*/
-/*}*/
-/*#mapContainer #map{*/
-/*    height: 30%;*/
-/*    width: 100%;*/
-/*}*/
 #activity-pics {
     display: flex;
 }
@@ -108,10 +108,43 @@ a{
     width: 100%;
     overflow-y: scroll;
 }
-/*width:100px;*/
-/*height:100px;*/
-/*overflow:scroll;*/
+.main-trip-page{
+    overflow: auto;
+    margin: auto;
+    width: 100%;
+}
+#main-trip-page-item{
+    float:left;
+    margin: 7px;
+}
+.trip-items{
+    margin: 3px;
+}
+.trip-page-pic{
+    width: 280px;
+    height: 250px;
+    border-radius: 2%;
+    /*object-fit: scale-down;*/
+}
+#trip-page-top{
+    margin: 30px;
+    padding: 10px;
+}
+#trip-search-bar{
+    width: 30%;
+    margin-right: auto;
+    margin-left: auto;
+}
+/*Like Button*/
+#heart {
+    color: grey;
+    font-size: 24px;
+    border: black;
+}
 
+#heart.red {
+    color: red;
+}
 
 /*modal css*/
 

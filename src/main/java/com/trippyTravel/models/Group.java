@@ -22,6 +22,9 @@ public class Group {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column
+    private String visibility;
+
     @Column(columnDefinition = "TEXT")
     private String profile_image;
 
@@ -44,9 +47,10 @@ public class Group {
         this.owner=owner;
     }
 
-    public Group(String name, String description, String profile_image, User owner, List<Trip> trip, List<GroupMember> groupMembers) {
+    public Group(String name, String description, String visibility, String profile_image, User owner, List<Trip> trip, List<GroupMember> groupMembers) {
         this.name = name;
         this.description = description;
+        this.visibility = visibility;
         this.profile_image = profile_image;
         this.owner = owner;
         this.trip = trip;
@@ -84,6 +88,10 @@ public class Group {
     public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description; }
+
+    public String getVisibility() { return visibility; }
+
+    public void setVisibility(String visibility) { this.visibility = visibility; }
 
     public String getProfile_image() { return profile_image; }
 

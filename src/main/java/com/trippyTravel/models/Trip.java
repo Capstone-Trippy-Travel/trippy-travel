@@ -27,6 +27,10 @@ public class Trip {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column
+    private String visibility;
+
+
     @Column(name = "start_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
@@ -48,6 +52,9 @@ public class Trip {
     @JsonBackReference
     private List<Comment> comments;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+    @JsonBackReference
+    private List<TripLikes> tripLikes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
     @JsonBackReference
@@ -57,20 +64,24 @@ public class Trip {
     @JsonBackReference
     private List<GroupMember> groupMembers;
 
+
     public Trip() {
     }
 
-    public Trip(String location, String name, String status, String description, Date startDate, Date endDate, Group group, List<Image> images, List<Comment> comments, List<Activity> activities) {
+    public Trip(String location, String name, String status, String description, String visibility, Date startDate, Date endDate, Group group, List<Image> images, List<Comment> comments, List<TripLikes> tripLikes, List<Activity> activities, List<GroupMember> groupMembers) {
         this.location = location;
         this.name = name;
         this.status = status;
         this.description = description;
+        this.visibility = visibility;
         this.startDate = startDate;
         this.endDate = endDate;
         this.group = group;
         this.images = images;
         this.comments = comments;
+        this.tripLikes = tripLikes;
         this.activities = activities;
+        this.groupMembers = groupMembers;
     }
 
     public long getId() { return id; }
@@ -113,7 +124,20 @@ public class Trip {
 
     public void setComments(List<Comment> comments) { this.comments = comments; }
 
+    public String getVisibility() { return visibility; }
+
+    public void setVisibility(String visibility) { this.visibility = visibility; }
+
+
+    public List<GroupMember> getGroupMembers() { return groupMembers; }
+
+    public void setGroupMembers(List<GroupMember> groupMembers) { this.groupMembers = groupMembers; }
+
     public List<Activity> getActivities() { return activities; }
 
     public void setActivities(List<Activity> activities) { this.activities = activities; }
+
+    public List<TripLikes> getTripLikes() { return tripLikes; }
+
+    public void setTripLikes(List<TripLikes> tripLikes) { this.tripLikes = tripLikes; }
 }

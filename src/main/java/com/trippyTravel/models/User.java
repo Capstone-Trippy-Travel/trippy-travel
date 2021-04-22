@@ -48,7 +48,6 @@ public class User {
     private List<FriendList> friends;
 
 
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
     @JsonBackReference
     private List<GroupMember> groupMember;
@@ -63,12 +62,17 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonBackReference
+    private List<TripLikes> tripLikes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<CommentReplies> commentReplies;
+
 
     public User() {
     }
 
-    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, String description, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<Comment> comments, List<CommentReplies> commentReplies) {
+    public User(@NotBlank(message = "Username can't be empty") String username, String firstName, String lastName, String description, @Email(message = "Invalid email") @NotBlank(message = "Email can't be empty") String email, @NotBlank(message = "Password can't be empty") String password, String profile_image, List<FriendList> friends, List<GroupMember> groupMember, List<Image> images, List<Comment> comments, List<CommentReplies> commentReplies, List<TripLikes> tripLikes) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -81,6 +85,7 @@ public class User {
         this.images = images;
         this.comments = comments;
         this.commentReplies = commentReplies;
+        this.tripLikes =tripLikes;
     }
 
     // Copy constructor an alternative for clone
@@ -161,5 +166,7 @@ public class User {
 
     public String friendStatus;
 
+    public List<TripLikes> getTripLikes() { return tripLikes; }
 
+    public void setTripLikes(List<TripLikes> tripLikes) { this.tripLikes = tripLikes; }
 }
