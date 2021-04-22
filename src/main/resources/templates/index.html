@@ -129,17 +129,18 @@
             </div>
         </div><br>
         <div class="row now">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="tab-content profile-tab " th:each="trip: ${trips}" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
                         <label>Trip Name</label>
                         <div class="row" >
                             <div class="col-md-4" >
 
                                 <p th:text="${trip.name}"></p>
                             </div>
-                            <div class="col-md-8">
-                                <label>Trip Description</label>
+                            <div class="col-md-6 " >
+                            <label >Trip Description</label>
+
                                 <p th:text="${trip.description}"></p>
                             </div>
                         </div>
