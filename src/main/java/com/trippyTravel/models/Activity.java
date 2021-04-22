@@ -212,4 +212,25 @@ public class Activity {
 
     @Column(name = "photoURL", columnDefinition = "TEXT")
     private String photoURL;
+
+    public int getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
+
+    private int voteCount;
+
+
+    public String getUsersPreviousVote() {
+        return usersPreviousVote;
+    }
+
+    public void setUsersPreviousVote(String usersPreviousVote) {
+        this.usersPreviousVote = usersPreviousVote;
+    }
+
+    private String usersPreviousVote;
 }

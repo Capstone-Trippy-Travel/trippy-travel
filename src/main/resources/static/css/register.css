@@ -8,13 +8,16 @@ body, html {
 }
 
 body {
-    /*background-image: url("../imgs/tt_background_mod.jpg");*/
+    background-image: url("../imgs/Toddler-looking-out-from-SUV-during-road-trip.jpeg");
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
     position: relative;
 }
-
+.now{
+    background-color: #d7d7d7;
+    width: 500px;
+}
 form {
     padding: .5em;
 }
@@ -32,7 +35,7 @@ fieldset {
     -webkit-box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
     border-radius: 10px;
     background-color: white;
-    opacity: 0.9;
+    opacity: 0.8;
     padding: 1em;
     margin: 1em;
     border: 0;
@@ -101,4 +104,9 @@ img {
     background: linear-gradient(white, transparent, transparent, transparent, transparent, transparent, transparent), url("../imgs/tt_sit_on_a_plane.jpg") no-repeat center;
     background-size: cover;
     box-shadow: 0px 10px 20px -5px rgba(0,0,0,.8);
+}
+
+.col-md-8{
+  align-self: start;
+    margin-bottom: 20px;
 }

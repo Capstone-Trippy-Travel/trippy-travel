@@ -20,6 +20,7 @@ public class TripController {
     private final ImageRepository imagesRepository;
     private final CommentRepository commentRepository;
     private final FriendListRepository friendListRepository;
+
     @Value("${mapBoxToken}")
     private String mapBoxToken;
     @Value("${fileStackApiKey}")
@@ -212,6 +213,37 @@ public class TripController {
     public @ResponseBody List<Activity> retrieveActivitiesWithAjax(@RequestParam("tripId") String tripId) {
         System.out.println(tripId);
         List<Activity> activities= tripRepository.getOne(Long.parseLong(tripId)).getActivities();
+        for (Activity activity: activities){
+            List<ActivityVote> activityVotes = activity.getActivityVotes();
+            activity.setUsersPreviousVote("none");
+            int voteCount=0;
+            for (ActivityVote activityVote: activityVotes){
+                if (activityVote.isVote()){
+                    voteCount++;
+                    if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
+                        //doing nothing if you are not logged in
+                    } else{
+                        //if you are logged in, will check to see if you voted
+                        User loggedInUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                        if (activityVote.getUser().getId()==loggedInUser.getId()){
+                            activity.setUsersPreviousVote("like");
+                        }
+                    }
+                } else{
+                    voteCount--;
+                    if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
+                        //doing nothing if you are not logged in
+                    } else{
+                        //if you are logged in, will check to see if you voted
+                        User loggedInUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                        if (activityVote.getUser().getId()==loggedInUser.getId()){
+                            activity.setUsersPreviousVote("dislike");
+                        }
+                    }
+                }
+            }
+            activity.setVoteCount(voteCount);
+        }
         System.out.println("about to return activities");
         return activities;
     }
