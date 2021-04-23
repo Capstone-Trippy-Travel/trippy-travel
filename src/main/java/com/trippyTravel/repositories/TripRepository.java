@@ -4,6 +4,7 @@ import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public interface TripRepository extends JpaRepository<Trip,Long> {
 
     @Query("select t from Trip t, Group g, GroupMember gm where t.group=g AND gm.unreadCommentTrip=t AND gm.member=?1")
     List<Trip> getUnreadCommentTrips(User user);
+
+    @Query("from Trip trip where trip.description like %:term%")
+    List<Trip> searchTrip(@Param("term") String term);
 }

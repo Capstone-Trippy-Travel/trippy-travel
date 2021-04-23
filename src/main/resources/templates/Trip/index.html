@@ -23,10 +23,10 @@
        <div id="trip-page-top">
            <h1 class="text-center">Member Trips</h1>
            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-           <div class="input-group"  id="trip-search-bar">
+           <form class="input-group"  id="trip-search-bar" th:action="@{/trip/search}" th:method="POST">
                <input type="text" class="form-control"  name="search" placeholder="Search Trips" id="searchUsers">
                <button type="submit">Go</button>
-           </div>
+           </form>
        </div>
        <div class="main-trip-page">
            <div th:each="trip: ${trips}" id="main-trip-page-item">
@@ -36,7 +36,7 @@
                        <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items" ></h5></a>
                    </div>
                    <div class="back" >
-                       <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items" ></h5></a>
+                       <a th:href="${'/trip/'+trip.getId()}"><h4 th:text="${trip.name}" class=" trip-items" ></h4></a>
                        <p th:text="${trip.location}"></p>
                        <p th:text="${trip.description}"></p>
                        <div class="trip-items" id="sub-group-forTrip">

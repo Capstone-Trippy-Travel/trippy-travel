@@ -269,4 +269,11 @@ public class TripController {
         return "index";
     }
 
+    @PostMapping(path = "/trip/search")
+    public String searchTrip(Model viewModel, @RequestParam(name = "search") String term) {
+        term = "%"+term+"%";
+        viewModel.addAttribute("tripResults", tripRepository.searchTrip(term));
+        return "Trip/search";
+    }
+
 }
