@@ -106,11 +106,15 @@ public class GroupController {
 
         User groupOwner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newGroup.setOwner(groupOwner);
+
+        //grab original group, and add groupmembers to new saved group.
+
         Group createdGroup = groupDao.save(newGroup);
-        for (int i=0; i<groupMembers.length; i++){
-            Long memberId = Long.valueOf(groupMembers[i]);
-            groupMemberDao.save(new GroupMember(false, userDao.getOne(memberId), newGroup) );
-        }
+
+//        for (int i=0; i<groupMembers.length; i++){
+//            Long memberId = Long.valueOf(groupMembers[i]);
+//            groupMemberDao.save(new GroupMember(false, userDao.getOne(memberId), newGroup) );
+//        }
 
 
         return "redirect:/groups/"+createdGroup.getId();
