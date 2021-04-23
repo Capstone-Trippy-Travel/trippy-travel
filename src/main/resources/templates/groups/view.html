@@ -60,8 +60,8 @@
                     <h4 class="main-item">Group Pictures</h4>
                     <div class=" main-item">
                         <div id="cardPic">
-                            <div th:each="groupMember : ${group.getGroupMembers()}" class="" >
-                                <div th:each="userImage : ${groupMember.getMember().getImages()}" class="group-pics">
+                            <div th:each="groupMember : ${group.getTrip()}" class="" >
+                                <div th:each="userImage : ${groupMember.getImages()}" class="group-pics">
                                     <img class="viewAll myImg" onclick="image(event)" th:src="${userImage.getImage_url()}"  data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">
                                 </div>
                             </div>
@@ -71,8 +71,8 @@
                     <!--                Trying picture modal-->
                     <div id="myModal" class="modal">
                         <span class="close" style="position: fixed">&times;</span>
-                        <div th:each="groupMember : ${group.getGroupMembers()}" >
-                            <div th:each="userImage : ${groupMember.getMember().getImages()}">
+                        <div th:each="groupMember : ${group.getTrip()}" >
+                            <div th:each="userImage : ${groupMember.getImages()}">
                                 <img class="modal-content" id="img01" th:src="${userImage.getImage_url()}">
                                 <p th:text="${userImage.getDescription()}" class="text-center" style="color: white"></p>
                             </div>
