@@ -24,9 +24,9 @@ public interface TripRepository extends JpaRepository<Trip,Long> {
     @Query("select t from Trip t, Group g, GroupMember gm where t.group=g AND gm.unreadCommentTrip=t AND gm.member=?1")
     List<Trip> getUnreadCommentTrips(User user);
 
+//    Trip Search Options
     @Query("from Trip trip where trip.description like %:term%")
     List<Trip> searchTrip(@Param("term") String term);
-
-    @Query("from Trip trip where trip.name like %:term%")
-    List<Trip> findByDescriptionContainingOrNameContainingOrLocationContaining(@Param("term") String term, @Param("term") String term1, @Param("term") String term2);
+    List<Trip> findByDescriptionContainingOrNameContainingOrLocationContaining(String term, String term1, String term2);
+    List<Trip> findAllByDescriptionContainingOrNameContainingOrLocationContaining(String term, String term1, String term2);
 }
