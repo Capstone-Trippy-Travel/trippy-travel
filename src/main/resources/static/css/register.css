@@ -136,9 +136,18 @@ img {
 }
 .menu-items{
     padding: 0;
+
+}
+.social-media{
+
 }
 .footer-copyright{
-text-align: center;
+font-size: smaller;
     list-style-type: none;
 
+}
+
+.fa-facebook{
+    height: 6px;
+    width: 6px;
 }
