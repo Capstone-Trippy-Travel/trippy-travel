@@ -123,3 +123,22 @@ img {
 #profile-tab{
     color: #666666;
 }
+.footer-content{
+    background-color: white;
+
+
+}
+.footer-title{
+
+}
+.footer-image{
+
+}
+.menu-items{
+    padding: 0;
+}
+.footer-copyright{
+text-align: center;
+    list-style-type: none;
+
+}
