@@ -31,7 +31,7 @@ a{
     border-radius: 50%;
     width: 90px;
     height: 85px;
-    object-fit: scale-down;
+    object-fit: cover;
 }
 .profile-icon-small{
     border-radius: 50%;
@@ -57,7 +57,7 @@ a{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    object-fit: scale-down;
+    object-fit: cover;
 }
 .side-profile{
     /*padding: 20px 10px 20px 5px;*/
@@ -125,7 +125,7 @@ a{
     width: 280px;
     height: 250px;
     border-radius: 2%;
-    /*object-fit: scale-down;*/
+    object-fit: cover;
 }
 #trip-page-top{
     margin: 30px;
