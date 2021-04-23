@@ -15,8 +15,11 @@ body {
     position: relative;
 }
 .now{
-    background-color: #d7d7d7;
+    background-color: #ffffff;
+
+
     width: 500px;
+    border-radius: 5%;
 }
 form {
     padding: .5em;
