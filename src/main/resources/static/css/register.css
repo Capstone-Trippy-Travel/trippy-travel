@@ -145,3 +145,31 @@ img {
 #profile-tab{
     color: #666666;
 }
+.footer-content{
+    background-color: white;
+
+
+}
+.footer-title{
+
+}
+.footer-image{
+
+}
+.menu-items{
+    padding: 0;
+
+}
+.social-media{
+
+}
+.footer-copyright{
+font-size: smaller;
+    list-style-type: none;
+
+}
+
+.fa-facebook{
+    height: 6px;
+    width: 6px;
+}
