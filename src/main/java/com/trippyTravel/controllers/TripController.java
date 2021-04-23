@@ -272,6 +272,7 @@ public class TripController {
     @PostMapping(path = "/trip/search")
     public String searchTrip(Model viewModel, @RequestParam(name = "search") String term) {
         term = "%"+term+"%";
+        viewModel.addAttribute("tripResults", tripRepository.findByDescriptionContainingOrNameContainingOrLocationContaining(term, term, term));
         viewModel.addAttribute("tripResults", tripRepository.searchTrip(term));
         return "Trip/search";
     }

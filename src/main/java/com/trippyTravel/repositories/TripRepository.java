@@ -26,4 +26,7 @@ public interface TripRepository extends JpaRepository<Trip,Long> {
 
     @Query("from Trip trip where trip.description like %:term%")
     List<Trip> searchTrip(@Param("term") String term);
+
+    @Query("from Trip trip where trip.name like %:term%")
+    List<Trip> findByDescriptionContainingOrNameContainingOrLocationContaining(@Param("term") String term, @Param("term") String term1, @Param("term") String term2);
 }
