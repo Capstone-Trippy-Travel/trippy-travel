@@ -98,6 +98,10 @@ img {
 #login-body {
     background-image: url("../imgs/tt_background_login.jpg");
 }
+#create-group-body {
+    background: url("../imgs/tt_sitting_on_bench.jpg");
+    background-size: cover;
+}
 #create-trip-body {
     /*padding-top: 20px;*/
     /*height: 20px;*/
