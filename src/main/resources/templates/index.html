@@ -128,56 +128,40 @@
                 </ul>
             </div>
         </div><br>
-        <div class="row now">
+        <div class="row now " style="opacity: 70%">
             <div class="col-md-10">
-                <div class="tab-content profile-tab " th:each="trip: ${trips}" id="myTabContent">
-                    <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <label>Trip Name</label>
-                        <div class="row" >
-                            <div class="col-md-4" >
+                <div class="tab-content profile-tab "  id="myTabContent">
+                    <div class="tab-pane fade show active "  id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                        <div class="row" th:each="trip: ${trips}" >
+                            <div class="col-md-4"  >
 
                                 <p th:text="${trip.name}"></p>
                             </div>
                             <div class="col-md-6 " >
-                            <label >Trip Description</label>
+
 
                                 <p th:text="${trip.description}"></p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                </div>
-                            <div class="col-md-8">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label></label>
-                            </div>
-                            <div class="col-md-6">
-                                <p></p>
-                            </div>
-                        </div>
+
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane fade" id="profile"  th:each="activity: ${activities}" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
                             <div class="col-md-4">
-                                <label>Activity 1</label>
+                            <img th:src="${activity.getImages().get(0).getImage_url()}" th:if="${activity.getImages().size()>0}"alt="...">
+
                             </div>
-                            <div class="col-md-8">
-                                <p>Activity Place</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad commodi cumque, delectus enim esse est, explicabo facere iusto magni nemo nisi odit optio porro quae, qui rem sunt! Quasi, repellendus?</p>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
-                                <label>Activity 2</label>
+                                <p th:text="${activity.place}"></p>
+
                             </div>
-                            <div class="col-md-8">
-                                <p>Activity Place</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, assumenda aut, consequatur consequuntur dignissimos dolorum, error iusto minus nihil quibusdam quisquam sunt tenetur. A aliquid debitis, dolore ex veritatis vero.</p>
+                            <div class="col-md-4">
+                                <p th:text="${activity.trip.name}"></p>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
