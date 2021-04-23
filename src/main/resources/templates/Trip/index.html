@@ -30,38 +30,39 @@
        </div>
        <div class="main-trip-page">
            <div th:each="trip: ${trips}" id="main-trip-page-item">
-<!--               <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class="text-center trip-items"></h5></a>-->
-               <img th:src="${trip.getImages().get(0).getImage_url()}" th:if="${trip.getImages().size()>0}" alt="..." class="trip-page-pic trip-items">
-               <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items"></h5></a>
-                   <div class="trip-items" id="sub-group-forTrip">
-                       <div id="sub-sub-group-items" class="row">
-                           <div class="col-sm-10">
-                               <a th:href="${'/groups/'+trip.getGroup().id}">
-                                   <div class="row">
-                                       <div class="col-sm-3">
-                                           <img th:src="${trip.getGroup().getProfile_image()}" alt="" class="profile-icon-small " />
+               <div class="card-container">
+                   <div class="front">
+                       <img class="viewAll  trip-page-pic trip-items"  th:src="${trip.getImages().get(0).getImage_url()}" th:if="${trip.getImages().size()>0}" alt="..." >
+                       <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items" ></h5></a>
+                   </div>
+                   <div class="back" >
+                       <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items" ></h5></a>
+                       <p th:text="${trip.location}"></p>
+                       <p th:text="${trip.description}"></p>
+                       <div class="trip-items" id="sub-group-forTrip">
+                           <div id="sub-sub-group-items" class="row">
+                               <div class="col-sm-10">
+                                   <a th:href="${'/groups/'+trip.getGroup().id}">
+                                       <div class="row">
+                                           <div class="col-sm-3">
+                                               <img th:src="${trip.getGroup().getProfile_image()}" alt="" class="profile-icon-small " />
+                                           </div>
+                                           <div class="col-sm-8">
+                                               <p> by <span th:text="${trip.getGroup().getName()}" ></span></p>
+                                           </div>
                                        </div>
-                                       <div class="col-sm-8">
-                                           <p> by <span th:text="${trip.getGroup().getName()}" ></span></p>
-                                       </div>
-                                   </div>
-                               </a>
-                           </div>
-                           <div class="col-sm-2 ">
-                               <i class="fa fa-heart" id="heart" ></i>
+                                   </a>
+                               </div>
+                               <div class="col-sm-2 ">
+                                   <i class="fa fa-heart" id="heart" ></i>
+                               </div>
                            </div>
                        </div>
                    </div>
+               </div>
            </div>
-           <!--                Trying picture modal-->
-<!--           <div id="myModal" class="modal">-->
-<!--               <span class="close" style="position: fixed">&times;</span>-->
-<!--               <img class="modal-content" id="img01">-->
-<!--               <div id="caption"></div>-->
-<!--           </div>-->
-           <!--                end modal tryout-->
-
        </div>
+
    </div>
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 <script>
@@ -72,6 +73,11 @@
         });
     })();
 </script>
+<!--Flip Card Script-->
+
+<!--End Flip Card Script-->
+
+
 <script src ="/js/alternateModal.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
