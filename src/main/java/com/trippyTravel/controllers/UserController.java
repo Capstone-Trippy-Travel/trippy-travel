@@ -202,8 +202,8 @@ public class UserController {
 //        }
         editedUser.setPassword(passwordEncoder.encode(editedUser.getPassword()));
         usersRepository.save(editedUser);
-        System.out.println("about to redirect");
-        return "redirect:/users/"+id;
+
+        return "redirect:/users/"+editedUser.getId();
     }
 
     // Edit controls are being showed up if the user is logged in and it's the same user viewing the file
