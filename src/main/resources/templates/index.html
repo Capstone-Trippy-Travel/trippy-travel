@@ -106,15 +106,32 @@
                             <h4 style="margin: 0; display: inline;">Welcome, </h4>
                             <h4 style="margin: 0; display: inline;" th:text="${#authentication.principal.username}"></h4>
                     </div><br>
-                    <h6>
-                        Here, you can view your trips, activities. Don't have any? Create some!
-                    </h6><br>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <h5>Trippy travel makes travelling fun by eliminating the hustle involved in planning and
+                        coordinating travel between friends and family. The app makes collaboration on trip ideas fun
+                        and seamless. Users may create trips, receive input on activities and plans from other trip
+                        collaborators. The collaborators can agree on events and activities for the trip, making the
+                        planning process exciting. Users can also peek into other trips to get ideas on what to include
+                        on their trips. The comments provided on past trips and experiences gives valuable feedback to
+                        other users looking to do the same. The app also allows users to share photos from past trips
+                        which brings a social-networking aspect to travelling. Bring the fun to your trip with Trippy
+                        travel.</h5>
+                    <br>
+                    <br>
+                    <ul class="nav nav-tabs d-flex align-items-baseline" id="myTab" role="tablist">
                         <li class="welcome-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Your Current Trips</a>
+                            <a class="nav-link active"  id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Your Current Trips</a>
                         </li>
                         <li class="welcome-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Your Current Activities</a>
+                        </li>
+
+                        <li class="welcome-items">
+                            <a style="margin-left: 42px ; display: inline;" class="nav-link lh-1"  th:href="@{/groups/create}">Create a Group</a>
+                        </li>
+
+                        <li class="welcome-items">
+                            <a style="margin: 0; display: inline;" class="nav-link" th:href="@{/trip/create}">Create a Trip</a>
+
                         </li>
                     </ul>
                 </div>
@@ -122,10 +139,7 @@
             <div class="col-md-4" id="create-button">
 <!--                <button type="button" class="btn btn-primary btn-sm" th:href="@{/groups/create}">Create a Group</button>-->
 <!--                <button type="button" class="btn btn-secondary btn-sm" th:href="@{/trip/create}">Create a Trip</button>-->
-                <ul class="group-trips-link mr-auto">
-                        <a style="margin: 0; display: inline;" class="nav-link" th:href="@{/groups/create}">Create a Group</a>
-                        <a style="margin: 0; display: inline;" class="nav-link" th:href="@{/trip/create}">Create a Trip</a>
-                </ul>
+
             </div>
         </div><br>
         <div class="row now " style="opacity: 70%">
