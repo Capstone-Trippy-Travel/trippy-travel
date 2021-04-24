@@ -1,227 +1,252 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<!--<head th:replace="fragments/header :: header(${'index-page'})"></head>-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Index</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <!--    <title th:text="${title}"></title>-->
-    <!--    <link rel="stylesheet" href="/css/custom.css">-->
-    <!--    <link rel="stylesheet" href="/css/activities.css">-->
-    <link rel="stylesheet" href="/css/register.css">
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
-    <script src="https://use.fontawesome.com/0dbfa7a73a.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/trial.css">
+    <link rel="stylesheet" href="/css/testPhoebe.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
-
 <body>
-<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<main>
-<hr class="rounded" style="width: 90%">
+<header>
 
+<!--    <nav th:replace="fragments/navbar2 :: navbar" />-->
+    <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 
-<!--<h3 class="col-lg-12 text-center">Collaborate with your friends to plan your group's next big adventure!</h3>-->
-<!--<div class="container" id="introDiv">-->
-<!--    <div class="row" id="intro">-->
-<!--        <div class="col-lg-12 text-center">-->
-<!--&lt;!&ndash;        <h3>Trippy Travel</h3>&ndash;&gt;-->
-<!--            <h5 class="mt-5">You could always plan a future trip!</h5>-->
-<!--            <a class="btn btn-primary btn-sm" th:href="@{/trip/create}">Plan A Trip!<span class="sr-only">(current)</span></a>-->
-<!--            <h5 class="mt-5">You can create a group to travel with!</h5>-->
-<!--            <a class="btn btn-primary btn-sm" th:href="@{/groups/create}">Create A Group!<span class="sr-only">(current)</span></a>-->
-<!--&lt;!&ndash;        <button type="button" class="btn btn-primary btn-lg" th:href="@{/trip/create}">Plan a Trip</button>&ndash;&gt;-->
-<!--&lt;!&ndash;        <button type="button" class="btn btn-secondary btn-lg" th:href="@{/groups/create}">Create a Group</button>&ndash;&gt;-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-
-
-
-
-
-
-<!--    <div class="col-8" id="homeLogo">-->
-<!--        <img src="img/plane_globe.png">-->
-
-<!--<h3 class="text-center m-4" th:if="${trips.size()>0}">-->
-<!--    Dive back into your active trips!-->
-<!--</h3>-->
-<!--<div id="activeTrips" th:each="trip: ${trips}">-->
-<!--    <div class="activeTrip" th:each="activity: ${trip.getActivities}:">-->
-
-<!--    </div>-->
-<!--</div>-->
-
-<!--<h3 class="text-center m-4" th:if="${trips.size()>0}">-->
-<!--    Explore your friends latest trips-->
-<!--    <br>-->
-<!--    <button type="button" class="btn btn-primary btn-lg text-center m-3">Explore</button>-->
-<!--</h3>-->
-<!--<div id="friendsTrips" th:each="trip: ${trips}">-->
-<!--    <div class="activeTrip" th:each="activity: ${trip.getActivities}:">-->
-
-<!--    </div>-->
-<!--</div>-->
-
-
-
-
-
-
-
-
-<!--<div sec:authorize="isAuthenticated()">-->
-<!--        <h4 style="margin: 0; display: inline;">Welcome, </h4>-->
-<!--        <h4 style="margin: 0; display: inline;" th:text="${#authentication.principal.username}"></h4>-->
-<!--        <div class="card col-4 " th:each="trip: ${trips}">-->
-<!--            <div class="card-header">-->
-<!--                <a th:href="${'/trip/'+trip.getId()}"><h4 th:text="${trip.name}" class="card-title"></h4></a>-->
-<!--                <p th:text="${trip.description}" class="card-text"></p>-->
-<!--                <p th:text="${trip.location}" class="card-text"></p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--</div>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container emp-profile">
-    <form method="post" >
-        <div class="row">
-            <div class="col-md-8">
-                <div class="profile-head">
-                    <div sec:authorize="isAuthenticated()">
-                            <h4 style="margin: 0; display: inline;">Welcome, </h4>
-                            <h4 style="margin: 0; display: inline;" th:text="${#authentication.principal.username}"></h4>
-                    </div><br>
-                    <h5>Trippy travel makes travelling fun by eliminating the hustle involved in planning and
-                        coordinating travel between friends and family. The app makes collaboration on trip ideas fun
-                        and seamless. Users may create trips, receive input on activities and plans from other trip
-                        collaborators. The collaborators can agree on events and activities for the trip, making the
-                        planning process exciting. Users can also peek into other trips to get ideas on what to include
-                        on their trips. The comments provided on past trips and experiences gives valuable feedback to
-                        other users looking to do the same. The app also allows users to share photos from past trips
-                        which brings a social-networking aspect to travelling. Bring the fun to your trip with Trippy
-                        travel.</h5>
-                    <br>
-                    <br>
-                    <ul class="nav nav-tabs d-flex align-items-baseline" id="myTab" role="tablist">
-                        <li class="welcome-item">
-                            <a class="nav-link active"  id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Your Current Trips</a>
-                        </li>
-                        <li class="welcome-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Your Current Activities</a>
-                        </li>
-
-                        <li class="welcome-items">
-                            <a style="margin-left: 42px ; display: inline;" class="nav-link lh-1"  th:href="@{/groups/create}">Create a Group</a>
-                        </li>
-
-                        <li class="welcome-items">
-                            <a style="margin: 0; display: inline;" class="nav-link" th:href="@{/trip/create}">Create a Trip</a>
-
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-4" id="create-button">
-<!--                <button type="button" class="btn btn-primary btn-sm" th:href="@{/groups/create}">Create a Group</button>-->
-<!--                <button type="button" class="btn btn-secondary btn-sm" th:href="@{/trip/create}">Create a Trip</button>-->
-
-            </div>
-        </div><br>
-        <div class="row now " style="opacity: 70%">
-            <div class="col-md-10">
-                <div class="tab-content profile-tab "  id="myTabContent">
-                    <div class="tab-pane fade show active "  id="home" role="tabpanel" aria-labelledby="home-tab">
-
-                        <div class="row" th:each="trip: ${trips}" >
-                            <div class="col-md-4"  >
-
-                                <p th:text="${trip.name}"></p>
-                            </div>
-                            <div class="col-md-6 " >
-
-
-                                <p th:text="${trip.description}"></p>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="tab-pane fade" id="profile"   role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row" th:each="activity: ${activities}">
-                            <div class="col-md-4">
-                            <img th:src="${activity.getImages().get(0).getImage_url()}" th:if="${activity.getImages().size()>0}"alt="...">
-
-                            </div>
-                            <div class="col-md-4">
-                                <p th:text="${activity.place}"></p>
-
-                            </div>
-                            <div class="col-md-4">
-                                <p th:text="${activity.trip.name}"></p>
-
-                            </div>
-                        </div>
-
+    <!--Mask-->
+    <div id="intro" class="view ">
+        <div class="mask rgba-black-strong">
+            <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="col-md-10 center" style="margin-top: 40%; color: white">
+                        <!-- Heading -->
+                        <h2 class="display-4 font-weight-bold white-text pt-5 mb-2">Trippi Travel</h2>
+                        <!-- Divider -->
+                        <hr class="hr-light">
+                        <!-- Description -->
+                        <h4 class="white-text my-4">
+                            Trusted Travel Planner. Bring the fun to your trip with Trippi Travel.
+                        </h4>
+                        <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!<i class="fa fa-book ml-2"></i></button>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+    <!--/.Mask-->
+</header>
+<!--Main Navigation-->
+<!--Main layout-->
+<main class="mt-5">
+    <div class="container">
+        <!--Section: Best Features-->
+        <section id="best-features" class="text-center">
+            <!-- Heading -->
+            <h2 class="mb-5 font-weight-bold">Application Features</h2>
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center mb-4">
+                <!--Grid column-->
+                <div class="col-md-8">
+                    <!-- Description -->
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate
+                        hic
+                        provident nulla repellat
+                        facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis
+                        est
+                        sit pariatur.</p>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-4 mb-5">
+                    <i class="fa fa-camera-retro fa-4x orange-text"></i>
+                    <h4 class="my-4 font-weight-bold">Experience</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-md-4 mb-1">
+                    <i class="fas fa-globe-americas fa-4x orange-text"></i>
+                    <h4 class="my-4 font-weight-bold">Travel</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-md-4 mb-1">
+                    <i class="fa fa-bicycle fa-4x orange-text"></i>
+                    <h4 class="my-4 font-weight-bold">Adventure</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+        </section>
+        <!--Section: Best Features-->
+        <hr class="my-5">
+        <!--Section: Examples-->
+        <section id="examples" class="text-center">
+            <!-- Heading -->
+            <h2 class="mb-5 font-weight-bold">Featured Trips</h2>
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4">
+                    <div class="view overlay z-depth-1-half">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712__340.jpg" class=" indexImage" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+                    <h4 class="my-4 font-weight-bold">Heading</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="view overlay z-depth-1-half">
+                        <img src="https://cdn.pixabay.com/photo/2016/03/04/19/36/beach-1236581__340.jpg" class=" indexImage" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+                    <h4 class="my-4 font-weight-bold">Heading</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="view overlay z-depth-1-half">
+                        <img src="https://cdn.pixabay.com/photo/2017/06/26/08/43/ribblehead-viaduct-2443085__340.jpg" class=" indexImage" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+                    <h4 class="my-4 font-weight-bold">Heading</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+
+        </section>
+        <!--Section: Examples-->
+        <hr class="my-5">
+        <!--Section: Gallery-->
+        <section id="gallery">
+            <!-- Heading -->
+            <h2 class="mb-5 font-weight-bold text-center">Something Else here</h2>
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+                    <!--Carousel Wrapper-->
+                    <div id="carousel-example-1z" class="carousel slide carousel-fade carousel-fade" data-ride="carousel">
+                        <!--Indicators-->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-1z" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+                        </ol>
+                        <!--/.Indicators-->
+                        <!--Slides-->
+                        <div class="carousel-inner z-depth-1-half" role="listbox">
+                            <!--First slide-->
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="https://cdn.pixabay.com/photo/2018/03/12/20/07/maldives-3220702__340.jpg"
+                                     alt="First slide">
+                            </div>
+                            <!--/First slide-->
+                            <!--Second slide-->
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="https://cdn.pixabay.com/photo/2016/02/19/11/36/canal-1209808__340.jpg"
+                                     alt="Second slide">
+                            </div>
+                            <!--/Second slide-->
+                            <!--Third slide-->
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075__340.jpg"
+                                     alt="Third slide">
+                            </div>
+                            <!--/Third slide-->
+                        </div>
+                        <!--/.Slides-->
+                        <!--Controls-->
+                        <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <!--/.Controls-->
+                    </div>
+                    <!--/.Carousel Wrapper-->
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6">
+                    <!--Excerpt-->
+                    <a href="" class="teal-text">
+                        <h6 class="pb-1"><i class="fa fa-heart"></i><strong> Lifestyle </strong></h6>
+                    </a>
+                    <h4 class="mb-3"><strong>This is title of the news</strong></h4>
+                    <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id
+                        quod maxime
+                        placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus et aut
+                        officiis
+                        debitis aut rerum.</p>
+
+                    <p>by <a><strong>Jessica Clark</strong></a>, 26/08/2016</p>
+                    <a class="btn btn-primary btn-md">Read more</a>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </section>
+        <!--Section: Gallery-->
+
+        <hr class="my-5">
+
+
+    </div>
 </main>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<footer th:replace="fragments/footer :: main-footer"></footer>
-
-
+<!--Main layout-->
+<div th:replace="fragments/footer2 :: footer"></div>
+<script th:inline="javascript">
+    $('.carousel').carousel({
+        interval: 3000,
+    })
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
 <script src="/js/notifications.js" th:inline="javascript"></script>
-
-
 </body>
 </html>
