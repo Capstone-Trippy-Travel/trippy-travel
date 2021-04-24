@@ -2,6 +2,7 @@ package com.trippyTravel.controllers;
 
 import com.trippyTravel.models.*;
 import com.trippyTravel.repositories.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,16 @@ public class GroupController {
     private CommentRepository commentDao;
     private FriendListRepository friendListRepository;
     private TripRepository tripRepository;
+    @Value("${mapBoxToken}")
+    private String mapBoxToken;
+    @Value("${fileStackApiKey}")
+    private String fileStackApiKey;
+    @Value("${fourSquareId}")
+    private String fourSquareId;
+    @Value("${fourSquarePassword}")
+    private String fourSquarePassword;
+    @Value("${googleMapsKey}")
+    private String googleMapsKey;
 
     public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao, FriendListRepository friendListRepository, TripRepository tripRepository) {
         this.groupDao = groupDao;
