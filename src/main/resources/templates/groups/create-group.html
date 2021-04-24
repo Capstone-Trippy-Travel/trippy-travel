@@ -21,12 +21,11 @@
 <body id="create-group-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <hr class="rounded" style="width: 90%">
-
+<form th:action="@{/groups/create}" th:method="post" th:object="${group}">
 <section>
     <section class="child-group">
         <fieldset id="fieldset-enter-group-info" class="col-11">
             <div class="cartoptionbox">
-                <form th:action="@{/groups/create}" th:method="post" th:object="${group}">
                     <div class="form-group">
                         <label >Group Name</label>
                         <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
@@ -61,8 +60,7 @@
                     <!--            <button class="logout-button" id="addPicture">Group Profile Picture</button>-->
                     <!--            <button class="btn btn-primary btn-sm" type="submit">Create Group</button>-->
                     <!--        </div>-->
-                </form>
-                <button class="btn btn-primary btn-md btn-block" style="margin-bottom: 5px" type="submit">Submit</button>
+                    <button class="btn btn-primary btn-md btn-block" style="margin-bottom: 5px" type="submit">Submit</button>
             </div>
         </fieldset>
     </section>
@@ -71,12 +69,15 @@
             <div class="cartoptionbox">
                 <label>Added Group Members</label>
                 <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">
+
                 </select>
                 <ul id="groupMembers" class="list-group"></ul>
             </div>
         </fieldset>
     </section>
 </section>
+</form>
+
 
 
 

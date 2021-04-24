@@ -30,6 +30,7 @@
             </div>
             <div class="col-6">
                 <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">
+                    <option selected="true" th:each="groupMember:${editGroup.getGroupMembers()}" th:value="${groupMember.getMember().getId()}" th:text="${groupMember.getMember().getFirstName() +' '+groupMember.getMember().getLastName()}"></option>
                 </select>
                 <h4>Current Group Members</h4>
                 <ul id="groupMembers" class="list-group"></ul>
@@ -37,7 +38,7 @@
         </div>
         <div class="form-group">
             <img id="imagePreview" src="" alt="" >
-            <input type="hidden" id="image"  name="profile_mage" th:field="*{profile_image}" >
+            <input type="hidden" id="image"  name="profile_image" th:field="*{profile_image}" >
             <button id="addPicture">Group Profile Picture</button>
         </div>
 
