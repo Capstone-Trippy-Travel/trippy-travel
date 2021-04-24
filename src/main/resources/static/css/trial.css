@@ -1,0 +1,48 @@
+html,
+body,
+header,
+#intro {
+    height: 100%;
+}
+/*Adding custom style*/
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+footer{
+    background-color: whitesmoke;
+}
+nav{
+    background-color: white;
+    /*opacity: 10%;*/
+    color: black;
+}
+button{
+    background-color: #bbbbbb;
+}
+.indexImage{
+    height: 200px;
+    width: 350px;
+}
+/*End custom style*/
+#intro {
+    background: url("https://cdn.pixabay.com/photo/2018/12/04/22/38/road-3856796__340.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.top-nav-collapse {
+    background-color: black;
+}
+@media (max-width: 768px) {
+    .navbar:not(.top-nav-collapse) {
+        background-color: #24355C;
+    }
+}
+@media (min-width: 800px) and (max-width: 850px) {
+    .navbar:not(.top-nav-collapse) {
+        background-color: #24355C;
+    }
+}

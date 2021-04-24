@@ -17,9 +17,10 @@ a{
     color: black;
 }
 .viewAll{
-    width: 300px;
-    height: 200px;
-    margin: 1px;
+    width: 230px;
+    height: 180px;
+    margin: .5px;
+    object-fit: cover;
 }
 .trip-image{
     width: 250px;
@@ -29,14 +30,15 @@ a{
 }
 .profile-icon{
     border-radius: 50%;
-    width: 90px;
-    height: 85px;
+    width: 64px;
+    height: 60px;
     object-fit: cover;
 }
 .profile-icon-small{
     border-radius: 50%;
     width: 50px;
     height: 40px;
+    object-fit: cover;
 }
 .profile-image{
     width: 250px;
@@ -48,6 +50,7 @@ a{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    object-fit: cover;
 
 }
 #profileImage{
@@ -63,9 +66,7 @@ a{
     /*padding: 20px 10px 20px 5px;*/
     margin: 10px;
 }
-.main-profile{
-    margin: 10px;
-}
+
 .side-item{
     padding: 10px;
 }
@@ -109,8 +110,8 @@ a{
     overflow-y: scroll;
 }
 #trip-page-top{
-    margin: 30px;
-    padding: 10px;
+    margin: 40px;
+    /*padding: 10px;*/
 }
 #trip-search-bar{
     width: 30%;
@@ -216,6 +217,7 @@ a{
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
+    margin-top: 50px;
 }
 
 .close:hover,
@@ -230,12 +232,52 @@ a{
     .modal-content {
         width: 100%;
     }
+    .viewAll{
+        width: 120px;
+        height: 100px;
+        margin: .5px;
+        object-fit: cover;
+    }
+    .trip-image{
+        width: 200px;
+        height: 120px;
+        margin: 1px;
+        border-radius: 2%;
+    }
+    .trip-page-pic{
+        width: 150px;
+        height: 200px;
+        border-radius: 2%;
+        object-fit: cover;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .viewAll{
+        width: 210px;
+        height: 140px;
+        margin: .5px;
+        object-fit: cover;
+    }
+    .trip-image{
+        width: 240px;
+        height: 160px;
+        margin: 1px;
+        border-radius: 2%;
+    }
+    .trip-page-pic{
+        width: 200px;
+        height: 150px;
+        border-radius: 2%;
+        object-fit: cover;
+    }
 }
 /*end modal css*/
 .main-trip-page{
     overflow: auto;
-    margin: auto;
+    margin: 60px;
+    padding: 70px 0;
     width: 100%;
+
 }
 #main-trip-page-item{
     float:left;
@@ -254,7 +296,7 @@ a{
 /*Flip Trip Card*/
 .card-container, .front, .back {
     width: 20rem;
-    height: 400px;
+    height: 420px;
 
 }
 .card-container {
