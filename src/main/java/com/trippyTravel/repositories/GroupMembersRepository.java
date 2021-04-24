@@ -1,5 +1,6 @@
 package com.trippyTravel.repositories;
 
+import com.trippyTravel.models.Group;
 import com.trippyTravel.models.GroupMember;
 import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
@@ -13,5 +14,6 @@ public interface GroupMembersRepository extends JpaRepository<GroupMember, Long>
     List <GroupMember> findGroupMembersByMember(User member);
     Boolean existsGroupMemberByMemberAndUnreadCommentTripAndUnreadComment(User user, Trip trip, Boolean existsUnreadComments);
     GroupMember findGroupMemberByMemberAndUnreadCommentTripAndUnreadComment(User user, Trip trip, Boolean existsUnreadComments);
-
+    Boolean existsGroupMemberByMemberAndGroup(User user, Group group);
+    GroupMember findGroupMemberByMemberAndGroup(User user, Group group);
 }

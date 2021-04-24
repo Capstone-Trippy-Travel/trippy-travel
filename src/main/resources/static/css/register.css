@@ -15,8 +15,11 @@ body {
     position: relative;
 }
 .now{
-    background-color: #d7d7d7;
+    background-color: #ffffff;
+
+
     width: 500px;
+    border-radius: 5%;
 }
 form {
     padding: .5em;
@@ -40,7 +43,24 @@ fieldset {
     margin: 1em;
     border: 0;
 }
-
+#fieldset-enter-group-info {
+    -webkit-box-shadow: 7px 7px 5px 0 rgba(0,0,0,0.75);
+    border-radius: 10px;
+    background-color: white;
+    opacity: 0.8;
+    padding: 1em;
+    margin: 1em;
+    border: 0;
+}
+#fieldset-added-group-members {
+    -webkit-box-shadow: -7px 7px 5px 0 rgba(0,0,0,0.75);
+    border-radius: 10px;
+    background-color: white;
+    opacity: 0.8;
+    padding: 1em;
+    margin: 1em;
+    border: 0;
+}
 .width-80 {
     width: 80%;
     margin: auto;
@@ -80,6 +100,10 @@ fieldset {
     border: none;
     background: none;
 }
+.child-group {
+    float: left;
+    width: 50%;
+}
 
 img {
     max-height: 30px;
@@ -99,8 +123,9 @@ img {
     background-image: url("../imgs/tt_background_login.jpg");
 }
 #create-group-body {
-    background: url("../imgs/tt_sitting_on_bench.jpg");
+    background: linear-gradient(white, transparent, transparent, transparent, transparent, transparent, transparent), url("../imgs/tt_family_pic.jpg") no-repeat center;
     background-size: cover;
+    box-shadow: 0px 10px 20px -5px rgba(0,0,0,.8);
 }
 #create-trip-body {
     /*padding-top: 20px;*/
@@ -113,4 +138,59 @@ img {
 .col-md-8{
   align-self: start;
     margin-bottom: 20px;
+}
+#home-tab{
+    color: #666666;
+}
+#profile-tab{
+    color: #666666;
+}
+.footer-content{
+    background-color: black;
+    opacity: 60%;
+
+
+}
+.footer-title{
+color: #d7d7d7;
+}
+.footer-image{
+color: #d7d7d7;
+
+}
+.menu-items{
+    padding: 0;
+
+}
+.social-media{
+
+
+}
+.footer-copyright{
+font-size: smaller;
+    list-style-type: none;
+    color: #d7d7d7;
+
+}
+
+.fa-facebook{
+    height: 6px;
+    width: 6px;
+}
+
+#map img{
+    max-height: none;
+    max-width: none;
+    margin-right: auto;
+}
+#createTripMapContainer{
+    height: 75%;
+    float: left;
+}
+#createTripMapContainer #map{
+    height: 100%;
+}
+
+#createTripFormContainer{
+    float:left;
 }

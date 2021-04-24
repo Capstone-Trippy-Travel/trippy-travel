@@ -252,6 +252,8 @@ public class TripController {
     public String SeeAllTripsHome(Model model) {
         List<Trip> tripFromDb= tripRepository.findAll();
         model.addAttribute("trips",tripFromDb);
+        List<Activity> activityList=activityRepository.findAll();
+        model.addAttribute("activities",activityList);
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();

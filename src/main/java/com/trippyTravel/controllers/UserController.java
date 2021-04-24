@@ -101,6 +101,7 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public String showUser(@PathVariable Long id, Model viewModel){
+        System.out.println("going to user profile: "+id);
         User user = usersRepository.getOne(id);
         viewModel.addAttribute("user", user);
         List<GroupMember> groupMembers=groupMembersRepository.findGroupMembersByMember(user);
@@ -177,18 +178,38 @@ public class UserController {
     }
 
     @PostMapping("/users/{id}/edit")
-    public String editUser(@PathVariable Long id, @Valid User editedUser, Errors validation, Model m){
-
+    public String editUser(@PathVariable Long id, @Valid User editedUser, Errors validation, Model m, @RequestParam(name = "image_url",  required = false) String imgUrl){
+        System.out.println("posting updated user");
         editedUser.setId(id);
 
-        if (validation.hasErrors()) {
-            m.addAttribute("errors", validation);
-            m.addAttribute("user", editedUser);
-            m.addAttribute("showEditControls", checkEditAuth(editedUser));
-            return "users/edit";
+//        System.out.println(validation.hasErrors());
+//        if (validation.hasErrors()) {
+//            m.addAttribute("errors", validation);
+//            m.addAttribute("user", editedUser);
+//            m.addAttribute("showEditControls", checkEditAuth(editedUser));
+//            if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
+//                List<FriendList> friendRequests= new ArrayList<>();
+//                m.addAttribute("friendRequests", friendRequests);
+//                List<Trip> unreadCommentTrips = new ArrayList<>();
+//                m.addAttribute("unreadCommentTrips", unreadCommentTrips);
+//
+//            } else{
+//                User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//                m.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+//                m.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+//            }
+//            return "users/edit";
+//        }
+        System.out.println("edited user username: "+editedUser.getUsername());
+        System.out.println("edited user id "+ editedUser.getId());
+        String userPassword=usersRepository.getOne(id).getPassword();
+
+        editedUser.setPassword(userPassword);
+        if (imgUrl!=null){
+            editedUser.setProfile_image(imgUrl);
         }
-        editedUser.setPassword(passwordEncoder.encode(editedUser.getPassword()));
         usersRepository.save(editedUser);
+
         return "redirect:/users/"+editedUser.getId();
     }
 

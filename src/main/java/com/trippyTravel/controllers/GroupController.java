@@ -2,6 +2,7 @@ package com.trippyTravel.controllers;
 
 import com.trippyTravel.models.*;
 import com.trippyTravel.repositories.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,16 @@ public class GroupController {
     private CommentRepository commentDao;
     private FriendListRepository friendListRepository;
     private TripRepository tripRepository;
+    @Value("${mapBoxToken}")
+    private String mapBoxToken;
+    @Value("${fileStackApiKey}")
+    private String fileStackApiKey;
+    @Value("${fourSquareId}")
+    private String fourSquareId;
+    @Value("${fourSquarePassword}")
+    private String fourSquarePassword;
+    @Value("${googleMapsKey}")
+    private String googleMapsKey;
 
     public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao, FriendListRepository friendListRepository, TripRepository tripRepository) {
         this.groupDao = groupDao;
@@ -102,15 +113,33 @@ public class GroupController {
         return "groups/edit-group";
     }
     @PostMapping(path = "/groups/{id}/update")
-    public String editGroup(@ModelAttribute Group newGroup, @RequestParam(name = "groupMembersList", required = false) Integer[] groupMembers) {
+    public String editGroup(@ModelAttribute Group newGroup, @RequestParam(name = "groupMembersList", required = false) long[] groupMembers, @RequestParam(name = "profile_image", required = false) String profileImage) {
 
         User groupOwner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newGroup.setOwner(groupOwner);
-        Group createdGroup = groupDao.save(newGroup);
-        for (int i=0; i<groupMembers.length; i++){
-            Long memberId = Long.valueOf(groupMembers[i]);
-            groupMemberDao.save(new GroupMember(false, userDao.getOne(memberId), newGroup) );
+
+        //if new profile image is uploaded, replace old one. If none is, attach original profile image
+        if (profileImage!=null){
+            newGroup.setProfile_image(profileImage);
+        } else{
+            newGroup.setProfile_image(groupDao.getOne(newGroup.getId()).getProfile_image());
         }
+
+        Group createdGroup = groupDao.save(newGroup);
+
+        //will loop through group member list, and save any new group members
+        for (int i=0; i<groupMembers.length; i++){
+            User user = userDao.getOne(groupMembers[i]);
+            Boolean groupMemberExists=groupMemberDao.existsGroupMemberByMemberAndGroup(user, newGroup);
+            if (!groupMemberExists){
+                //if new, save the new group member
+                groupMemberDao.save(new GroupMember(false, user, newGroup));
+            }
+        }
+
+
+
+
 
 
         return "redirect:/groups/"+createdGroup.getId();

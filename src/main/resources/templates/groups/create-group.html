@@ -21,47 +21,63 @@
 <body id="create-group-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <hr class="rounded" style="width: 90%">
-<fieldset class="col-6">
-    <div class="container">
-        <form th:action="@{/groups/create}" th:method="post" th:object="${group}">
-            <div class="form-group">
-                <label >Group Name</label>
-                <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
-            </div>
-            <div class="col-10" style="padding-left: 0px">
-                <!--            <label >Group Description</label>-->
-                <textarea class="form-control form-control-sm" type="text" placeholder="Group Description.." th:field="*{description}" id="post" rows="4" name="description"></textarea>
+<form th:action="@{/groups/create}" th:method="post" th:object="${group}">
+<section>
+    <section class="child-group">
+        <fieldset id="fieldset-enter-group-info" class="col-11">
+            <div class="cartoptionbox">
+                    <div class="form-group">
+                        <label >Group Name</label>
+                        <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
+                    </div>
+                    <div class="col-10" style="padding-left: 0px">
+                        <!--            <label >Group Description</label>-->
+                        <textarea class="form-control form-control-sm" type="text" placeholder="Group Description.." th:field="*{description}" id="post" rows="4" name="description"></textarea>
 
-            </div>
-            <img id="imagePreview" src="" alt="" >
-            <input type="hidden" id="image"  name="profile_mage" th:field="*{profile_image}" >
-            <button class="logout-button" id="addPicture" style="margin-left: -12px; margin-top: 2px">Group Profile Picture</button>
+                    </div>
+                    <img id="imagePreview" src="" alt="" >
+                    <input type="hidden" id="image"  name="profile_mage" th:field="*{profile_image}" >
+                    <button class="logout-button" id="addPicture" style="margin-left: -12px; margin-top: 2px">Group Profile Picture</button>
 
-            <!--        <div class="row">-->
+                    <!--        <div class="row">-->
 
-            <div class="form-group col-12" style="padding: 0px"><br>
-                <label >Add a Group Member</label>
-                <input id="searchUsers" type="text" class="form-control" name="name" placeholder="">
-                <ul id="databaseMatches" class="list-group"></ul>
-                <!--        <button type="submit" class="btn btn-primary">Submit Post</button>-->
+                    <div class="form-group col-12" style="padding: 0px"><br>
+                        <label >Add a Group Member</label>
+                        <input id="searchUsers" type="text" class="form-control" name="name" placeholder="">
+                        <ul id="databaseMatches" class="list-group"></ul>
+                        <!--        <button type="submit" class="btn btn-primary">Submit Post</button>-->
+                    </div>
+                    <!--            <div class="form-group col-6">-->
+                    <!--                <label>Current Group Members</label>-->
+                    <!--                <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">-->
+                    <!--                </select>-->
+                    <!--                <ul id="groupMembers" class="list-group"></ul>-->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <!--        <div class="form-group col-12">-->
+                    <!--            <img id="imagePreview" src="" alt="" >-->
+                    <!--            <input type="hidden" id="image"  name="profile_mage" th:field="*{profile_image}" >-->
+                    <!--            <button class="logout-button" id="addPicture">Group Profile Picture</button>-->
+                    <!--            <button class="btn btn-primary btn-sm" type="submit">Create Group</button>-->
+                    <!--        </div>-->
+                    <button class="btn btn-primary btn-md btn-block" style="margin-bottom: 5px" type="submit">Submit</button>
             </div>
-            <!--            <div class="form-group col-6">-->
-            <!--                <label>Current Group Members</label>-->
-            <!--                <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">-->
-            <!--                </select>-->
-            <!--                <ul id="groupMembers" class="list-group"></ul>-->
-            <!--            </div>-->
-            <!--        </div>-->
-            <!--        <div class="form-group col-12">-->
-            <!--            <img id="imagePreview" src="" alt="" >-->
-            <!--            <input type="hidden" id="image"  name="profile_mage" th:field="*{profile_image}" >-->
-            <!--            <button class="logout-button" id="addPicture">Group Profile Picture</button>-->
-            <!--            <button class="btn btn-primary btn-sm" type="submit">Create Group</button>-->
-            <!--        </div>-->
-        </form>
-        <button class="btn btn-primary btn-md btn-block" style="margin-bottom: 5px" type="submit">Submit</button>
-    </div>
-</fieldset>
+        </fieldset>
+    </section>
+    <section class="child-group">
+        <fieldset id="fieldset-added-group-members">
+            <div class="cartoptionbox">
+                <label>Added Group Members</label>
+                <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">
+
+                </select>
+                <ul id="groupMembers" class="list-group"></ul>
+            </div>
+        </fieldset>
+    </section>
+</section>
+</form>
+
 
 
 
