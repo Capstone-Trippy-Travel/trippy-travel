@@ -178,7 +178,7 @@ public class UserController {
     }
 
     @PostMapping("/users/{id}/edit")
-    public String editUser(@PathVariable Long id, @Valid User editedUser, Errors validation, Model m){
+    public String editUser(@PathVariable Long id, @Valid User editedUser, Errors validation, Model m, @RequestParam(name = "image_url",  required = false) String imgUrl){
         System.out.println("posting updated user");
         editedUser.setId(id);
 
@@ -200,7 +200,14 @@ public class UserController {
 //            }
 //            return "users/edit";
 //        }
-        editedUser.setPassword(passwordEncoder.encode(editedUser.getPassword()));
+        System.out.println("edited user username: "+editedUser.getUsername());
+        System.out.println("edited user id "+ editedUser.getId());
+        String userPassword=usersRepository.getOne(id).getPassword();
+
+        editedUser.setPassword(userPassword);
+        if (imgUrl!=null){
+            editedUser.setProfile_image(imgUrl);
+        }
         usersRepository.save(editedUser);
 
         return "redirect:/users/"+editedUser.getId();
