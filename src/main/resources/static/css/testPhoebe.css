@@ -133,7 +133,6 @@ a{
 #heart.red {
     color: red;
 }
-
 /*modal css*/
 
 .myImg {
@@ -245,7 +244,7 @@ a{
         border-radius: 2%;
     }
     .trip-page-pic{
-        width: 150px;
+        width: 120px;
         height: 200px;
         border-radius: 2%;
         object-fit: cover;
@@ -274,8 +273,8 @@ a{
 /*end modal css*/
 .main-trip-page{
     overflow: auto;
-    margin: 60px;
-    padding: 70px 0;
+    margin: 40px;
+    padding: 50px 0;
     width: 100%;
 
 }

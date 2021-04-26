@@ -29,11 +29,12 @@
                <button type="submit">Go</button>
            </form>
        </div>
+       <hr class="my-5">
        <div class="main-trip-page">
            <div th:each="trip: ${trips}" id="main-trip-page-item">
                <div class="card-container">
                    <div class="front">
-                       <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items" style="font-weight: bold"></h5></a>
+                       <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items" style="font-weight: bold;"></h5></a>
                        <img class="viewAll  trip-page-pic trip-items"  th:src="${trip.getImages().get(0).getImage_url()}" th:if="${trip.getImages().size()>0}" alt="..." >
                        <h5 th:text="${trip.location}" style="text-align: left;"></h5>
                    </div>

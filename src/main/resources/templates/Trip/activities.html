@@ -4,67 +4,63 @@
 <head th:replace="fragments/header :: header(${'login-page'})"></head>
 
 <body>
-
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<div class="card text-center">
-    <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Trip Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Add activities</a>
-            </li>
-        </ul>
-    </div>
-    <div class="card-body">
-        <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><h5 class="card-title" th:text="${trip.getName()}"></h5></a>
-        <div id="tripDate" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
-        <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>
-        <p class="card-text" th:text="${trip.getDescription()}"></p>
-
-    </div>
-</div>
-<form class="form-inline">
-    <div class="form-group mr-2 addressBar">
-        <label class="sr-only" for="searchValue">Address</label>
-        <input style ="width: 500px" type="text" class="form-control" id="searchValue" th:value="${trip.location}">
-    </div>
-    <div class="form-group mr-2">
-        <select name="form-select" id="zoom" class="form-select">
-            <!--            <option>Set Zoom</option>-->
-            <option>5</option>
-            <option selected>10</option>
-            <option>15</option>
-        </select>
-    </div>
-    <button type="button" class="btn btn-primary" id="searchButton">Search</button>
-</form>
-
-<!--</form>-->
-<div class="row">
-    <div class="col-6">
-        <div class="row">
-            <div class="form-group col-9">
-                <label class="sr-only" for="venue">Address</label>
-                <input type="text" class="form-control float-right" id="venue" placeholder="Restaurants">
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-primary" id="venueButton">Search Venue</button>
-            </div>
+<div class="container-fluid">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Trip Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Add activities</a>
+                </li>
+            </ul>
         </div>
-
-
-        <div id="venueList">
-
+        <div class="card-body">
+            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><h5 class="card-title" th:text="${trip.getName()}"></h5></a>
+            <div id="tripDate" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
+            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>
+            <p class="card-text" th:text="${trip.getDescription()}"></p>
         </div>
     </div>
-    <div class="col-6" id="map">
-        <div id="clickedPlace"></div>
+    <form class="form-inline">
+        <div class="form-group mr-2 addressBar">
+            <label class="sr-only" for="searchValue">Address</label>
+            <input style ="width: 500px" type="text" class="form-control" id="searchValue" th:value="${trip.location}">
+        </div>
+        <div class="form-group mr-2">
+            <select name="form-select" id="zoom" class="form-select">
+                <!--            <option>Set Zoom</option>-->
+                <option>5</option>
+                <option selected>10</option>
+                <option>15</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" id="searchButton">Search</button>
+    </form>
+
+    <!--</form>-->
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <div class="form-group col-9">
+                    <label class="sr-only" for="venue">Address</label>
+                    <input type="text" class="form-control float-right" id="venue" placeholder="Restaurants">
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-primary" id="venueButton">Search Venue</button>
+                </div>
+            </div>
+            <div id="venueList">
+            </div>
+        </div>
+        <div class="col-6" id="map">
+            <div id="clickedPlace"></div>
+        </div>
     </div>
-
-
 </div>
+
 <script async
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&libraries=places">
 </script>

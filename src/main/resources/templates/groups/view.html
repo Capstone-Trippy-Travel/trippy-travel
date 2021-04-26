@@ -33,12 +33,12 @@
                 <div class="row">
                     <div class="col">
                         <form th:action="${'/groups/'+ group.id +'/update'}" method="GET" class="button side-item">
-                            <button>Edit Group</button>
+                            <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Edit Group</button>
                         </form>
                     </div>
                     <div class="col">
                         <form th:action="${'/trip/create'}" method="GET" class="button side-item">
-                            <button>Plan a Trip!</button>
+                            <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!</button>
                         </form>
                     </div>
                 </div>
