@@ -116,6 +116,7 @@ function createVenueCard(place, marker){
     cardBody.setAttribute("class", "venueCardBody")
     activityImageForm.appendChild(cardBody)
 
+    //creating div to hold each venue image, and adding to card body
     let venueImage=document.createElement("img")
     venueImage.setAttribute("class", "venueImage")
     venueImageDiv.appendChild(venueImage);
@@ -127,9 +128,6 @@ function createVenueCard(place, marker){
 
     cardBody.appendChild(venueInfo)
 
-    //creating each set of info to pass into card body
-
-
 
     //creating activity name header
     let venueNameHeader=document.createElement("h5");
@@ -140,19 +138,6 @@ function createVenueCard(place, marker){
     let venueRatings=document.createElement("p");
     venueRatings.innerText=place.rating + " stars - "+place.reviews + " reviews"
     venueInfo.appendChild(venueRatings);
-
-
-    // let html = "";
-    // if(place.photoURL) {
-    //     html += `<img class="card-img-top" id="photo" src="${place.photoURL}" alt="Card image cap">`
-    // }
-    // html += `<h5 class="card-title">${place.place}</h5>`
-    // html += `<p class="card-text">${place.rating} stars - ${place.reviews} reviews</p>`
-
-
-
-
-
 
 
     let activityInput=document.createElement("input");
@@ -292,19 +277,11 @@ function createVenueCard(place, marker){
 
 
 
-    venueDetailsButton.addEventListener("click", ()=>{
-        marker.addListener("click", toggleBounce(marker))
-        venueCard.style.width="100%";
-        venueCard.style.maxWidth="100%";
-        venueImage.setAttribute("src", place.photoURL);
-        additionalVenueInfo.style.display="inline-block"
 
-
-    })
-    var listener = function (event) {
+    var showActivityImages = function (event) {
         let imageDiv = document.getElementById(place.place)
         let activityPic = document.getElementById("activity-pics")
-    let activityDiv= document.getElementsByClassName("activityImageDiv")
+        let activityDiv= document.getElementsByClassName("activityImageDiv")
         for (let i =0;i<activityDiv.length;i++){
             let singleActivityDiv = activityDiv[i]
             if (singleActivityDiv != imageDiv){
@@ -314,29 +291,43 @@ function createVenueCard(place, marker){
             }
         }
         activityPic.innerHTML;
-
-
     }
-venueCard.addEventListener('click', listener);
 
 
-    var listener1 = function (event) {
+    var showAllImages = function (event) {
         let imageDiv = document.getElementById(place.place)
         let activityPic = document.getElementById("activity-pics")
         let activityDiv= document.getElementsByClassName("activityImageDiv")
         for (let i =0;i<activityDiv.length;i++){
             let singleActivityDiv = activityDiv[i]
-            if (singleActivityDiv != imageDiv){
-                singleActivityDiv.style.display = "inline-block"
-            }else{
-                singleActivityDiv.style.display = "inline-block"
-            }
+            singleActivityDiv.style.display = "inline-block"
         }
         activityPic.innerHTML;
-
-
     }
-    venueCard.addEventListener('dblclick', listener1);
+
+    venueDetailsButton.addEventListener("click", ()=>{
+        if (venueDetailsButton.innerText==="See Details"){
+            toggleBounce(marker)
+            // marker.addListener("click", toggleBounce(marker))
+            venueCard.style.width="100%";
+            venueCard.style.maxWidth="100%";
+            venueImage.setAttribute("src", place.photoURL);
+            venueDetailsButton.innerText="Hide Details"
+             additionalVenueInfo.style.display="block"
+            showActivityImages();
+        } else{
+            toggleBounce(marker);
+            venueCard.style.width="250px";
+            venueCard.style.maxWidth="250px";
+            venueImage.setAttribute("src", "");
+            venueDetailsButton.innerText="Hide Details"
+            additionalVenueInfo.style.display="none"
+            venueDetailsButton.innerText="See Details"
+            showAllImages();
+        }
+
+
+    })
 
 
 
@@ -362,17 +353,17 @@ venueCard.addEventListener('click', listener);
     cardBody.appendChild(additionalVenueInfo)
 
 
-    let imagePreview = document.createElement("image")
-    let imagePreviewDiv = document.createElement("div")
-    imagePreviewDiv.appendChild(imagePreview)
-    imagePreviewDiv.style.display = "none"
-    let submitButton=document.createElement("button")
-    submitButton.setAttribute("type", "submit")
-    submitButton.innerText="submit"
-    imagePreviewDiv.appendChild(imagePreview)
-    imagePreviewDiv.appendChild(submitButton)
-
-    cardBody.appendChild(imagePreviewDiv)
+    // let imagePreview = document.createElement("image")
+    // let imagePreviewDiv = document.createElement("div")
+    // imagePreviewDiv.appendChild(imagePreview)
+    // imagePreviewDiv.style.display = "none"
+    // let submitButton=document.createElement("button")
+    // submitButton.setAttribute("type", "submit")
+    // submitButton.innerText="submit"
+    // imagePreviewDiv.appendChild(imagePreview)
+    // imagePreviewDiv.appendChild(submitButton)
+    //
+    // cardBody.appendChild(imagePreviewDiv)
 
 
 
@@ -390,10 +381,9 @@ venueCard.addEventListener('click', listener);
 
             // this sets my hidden input to the value of my new image url.
             imageUrlInput.value=imgURL;
-            // this lets the user see a preview of the image that they uploaded.
-            $('#imagePreview').attr('src',imgURL);
-            imagePreview.setAttribute("src", imgURL)
-            console.log(callback);
+
+            //will submit form now
+            activityImageForm.submit();
         }
     }
 

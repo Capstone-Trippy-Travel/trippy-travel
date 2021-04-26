@@ -3,10 +3,9 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<!--    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>-->
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <title>Individual Trip</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/activities.css">
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="stylesheet" href="/css/trial.css">
@@ -106,34 +105,36 @@
             </div>
         </main>
         </div>
-        <div class="col-8" id="mapContainer">
-            <div id="map">
+    </div>
+    <div class="col-8" id="mapContainer">
+        <div id="map">
 
-            </div>
-            <div id="activityList">
+        </div>
+        <div id="activityList">
 
+        </div>
+        <div class="card activity-card">
+            <div id="activity-pics">
+                <div th:each="activity : ${trips.getActivities()}" class="activityImageDiv" th:id = "${activity.getPlace()}">
+                    <div th:each="userImage : ${activity.getImages()}" th:class="${'imageDiv ' + activity.getPlace()}">
+                        <img th:src="${userImage.getImage_url()}"  class="viewAll myImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card activity-card">
-        <div id="activity-pics">
-            <div th:each="activity : ${trips.getActivities()}" class="activityImageDiv" th:id = "${activity.getPlace()}">
-                <div th:each="userImage : ${activity.getImages()}" th:class="${'imageDiv ' + activity.getPlace()}">
-                    <img th:src="${userImage.getImage_url()}"  class="viewAll myImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">
+        <!--    Bottom modal-->
+        <div id="myModal" class="modal" >
+            <span class="close" style="position: fixed">&times;</span>
+            <div th:each="activity : ${trips.getActivities()}">
+                <div th:each="userImage : ${activity.getImages()}">
+                    <img class="modal-content" id="img01" th:src="${userImage.getImage_url()}" th:alt="${userImage.getDescription()}">
+                    <p th:text="${userImage.getDescription()}" class="text-center" style="color: white"></p>
                 </div>
             </div>
         </div>
     </div>
-    <!--    Bottom modal-->
-    <div id="myModal" class="modal" >
-        <span class="close" style="position: fixed">&times;</span>
-        <div th:each="activity : ${trips.getActivities()}">
-            <div th:each="userImage : ${activity.getImages()}">
-                <img class="modal-content" id="img01" th:src="${userImage.getImage_url()}" th:alt="${userImage.getDescription()}">
-                <p th:text="${userImage.getDescription()}" class="text-center" style="color: white"></p>
-            </div>
-        </div>
-    </div>
+
+
 
 
 <div th:replace="fragments/footer2 :: footer"></div>
@@ -143,7 +144,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
