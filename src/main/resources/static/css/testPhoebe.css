@@ -237,12 +237,7 @@ a{
         margin: .5px;
         object-fit: cover;
     }
-    .trip-image{
-        width: 200px;
-        height: 120px;
-        margin: 1px;
-        border-radius: 2%;
-    }
+
     .trip-page-pic{
         width: 120px;
         height: 200px;

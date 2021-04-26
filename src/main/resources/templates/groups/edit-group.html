@@ -16,6 +16,13 @@
             <label >Group Name</label>
             <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
         </div>
+        <div class="form-group"><br>
+            <label >Group Privacy</label>
+            <select class="form-control" th:field="*{visibility}">
+                <option value="private">Private Group</option>
+                <option value="public">Public Group</option>
+            </select><br>
+        </div>
         <div class="form-group">
             <label >Group Description</label>
             <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>

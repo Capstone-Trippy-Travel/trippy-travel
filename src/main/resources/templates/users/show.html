@@ -125,23 +125,20 @@
                                 <div th:each="userGroup : ${user.getGroupMember()}" class="item ">
                                     <a th:href="${'/groups/'+ userGroup.getGroup().getId()}">
                                         <h5><span th:text="${userGroup.getGroup().getName()}"></span></h5>
-                                        <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" class="trip-image">
+                                        <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" class="userPage-image">
                                     </a>
                                 </div>
                             </div>
                     </div>
                     <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
-                        <div class="row flex-wrap items secondary-item">
-                            <div th:each="userFriend : ${user.getFriends()}" class="item1"><x></x>
+                        <div class="items main-item">
+                            <div th:each="userFriend : ${user.getFriends()}" class="item"><x></x>
                                 <a th:href="${'/users/'+ userFriend.getFriend().getId()}">
-                                    <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" class="friend-image">
-
-                                    <h5 class="text-center"><span th:text="${userFriend.getFriend().getUsername()}"></span> </h5>
-
+                                    <h5 class="text-center"><span th:text="${userFriend.getFriend().getFirstName()}"></span> </h5>
+                                    <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" class="userPage-image">
                                 </a>
                             </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -163,12 +160,8 @@
                 </div>
                 <!--                end modal tryout-->
             </div>
-
-
         </div>
     </div>
-
-
 
 
 <div th:replace="fragments/footer2 :: footer"></div>
