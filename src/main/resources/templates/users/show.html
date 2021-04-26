@@ -132,7 +132,16 @@
                             </div>
                     </div>
                     <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
-                        <p>Friends go here</p>
+                        <div class="row flex-wrap items secondary-item">
+                            <div th:each="userFriend : ${user.getFriends()}" class="item1"><x></x>
+                                <a th:href="${'/users/'+ userFriend.getFriend().getId()}">
+                                    <h5 class="text-center"><span th:text="${userFriend.getFriend().getUsername()}"></span> </h5>
+                                    <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" class="friend-image">
+
+                                </a>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
@@ -185,4 +194,14 @@
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 
 </body>
+<!--<style>-->
+<!--    img:before {-->
+<!--        content: ' ';-->
+<!--        display: block;-->
+<!--        position: absolute;-->
+<!--        height: 50px;-->
+<!--        width: 50px;-->
+<!--        background-image: url(static/imgs/blank-profile-picture-973460_1280.png);-->
+<!--    }-->
+<!--</style>-->
 </html>
