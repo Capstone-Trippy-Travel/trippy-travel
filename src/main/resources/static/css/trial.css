@@ -50,4 +50,6 @@ button{
     height: 200px;
     width: 200px;
     margin-right: 6px;
+    border-radius: 3%;
+
 }
