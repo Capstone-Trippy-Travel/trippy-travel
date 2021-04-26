@@ -20,55 +20,46 @@
         <div class="row">
             <div class="form-group col-12" style="padding: 0">
                 <form class="col s12"  th:action="@{/trip/create}" th:method="POST" th:object="${trip}">
-
-
                     <div class="input-field col s12">
                         <label >Group</label>
-
-
                         <select class="form-control" name="groupId">
                             <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}"></option>
-
-
                         </select><br>
-
                     </div>
-
                     <div class="input-field col s12 col-10" style="margin: 5px">
                         <input class="form-control form-control-sm" type="text" placeholder="Location" th:field="*{location}" id="tripLocationInput"/>
-
                     </div>
-
                     <div class="input-field col s12 col-10" style="margin: 5px">
                         <input class="form-control form-control-sm" type="text" placeholder="Name" th:field="*{name}" />
-
                     </div>
-
                     <div class="input-field col s12 col-10" style="margin: 5px">
                         <input class="form-control form-control-sm" type="text" placeholder="Description" th:field="*{description}" />
-
                     </div>
-
+                    <button id="addPicture" class="logout-button" style="margin-left: 8px">Add a Picture</button>
                     <img id="imagePreview" src="" alt="" >
+                    <input type="hidden" id="image"  name="image_url">
 
                     <!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
-                    <input type="hidden" id="image"  name="image_url">
 
                     <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
                     <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
                     <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
 
-                    <button id="addPicture" class="logout-button" style="margin-left: 8px">Add a Picture</button>
                     <!--                <input type="text"  name="image_url">-->
-
+                    <div class="input-field col s12"><br>
+                        <label >Trip Privacy</label>
+                        <select class="form-control" th:field="*{visibility}">
+                            <option value="" selected="selected" >Select</option>
+                            <option value="private">Private Trip</option>
+                            <option value="public">Public Trip</option>
+                        </select><br>
+                    </div>
                     <div class="input-field col s12"><br>
                         <label >Trip Status</label>
                         <select class="form-control" th:field="*{status}">
                             <option value="future">Future Trip</option>
                             <option value="past">Past Trip</option>
-
                         </select><br>
-
                     </div>
 
                     <div class="container">
@@ -118,12 +109,13 @@
     </main>
 </fieldset>
 <div id="createTripMapContainer" class="col-5">
-    <div id="map">
+    <div id="map" style="border-radius: 10px">
 
     </div>
 </div>
 
 </div>
+
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <!--<script>-->
 <!--    // Set up the picker-->
