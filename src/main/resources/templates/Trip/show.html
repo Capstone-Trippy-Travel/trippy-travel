@@ -117,9 +117,13 @@
 
                 <input type="hidden" id="image"  name="image_url">
                 <button id="addPicture">addPicture</button>
-                <input class="btn" type="submit" />
+                    <input  class="btn" type="submit" />
                 </form>
                 </div>
+                <br>
+                <br>
+                <br>
+                <br>
                 <div class="col">
                     <i class='far fa-comment ' style='font-size:36px' id="formButton"></i>
                     <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm" style="display: none">

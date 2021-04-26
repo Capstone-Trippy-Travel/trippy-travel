@@ -228,3 +228,11 @@ font-size: smaller;
     border-radius: 5%;
 
 }
+#sumbitbutton{
+    background-color: dodgerblue;
+    padding: 8px;
+    color: white;
+    border: 1px;
+    border-color: lightgray;
+    border-radius: 5%;
+}
