@@ -15,8 +15,7 @@
 
 <body>
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<br><br>
-    <div class="container">
+    <div class="container" style="margin-top: 80px">
         <div class="row">
             <div class="col-lg-3 col-mg-12 side-profile">
                 <h3 th:text="${user.getFirstName()+ ' '+ user.getLastName()}" class="side-item text-center"></h3>

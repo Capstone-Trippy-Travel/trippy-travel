@@ -16,140 +16,139 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<div class="card text-center">
-    <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="#" >Trip Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="${'/trip/'+trips.getId()}+'/activities'">Add activities</a>
-            </li>
-        </ul>
+<div class="container-fluid" style="margin-top: 70px">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" >Trip Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="${'/trip/'+trips.getId()}+'/activities'">Add activities</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <a th:href="${'/trip/'+trips.getId()}" class="btn btn-primary"><div th:text="${trips.getName()}"></div></a>
+            <div id="tripDate" th:text="${trips.getStartDate().toGMTString().substring(0,11)+ ' - '+trips.getEndDate().toGMTString().substring(0,11)}"></div>
+            <a th:href="${'/groups/'+trips.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trips.getGroup().getName()}"></div></a>
+            <p class="card-text" th:text="${trips.getDescription()}"></p>
+            <div id="tripLocation" th:text="${trips.getLocation()}"></div>
+
+        </div>
     </div>
-    <div class="card-body">
-        <a th:href="${'/trip/'+trips.getId()}" class="btn btn-primary"><div th:text="${trips.getName()}"></div></a>
-        <div id="tripDate" th:text="${trips.getStartDate().toGMTString().substring(0,11)+ ' - '+trips.getEndDate().toGMTString().substring(0,11)}"></div>
-        <a th:href="${'/groups/'+trips.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trips.getGroup().getName()}"></div></a>
-                <p class="card-text" th:text="${trips.getDescription()}"></p>
-        <div id="tripLocation" th:text="${trips.getLocation()}"></div>
+    <div class="row" id="tripContainer">
+        <div class="card col-4" style="width: 18rem;">
+            <div class="card-body">
+                <main class="container" id="tripProfileInfo">
+                    <!--    <div class="post" th:each="image:${post.getImages()}">-->
 
-    </div>
-</div>
-<div class="row" id="tripContainer">
-<div class="card col-4" style="width: 18rem;">
-    <div class="card-body">
-        <main class="container" id="tripProfileInfo">
-            <!--    <div class="post" th:each="image:${post.getImages()}">-->
-
-            <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
-<!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
-            <!-- Button trigger modal -->
-            <img th:src="${trips.getImages().get(0).getImage_url()}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trips.getImages().size()>0}">
+                    <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
+                    <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
+                    <!-- Button trigger modal -->
+                    <img th:src="${trips.getImages().get(0).getImage_url()}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trips.getImages().size()>0}">
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" >
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Albums</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" th:each="image : ${trips.getImages()}">
-                            <table class="table">
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" >
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Albums</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" th:each="image : ${trips.getImages()}">
+                                        <table class="table">
 
-                                    <a th:href="${image.getImage_url()}">
-                                    <img th:src="${image.getImage_url()}" id="" class="img-thumbnail"  alt="...">
-                                    </a>
+                                            <a th:href="${image.getImage_url()}">
+                                                <img th:src="${image.getImage_url()}" id="" class="img-thumbnail"  alt="...">
+                                            </a>
 
-                                <img id="imagePreview" src="" alt="" >
+                                            <img id="imagePreview" src="" alt="" >
 
-                                <!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
-<!--                                <input type="hidden" id="image"  name="image_url">-->
+                                            <!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
+                                            <!--                                <input type="hidden" id="image"  name="image_url">-->
 
-                                <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
-                                <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
-                                <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
-                                <!--                <input type="text"  name="image_url">-->
+                                            <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
+                                            <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
+                                            <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
+                                            <!--                <input type="text"  name="image_url">-->
 
-                                <br>
+                                            <br>
 
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="hidden" id="image"  name="image_url">
-                            <button id="addPicture">addPicture</button>
-                            <input class="btn" type="submit" />
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
-            <h1 th:text="${trips.name}" class="card-title"></h1>
-
-            <!--    </div>-->
-
-            <div id="comments">
-                <div th:each="comment : ${trips.getComments()}" class="card">
-                    <div class="row no-gutters">
-                        <div class="col-sm-2" >
-                            <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
-                            <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
-                        </div>
-                        <div class="col-sm-10">
-                            <div class="">
-                                <div class=""><strong th:text="${comment.getUser().getFirstName()+ ' '+ comment.getUser().getLastName()}"></strong></div>
-                                <div th:text="${comment.getComment_text()}"></div>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" id="image"  name="image_url">
+                                        <button id="addPicture">addPicture</button>
+                                        <input class="btn" type="submit" />
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
+
+
+                    <h1 th:text="${trips.name}" class="card-title"></h1>
+
+                    <!--    </div>-->
+
+                    <div id="comments">
+                        <div th:each="comment : ${trips.getComments()}" class="card">
+                            <div class="row no-gutters">
+                                <div class="col-sm-2" >
+                                    <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
+                                    <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="">
+                                        <div class=""><strong th:text="${comment.getUser().getFirstName()+ ' '+ comment.getUser().getLastName()}"></strong></div>
+                                        <div th:text="${comment.getComment_text()}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <form th:action="${'/trip/'+ trips.id +'/delete'}" method="POST">
+                                <button type="submit" id="delete" >Delete Trip</button>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <i class='far fa-comment ' style='font-size:36px' id="formButton"></i>
+                            <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm" style="display: none">
+                                <textarea name="comment" placeholder="Enter comment here"></textarea>
+                                <button type="submit" id="comment">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </main>
             </div>
-            <div class="row">
-                <div class="col">
-                    <form th:action="${'/trip/'+ trips.id +'/delete'}" method="POST">
-                        <button type="submit" id="delete" >Delete Trip</button>
-                    </form>
-                </div>
-                <div class="col">
-                    <i class='far fa-comment ' style='font-size:36px' id="formButton"></i>
-                    <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm" style="display: none">
-                        <textarea name="comment" placeholder="Enter comment here"></textarea>
-                        <button type="submit" id="comment">Submit</button>
-                    </form>
-                </div>
+        </div>
+        <div class="col-8" id="mapContainer">
+            <div id="map">
+
             </div>
-
-
-
-
-
-        </main>
+            <div id="activityList"></div>
+        </div>
     </div>
-</div>
-    <div class="col-8" id="mapContainer">
-        <div id="map">
+
+    <div class="card activity-card">
+        <div id="activity-pics">
+            <div th:each="activity : ${trips.getActivities()}" class="activityImageDiv" th:id = "${activity.getPlace()}">
+
+                <div th:each="userImage : ${activity.getImages()}" th:class="${'imageDiv ' + activity.getPlace()}">
+                    <img th:src="${userImage.getImage_url()}"  class="viewAll"  alt=".." style="width: 200px; height: 200px"/>
+                </div>
+            </div>
 
         </div>
-        <div id="activityList"></div>
     </div>
 </div>
 
-<div class="card activity-card">
-    <div id="activity-pics">
-        <div th:each="activity : ${trips.getActivities()}" class="activityImageDiv" th:id = "${activity.getPlace()}">
-
-            <div th:each="userImage : ${activity.getImages()}" th:class="${'imageDiv ' + activity.getPlace()}">
-                <img th:src="${userImage.getImage_url()}"  class="viewAll"  alt=".." style="width: 200px; height: 200px"/>
-            </div>
-        </div>
-
-    </div>
-</div>
 <!--    <div th:replace="fragments/activity :: mainAct"></div>-->
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
