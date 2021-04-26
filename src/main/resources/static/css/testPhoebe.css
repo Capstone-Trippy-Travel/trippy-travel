@@ -269,13 +269,12 @@ a{
 .main-trip-page{
     overflow: auto;
     margin: 40px;
-    padding: 50px 0;
+    padding: 30px 0;
     width: 100%;
-
 }
 #main-trip-page-item{
     float:left;
-    margin: 7px;
+    margin: 3px;
 }
 .trip-items{
     margin: 3px;
@@ -291,7 +290,6 @@ a{
 .card-container, .front, .back {
     width: 20rem;
     height: 420px;
-
 }
 .card-container {
     /*margin: 5rem;*/

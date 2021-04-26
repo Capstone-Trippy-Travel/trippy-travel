@@ -31,15 +31,14 @@
        </div>
        <hr class="my-5">
        <div class="main-trip-page">
-           <div th:each="trip: ${trips}" id="main-trip-page-item">
-               <div class="card-container">
+           <div th:each="trip : ${trips}" id="main-trip-page-item">
+               <a th:href="${'/trip/'+trip.id}"><h5 th:text="${trip.name}" class="trip-items" style="font-weight: bold;"></h5></a>
+               <div class="card-container" >
                    <div class="front">
-                       <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items" style="font-weight: bold;"></h5></a>
-                       <img class="viewAll  trip-page-pic trip-items"  th:src="${trip.getImages().get(0).getImage_url()}" th:if="${trip.getImages().size()>0}" alt="..." >
+                       <img class="viewAll  trip-page-pic trip-items"  th:src="${trip.getImages().get(0).getImage_url()}" th:if="${trip.getImages().size()>0}" alt="...">
                        <h5 th:text="${trip.location}" style="text-align: left;"></h5>
                    </div>
                    <div class="back" >
-                       <a th:href="${'/trip/'+trip.getId()}"><h4 th:text="${trip.name}" class=" trip-items" style="font-weight: bold"></h4></a>
                        <p th:text="${trip.location}"></p>
                        <p th:text="${trip.description}"></p>
                        <div class="trip-items" id="sub-group-forTrip">
@@ -64,7 +63,6 @@
                </div>
            </div>
        </div>
-
    </div>
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 <div th:replace="fragments/footer2 :: footer"></div>
