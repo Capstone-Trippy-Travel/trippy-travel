@@ -78,9 +78,9 @@ fieldset {
 }
 
 .btn {
-    background-color: lightskyblue;
+
     padding: 8px;
-    color: white;
+    color: dodgerblue;
     border: 1px;
     border-color: lightgray;
 }
@@ -106,8 +106,8 @@ fieldset {
 }
 
 img {
-    max-height: 30px;
-    max-width: 30px;
+    max-height: 200px;
+    max-width: 200px;
     margin-right: 10px;
 }
 #create-button {
@@ -122,7 +122,7 @@ img {
 #login-body {
     background-image: url("../imgs/tt_background_login.jpg");
 }
-#create-group-body {
+#create-group-body,#edit-profile-body {
     background: linear-gradient(white, transparent, transparent, transparent, transparent, transparent, transparent), url("../imgs/tt_family_pic.jpg") no-repeat center;
     background-size: cover;
     box-shadow: 0px 10px 20px -5px rgba(0,0,0,.8);
@@ -193,4 +193,38 @@ font-size: smaller;
 
 #createTripFormContainer{
     float:left;
+}
+.image{
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    border-radius: 5%;
+}
+.imageP{
+    display: flex;
+    justify-content: center;
+    border-radius: 5%;
+
+}
+.imagebutton{
+    display: flex;
+    justify-content: center;
+
+}
+.container{
+    margin-top: 70px;
+}
+#edit-profile-body{
+    margin-top: 40px;
+}
+#addPicture{
+    background-color: dodgerblue;
+    padding: 8px;
+    color: white;
+    border: 1px;
+    border-color: lightgray;
+    border-radius: 5%;
+
 }
