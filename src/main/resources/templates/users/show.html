@@ -20,7 +20,7 @@
             <div class="col-lg-3 col-mg-12 side-profile">
                 <h3 th:text="${user.getFirstName()+ ' '+ user.getLastName()}" class="side-item text-center"></h3>
                 <div class="side-item">
-                    <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="profileImage">
+                    <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="profileImage" default="static/imgs/blank-profile-picture-973460_1280.png">
                 </div>
                 <div class="side-item">
                     <p th:text="${user.description}" ></p>
