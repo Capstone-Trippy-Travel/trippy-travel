@@ -184,8 +184,14 @@ font-size: smaller;
     margin-right: auto;
 }
 #createTripMapContainer{
-    height: 75%;
+    /*height: 60%;*/
+    height: 461px;
     float: left;
+    border-radius: 10px;
+    opacity: 0.99;
+    padding: 1em;
+    margin: 1em;
+    border: 0;
 }
 #createTripMapContainer #map{
     height: 100%;
