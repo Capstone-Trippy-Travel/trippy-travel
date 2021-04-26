@@ -133,7 +133,6 @@ a{
 #heart.red {
     color: red;
 }
-
 /*modal css*/
 
 .myImg {
@@ -238,14 +237,9 @@ a{
         margin: .5px;
         object-fit: cover;
     }
-    .trip-image{
-        width: 200px;
-        height: 120px;
-        margin: 1px;
-        border-radius: 2%;
-    }
+
     .trip-page-pic{
-        width: 150px;
+        width: 120px;
         height: 200px;
         border-radius: 2%;
         object-fit: cover;
@@ -274,14 +268,13 @@ a{
 /*end modal css*/
 .main-trip-page{
     overflow: auto;
-    margin: 60px;
-    padding: 70px 0;
+    margin: 40px;
+    padding: 30px 0;
     width: 100%;
-
 }
 #main-trip-page-item{
     float:left;
-    margin: 7px;
+    margin: 3px;
 }
 .trip-items{
     margin: 3px;
@@ -297,7 +290,6 @@ a{
 .card-container, .front, .back {
     width: 20rem;
     height: 420px;
-
 }
 .card-container {
     /*margin: 5rem;*/

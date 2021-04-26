@@ -11,24 +11,36 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 
-<body>
+<body id="edit-profile-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
+
 <main class="container">
-    <div class="row">
-        <div class="col l12">
+    <fieldset id="fieldset-enter-group-info" class="col-11">
+        <div class="cartoptionbox">
+
             <h3>Edit User</h3>
             <div class="col l8 offset-l2">
                 <form th:action="@{/users/{id}/edit(id=${id})}" th:method="POST" th:object="${user}">
-                    <label for="username">Username</label>
+                    <div class ='imageP'>
+                        <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
+<!--                        <img id="imagePreview" src="" alt="" >-->
+                        <input type="hidden" id="image"  name="image_url">
+
+                    </div>
+                    <div class ="imagebutton">
+                    <button id="addPicture" class="button " style="margin-left: 8px">Edit Picture</button>
+
+                    </div>
+                    <label for="lastname">Firstname</label>
                     <input class="form-control disa" th:field="*{firstName}" />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
 
-                    <label for="username">Username</label>
+                    <label for="Lastname">Lastname</label>
                     <input class="form-control disa" th:field="*{lastName}" />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
 
                     <label for="username">Username</label>
-                    <input class="form-control disa" th:field="*{username}" />
+                    <input class="form-control " th:field="*{username}" />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 
                     <label for="email">Email</label>
@@ -40,18 +52,14 @@
                         <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>
 
                     </div>
-                    <div>
-                        <img id="imagePreview" src="" alt="" >
-                        <input type="hidden" id="image"  name="image_url">
-                        <button id="addPicture" class="button" style="margin-left: 8px">Add a Picture</button>
-                    </div>
+
 
                     <input th:if="${showEditControls}" class="btn" type="submit" />
                 </form>
             </div>
             <!--<div th:replace="fragments/forms :: postsForm(@{'/posts/edit'}, true)"></div>-->
         </div>
-    </div>
+    </fieldset>
 
 </main>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>

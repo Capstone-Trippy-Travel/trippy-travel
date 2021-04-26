@@ -13,6 +13,130 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
+<!--<<<<<<< HEAD-->
+<!--<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>-->
+<!--<main>-->
+<!--<hr class="rounded" style="width: 90%">-->
+
+
+<!--&lt;!&ndash;<h3 class="col-lg-12 text-center">Collaborate with your friends to plan your group's next big adventure!</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="container" id="introDiv">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="row" id="intro">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="col-lg-12 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <h3>Trippy Travel</h3>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <h5 class="mt-5">You could always plan a future trip!</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a class="btn btn-primary btn-sm" th:href="@{/trip/create}">Plan A Trip!<span class="sr-only">(current)</span></a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <h5 class="mt-5">You can create a group to travel with!</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a class="btn btn-primary btn-sm" th:href="@{/groups/create}">Create A Group!<span class="sr-only">(current)</span></a>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <button type="button" class="btn btn-primary btn-lg" th:href="@{/trip/create}">Plan a Trip</button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <button type="button" class="btn btn-secondary btn-lg" th:href="@{/groups/create}">Create a Group</button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+
+
+
+
+
+
+<!--&lt;!&ndash;    <div class="col-8" id="homeLogo">&ndash;&gt;-->
+<!--&lt;!&ndash;        <img src="img/plane_globe.png">&ndash;&gt;-->
+
+<!--&lt;!&ndash;<h3 class="text-center m-4" th:if="${trips.size()>0}">&ndash;&gt;-->
+<!--&lt;!&ndash;    Dive back into your active trips!&ndash;&gt;-->
+<!--&lt;!&ndash;</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;<div id="activeTrips" th:each="trip: ${trips}">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="activeTrip" th:each="activity: ${trip.getActivities}:">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<h3 class="text-center m-4" th:if="${trips.size()>0}">&ndash;&gt;-->
+<!--&lt;!&ndash;    Explore your friends latest trips&ndash;&gt;-->
+<!--&lt;!&ndash;    <br>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button type="button" class="btn btn-primary btn-lg text-center m-3">Explore</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;<div id="friendsTrips" th:each="trip: ${trips}">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="activeTrip" th:each="activity: ${trip.getActivities}:">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+
+
+
+
+
+
+<!--&lt;!&ndash;<div sec:authorize="isAuthenticated()">&ndash;&gt;-->
+<!--&lt;!&ndash;        <h4 style="margin: 0; display: inline;">Welcome, </h4>&ndash;&gt;-->
+<!--&lt;!&ndash;        <h4 style="margin: 0; display: inline;" th:text="${#authentication.principal.username}"></h4>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="card col-4 " th:each="trip: ${trips}">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="card-header">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:href="${'/trip/'+trip.getId()}"><h4 th:text="${trip.name}" class="card-title"></h4></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <p th:text="${trip.description}" class="card-text"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                <p th:text="${trip.location}" class="card-text"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="container emp-profile">-->
+<!--    <form method="post" >-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-8">-->
+<!--                <div class="profile-head">-->
+<!--                    <div sec:authorize="isAuthenticated()">-->
+<!--                            <h4 style="margin: 0; display: inline;">Welcome, </h4>-->
+<!--                            <h4 style="margin: 0; display: inline;" th:text="${#authentication.principal.username}"></h4>-->
+<!--                    </div><br>-->
+<!--                    <h5>Trippy travel makes travelling fun by eliminating the hustle involved in planning and-->
+<!--                        coordinating travel between friends and family. The app makes collaboration on trip ideas fun-->
+<!--                        and seamless. Users may create trips, receive input on activities and plans from other trip-->
+<!--                        collaborators. The collaborators can agree on events and activities for the trip, making the-->
+<!--                        planning process exciting. Users can also peek into other trips to get ideas on what to include-->
+<!--                        on their trips. The comments provided on past trips and experiences gives valuable feedback to-->
+<!--                        other users looking to do the same. The app also allows users to share photos from past trips-->
+<!--                        which brings a social-networking aspect to travelling. Bring the fun to your trip with Trippy-->
+<!--                        travel.</h5>-->
+<!--                    <br>-->
+<!--                    <br>-->
+<!--                    <ul class="nav nav-tabs d-flex align-items-baseline" id="myTab" role="tablist">-->
+<!--                        <li class="welcome-item">-->
+<!--                            <a class="nav-link active"  id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"> Current Trips</a>-->
+<!--                        </li>-->
+<!--                        <li class="welcome-item">-->
+<!--                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"> Current Activities</a>-->
+<!--                        </li>-->
+
+<!--                        <li class="welcome-items">-->
+<!--                            <a style="margin-left: 42px ; display: inline;" class="nav-link lh-1"  th:href="@{/groups/create}">Create a Group</a>-->
+<!--                        </li>-->
+
+<!--                        <li class="welcome-items">-->
+<!--                            <a style="margin: 0; display: inline;" class="nav-link" th:href="@{/trip/create}">Create a Trip</a>-->
+
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--=======-->
 <header>
 
 <!--    <nav th:replace="fragments/navbar2 :: navbar" />-->
@@ -32,8 +156,11 @@
                         <h4 class="white-text my-4">
                             Trusted Travel Planner. Bring the fun to your trip with Trippi Travel.
                         </h4>
-                        <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!<i class="fa fa-book ml-2"></i></button>
+                        <form th:action="${'/trip/create'}" method="GET" class="button side-item">
+                            <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!</button>
+                        </form>
                     </div>
+
                 </div>
             </div>
         </div>
