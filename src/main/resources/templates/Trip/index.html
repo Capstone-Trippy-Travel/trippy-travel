@@ -5,8 +5,9 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="/css/testPhoebe.css">
+    <link rel="stylesheet" href="/css/trial.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
 
@@ -14,12 +15,12 @@
 </head>
 <body id="create-group-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-
+<br>
 <!--    <div sec:authorize="isAuthenticated()">-->
 <!--    &lt;!&ndash;    <img src=" https://cdn.filestackcontent.com/7o0pCn7cRy2y1Ijh5xOt" alt="...">&ndash;&gt;-->
 <!--        <h2 th:text="${#authentication.principal.username}"></h2>-->
 <!--    </div>-->
-   <div class="container-fluid">
+   <div class="container">
        <div id="trip-page-top">
            <h1 class="text-center">Member Trips</h1>
            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
@@ -32,11 +33,12 @@
            <div th:each="trip: ${trips}" id="main-trip-page-item">
                <div class="card-container">
                    <div class="front">
+                       <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items" style="font-weight: bold"></h5></a>
                        <img class="viewAll  trip-page-pic trip-items"  th:src="${trip.getImages().get(0).getImage_url()}" th:if="${trip.getImages().size()>0}" alt="..." >
-                       <a th:href="${'/trip/'+trip.getId()}"><h5 th:text="${trip.name}" class=" trip-items" ></h5></a>
+                       <h5 th:text="${trip.location}" style="text-align: left;"></h5>
                    </div>
                    <div class="back" >
-                       <a th:href="${'/trip/'+trip.getId()}"><h4 th:text="${trip.name}" class=" trip-items" ></h4></a>
+                       <a th:href="${'/trip/'+trip.getId()}"><h4 th:text="${trip.name}" class=" trip-items" style="font-weight: bold"></h4></a>
                        <p th:text="${trip.location}"></p>
                        <p th:text="${trip.description}"></p>
                        <div class="trip-items" id="sub-group-forTrip">
@@ -64,6 +66,7 @@
 
    </div>
 <!--<div th:replace="fragments/footer :: footer"></div>-->
+<div th:replace="fragments/footer2 :: footer"></div>
 <script>
     (function() {
         const heart = document.getElementById('heart');
@@ -72,13 +75,17 @@
         });
     })();
 </script>
-<!--Flip Card Script-->
 
-<!--End Flip Card Script-->
-
-
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 <script src ="/js/alternateModal.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 
 
 </body>

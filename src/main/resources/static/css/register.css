@@ -177,3 +177,20 @@ font-size: smaller;
     height: 6px;
     width: 6px;
 }
+
+#map img{
+    max-height: none;
+    max-width: none;
+    margin-right: auto;
+}
+#createTripMapContainer{
+    height: 75%;
+    float: left;
+}
+#createTripMapContainer #map{
+    height: 100%;
+}
+
+#createTripFormContainer{
+    float:left;
+}

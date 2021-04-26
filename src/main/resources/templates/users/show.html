@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="/css/testPhoebe.css">
+    <link rel="stylesheet" href="/css/trial.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
 
@@ -14,9 +15,10 @@
 
 <body>
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-    <div class="container-fluid">
+<br><br>
+    <div class="container">
         <div class="row">
-            <div class="col-3 side-profile">
+            <div class="col-lg-3 col-mg-12 side-profile">
                 <h3 th:text="${user.getFirstName()+ ' '+ user.getLastName()}" class="side-item text-center"></h3>
                 <div class="side-item">
                     <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="profileImage">
@@ -47,11 +49,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="side-item">
-                    <i class='fas fa-user-friends' style='font-size:36px'></i>
-                    <i class='fas fa-user-plus' style='font-size:36px'></i>
-                    <i class='fas fa-user-minus' style='font-size:36px'></i>
-                </div>
+<!--                <div class="side-item">-->
+<!--                    <i class='fas fa-user-friends' style='font-size:36px'></i>-->
+<!--                    <i class='fas fa-user-plus' style='font-size:36px'></i>-->
+<!--                    <i class='fas fa-user-minus' style='font-size:36px'></i>-->
+<!--                </div>-->
 <!--                <form class="navbar-form " th:action="@{}" th:method="POST">-->
                     <div class="input-group side-item">
                         <input type="text" class="form-control"  name="search" placeholder="Search Friends" id="searchUsers">
@@ -64,7 +66,7 @@
                 <div class="row">
                     <div class="col">
                         <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item">
-                            <button>Edit User</button>
+                            <button>Edit Profile</button>
                         </form>
                     </div>
                     <div class="col">
@@ -74,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8 main-profile">
+            <div class="col-lg-8 col-md-12 main-profile">
                 <h3 class="side-item">Your Places</h3>
                 <div id="mapContainerProfile" class="main-item">
                     <div id="map"></div>
@@ -90,7 +92,7 @@
 
                 <div class="tab-content" id="myTabContent1">
                     <div class="tab-pane fade show active" id="trips" role="tabpanel" aria-labelledby="trips-tab">
-                        <div class="items main-item">
+                        <div class="items main-item ">
                             <div th:each="trip : ${trips}" class="item ">
                                 <a th:href="${'/trip/'+ trip.id}">
                                     <h5><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
@@ -100,7 +102,7 @@
                         </div>
                     </div>
                      <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
-                         <div class="items main-item">
+                         <div class="items main-item ">
                              <div th:each="trip : ${plannedTrips}" class="item ">
                                  <a th:href="${'/trip/'+ trip.id}">
                                      <h5><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
@@ -136,12 +138,10 @@
                     </div>
                 </div>
                 <h4 class="main-item">Your Pictures</h4>
-                <div class=" main-item items" >
+                <div class=" main-item" >
                     <div id="cardPic">
                         <div th:each="userImage : ${user.getImages()}" class="group-pics ">
-
                             <img  class="viewAll myImg" onclick="image(event)"  th:src="${userImage.getImage_url()}" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" >
-
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
 
 
 
-
+<div th:replace="fragments/footer2 :: footer"></div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <nav th:fragment="navbar(friendRequests, unreadCommentTrips)" class="navbar navbar-expand-lg navbar-light">
+    <nav th:fragment="navbar(friendRequests, unreadCommentTrips)" class="navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar">
         <img src="/imgs/tt_icon.png" class="logo" alt="logo">
         <a class="navbar-brand">Trippi Travel</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,7 @@
                         <li class="nav-link" data-toggle="modal" data-target="#myPro">
                             <a class="nav-link" th:href="@{/users/profile}">Profile</a>
                         </li>
-                    <button class="logout-button" type="submit">Logout</button>
+                    <button class="btn btn-outline-white" type="submit">Logout</button>
                 </form>
 <!--                <form sec:authorize="isAnonymous()" action="/login" th:method="get" class="d-flex">-->
 <!--                    <button class="log-button" type="submit">Login</button>-->
