@@ -79,7 +79,6 @@
 #venueList{
     display: flex;
     flex-wrap: wrap;
-
 }
 
 .venueCard{
@@ -87,6 +86,9 @@
     max-height: 375px;
     align-items: center;
     justify-content: space-evenly;
+    white-space: normal;
+
+
 }
 
 .venueCard img{
@@ -167,4 +169,25 @@ html, body, .container{
 
 #tripContainer{
     height: auto;
+}
+
+.addPicture{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+
+}
+
+.venueInfo{
+    position: relative;
+    padding: 10px;
+}
+
+.venueCardBody{
+    display: flex;
+    position: relative;
+}
+
+.additionalVenueInfo{
+    display: none;
 }
