@@ -136,7 +136,7 @@
                         <div class="row flex-wrap items secondary-item">
                             <div th:each="userFriend : ${user.getFriends()}" class="item1"><x></x>
                                 <a th:href="${'/users/'+ userFriend.getFriend().getId()}">
-                                    <h5><span th:text="${userFriend.getFriend().getUsername()}"></span> </h5>
+                                    <h5 class="text-center"><span th:text="${userFriend.getFriend().getUsername()}"></span> </h5>
                                     <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" class="friend-image">
 
                                 </a>
