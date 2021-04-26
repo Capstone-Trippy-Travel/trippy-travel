@@ -49,41 +49,41 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Albums</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" th:each="image : ${trips.getImages()}">
-                            <table class="table">
+<!--            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                <div class="modal-dialog">-->
+<!--                    <div class="modal-content">-->
+<!--                        <div class="modal-header">-->
+<!--                            <h5 class="modal-title" id="exampleModalLabel">Albums</h5>-->
+<!--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                        </div>-->
+<!--                        <div class="modal-body" th:each="image : ${trips.getImages()}">-->
+<!--                            <table class="table">-->
 
-                                    <a th:href="${image.getImage_url()}">
-                                    <img th:src="${image.getImage_url()}" id="" class="img-thumbnail"  alt="...">
-                                    </a>
+<!--                                    <a th:href="${image.getImage_url()}">-->
+<!--                                    <img th:src="${image.getImage_url()}" id="" class="img-thumbnail"  alt="...">-->
+<!--                                    </a>-->
 
-                                <img id="imagePreview" src="" alt="" >
+<!--                                <img id="imagePreview" src="" alt="" >-->
 
-                                <!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
-<!--                                <input type="hidden" id="image"  name="image_url">-->
+<!--                                &lt;!&ndash;                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="hidden" id="image"  name="image_url">&ndash;&gt;-->
 
-                                <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
-                                <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
-                                <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
-                                <!--                <input type="text"  name="image_url">-->
+<!--                                &lt;!&ndash;                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;&ndash;&gt;-->
+<!--                                &lt;!&ndash;                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;&ndash;&gt;-->
+<!--                                &lt;!&ndash;                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;&ndash;&gt;-->
+<!--                                &lt;!&ndash;                <input type="text"  name="image_url">&ndash;&gt;-->
 
-                                <br>
+<!--                                <br>-->
 
-                            </table>
-                        </div>
-                        <div class="modal-footer">
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                        <div class="modal-footer">-->
 
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<!--                        </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
 
             <h1 th:text="${trips.name}" class="card-title"></h1>
