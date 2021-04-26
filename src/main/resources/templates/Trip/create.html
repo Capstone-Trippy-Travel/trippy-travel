@@ -28,8 +28,6 @@
 
                         <select class="form-control" name="groupId">
                             <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}"></option>
-
-
                         </select><br>
 
                     </div>
@@ -124,6 +122,7 @@
 </div>
 
 </div>
+
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <!--<script>-->
 <!--    // Set up the picker-->
