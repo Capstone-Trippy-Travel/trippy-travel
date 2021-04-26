@@ -47,48 +47,11 @@
             <!-- Button trigger modal -->
             <img th:src="${trips.getImages().get(0).getImage_url()}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trips.getImages().size()>0}">
 
-
-            <!-- Modal -->
-<!--            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--                <div class="modal-dialog">-->
-<!--                    <div class="modal-content">-->
-<!--                        <div class="modal-header">-->
-<!--                            <h5 class="modal-title" id="exampleModalLabel">Albums</h5>-->
-<!--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                        </div>-->
-<!--                        <div class="modal-body" th:each="image : ${trips.getImages()}">-->
-<!--                            <table class="table">-->
-
-<!--                                    <a th:href="${image.getImage_url()}">-->
-<!--                                    <img th:src="${image.getImage_url()}" id="" class="img-thumbnail"  alt="...">-->
-<!--                                    </a>-->
-
-<!--                                <img id="imagePreview" src="" alt="" >-->
-
-<!--                                &lt;!&ndash;                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                                <input type="hidden" id="image"  name="image_url">&ndash;&gt;-->
-
-<!--                                &lt;!&ndash;                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;&ndash;&gt;-->
-<!--                                &lt;!&ndash;                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;&ndash;&gt;-->
-<!--                                &lt;!&ndash;                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;&ndash;&gt;-->
-<!--                                &lt;!&ndash;                <input type="text"  name="image_url">&ndash;&gt;-->
-
-<!--                                <br>-->
-
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                        <div class="modal-footer">-->
-
-<!--                        </div>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+           
+                    <h1 th:text="${trips.name}" class="card-title"></h1>
+                    <!--    </div>-->
 
 
-            <h1 th:text="${trips.name}" class="card-title"></h1>
-
-            <!--    </div>-->
 
 
             <div class="row">
@@ -139,6 +102,7 @@
                     <br>
                 </div>
 
+
             </div>
         </main>
         </div>
@@ -188,7 +152,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
-
 <script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/trip_profile.js"></script>
