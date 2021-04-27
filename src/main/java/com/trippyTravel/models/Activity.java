@@ -233,4 +233,15 @@ public class Activity {
     }
 
     private String usersPreviousVote;
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    private int commentCount;
+
 }
