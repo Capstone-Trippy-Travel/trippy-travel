@@ -52,14 +52,26 @@ for (let tripIdHolder of tripIdHolderArray ){
 }
 console.log(tripIdsArray)
 
+
 notificationsButton.addEventListener("click", ()=>{
-        modalNotificationIcon.style.display= "none";
+    if (modalNotificationIcon!=null) {
+        modalNotificationIcon.style.display = "none";
+    }
+    let modalFadeDivs=document.getElementsByClassName("modal-backdrop")
+
+     setTimeout(function(){
+        for (let modalBackdrop of modalFadeDivs ){
+            modalBackdrop.style.display="none";
+        }
+    }, 1)
 })
 
 let closeModalButton=document.getElementById("closeModalButton")
 
 closeModalButton.addEventListener("click", ()=>{
-    commentNotificationIcon.style.display="none";
+    if (commentNotificationIcon!=null) {
+        commentNotificationIcon.style.display = "none";
+    }
     for (let i=0; i<tripIdsArray.length; i++){
         updateUnreadCommentStatus(tripIdsArray[i])
     }
@@ -77,3 +89,5 @@ function updateUnreadCommentStatus(id){
         }
     })
 }
+
+
