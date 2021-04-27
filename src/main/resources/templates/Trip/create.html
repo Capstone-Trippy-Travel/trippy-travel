@@ -20,34 +20,24 @@
         <div class="row">
             <div class="form-group col-12" style="padding: 0">
                 <form class="col s12"  th:action="@{/trip/create}" th:method="POST" th:object="${trip}">
-
-
                     <div class="input-field col s12">
                         <label >Group</label>
-
-
                         <select class="form-control" name="groupId">
                             <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}"></option>
                         </select><br>
-
                     </div>
-
                     <div class="input-field col s12 col-10" style="margin: 5px">
                         <input class="form-control form-control-sm" type="text" placeholder="Location" th:field="*{location}" id="tripLocationInput"/>
-
                     </div>
-
                     <div class="input-field col s12 col-10" style="margin: 5px">
                         <input class="form-control form-control-sm" type="text" placeholder="Name" th:field="*{name}" />
-
                     </div>
-
                     <div class="input-field col s12 col-10" style="margin: 5px">
                         <input class="form-control form-control-sm" type="text" placeholder="Description" th:field="*{description}" />
-
                     </div>
 
                     <button id="addPicture" class="logout-button" style="margin-left: 22px">Add a Picture</button>
+
                     <img id="imagePreview" src="" alt="" >
                     <input type="hidden" id="image"  name="image_url">
 
@@ -58,15 +48,20 @@
                     <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
 
                     <!--                <input type="text"  name="image_url">-->
-
+                    <div class="input-field col s12"><br>
+                        <label >Trip Privacy</label>
+                        <select class="form-control" th:field="*{visibility}">
+                            <option value="" selected="selected" >Select</option>
+                            <option value="private">Private Trip</option>
+                            <option value="public">Public Trip</option>
+                        </select><br>
+                    </div>
                     <div class="input-field col s12"><br>
                         <label >Trip Status</label>
                         <select class="form-control" th:field="*{status}">
                             <option value="future">Future Trip</option>
                             <option value="past">Past Trip</option>
-
                         </select><br>
-
                     </div>
 
                     <div class="container">

@@ -96,111 +96,105 @@ function createVenueCard(place, marker){
     // console.log(place.opening_hours.isOpen)
     // console.log(place.photos[0].getUrl);
 
-
+    //creating div for each activity card.
     let venueCard = document.createElement("div");
-    venueCard.setAttribute("class", "card venueCard");
+    venueCard.setAttribute("class", "venueCard");
 
-    let cardBody=document.createElement("div");
-    cardBody.setAttribute("class", "card-body")
-
-    venueCard.appendChild(cardBody)
-
-
-    let html = "";
-    if(place.photoURL) {
-        html += `<img class="card-img-top" id="photo" src="${place.photoURL}" alt="Card image cap">`
-    }
-    html += `<h5 class="card-title">${place.place}</h5>`
-    html += `<p class="card-text">${place.rating} stars - ${place.reviews} reviews</p>`
+    //creating div to show image (when not hidden)
+    let venueImageDiv=document.createElement("div")
+    venueImageDiv.setAttribute("class", "venueImageDiv")
 
 
 
-    let activityFormDiv=document.createElement("div");
-
+    //creating form to hold activity info : comments, pictures, etc.
     let activityImageForm=document.createElement("form");
-    activityImageForm.setAttribute("class", "col s12" );
     activityImageForm.setAttribute("action", '/trip/'+place.trip.id);
     activityImageForm.setAttribute("method", "Post")
+    venueCard.appendChild(activityImageForm)
+
+    let cardBody=document.createElement("div");
+    cardBody.setAttribute("class", "venueCardBody")
+    activityImageForm.appendChild(cardBody)
+
+    //creating div to hold each venue image, and adding to card body
+    let venueImage=document.createElement("img")
+    venueImage.setAttribute("class", "venueImage")
+    venueImageDiv.appendChild(venueImage);
+    cardBody.appendChild(venueImageDiv)
+
+    //creating div for main body of each activity
+    let venueInfo=document.createElement("div");
+    venueInfo.setAttribute("class", "venueInfo")
+
+    cardBody.appendChild(venueInfo)
+
+
+    //creating activity name header
+    let venueNameHeader=document.createElement("h5");
+    venueNameHeader.innerText=place.place;
+    venueInfo.appendChild(venueNameHeader)
+
+    //creating activity ratings paragraph
+    let venueRatings=document.createElement("p");
+    venueRatings.innerText=place.rating + " stars - "+place.reviews + " reviews"
+    venueInfo.appendChild(venueRatings);
 
 
     let activityInput=document.createElement("input");
     activityInput.setAttribute("value", place.id);
     activityInput.setAttribute("name", "activity_id")
     activityInput.setAttribute("type", "hidden")
-    activityImageForm.appendChild(activityInput);
+    venueInfo.appendChild(activityInput);
 
     let imageUrlInput=document.createElement("input");
     imageUrlInput.setAttribute("name", "image_url")
     imageUrlInput.setAttribute("type", "hidden")
-    activityImageForm.appendChild(imageUrlInput)
+    venueInfo.appendChild(imageUrlInput)
 
 
-    let submitButton=document.createElement("button")
-    submitButton.setAttribute("type", "submit")
-    submitButton.innerText="submit"
-    activityImageForm.appendChild(submitButton)
-
-    let imagePreview=document.createElement("image")
-    activityImageForm.appendChild(imagePreview)
-
-    html += `</div>`
-html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Albums</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" th:each="image : ${place.image}">
-                            <table class="table">
-
-                                    <a th:href="">
-                                    <img th:src="" id="" class="img-thumbnail"  alt="...">
-
-                                    </a>
-
-                                <!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
-<!--                                <input type="hidden" id="image"  name="image_url">-->
-
-                                 <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
-                                <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
-                                <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
-                                <!--                <input type="text"  name="image_url">-->
-
-                                <br>
-
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                           
-                        </div>
-                        
-                </div>
 
 
-<!--                            <button id="addPicture">addPicture</button>-->
-<!--                            <input class="btn" type="submit" />-->
-                        </div>`
-    cardBody.innerHTML = html;
 
-    let venueDetailsDiv=document.createElement("div");
-    let venueDetailsButton=document.createElement("button");
-    venueDetailsButton.setAttribute("class", "btn btn-primary float-left btn-sm text-center" )
-    venueDetailsDiv.appendChild(venueDetailsButton)
-    venueDetailsButton.innerText="See Details"
-
-    //adding filestack addPicture button
-    let fileStackButton=document.createElement("button");
-    fileStackButton.setAttribute("class", "addPicture");
-    fileStackButton.innerText="addPicture"
-
-    activityImageForm.appendChild(fileStackButton)
-
-    activityFormDiv.appendChild(activityImageForm);
-
-    venueCard.appendChild(venueDetailsDiv)
-    venueCard.appendChild(activityFormDiv)
-
+//
+//     html += `</div>`
+// html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+//                 <div class="modal-dialog">
+//                     <div class="modal-content">
+//                         <div class="modal-header">
+//                             <h5 class="modal-title" id="exampleModalLabel">Albums</h5>
+//                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+//                         </div>
+//                         <div class="modal-body" th:each="image : ${place.image}">
+//                             <table class="table">
+//
+//                                     <a th:href="">
+//                                     <img th:src="" id="" class="img-thumbnail"  alt="...">
+//
+//                                     </a>
+//
+//                                 <!--                &lt;!&ndash;    this is our hidden input field and this is what we want to actually pass our image url in. &ndash;&gt;-->
+// <!--                                <input type="hidden" id="image"  name="image_url">-->
+//
+//                                  <!--                &lt;!&ndash;    This is the button a user will press if they want to open the filepicker &ndash;&gt;-->
+//                                 <!--                &lt;!&ndash;    note: you might want to change the text in the button after &ndash;&gt;-->
+//                                 <!--                &lt;!&ndash;    they have uploaded a image with the filepicker to "change picture" or file. &ndash;&gt;-->
+//                                 <!--                <input type="text"  name="image_url">-->
+//
+//                                 <br>
+//
+//                             </table>
+//                         </div>
+//                         <div class="modal-footer">
+//
+//                         </div>
+//
+//                 </div>
+//
+//
+// <!--                            <button id="addPicture">addPicture</button>-->
+// <!--                            <input class="btn" type="submit" />-->
+//                         </div>`
+//     cardBody.innerHTML = html;
 
     let yesButton=document.createElement("button");
     yesButton.setAttribute("id", "yes-button");
@@ -255,11 +249,27 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
     voteDiv.appendChild(yesButton);
     voteDiv.appendChild(counter);
     voteDiv.appendChild(noButton)
-    cardBody.appendChild(voteDiv)
+    venueInfo.appendChild(voteDiv)
+
+    //creating button to display additional venue details.
+    let venueDetailsDiv=document.createElement("div");
+    let venueDetailsButton=document.createElement("button");
+    venueDetailsButton.setAttribute("class", "btn btn-primary float-left btn-sm text-center" )
+    venueDetailsDiv.appendChild(venueDetailsButton)
+    venueDetailsButton.innerText="See Details"
+
+    //adding filestack addPicture button
+    let fileStackButton=document.createElement("button");
+    fileStackButton.setAttribute("class", "addPicture");
+    fileStackButton.innerText="Add picture"
+    // let pictureIcon=document.createElement("i");
+    // pictureIcon.setAttribute("class", "bi bi-images");
+    // fileStackButton.appendChild(pictureIcon)
+
+    cardBody.appendChild(fileStackButton)
 
 
-
-
+    venueCard.appendChild(venueDetailsDiv)
 
 
     let activityList=document.getElementById("activityList")
@@ -267,17 +277,11 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
 
 
 
-    venueDetailsButton.addEventListener("click", ()=>{
-        marker.addListener("click", toggleBounce(marker))
-        venueCard.style.width="100%";
-        venueCard.style.maxWidth="100%";
 
-
-    })
-    var listener = function (event) {
+    var showActivityImages = function (event) {
         let imageDiv = document.getElementById(place.place)
         let activityPic = document.getElementById("activity-pics")
-    let activityDiv= document.getElementsByClassName("activityImageDiv")
+        let activityDiv= document.getElementsByClassName("activityImageDiv")
         for (let i =0;i<activityDiv.length;i++){
             let singleActivityDiv = activityDiv[i]
             if (singleActivityDiv != imageDiv){
@@ -287,29 +291,81 @@ html+=` <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby
             }
         }
         activityPic.innerHTML;
-
-
     }
-venueCard.addEventListener('click', listener);
 
 
-    var listener1 = function (event) {
+    var showAllImages = function (event) {
         let imageDiv = document.getElementById(place.place)
         let activityPic = document.getElementById("activity-pics")
         let activityDiv= document.getElementsByClassName("activityImageDiv")
         for (let i =0;i<activityDiv.length;i++){
             let singleActivityDiv = activityDiv[i]
-            if (singleActivityDiv != imageDiv){
-                singleActivityDiv.style.display = "inline-block"
-            }else{
-                singleActivityDiv.style.display = "inline-block"
-            }
+            singleActivityDiv.style.display = "inline-block"
         }
         activityPic.innerHTML;
-
-
     }
-    venueCard.addEventListener('dblclick', listener1);
+
+    venueDetailsButton.addEventListener("click", ()=>{
+        if (venueDetailsButton.innerText==="See Details"){
+            toggleBounce(marker)
+            // marker.addListener("click", toggleBounce(marker))
+            venueCard.style.width="100%";
+            venueCard.style.maxWidth="100%";
+            venueImage.setAttribute("src", place.photoURL);
+            venueDetailsButton.innerText="Hide Details"
+             additionalVenueInfo.style.display="block"
+            showActivityImages();
+        } else{
+            toggleBounce(marker);
+            venueCard.style.width="250px";
+            venueCard.style.maxWidth="250px";
+            venueImage.setAttribute("src", "");
+            venueDetailsButton.innerText="Hide Details"
+            additionalVenueInfo.style.display="none"
+            venueDetailsButton.innerText="See Details"
+            showAllImages();
+        }
+
+
+    })
+
+
+
+
+    let additionalVenueInfo=document.createElement("div");
+    additionalVenueInfo.setAttribute("class", "additionalVenueInfo");
+
+    let websiteLink=document.createElement("a");
+    websiteLink.setAttribute("class", "websiteDiv");
+    websiteLink.innerText=place.website
+    additionalVenueInfo.appendChild(websiteLink);
+
+    let addressDiv=document.createElement("div");
+    addressDiv.setAttribute("class", "addressDiv")
+    addressDiv.innerText=place.address
+    additionalVenueInfo.appendChild(addressDiv);
+
+    let hoursDiv=document.createElement("div");
+    hoursDiv.setAttribute("class", "hoursDiv")
+    hoursDiv.innerText=place.hours
+    additionalVenueInfo.appendChild(hoursDiv);
+
+    cardBody.appendChild(additionalVenueInfo)
+
+
+    // let imagePreview = document.createElement("image")
+    // let imagePreviewDiv = document.createElement("div")
+    // imagePreviewDiv.appendChild(imagePreview)
+    // imagePreviewDiv.style.display = "none"
+    // let submitButton=document.createElement("button")
+    // submitButton.setAttribute("type", "submit")
+    // submitButton.innerText="submit"
+    // imagePreviewDiv.appendChild(imagePreview)
+    // imagePreviewDiv.appendChild(submitButton)
+    //
+    // cardBody.appendChild(imagePreviewDiv)
+
+
 
 
     const options = {
@@ -324,17 +380,18 @@ venueCard.addEventListener('click', listener);
             console.log(imgURL);
 
             // this sets my hidden input to the value of my new image url.
-           imageUrlInput.value=imgURL;
-            // this lets the user see a preview of the image that they uploaded.
-            // $('#imagePreview').attr('src',imgURL);
-            imagePreview.setAttribute("src", imgURL)
-            console.log(callback);
+            imageUrlInput.value=imgURL;
+
+            //will submit form now
+            activityImageForm.submit();
         }
     }
 
     // This is an event listen for listening to a click on a button
     fileStackButton.addEventListener("click",()=>{
         console.log('adding picture')
+        fileStackButton.style.display="none";
+        additionalVenueInfo.style.display="none"
 
         // this is what prevents the button from submiting the form
         event.preventDefault();
@@ -344,7 +401,6 @@ venueCard.addEventListener('click', listener);
         // where you can specify what you want the picker to do
         client.picker(options).open();
     })
-
 }
 
 function getVenueDetails(id){
