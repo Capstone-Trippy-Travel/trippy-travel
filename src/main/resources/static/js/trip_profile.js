@@ -98,6 +98,7 @@ function createVenueCard(place, marker){
 
     //creating div for each activity card.
     let venueCard = document.createElement("div");
+
     venueCard.setAttribute("class", "venueCard card");
 
     //creating div to show image (when not hidden)

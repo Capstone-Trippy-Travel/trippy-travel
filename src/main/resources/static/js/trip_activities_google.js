@@ -122,8 +122,8 @@ function createVenueCard(place, index){
 
         let html = "";
         if(place.photos!=undefined) {
-            imageUrl = place.photos[0].getUrl({maxHeight: 300});
-            html += `<img class="card-img-top" src="${imageUrl}" alt="Card image cap">`
+            // imageUrl = place.photos[0].getUrl({height: 200},{width:200});
+            // html += `<img class="card-img-top" src="${imageUrl}" alt="Card image cap">`
         }
         html += `<div class="card-body">`
         html += `<h5 class="card-title">${place.name}</h5>`
@@ -289,7 +289,7 @@ function addActivityToDatabase(place){
         success: function(data)
         {
             console.log(data);
-            console.log("sucess!!")
+            console.log("success!!")
         }
     });
 }
