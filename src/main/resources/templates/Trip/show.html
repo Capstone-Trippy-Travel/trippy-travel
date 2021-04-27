@@ -60,11 +60,11 @@
                     </form>
                 </div>
                 <div class="col">
-                <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" >
+                <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >
 
                 <input type="hidden" id="image"  name="image_url">
                 <button id="addPicture">addPicture</button>
-                <input class="btn" type="submit" />
+<!--                <input class="btn" type="submit" />-->
                 </form>
                 </div>
                 <br>
@@ -118,8 +118,18 @@
                 <div th:each="activity : ${trips.getActivities()}" class="activityImageDiv" th:id = "${activity.getPlace()}">
                     <div th:each="userImage : ${activity.getImages()}" th:class="${'imageDiv ' + activity.getPlace()}">
                         <img th:src="${userImage.getImage_url()}"  class="viewAll myImg"  onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">
+
+<!--                <div class="activityImageDiv">-->
+                    <div th:each="userImage : ${trips.getImages()}" th:class="imageDiv">
+                        <img th:src="${userImage.getImage_url()}"  class="viewAll myImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
+                        <img th:src="${userImage.getImage_url()}" th:id="${userImage.getActivity().getPlace()}"  class="viewAll myImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()!=null}">
                     </div>
-                </div>
+<!--                </div>-->
+<!--                <div th:each="activity : ${trips.getActivities()}" class="activityImageDiv" th:id = "${activity.getPlace()}">-->
+<!--                    <div th:each="userImage : ${activity.getImages()}" th:class="${'imageDiv ' + activity.getPlace()}">-->
+<!--                        <img th:src="${userImage.getImage_url()}"  class="viewAll myImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
         <!--    Bottom modal-->
@@ -156,7 +166,7 @@
 <script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/trip_profile.js"></script>
-<script src="/js/fileStack.js"></script>
+<!--<script src="/js/fileStack.js"></script>-->
 <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
         async
