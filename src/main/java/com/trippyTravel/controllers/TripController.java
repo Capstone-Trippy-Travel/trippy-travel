@@ -215,7 +215,12 @@ public class TripController {
         List<Activity> activities= tripRepository.getOne(Long.parseLong(tripId)).getActivities();
         for (Activity activity: activities){
             List<ActivityVote> activityVotes = activity.getActivityVotes();
+
+            //will set an initial vote setting on none, then will check to see if user voted and modify accordingly.
             activity.setUsersPreviousVote("none");
+
+            //will grab all comments from this activity, and pass the quantity to the object to be passed to the page.
+            activity.setCommentCount(commentRepository.findCommentsByActivity_Id(activity.getId()).size());
             int voteCount=0;
             for (ActivityVote activityVote: activityVotes){
                 if (activityVote.isVote()){
