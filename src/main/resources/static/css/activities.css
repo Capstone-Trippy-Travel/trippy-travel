@@ -190,6 +190,26 @@ html, body, .container{
     display: none;
 }
 
+#img01{
+    width: 250px;
+}
+.card-img-top{
+    width: 250px;
+}
+.card-body{
+    width: 230px;
+    height: 200px;
+
+}
+#venueList{
+    display: flex;
+}
+#venueDiv{
+
+
+}
+
+
 .voteDiv{
     justify-content: space-evenly;
 }

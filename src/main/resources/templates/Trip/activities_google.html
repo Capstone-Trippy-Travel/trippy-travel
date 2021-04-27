@@ -81,7 +81,7 @@
             </ul>
         </div>
         <div class="card-body">
-            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>
+<!--            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>-->
             <div id="tripDate" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
             <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>
             <!--        <p class="card-text" th:text="${trip.getDescription()}"></p>-->
@@ -104,8 +104,13 @@
     </form>
 
     <!--</form>-->
-    <div class="row">
-        <div id="venueDiv" class="col-6">
+    <div class="row row-cols-12">
+        <div class=" col-md-12 col-lg-6 "  >
+            <div id="clickedPlace"></div>
+            <div id="map"></div>
+        </div>
+
+        <div id="venueDiv" class="col-lg-6 col-md-12">
             <div class="form-group">
                 <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants">
                 <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>
@@ -115,10 +120,7 @@
 
             </div>
         </div>
-        <div class="col-6"  >
-            <div id="clickedPlace"></div>
-            <div id="map"></div>
-        </div>
+
     </div>
 </div>
 
