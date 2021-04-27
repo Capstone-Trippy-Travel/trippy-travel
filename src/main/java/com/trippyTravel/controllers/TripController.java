@@ -268,7 +268,11 @@ public class TripController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List <Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip trip: unreadCommentTrips){
+                System.out.println(trip.getName());
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips );
         }
 
         System.out.println();
