@@ -65,6 +65,20 @@ public class Comment {
         this.replies = replies;
     }
 
+    public Comment(String comment_text, User user, Trip trip, Activity activity) {
+        this.comment_text = comment_text;
+        this.user = user;
+        this.trip = trip;
+        this.activity = activity;
+    }
+
+    public Comment(String comment_text, User user, Trip trip) {
+        this.comment_text = comment_text;
+        this.user = user;
+        this.trip = trip;
+
+    }
+
     public long getId() {
         return id;
     }

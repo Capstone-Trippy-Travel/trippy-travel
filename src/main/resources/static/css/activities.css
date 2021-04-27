@@ -219,6 +219,21 @@ html, body, .container{
 .commentLikeCounterDiv{
     height: 40px;
 
+
+}
+
+
+
+
+#comments{
+    max-height: 300px;
+    overflow-y: scroll;
+
+
+}
+
+#tripProfilePicture{
+    max-height: 200px;
 }
 
 
