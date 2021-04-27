@@ -44,8 +44,9 @@
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
             <!-- Button trigger modal -->
-            <img th:src="${trips.getImages().get(0).getImage_url()}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trips.getImages().size()>0}">
-
+            <div style="text-align: center">
+                <img th:src="${trips.getImages().get(0).getImage_url()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trips.getImages().size()>0}">
+            </div>
            
                     <h1 th:text="${trips.name}" class="card-title"></h1>
                     <!--    </div>-->
@@ -84,22 +85,24 @@
                                     <div th:text="${comment.getComment_text()}"></div>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
                 </div>
-                <div class="col">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <i class='far fa-comment ' style='font-size:36px' id="formButton"></i>
-                    <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm" style="display: none">
-                        <textarea name="comment" placeholder="Enter comment here"></textarea>
-                        <button type="submit" id="comment">Submit</button>
+                <textarea name="comment" placeholder="Enter comment here" id="tripCommentInput"></textarea>
+                <button type="submit" id="tripCommentButton">Submit</button>
+<!--                <div class="col">-->
+<!--                    <br>-->
 
-                    </form>
-                    <br>
-                </div>
+<!--                    <i class='far fa-comment ' style='font-size:36px' id="formButton"></i>-->
+<!--                    <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm" style="display: none">-->
+<!--                        <textarea name="comment" placeholder="Enter comment here"></textarea>-->
+<!--                        <button type="submit" id="comment">Submit</button>-->
+
+<!--                    </form>-->
+<!--                    <br>-->
+<!--                </div>-->
 
 
             </div>

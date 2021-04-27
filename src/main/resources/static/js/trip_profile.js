@@ -596,3 +596,53 @@ $('#addPicture').click(function (event){
     client.picker(options).open();
 })
 
+let pathUrl=window.location.pathname;
+let pathUrlArray=pathUrl.split("/");
+let tripId=pathUrlArray[pathUrlArray.length-1];
+
+let tripCommentInput=document.getElementById("tripCommentInput")
+let tripCommentButton=document.getElementById("tripCommentButton")
+let currentTripComments=document.getElementById("comments")
+
+tripCommentButton.addEventListener("click", ()=>{
+    addCommentToTrip(tripCommentInput.value, tripId)
+})
+
+function addCommentToTrip(comment, tripId){
+    jQuery.ajax({
+        'url': `/trip/${tripId}/comments?comment=${comment}`,
+        success: function (comments) {
+            console.log(comments)
+            let html="";
+
+            for (let comment of comments){
+                html+=`<div >
+                        <div class="row no-gutters">
+                            <div class="col-sm-2" >
+                                <img src="${comment.user.profile_image}" class="card-img-top h-100" default="/imgs/default-profile-picture.png">
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="">
+                                    <div class=""><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
+                                    <div>${comment.comment_text}</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>`
+
+            }
+            currentTripComments.innerHTML=html;
+            tripCommentInput.value=""
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    })
+}
+
+$('#comments').scrollTop($('#comments')[0].scrollHeight);
+
+
+
