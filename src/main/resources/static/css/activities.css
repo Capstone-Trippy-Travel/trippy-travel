@@ -218,7 +218,12 @@ html, body, .container{
 }
 .commentLikeCounterDiv{
     height: 40px;
+
+
 }
+
+
+
 
 #comments{
     max-height: 300px;
@@ -230,4 +235,5 @@ html, body, .container{
 #tripProfilePicture{
     max-height: 200px;
 }
+
 
