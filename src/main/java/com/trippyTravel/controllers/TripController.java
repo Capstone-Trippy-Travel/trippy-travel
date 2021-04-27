@@ -67,7 +67,6 @@ public class TripController {
             model.addAttribute("friendRequests", friendRequests);
             List<Trip> unreadCommentTrips = new ArrayList<>();
             model.addAttribute("unreadCommentTrips", unreadCommentTrips);
-
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
