@@ -31,7 +31,7 @@
        </div>
        <hr class="my-5">
        <div class="main-trip-page">
-           <div th:each="trip : ${trips}" id="main-trip-page-item">
+           <div th:each="trip : ${publicTrips}" id="main-trip-page-item">
                <a th:href="${'/trip/'+trip.id}"><h5 th:text="${trip.name}" class="trip-items" style="font-weight: bold;"></h5></a>
                <div class="card-container" >
                    <div class="front">

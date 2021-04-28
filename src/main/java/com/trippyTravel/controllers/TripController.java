@@ -57,10 +57,11 @@ public class TripController {
             model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
         }
         System.out.println();
+        model.addAttribute("publicTrips", tripRepository.findTripsByVisibility());
         return "Trip/index";
     }
     @PostMapping("/trip")
-    public String index(Model model) {
+    public String index(Model model, @PathVariable Long id) {
         List<Trip> tripFromDb= tripRepository.findAll();
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
