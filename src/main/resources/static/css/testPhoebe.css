@@ -63,7 +63,7 @@ a{
     object-fit: cover;
 }
 .side-profile{
-    /*padding: 20px 10px 20px 5px;*/
+    padding: 20px 10px 20px 5px;
     margin: 10px;
 }
 
@@ -91,7 +91,7 @@ a{
 }
 #cardPic{
     overflow: auto;
-    height: 750px;
+    height: 364px;
 }
 .group-pics{
     float:left;
