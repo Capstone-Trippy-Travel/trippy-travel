@@ -22,7 +22,7 @@
             <div class="cartoptionbox">
                     <div class="form-group">
                         <label >Group Name</label>
-                        <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
+                        <input type="text" class="form-control"  name="name" th:field="*{name}" />
                     </div>
                     <div class="input-field"><br>
                         <label >Group Privacy</label>
@@ -44,7 +44,7 @@
 
                     <div class="form-group col-12" style="padding: 0px"><br>
                         <label >Add a Group Member</label>
-                        <input id="searchUsers" type="text" class="form-control" name="name" placeholder="">
+                        <input id="searchUsers" type="text" class="form-control" name="userName" placeholder="">
                         <ul id="databaseMatches" class="list-group"></ul>
                         <!--        <button type="submit" class="btn btn-primary">Submit Post</button>-->
                     </div><br>
@@ -246,6 +246,11 @@
             },500);
 
         });
+
+    let groupName=document.getElementById("name");
+    groupName.addEventListener("change", ()=>{
+        console.log(groupName.value)
+    })
 
 </script>
 <script src="/js/notifications.js" th:inline="javascript"></script>
