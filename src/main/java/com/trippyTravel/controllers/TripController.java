@@ -181,9 +181,9 @@ public class TripController {
     public String updateTrip(@PathVariable Long id ,Model model){
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("groups", groupsRepository.findByOwner(user));
-        Trip trip=tripRepository.getOne(id);
-        System.out.println(trip.getName());
-        model.addAttribute("trip", trip);
+        Trip trips=tripRepository.getOne(id);
+        System.out.println(trips.getName());
+        model.addAttribute("trip", trips);
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             model.addAttribute("friendRequests", friendRequests);
