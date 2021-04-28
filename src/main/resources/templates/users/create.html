@@ -13,7 +13,7 @@
 
 <body id="register-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<hr class="rounded" style="width: 85%">
+<hr class="rounded" style="width: 90%">
 <main class="container" style="max-width: 500px">
     <form class="col s12" th:action="@{/users/create}" th:method="POST" th:object="${user}">
         <fieldset class="width-80">
@@ -49,7 +49,7 @@
                 <p class="card-panel red darken-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </div><br>
 
-            <button class="btn btn-block" type="submit">Register</button>
+            <button class="btn btn-primary btn-md btn-block" type="submit">Register</button>
         </fieldset>
     </form>
 </main>
@@ -93,6 +93,7 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</main>-->
+<script src="/js/notifications.js" th:inline="javascript"></script>
 
 <div th:replace="fragments/footer :: footer"></div>
 </body>

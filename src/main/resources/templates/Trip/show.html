@@ -38,7 +38,7 @@
 <div class="row" id="tripContainer">
 <div class="card col-4" style="width: 18rem;">
     <div class="card-body">
-        <main class="container" id="tripProfileInfo">
+        <div class="container" id="tripProfileInfo">
             <!--    <div class="post" th:each="image:${post.getImages()}">-->
 
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
@@ -47,65 +47,62 @@
             <div style="text-align: center">
                 <img th:src="${trips.getImages().get(0).getImage_url()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trips.getImages().size()>0}">
             </div>
-           
-                    <h1 th:text="${trips.name}" class="card-title"></h1>
-                    <!--    </div>-->
+                <h1 th:text="${trips.name}" class="card-title"></h1>
 
-
-
-
-            <div class="row">
-                <div class="col">
-                    <form th:action="${'/trip/'+ trips.id +'/delete'}" method="POST">
-                        <button type="submit" id="delete" >Delete Trip</button>
+                <div>
+                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get">
+                        <button type="submit" id="edit" >Edit Trip</button>
                     </form>
                 </div>
-                <div class="col">
-                <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >
 
-                <input type="hidden" id="image"  name="image_url">
-                <button id="addPicture">addPicture</button>
-<!--                <input class="btn" type="submit" />-->
-                </form>
+            <div class="row">
+                <div class="col form-group">
+                    <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >
+                        <input type="hidden" id="image"  name="image_url">
+                        <button id="addPicture">addPicture</button>
+                        <!--                <input class="btn" type="submit" />-->
+                    </form>
                 </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div id="comments">
-                    <div th:each="comment : ${trips.getComments()}" >
-                        <div class="row no-gutters">
-                            <div class="col-sm-2" >
-                                <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
-                                <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
-                            </div>
-                            <div class="col-sm-10">
-                                <div class="">
-                                    <div class=""><strong th:text="${comment.getUser().getFirstName()+ ' '+ comment.getUser().getLastName()}"></strong></div>
-                                    <div th:text="${comment.getComment_text()}"></div>
-                                </div>
-                            </div>
+            </div>
 
+            <br>
+            <div id="comments">
+                <div th:each="comment : ${trips.getComments()}" >
+                    <div class="row no-gutters">
+                        <div class="col-sm-2" >
+                            <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
+                            <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
                         </div>
-
+                        <div class="col-sm-10">
+                            <div class="">
+                                <div class=""><strong th:text="${comment.getUser().getFirstName()+ ' '+ comment.getUser().getLastName()}"></strong></div>
+                                <div th:text="${comment.getComment_text()}"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <textarea name="comment" placeholder="Enter comment here" id="tripCommentInput"></textarea>
                 <button type="submit" id="tripCommentButton">Submit</button>
-<!--                <div class="col">-->
-<!--                    <br>-->
-
-<!--                    <i class='far fa-comment ' style='font-size:36px' id="formButton"></i>-->
-<!--                    <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm" style="display: none">-->
-<!--                        <textarea name="comment" placeholder="Enter comment here"></textarea>-->
-<!--                        <button type="submit" id="comment">Submit</button>-->
-
-<!--                    </form>-->
-<!--                    <br>-->
-<!--                </div>-->
-
-
             </div>
+
+                <!--                <div class="col">-->
+                <!--                    <br>-->
+
+                <!--                    <i class='far fa-comment ' style='font-size:36px' id="formButton"></i>-->
+                <!--                    <form th:action="${'/trip/'+ trips.id +'/comment'}" method="post" id="commentForm" style="display: none">-->
+                <!--                        <textarea name="comment" placeholder="Enter comment here"></textarea>-->
+                <!--                        <button type="submit" id="comment">Submit</button>-->
+
+                <!--                    </form>-->
+                <!--                    <br>-->
+                <!--                </div>-->
+
+
+        </div>
+
+
         </main>
         </div>
     </div>
@@ -133,7 +130,6 @@
                     <div th:each="userImage : ${trips.getImages()}" th:class="imageDiv">
                         <img th:src="${userImage.getImage_url()}"  class="viewAll myImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
                         <img th:src="${userImage.getImage_url()}" th:id="${userImage.getActivity().getPlace()}"  class="viewAll myImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()!=null}">
-<!---->
                     </div>
 <!--                </div>-->
 <!--                <div th:each="activity : ${trips.getActivities()}" class="activityImageDiv" th:id = "${activity.getPlace()}">-->
@@ -142,6 +138,7 @@
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
+            </div>
         </div>
         <!--    Bottom modal-->
         <div id="myModal" class="modal" >
@@ -155,11 +152,8 @@
         </div>
     </div>
 
-
-
-
-<div th:replace="fragments/footer2 :: footer"></div>
 </div>
+    <div th:replace="fragments/footer2 :: footer"></div>
 <!--    <div th:replace="fragments/activity :: mainAct"></div>-->
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -178,10 +172,10 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/trip_profile.js"></script>
 <!--<script src="/js/fileStack.js"></script>-->
-<script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
-        async
-></script>
+<!--<script-->
+<!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
+<!--        async-->
+<!--&gt;</script>-->
 <script src ="/js/alternateModal.js"></script>
 
 
@@ -207,6 +201,7 @@
 
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="/js/notifications.js" th:inline="javascript"></script>
 
 
 <!--<div th:replace="fragments/footer :: footer"></div>-->

@@ -44,7 +44,6 @@
                         </form>
                     </div>
                 </div>
-
             </div>
             <div class="col-lg-8 col-md-12 main-profile" >
                 <h3 class="main-item">Trip Locations</h3>
@@ -54,9 +53,9 @@
                 <div>
                     <h4 class="main-item">Trips</h4>
                     <div class="items main-item">
-                        <div th:each="trip : ${group.getTrip()}" class="item ">
+                        <div th:each="trip : ${group.getTrip()}" class="item " style="max-width: 240px">
                             <a th:href="${'/trip/'+ trip.id}">
-                                <p><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="tripLocation"></span></p>
+                                <p class="overflow"><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="tripLocation"></span></p>
                                 <img th:src="${trip.getImages().get(0).getImage_url()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trip.getImages().size()>0}">
                             </a>
                         </div>
@@ -83,10 +82,7 @@
                         </div>
                     </div>
                     <!--                end modal tryout-->
-
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -107,6 +103,8 @@
         <script src ="/keys.js"></script>
         <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
         <script src="/js/mapDisplay.js"></script>
+<script src="/js/notifications.js" th:inline="javascript"></script>
+
 <!--        <script-->
 <!--                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
 <!--                async-->

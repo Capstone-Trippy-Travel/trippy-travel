@@ -58,7 +58,17 @@ public class CommentController {
     public @ResponseBody List<Comment> submitTripComment(@PathVariable long id, @RequestParam("comment") String comment) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        if (activityId==null){
-            commentDao.save(new Comment(comment, userDao.getOne(user.getId()), tripDao.getOne(id)));
+        Trip trip = tripDao.getOne(id);
+            commentDao.save(new Comment(comment, userDao.getOne(user.getId()), trip));
+
+        List<GroupMember> groupMembers = trip.getGroup().getGroupMembers();
+        for (GroupMember groupMember: groupMembers){
+            if (groupMember.getMember().getId()!=user.getId()){
+                groupMember.setUnreadComment(true);
+                groupMember.setUnreadCommentTrip(trip);
+                groupMembersRepository.save(groupMember);
+            }
+        }
 //        } else{
 //            if (commentDao.existsCommentByActivity_Id(activityId)){
 //            commentDao.save(new Comment(comment, user, tripDao.getOne(id), activityDao.getOne(activityId)));

@@ -8,7 +8,7 @@ body, html {
 }
 
 body {
-    background-image: url("../imgs/Toddler-looking-out-from-SUV-during-road-trip.jpeg");
+    /*background-image: url("../imgs/Toddler-looking-out-from-SUV-during-road-trip.jpeg");*/
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -80,7 +80,7 @@ fieldset {
 .btn {
 
     padding: 8px;
-    color: dodgerblue;
+    /*color: dodgerblue;*/
     border: 1px;
     border-color: lightgray;
 }
@@ -116,8 +116,13 @@ img {
     text-align: center;
 }
 
+/*#profile-page-body {*/
+/*    background-image: url("../imgs/tt_profile_background_2.jpg");*/
+/*}*/
+
 #register-body {
     background-image: url("../imgs/tt_background_mod.jpg");
+    line-height: 0;
 }
 #login-body {
     background-image: url("../imgs/tt_background_login.jpg");
@@ -133,6 +138,7 @@ img {
     background: linear-gradient(white, transparent, transparent, transparent, transparent, transparent, transparent), url("../imgs/tt_sit_on_a_plane.jpg") no-repeat center;
     background-size: cover;
     box-shadow: 0px 10px 20px -5px rgba(0,0,0,.8);
+    line-height: 1.5em;
 }
 
 .col-md-8{
@@ -219,26 +225,25 @@ font-size: smaller;
     justify-content: center;
 
 }
-.container{
-    margin-top: 70px;
-}
+/*.container{*/
+/*    margin-top: 70px;*/
+/*}*/
 #edit-profile-body{
     margin-top: 40px;
 }
-#addPicture{
-    background-color: dodgerblue;
-    padding: 8px;
-    color: white;
-    border: 1px;
-    border-color: lightgray;
-    border-radius: 5%;
-
-}
-#sumbitbutton{
-    background-color: dodgerblue;
-    padding: 8px;
-    color: white;
-    border: 1px;
-    border-color: lightgray;
-    border-radius: 5%;
-}
+/*#addPicture{*/
+/*    background-color: dodgerblue;*/
+/*    padding: 8px;*/
+/*    color: white;*/
+/*    border: 1px;*/
+/*    border-color: lightgray;*/
+/*    border-radius: 5%;*/
+/*}*/
+/*#sumbitbutton{*/
+/*    background-color: dodgerblue;*/
+/*    padding: 8px;*/
+/*    color: white;*/
+/*    border: 1px;*/
+/*    border-color: lightgray;*/
+/*    border-radius: 5%;*/
+/*}*/

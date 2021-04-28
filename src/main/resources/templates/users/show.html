@@ -9,22 +9,24 @@
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="stylesheet" href="/css/trial.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="/css/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/broke image.css">
 </head>
 
-<body>
+<body id="profile-page-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-    <div class="container" style="margin-top: 80px">
+<hr class="rounded" style="width: 90%; margin-top: unset">
+    <div class="container">
         <div class="row">
             <div class="col-lg-3 col-mg-12 side-profile">
                 <h3 th:text="${user.getFirstName()+ ' '+ user.getLastName()}" class="side-item text-center"></h3>
                 <div class="side-item">
                     <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="profileImage" default="static/imgs/blank-profile-picture-973460_1280.png">
                 </div>
-                <div class="side-item">
-                    <p th:text="${user.description}" ></p>
-                </div>
+<!--                <div class="side-item">-->
+<!--                    <p th:text="${user.description}" ></p>-->
+<!--                </div>-->
                 <div id="friend-requests" th:if="${friendRequests.size()>0}">
                     <h5>Friend Requests</h5>
                     <div class="card" th:each="friend : ${friendRequests}" th:id="${'friendRequestCard'+friend.getId()}" >
@@ -48,6 +50,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="col">
+                    <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item" style="text-align: right; margin-top: -20px; margin-right: -14px">
+                        <button class="logout-button">Edit Profile</button>
+                    </form>
+                </div>
+
 <!--                <div class="side-item">-->
 <!--                    <i class='fas fa-user-friends' style='font-size:36px'></i>-->
 <!--                    <i class='fas fa-user-plus' style='font-size:36px'></i>-->
@@ -56,27 +64,22 @@
 <!--                <form class="navbar-form " th:action="@{}" th:method="POST">-->
                     <div class="input-group side-item">
                         <input type="text" class="form-control"  name="search" placeholder="Search Friends" id="searchUsers">
-                        <button type="submit">Go</button>
+                        <button class="btn-profile-go btn-primary" type="submit" style="border-radius: 3px">Go</button>
                     </div>
                     <div id="usersList">
 
                     </div>
 <!--                </form>-->
                 <div class="row">
-                    <div class="col">
-                        <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item">
-                            <button>Edit Profile</button>
-                        </form>
-                    </div>
-                    <div class="col">
-                        <form th:action="${'/groups/create'}" method="GET" class="button side-item">
-                            <button>Create Group</button>
-                        </form>
-                    </div>
+<!--                    <div class="col" style="padding-left: 23px">-->
+<!--                        <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item">-->
+<!--                            <button class="logout-button">Edit Profile</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
                 </div>
             </div>
             <div class="col-lg-8 col-md-12 main-profile">
-                <h3 class="side-item">Your Places</h3>
+                <h3 class="side-item" style="text-align: center; margin-top: 15px">Your Places</h3>
                 <div id="mapContainerProfile" class="main-item">
                     <div id="map"></div>
                 </div>
@@ -87,14 +90,19 @@
                     <li class="nav-item1">
                         <a class="nav-link" id="planning-tab" data-toggle="tab" href="#planning" role="tab" >Planned Trips</a>
                     </li>
+                    <div class="col" style="text-align: right">
+                        <form th:action="${'/trip/create'}" method="GET" class="button side-item">
+                            <button class="logout-button">Create Trip</button>
+                        </form>
+                    </div>
                 </ul>
 
                 <div class="tab-content" id="myTabContent1">
                     <div class="tab-pane fade show active" id="trips" role="tabpanel" aria-labelledby="trips-tab">
                         <div class="items main-item ">
-                            <div th:each="trip : ${trips}" class="item ">
+                            <div th:each="trip : ${trips}" class="item " style="max-width: 250px">
                                 <a th:href="${'/trip/'+ trip.id}">
-                                    <h5><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
+                                    <h5 th:class="overflow" ><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
                                     <img th:src="${trip.getImages().get(0).getImage_url()}" alt="" class="trip-image">
                                 </a>
                             </div>
@@ -102,15 +110,15 @@
                     </div>
                      <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
                          <div class="items main-item ">
-                             <div th:each="trip : ${plannedTrips}" class="item ">
+                             <div th:each="trip : ${plannedTrips}" class="item " style="max-width: 250px">
                                  <a th:href="${'/trip/'+ trip.id}">
-                                     <h5><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
+                                     <h5 class="overflow"><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
                                      <img th:src="${trip.getImages().get(0).getImage_url()}" alt="" class="trip-image">
                                  </a>
                              </div>
                          </div>
                      </div>
-                </div>
+                </div><br>
                 <ul class="nav nav-tabs" id="myTab2" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="groups-tab" data-toggle="tab" href="#groups" role="tab" >Your Groups</a>
@@ -118,32 +126,39 @@
                     <li class="nav-item">
                         <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" >Your Friends</a>
                     </li>
+                    <div class="col" style="text-align: right">
+                        <form th:action="${'/groups/create'}" method="GET" class="button side-item">
+                            <button class="logout-button">Create Group</button>
+                        </form>
+                    </div>
                 </ul>
 
                 <div class="tab-content" id="myTabContent2">
                     <div class="tab-pane fade show active" id="groups" role="tabpanel" aria-labelledby="groups-tab">
                             <div class="items main-item">
-                                <div th:each="userGroup : ${user.getGroupMember()}" class="item ">
+                                <div th:each="userGroup : ${user.getGroupMember()}" class="item " style="max-width: 180px;">
                                     <a th:href="${'/groups/'+ userGroup.getGroup().getId()}">
                                         <h5><span th:text="${userGroup.getGroup().getName()}"></span></h5>
                                         <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" style="width: 100px;height: 100px" id="groupPic" class="group-image">
+
                                     </a>
                                 </div>
                             </div>
                     </div>
                     <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
                         <div class="items main-item">
-                            <div th:each="userFriend : ${user.getFriends()}" class="item"><x></x>
+                            <div th:each="userFriend : ${user.getFriends()}" class="item" style="max-width: 100px"><x></x>
                                 <a th:href="${'/users/'+ userFriend.getFriend().getId()}">
                                     <h5 class="text-center"><span th:text="${userFriend.getFriend().getFirstName()}"></span> </h5>
                                     <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" id="friendPic" style="width: 100px;height: 100px" class="friend-image">
+
                                 </a>
                             </div>
                         </div>
 
                     </div>
                 </div>
-                <h4 class="main-item">Your Pictures</h4>
+                <h4 class="main-item" style="text-align: center">Your Pictures</h4>
                 <div class=" main-item" >
                     <div id="cardPic">
                         <div th:each="userImage : ${user.getImages()}" class="group-pics ">
@@ -162,11 +177,11 @@
                 <!--                end modal tryout-->
             </div>
         </div>
-    </div>
+    </div><br>
 
-
-<div th:replace="fragments/footer2 :: footer"></div>
-
+<div id="profile-footer">
+<div id="div-profile-footer" th:replace="fragments/footer2 :: footer"></div>
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -181,6 +196,7 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/mapDisplay.js"></script>
 <script src="/js/userProfile.js"></script>
+<script src="/js/notifications.js" th:inline="javascript"></script>
 <!--<script-->
 <!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
 <!--        async-->

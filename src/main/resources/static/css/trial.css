@@ -11,13 +11,21 @@ header,
     padding: 10px;
 }
 footer{
-    background-color: whitesmoke;
+    /*background-color: black;*/
+    /*color: white;*/
+    opacity: .7;
+    background: linear-gradient(transparent, black);
+    background-size: cover;
+    line-height: 1.5em;
 }
-nav{
-    background-color: white;
-    /*opacity: 10%;*/
-    color: black;
-}
+/*.footer-link {*/
+/*    color: white;*/
+/*}*/
+/*nav{*/
+/*    background-color: white;*/
+/*    !*opacity: 10%;*!*/
+/*    color: black;*/
+/*}*/
 button{
     background-color: #bbbbbb;
 }
@@ -52,4 +60,18 @@ button{
     margin: 1px;
     border-radius: 3%;
     object-fit: cover;
+}
+
+.userPage-TripImage{
+    width: 180px;
+    height: 130px;
+    margin: 1px;
+    border-radius: 3%;
+    object-fit: cover;
+}
+.overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: inherit;
 }
