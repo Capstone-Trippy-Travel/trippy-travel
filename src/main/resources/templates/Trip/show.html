@@ -86,18 +86,19 @@
             </div>
                 <h1 th:text="${trips.name}" class="card-title"></h1>
 
-                <div>
-                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get">
-                        <button type="submit" id="edit" >Edit Trip</button>
-                    </form>
-                </div>
+
 
             <div class="row">
-                <div class="col form-group">
+                <div class="col-6 form-group">
                     <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >
                         <input type="hidden" id="image"  name="image_url">
                         <button id="addPicture">addPicture</button>
                         <!--                <input class="btn" type="submit" />-->
+                    </form>
+                </div>
+                <div class="col-6">
+                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get">
+                        <button type="submit" id="edit" >Edit Trip</button>
                     </form>
                 </div>
             </div>

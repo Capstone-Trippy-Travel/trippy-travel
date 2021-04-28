@@ -58,7 +58,7 @@ function initMap() {
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
             venueList.innerHTML="";
             for (let i = 0; i < results.length; i++) {
-                createVenueCard(results[i], i, marker)
+                createVenueCard(results[i], i)
             }
             map.setCenter(results[0].geometry.location);
         }

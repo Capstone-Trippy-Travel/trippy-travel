@@ -55,27 +55,25 @@ public class CommentController {
     }
 
     @RequestMapping(value="/trip/{id}/comments", method=RequestMethod.GET, produces="application/json")
-    public @ResponseBody List<Comment> submitTripComment(@PathVariable long id, @RequestParam("comment") String comment) {
+    public @ResponseBody List<Comment> submitTripComment(@PathVariable long id, @RequestParam(name="comment", required=false) String comment) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if (activityId==null){
-        Trip trip = tripDao.getOne(id);
+
+        //will save new comment to datbase, if one is passed to it
+        if (comment!=null) {
+            Trip trip = tripDao.getOne(id);
             commentDao.save(new Comment(comment, userDao.getOne(user.getId()), trip));
 
-        List<GroupMember> groupMembers = trip.getGroup().getGroupMembers();
-        for (GroupMember groupMember: groupMembers){
-            if (groupMember.getMember().getId()!=user.getId()){
-                groupMember.setUnreadComment(true);
-                groupMember.setUnreadCommentTrip(trip);
-                groupMembersRepository.save(groupMember);
+            List<GroupMember> groupMembers = trip.getGroup().getGroupMembers();
+            for (GroupMember groupMember : groupMembers) {
+                if (groupMember.getMember().getId() != user.getId()) {
+                    groupMember.setUnreadComment(true);
+                    groupMember.setUnreadCommentTrip(trip);
+                    groupMembersRepository.save(groupMember);
+                }
             }
         }
-//        } else{
-//            if (commentDao.existsCommentByActivity_Id(activityId)){
-//            commentDao.save(new Comment(comment, user, tripDao.getOne(id), activityDao.getOne(activityId)));
-//            }
-//        }
-        List<Comment> comments=commentDao.findCommentsByTrip_Id(id);
-        return comments;
+
+        return commentDao.findCommentsByTrip_Id(id);
 
     }
 
