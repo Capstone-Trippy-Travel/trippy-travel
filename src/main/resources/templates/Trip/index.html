@@ -36,7 +36,7 @@
                <a th:href="${'/trip/'+trip.id}"><h5 th:text="${trip.name}" class="trip-items" style="font-weight: bold;"></h5></a>
                <div class="card-container" >
                    <div class="front">
-                       <img class="viewAll  trip-page-pic trip-items"  th:src="${trip.getTrip_profile_image()}" th:if="${trip.getImages().size()>0}" alt="...">
+                       <img class="viewAll  trip-page-pic trip-items"  th:src="${trip.getTrip_profile_image()}" alt="...">
                        <h5 th:text="${trip.location}" style="text-align: left;"></h5>
                    </div>
                    <div class="back" >
