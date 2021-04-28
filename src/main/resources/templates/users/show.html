@@ -125,7 +125,7 @@
                                 <div th:each="userGroup : ${user.getGroupMember()}" class="item ">
                                     <a th:href="${'/groups/'+ userGroup.getGroup().getId()}">
                                         <h5><span th:text="${userGroup.getGroup().getName()}"></span></h5>
-                                        <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" class="userPage-image">
+                                        <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" class="userPage-TripImage">
                                     </a>
                                 </div>
                             </div>
@@ -180,10 +180,10 @@
 <script src="/js/mapDisplay.js"></script>
 <script src="/js/userProfile.js"></script>
 <script src="/js/notifications.js" th:inline="javascript"></script>
-<script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
-        async
-></script>
+<!--<script-->
+<!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"-->
+<!--        async-->
+<!--&gt;</script>-->
 
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 

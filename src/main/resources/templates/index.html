@@ -156,9 +156,19 @@
                         <h4 class="white-text my-4">
                             Trusted Travel Planner. Bring the fun to your trip with Trippi Travel.
                         </h4>
-                        <form th:action="${'/trip/create'}" method="GET" class="button side-item">
-                            <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!</button>
-                        </form>
+                        <div class="row">
+                            <div class="col">
+                                <form th:action="${'/trip/create'}" method="GET" class="button side-item">
+                                    <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!</button>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <form th:action="${'/groups/create'}" method="GET" class="button side-item">
+                                    <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!</button>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
