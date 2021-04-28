@@ -60,3 +60,9 @@ button{
     border-radius: 3%;
     object-fit: cover;
 }
+.overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: inherit;
+}

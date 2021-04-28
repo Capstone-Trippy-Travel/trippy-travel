@@ -52,9 +52,9 @@
                 <div>
                     <h4 class="main-item">Trips</h4>
                     <div class="items main-item">
-                        <div th:each="trip : ${group.getTrip()}" class="item ">
+                        <div th:each="trip : ${group.getTrip()}" class="item " style="max-width: 240px">
                             <a th:href="${'/trip/'+ trip.id}">
-                                <p><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="tripLocation"></span></p>
+                                <p class="overflow"><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="tripLocation"></span></p>
                                 <img th:src="${trip.getImages().get(0).getImage_url()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trip.getImages().size()>0}">
                             </a>
                         </div>
