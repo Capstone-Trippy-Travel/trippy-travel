@@ -11,3 +11,13 @@ function replaceEmptySrc2(brokeTrip) {
         brokeTrip.src = '/imgs/trip_airplane.jpg';
     }
 }
+const brokeimg = document.querySelectorAll('.profile-icon-small');
+console.log(brokeimg)
+console.log(brokeimg[0].src);
+
+brokeimg.forEach(replaceEmptySrc3);
+function replaceEmptySrc3(image) {
+    if (image.getAttribute('src') === '') {
+        image.src = '/imgs/blank-profile-picture-973460_1280.png';
+    }
+}
