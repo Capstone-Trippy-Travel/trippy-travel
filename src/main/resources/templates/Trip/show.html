@@ -44,7 +44,7 @@
 <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
             <!-- Button trigger modal -->
             <div style="text-align: center">
-                <img th:src="${trips.getTrip_profile_image()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trips.getImages().size()>0}">
+                <img th:src="${trips.getTrip_profile_image()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
             </div>
                 <h1 th:text="${trips.name}" class="card-title"></h1>
 

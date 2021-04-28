@@ -151,12 +151,14 @@ public class TripController {
         return "Trip/create";
     }
     @PostMapping("/trip/create")
-    public String createTripForm(@ModelAttribute Trip trip,@RequestParam(name = "image_url",  required = false) String ImgUrl, @RequestParam(name="groupId")String groupId
+    public String createTripForm(@ModelAttribute Trip trip,@RequestParam(name = "trip_profile_image",  required = false) String imgUrl, @RequestParam(name="groupId")String groupId
     ) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Group group = groupsRepository.getOne(Long.parseLong(groupId));
         trip.setGroup(group);
-        Trip saveTrip= tripRepository.save(trip);
+        Trip savedTrip= tripRepository.save(trip);
+        savedTrip.setTrip_profile_image(imgUrl);
+        tripRepository.save(savedTrip);
         System.out.println();
 //        Image imageToSave = new Image(ImgUrl, user, saveTrip);
 //        System.out.println(imageToSave.getImage_url());
@@ -175,7 +177,7 @@ public class TripController {
 //        imageRepo.save(imagesToSave);
 //        imageRepo.save(image1ToSave);
 //        emailService.prepareAndSend(saveTrip, "new trip","hey where you wanna go");
-        return "redirect:/trip/"+saveTrip.getId();
+        return "redirect:/trip/"+savedTrip.getId();
     }
     @GetMapping(path = "/trip/{id}/edit")
     public String updateTrip(@PathVariable Long id ,Model model){
@@ -198,7 +200,7 @@ public class TripController {
         return "Trip/edit";
     }
     @PostMapping(path = "/trip/{id}/edit")
-    public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trip trips, @RequestParam(name="groupId")String groupId, @RequestParam(name = "image_url",  required = false) String ImgUrl) {
+    public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trip trips, @RequestParam(name="groupId")String groupId, @RequestParam(name = "trip_profile_image",  required = false) String imgUrl) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Group groups = groupsRepository.getOne(Long.parseLong(groupId));
 //        trips.setGroup(group);
@@ -209,6 +211,10 @@ public class TripController {
         trips.setId(id);
         trips.setGroup(groups);
         Trip savedTrip = tripRepository.save(trips);
+        if (imgUrl!=null){
+            savedTrip.setTrip_profile_image(imgUrl);
+        }
+        tripRepository.save(savedTrip);
         return "redirect:/trip/"+savedTrip.getId();
     }
     @PostMapping("/trip/{id}/delete")
