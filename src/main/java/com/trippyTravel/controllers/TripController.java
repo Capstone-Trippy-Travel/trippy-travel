@@ -158,12 +158,12 @@ public class TripController {
         trip.setGroup(group);
         Trip saveTrip= tripRepository.save(trip);
         System.out.println();
-        Image imageToSave = new Image(ImgUrl, user, saveTrip);
-        System.out.println(imageToSave.getImage_url());
-        System.out.println(imageToSave.getUser().getUsername());
-        System.out.println("about to save image");
-        imagesRepository.save(imageToSave);
-        System.out.println("saved image");
+//        Image imageToSave = new Image(ImgUrl, user, saveTrip);
+//        System.out.println(imageToSave.getImage_url());
+//        System.out.println(imageToSave.getUser().getUsername());
+//        System.out.println("about to save image");
+//        imagesRepository.save(imageToSave);
+//        System.out.println("saved image");
 //        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        trips.setGroup(groups);

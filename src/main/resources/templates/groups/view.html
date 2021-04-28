@@ -64,7 +64,7 @@
                     <div class=" main-item">
                         <div id="cardPic">
                             <div th:each="groupMember : ${group.getTrip()}" class="" >
-                                <div th:each="userImage : ${groupMember.getImages()}" class="group-pics">
+                                <div th:each="userImage : ${groupImages}" class="group-pics">
                                     <img class="viewAll myImg" onclick="image(event)" th:src="${userImage.getImage_url()}"  data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">
                                 </div>
                             </div>

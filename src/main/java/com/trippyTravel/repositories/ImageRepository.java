@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface ImageRepository extends JpaRepository<Image,Long> {
 
-//    @Query("select i from images i, Trip p, Group g where  ")
-//    List<Image> getTripImages();
+    @Query("select i from Image i, Trip t, Group g where i.trip=t AND t.group=g AND g.id=?1 ")
+    List<Image> getGroupImages(long id);
 }
