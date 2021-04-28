@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/trial.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/broke image.css">
 </head>
 
 <body>
@@ -125,7 +126,7 @@
                                 <div th:each="userGroup : ${user.getGroupMember()}" class="item ">
                                     <a th:href="${'/groups/'+ userGroup.getGroup().getId()}">
                                         <h5><span th:text="${userGroup.getGroup().getName()}"></span></h5>
-                                        <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" class="userPage-image">
+                                        <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" style="width: 100px;height: 100px" id="groupPic" class="group-image">
                                     </a>
                                 </div>
                             </div>
@@ -135,7 +136,7 @@
                             <div th:each="userFriend : ${user.getFriends()}" class="item"><x></x>
                                 <a th:href="${'/users/'+ userFriend.getFriend().getId()}">
                                     <h5 class="text-center"><span th:text="${userFriend.getFriend().getFirstName()}"></span> </h5>
-                                    <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" class="userPage-image">
+                                    <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" id="friendPic" style="width: 100px;height: 100px" class="friend-image">
                                 </a>
                             </div>
                         </div>
@@ -174,6 +175,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
+<script src="/js/brokeimage.js"></script>
 <script src ="/js/alternateModal.js"></script>
 <script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>

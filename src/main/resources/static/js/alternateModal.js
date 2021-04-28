@@ -28,12 +28,13 @@ span.onclick = function () {
 //             heart.classList.toggle('red');
 //         });
 //     })();
+// const images = document.querySelectorAll('img');
 
-const images = document.querySelectorAll('img');
-console.log(images[0].src);
-images.forEach(replaceEmptySrc);
-function replaceEmptySrc(image) {
-    if (image.getAttribute('src') === '') {
-        image.src = '/imgs/blank-profile-picture-973460_1280.png';
-    }
-}
+// const images = document.getElementById('groupPic');
+// console.log(images[0].src);
+// images.forEach(replaceEmptySrc1);
+// function replaceEmptySrc1(image) {
+//     if (image.getAttribute('src') === '') {
+//         image.src = '/imgs/group.png';
+//     }
+// }
