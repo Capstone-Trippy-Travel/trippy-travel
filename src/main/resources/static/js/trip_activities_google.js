@@ -58,8 +58,7 @@ function initMap() {
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
             venueList.innerHTML="";
             for (let i = 0; i < results.length; i++) {
-                createMarker(results[i]);
-                createVenueCard(results[i], i)
+                createVenueCard(results[i], i, marker)
             }
             map.setCenter(results[0].geometry.location);
         }
@@ -88,16 +87,13 @@ function initMap() {
 }
 
 function createMarker(place) {
-    if (!place.geometry || !place.geometry.location) return;
     const marker = new google.maps.Marker({
         map,
         position: place.geometry.location,
     });
     markers.push(marker);
-    google.maps.event.addListener(marker, "click", () => {
-        infowindow.setContent(place.name || "");
-        infowindow.open(map);
-    });
+
+    return marker
 }
 
 function setMapOnAll(map) {
@@ -111,20 +107,44 @@ function clearMarkers() {
     setMapOnAll(null);
 }
 
+function toggleBounce(marker) {
+    if (markers!=undefined) {
+        for (let i = 0; i < markers.length; i++) {
+            markers[i].setAnimation(null)
+        }
+    }
+    if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+}
+
 function createVenueCard(place, index){
     // console.log(place.opening_hours.isOpen)
     // console.log(place.photos[0].getUrl);
 
+    let marker = createMarker(place);
 
         let venueCard = document.createElement("div");
         venueCard.setAttribute("class", "card venueCard");
 
+        //adding event listener to card, will toggle marker animation bounce.
+        venueCard.addEventListener("mouseenter", ()=>{
+            toggleBounce(marker)
+        })
+
+    venueCard.addEventListener("mouseleave", ()=>{
+        toggleBounce(marker)
+    })
+
+
 
         let html = "";
-        if(place.photos!=undefined) {
-            // imageUrl = place.photos[0].getUrl({height: 200},{width:200});
-            // html += `<img class="card-img-top" src="${imageUrl}" alt="Card image cap">`
-        }
+        // if(place.photos!=undefined) {
+        //     // imageUrl = place.photos[0].getUrl({height: 200},{width:200});
+        //     // html += `<img class="card-img-top" src="${imageUrl}" alt="Card image cap">`
+        // }
         html += `<div class="card-body">`
         html += `<h5 class="card-title">${place.name}</h5>`
         html += `<p class="card-text">${place.vicinity}</p>`
@@ -173,6 +193,11 @@ function createVenueCard(place, index){
     venueDetailsButton.addEventListener("click", ()=>{
         getVenueDetails(place.place_id)
     })
+    //
+    marker.addListener("click", ()=>{
+        getVenueDetails(place.place_id)
+    })
+
 }
 
 function getVenueDetails(id){
