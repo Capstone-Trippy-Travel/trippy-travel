@@ -116,6 +116,10 @@ img {
     text-align: center;
 }
 
+/*#profile-page-body {*/
+/*    background-image: url("../imgs/tt_profile_background_2.jpg");*/
+/*}*/
+
 #register-body {
     background-image: url("../imgs/tt_background_mod.jpg");
     line-height: 0;
