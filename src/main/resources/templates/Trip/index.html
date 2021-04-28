@@ -64,6 +64,22 @@
                </div>
            </div>
        </div>
+       <nav aria-label="...">
+           <ul class="pagination">
+               <li class="page-item" th:if="${pageNumber!=1}">
+                   <a class="page-link" th:href="${'/trip/page/'+pageNumber+(-1)}" tabindex="-1">Previous</a>
+               </li>
+               <th: block th:each="i: ${#numbers.sequence(1, pageNumber)}">
+               <li class="page-item" th:if="${pageNumber!=i}"><a class="page-link" href="#" th:text="${i}"></a></li>
+               <li class="page-item active" th:if="${pageNumber==i}">
+                   <a class="page-link" th:href="${'/trip/page/'+i}" th:text="${i}"> <span class="sr-only">(current)</span></a>
+               </li>
+               </th:>
+               <li class="page-item">
+                   <a class="page-link" th:href="${'/trip/page/'+pageNumber+1}" th:if="${pageNumber!=numPages}">Next</a>
+               </li>
+           </ul>
+       </nav>
    </div>
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 <div th:replace="fragments/footer2 :: footer"></div>

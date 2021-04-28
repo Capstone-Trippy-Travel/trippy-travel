@@ -34,11 +34,10 @@ public class CommentReplies {
     public CommentReplies() {
     }
 
-    public CommentReplies(String comment_text, User user, Comment parentComment, Date createdAt) {
+    public CommentReplies(String comment_text, User user, Comment parentComment) {
         this.comment_text = comment_text;
         this.user = user;
         this.parentComment = parentComment;
-        this.createdAt = createdAt;
     }
 
     public long getId() { return id; }

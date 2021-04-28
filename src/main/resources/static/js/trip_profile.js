@@ -295,6 +295,8 @@ function createVenueCard(place, marker){
     venueDetailsDiv.setAttribute("class", "text-center")
     let venueDetailsButton=document.createElement("button");
     venueDetailsButton.setAttribute("class", "btn btn-primary text-center" )
+    venueDetailsButton.setAttribute("data-toggle", "modal")
+    venueDetailsButton.setAttribute("data-target", "#modalPoll-1")
     venueDetailsDiv.appendChild(venueDetailsButton)
     venueDetailsButton.innerText="See Details"
 
@@ -351,13 +353,48 @@ function createVenueCard(place, marker){
 
     venueDetailsButton.addEventListener("click", ()=>{
         if (venueDetailsButton.innerText==="See Details"){
+
             toggleBounce(marker)
             // marker.addListener("click", toggleBounce(marker))
-            venueCard.style.width="100%";
-            venueCard.style.maxWidth="100%";
-            venueImage.setAttribute("src", place.photoURL);
-            venueDetailsButton.innerText="Hide Details"
-             additionalVenueInfo.style.display="block"
+            // venueCard.style.width="100%";
+            // venueCard.style.maxWidth="100%";
+
+            //adding image to modal
+            let modalActivityImage=document.getElementById("modalActivityImage")
+            modalActivityImage.setAttribute("src", place.photoURL)
+
+            //add activity name to modal
+            let modalActivityName=document.getElementById("modalActivityName");
+            modalActivityName.innerText=place.place;
+
+            //add activity website to modal
+            let modalActivityWebsite=document.getElementById("modalActivityWebsite");
+            modalActivityWebsite.setAttribute("href", place.website);
+            modalActivityWebsite.innerText=place.website;
+
+            //add activity address to modal
+            let modalActivityAddress=document.getElementById("modalActivityAddress");
+            modalActivityAddress.innerText=place.address;
+
+            //add activity hours to modal
+            let modalActivityHours=document.getElementById("modalActivityHours");
+            modalActivityAddress.innerText=place.hours;
+
+            //make ajax call to grab latest activity comments
+            retrieveActivityCommentsFromDatabase(place);
+
+            //set eventListener on comment submit button
+            let activityCommentSubmit=document.getElementById("activityModalCommentButton");
+            activityCommentSubmit.addEventListener("click",()=>{
+                //will grab text from new comment
+                let activityCommentText=document.getElementById("modalActivityCommentInput");
+                retrieveActivityCommentsFromDatabase(place, activityCommentText.value)
+                activityCommentText.value="";
+            })
+
+
+            // venueDetailsButton.innerText="Hide Details"
+            //  additionalVenueInfo.style.display="block"
             showActivityImages();
         } else{
             toggleBounce(marker);
@@ -447,6 +484,8 @@ function createVenueCard(place, marker){
         // where you can specify what you want the picker to do
         client.picker(options).open();
     })
+
+
 }
 
 function getVenueDetails(id){
@@ -642,6 +681,72 @@ function addCommentToTrip(comment, tripId){
             }
             currentTripComments.innerHTML=html;
             tripCommentInput.value=""
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    })
+}
+
+function retrieveActivityCommentsFromDatabase(place, newComment){
+    let url=""
+    //if new comment is added, will append it to ajax url
+    if (newComment){
+        url=`/trip/${place.trip.id}/activity/${place.id}?comment=${newComment}`
+    } else{
+        url=`/trip/${place.trip.id}/activity/${place.id}`
+    }
+
+    jQuery.ajax({
+        'url': url,
+        success: function (comments) {
+            console.log(comments)
+            //loop through comments returned from database and add them to commentsDiv
+            let html=""
+
+            //will check to see if original comment was included in comment replies response, and will add it first if not
+            if (comments.length>0 && comments[0].id!==0){
+                let comment=comments[0];
+                html+=`<div >
+                        <div class="row no-gutters">
+                            <div class="col-sm-2" >
+                                <img src="${comment.parentComment.user.profile_image}" class="card-img-top h-100" default="/imgs/default-profile-picture.png">
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="">
+                                    <div class=""><strong>${comment.parentComment.user.firstName} ${comment.parentComment.user.lastName}</strong></div>
+                                    <div>${comment.parentComment.comment_text}</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>`
+            }
+
+            //will loop through all comment replies returned from database and generate comments
+            for (let comment of comments){
+                html+=`<div >
+                        <div class="row no-gutters">
+                            <div class="col-sm-2" >
+                                <img src="${comment.user.profile_image}" class="card-img-top h-100" default="/imgs/default-profile-picture.png">
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="">
+                                    <div class=""><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
+                                    <div>${comment.comment_text}</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>`
+
+            }
+
+            let commentDiv=document.getElementById("activityModalComments")
+            commentDiv.innerHTML=html;
+
         },
         error: function (data) {
             console.log(data)
