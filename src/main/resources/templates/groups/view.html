@@ -19,7 +19,9 @@
         <div class="row">
             <div class="col-lg-3 col-md-12 side-profile">
                 <h3 id="heading"><span th:text="${group.name}"></span></h3>
-                <img th:src="${group.getProfile_image()}" alt="" class="profile-image side-item"/>
+                <object data="src/main/resources/static/imgs/group.png" type="image/png">
+                    <img th:src="${group.getProfile_image()}" alt=""  id="groupPic" class="profile-image  side-item" />
+                </object>
                 <h4 class="side-item text-center">About Group <span th:text="${group.name}"></span></h4>
                 <p th:text="${group.description}" class="side-item "></p>
                 <h4 class="side-item text-center">Group Members</h4>
