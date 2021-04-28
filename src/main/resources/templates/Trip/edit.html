@@ -16,11 +16,18 @@
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <main class="container">
     <div class="row">
+        <div class="col">
+            <h2>Edit Trip</h2>
+        </div>
+        <div class="col-last">
+            <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST">
+                <button type="submit" id="delete" >Delete Trip</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
         <div class="col l8 offset-l2">
-<form th:action="@{'/trip/'+ ${trip.id} +'/edit'}" method="post" th:object="${trip}" >
-
-    <h2>Edit Trip</h2>
-
+    <form th:action="@{'/trip/'+ ${trip.id} +'/edit'}" method="post" th:object="${trip}" >
     <div class="input-field col s12">
         <label >Group</label>
         <select class="form-control" name="groupId">
