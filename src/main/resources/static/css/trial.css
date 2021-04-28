@@ -53,3 +53,10 @@ button{
     border-radius: 3%;
     object-fit: cover;
 }
+.userPage-TripImage{
+    width: 180px;
+    height: 130px;
+    margin: 1px;
+    border-radius: 3%;
+    object-fit: cover;
+}

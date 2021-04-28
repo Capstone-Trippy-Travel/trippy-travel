@@ -178,6 +178,8 @@ public class TripController {
     }
     @GetMapping(path = "/trip/{id}/edit")
     public String updateTrip(@PathVariable Long id ,Model model){
+        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("groups", groupsRepository.findByOwner(user));
         Trip trip=tripRepository.getOne(id);
         System.out.println(trip.getName());
         model.addAttribute("trip", trip);
@@ -195,12 +197,18 @@ public class TripController {
         return "Trip/edit";
     }
     @PostMapping(path = "/trip/{id}/edit")
-    public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trip trips) {
-        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trip trips, @RequestParam(name="groupId")String groupId, @RequestParam(name = "image_url",  required = false) String ImgUrl) {
+        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Group groups = groupsRepository.getOne(Long.parseLong(groupId));
+//        trips.setGroup(group);
+//        Trip saveTrip= tripRepository.save(trips);
+//        System.out.println();
+//        Image imageToSave = new Image(ImgUrl, user, saveTrip);
+//        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         trips.setId(id);
         trips.setGroup(groups);
-        tripRepository.save(trips);
-        return "redirect:/trip";
+        Trip savedTrip = tripRepository.save(trips);
+        return "redirect:/trip/"+savedTrip.getId();
     }
     @PostMapping("/trip/{id}/delete")
     public String DeleteTrip(@PathVariable Long id) {
