@@ -41,9 +41,10 @@ public class TripController {
         this.activityRepository = activityRepository;
         this.friendListRepository=friendListRepository;
     }
-    @GetMapping("/trip")
-    public String SeeAllTripsPage(Model model) {
-        List<Trip> tripFromDb= tripRepository.findAll();
+    @GetMapping("/trip/page/{pageNumber}")
+    public String SeeAllTripsPage(Model model, @PathVariable int pageNumber) {
+        int numberOfTrips=tripRepository.findAll().size();
+        List<Trip> tripFromDb= tripRepository.findAll().subList((18*(-1+pageNumber)), numberOfTrips);
         model.addAttribute("trips",tripFromDb);
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
@@ -58,6 +59,13 @@ public class TripController {
         }
         System.out.println();
         model.addAttribute("publicTrips", tripRepository.findTripsByVisibility());
+        model.addAttribute("pageNumber", pageNumber);
+        double numberOfTripsDouble=(double) numberOfTrips;
+        System.out.println("number of trips: "+numberOfTrips);
+        Double numPagesDouble= Math.ceil(numberOfTripsDouble/18);
+        Long numPages=Math.round(numPagesDouble);
+        System.out.println("number of pages:"+numPages);
+        model.addAttribute("numPages", Math.ceil(numberOfTripsDouble/18));
         return "Trip/index";
     }
     @PostMapping("/trip")
