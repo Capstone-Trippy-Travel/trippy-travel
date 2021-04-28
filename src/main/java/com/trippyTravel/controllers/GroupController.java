@@ -17,6 +17,7 @@ public class GroupController {
     private GroupMembersRepository groupMemberDao;
     private UsersRepository userDao;
     private CommentRepository commentDao;
+    private ImageRepository imageDao;
     private FriendListRepository friendListRepository;
     private TripRepository tripRepository;
     @Value("${mapBoxToken}")
@@ -30,13 +31,14 @@ public class GroupController {
     @Value("${googleMapsKey}")
     private String googleMapsKey;
 
-    public GroupController(GroupsRepository groupDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao, FriendListRepository friendListRepository, TripRepository tripRepository) {
+    public GroupController(GroupsRepository groupDao, ImageRepository imageDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao, FriendListRepository friendListRepository, TripRepository tripRepository) {
         this.groupDao = groupDao;
         this.groupMemberDao = groupMemberDao;
         this.userDao = userDao;
         this.commentDao = commentDao;
         this.friendListRepository=friendListRepository;
         this.tripRepository=tripRepository;
+        this.imageDao =imageDao;
     }
 
     //    @GetMapping(path = "/groups")
@@ -59,6 +61,7 @@ public class GroupController {
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
             viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
         }
+        viewModel.addAttribute("groupImages", imageDao.getGroupImages(id));
         return "groups/view";
     }
 
