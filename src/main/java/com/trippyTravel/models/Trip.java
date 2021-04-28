@@ -30,6 +30,8 @@ public class Trip {
     @Column
     private String visibility;
 
+    @Column(columnDefinition = "TEXT")
+    private String trip_profile_image;
 
     @Column(name = "start_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -68,12 +70,13 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(String location, String name, String status, String description, String visibility, Date startDate, Date endDate, Group group, List<Image> images, List<Comment> comments, List<TripLikes> tripLikes, List<Activity> activities, List<GroupMember> groupMembers) {
+    public Trip(String location, String name, String status, String description, String visibility, String trip_profile_image, Date startDate, Date endDate, Group group, List<Image> images, List<Comment> comments, List<TripLikes> tripLikes, List<Activity> activities, List<GroupMember> groupMembers) {
         this.location = location;
         this.name = name;
         this.status = status;
         this.description = description;
         this.visibility = visibility;
+        this.trip_profile_image = trip_profile_image;
         this.startDate = startDate;
         this.endDate = endDate;
         this.group = group;
@@ -128,6 +131,9 @@ public class Trip {
 
     public void setVisibility(String visibility) { this.visibility = visibility; }
 
+    public String getTrip_profile_image() { return trip_profile_image; }
+
+    public void setTrip_profile_image(String trip_profile_image) { this.trip_profile_image = trip_profile_image; }
 
     public List<GroupMember> getGroupMembers() { return groupMembers; }
 

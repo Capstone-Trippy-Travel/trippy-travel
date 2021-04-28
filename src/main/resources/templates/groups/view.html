@@ -56,7 +56,7 @@
                         <div th:each="trip : ${group.getTrip()}" class="item " style="max-width: 240px">
                             <a th:href="${'/trip/'+ trip.id}">
                                 <p class="overflow"><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="tripLocation"></span></p>
-                                <img th:src="${trip.getImages().get(0).getImage_url()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trip.getImages().size()>0}">
+                                <img th:src="${trip.getTrip_profile_image()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." th:if="${trip.getImages().size()>0}">
                             </a>
                         </div>
                     </div>
