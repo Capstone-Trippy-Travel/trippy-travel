@@ -6,10 +6,9 @@ import com.trippyTravel.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+
 
 import java.util.List;
 
@@ -20,13 +19,15 @@ public class CommentController {
     private TripRepository tripDao;
     private ActivityRepository activityDao;
     private GroupMembersRepository groupMembersRepository;
+    private CommentRepliesRepository commentRepliesRepository;
 
-    public CommentController(UsersRepository userDao, CommentRepository commentDao, TripRepository tripDao, ActivityRepository activityDao, GroupMembersRepository groupMembersRepository) {
+    public CommentController(UsersRepository userDao, CommentRepository commentDao, TripRepository tripDao, ActivityRepository activityDao, GroupMembersRepository groupMembersRepository, CommentRepliesRepository commentRepliesRepository) {
         this.userDao = userDao;
         this.commentDao = commentDao;
         this.tripDao = tripDao;
         this.activityDao = activityDao;
         this.groupMembersRepository=groupMembersRepository;
+        this.commentRepliesRepository=commentRepliesRepository;
     }
 
 
@@ -51,5 +52,30 @@ public class CommentController {
 
         commentDao.save(newComment);
         return "redirect:/trip/" + id;
+    }
+
+    @RequestMapping(value="/trip/{id}/comments", method=RequestMethod.GET, produces="application/json")
+    public @ResponseBody List<Comment> submitTripComment(@PathVariable long id, @RequestParam("comment") String comment) {
+        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        if (activityId==null){
+        Trip trip = tripDao.getOne(id);
+            commentDao.save(new Comment(comment, userDao.getOne(user.getId()), trip));
+
+        List<GroupMember> groupMembers = trip.getGroup().getGroupMembers();
+        for (GroupMember groupMember: groupMembers){
+            if (groupMember.getMember().getId()!=user.getId()){
+                groupMember.setUnreadComment(true);
+                groupMember.setUnreadCommentTrip(trip);
+                groupMembersRepository.save(groupMember);
+            }
+        }
+//        } else{
+//            if (commentDao.existsCommentByActivity_Id(activityId)){
+//            commentDao.save(new Comment(comment, user, tripDao.getOne(id), activityDao.getOne(activityId)));
+//            }
+//        }
+        List<Comment> comments=commentDao.findCommentsByTrip_Id(id);
+        return comments;
+
     }
 }

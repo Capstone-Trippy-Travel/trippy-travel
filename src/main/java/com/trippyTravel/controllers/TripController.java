@@ -57,17 +57,17 @@ public class TripController {
             model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
         }
         System.out.println();
+        model.addAttribute("publicTrips", tripRepository.findTripsByVisibility());
         return "Trip/index";
     }
     @PostMapping("/trip")
-    public String index(Model model) {
+    public String index(Model model, @PathVariable Long id) {
         List<Trip> tripFromDb= tripRepository.findAll();
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             model.addAttribute("friendRequests", friendRequests);
             List<Trip> unreadCommentTrips = new ArrayList<>();
             model.addAttribute("unreadCommentTrips", unreadCommentTrips);
-
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
@@ -179,6 +179,8 @@ public class TripController {
     }
     @GetMapping(path = "/trip/{id}/edit")
     public String updateTrip(@PathVariable Long id ,Model model){
+        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("groups", groupsRepository.findByOwner(user));
         Trip trip=tripRepository.getOne(id);
         System.out.println(trip.getName());
         model.addAttribute("trip", trip);
@@ -196,12 +198,18 @@ public class TripController {
         return "Trip/edit";
     }
     @PostMapping(path = "/trip/{id}/edit")
-    public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trip trips) {
-        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trip trips, @RequestParam(name="groupId")String groupId, @RequestParam(name = "image_url",  required = false) String ImgUrl) {
+        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Group groups = groupsRepository.getOne(Long.parseLong(groupId));
+//        trips.setGroup(group);
+//        Trip saveTrip= tripRepository.save(trips);
+//        System.out.println();
+//        Image imageToSave = new Image(ImgUrl, user, saveTrip);
+//        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         trips.setId(id);
         trips.setGroup(groups);
-        tripRepository.save(trips);
-        return "redirect:/trip";
+        Trip savedTrip = tripRepository.save(trips);
+        return "redirect:/trip/"+savedTrip.getId();
     }
     @PostMapping("/trip/{id}/delete")
     public String DeleteTrip(@PathVariable Long id) {
@@ -215,7 +223,12 @@ public class TripController {
         List<Activity> activities= tripRepository.getOne(Long.parseLong(tripId)).getActivities();
         for (Activity activity: activities){
             List<ActivityVote> activityVotes = activity.getActivityVotes();
+
+            //will set an initial vote setting on none, then will check to see if user voted and modify accordingly.
             activity.setUsersPreviousVote("none");
+
+            //will grab all comments from this activity, and pass the quantity to the object to be passed to the page.
+            activity.setCommentCount(commentRepository.findCommentsByActivity_Id(activity.getId()).size());
             int voteCount=0;
             for (ActivityVote activityVote: activityVotes){
                 if (activityVote.isVote()){
@@ -264,7 +277,11 @@ public class TripController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List <Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip trip: unreadCommentTrips){
+                System.out.println(trip.getName());
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips );
         }
 
         System.out.println();

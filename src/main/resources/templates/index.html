@@ -156,9 +156,19 @@
                         <h4 class="white-text my-4">
                             Trusted Travel Planner. Bring the fun to your trip with Trippi Travel.
                         </h4>
-                        <form th:action="${'/trip/create'}" method="GET" class="button side-item">
-                            <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!</button>
-                        </form>
+                        <div class="row">
+                            <div class="col">
+                                <form th:action="${'/trip/create'}" method="GET" class="button side-item">
+                                    <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!</button>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <form th:action="${'/groups/create'}" method="GET" class="button side-item">
+                                    <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!</button>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -366,11 +376,11 @@
 </main>
 <!--Main layout-->
 <div th:replace="fragments/footer2 :: footer"></div>
-<script th:inline="javascript">
-    $('.carousel').carousel({
-        interval: 3000,
-    })
-</script>
+<!--<script th:inline="javascript">-->
+<!--    $('.carousel').carousel({-->
+<!--        interval: 3000,-->
+<!--    })-->
+<!--</script>-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
