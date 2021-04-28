@@ -25,12 +25,11 @@
                         <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
 <!--                        <img id="imagePreview" src="" alt="" >-->
                         <input type="hidden" id="image"  name="image_url">
-
                     </div>
                     <div class ="imagebutton">
                     <button id="addPicture" class="button " style="margin-left: 8px">Edit Picture</button>
-
                     </div>
+
                     <label for="lastname">Firstname</label>
                     <input class="form-control disa" th:field="*{firstName}" />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
@@ -50,9 +49,7 @@
                     <div class="form-group">
                         <label >About You</label>
                         <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>
-
                     </div>
-
 
                     <input th:if="${showEditControls}" class="btn" type="submit" />
                 </form>

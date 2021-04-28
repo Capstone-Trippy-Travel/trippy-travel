@@ -103,7 +103,7 @@
                             <div th:each="trip : ${trips}" class="item " style="max-width: 250px">
                                 <a th:href="${'/trip/'+ trip.id}">
                                     <h5 th:class="overflow" ><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
-                                    <img th:src="${trip.getImages().get(0).getImage_url()}" alt="" class="trip-image">
+                                    <img th:src="${trip.getTrip_profile_image()}" alt="" class="trip-image">
                                 </a>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                              <div th:each="trip : ${plannedTrips}" class="item " style="max-width: 250px">
                                  <a th:href="${'/trip/'+ trip.id}">
                                      <h5 class="overflow"><span th:text="${trip.getName()}"></span> in <span th:text="${trip.getLocation()}" class="tripLocation"></span></h5>
-                                     <img th:src="${trip.getImages().get(0).getImage_url()}" alt="" class="trip-image">
+                                     <img th:src="${trip.getTrip_profile_image()}" alt="" class="trip-image">
                                  </a>
                              </div>
                          </div>
