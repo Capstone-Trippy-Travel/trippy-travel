@@ -106,16 +106,16 @@
     <!--</form>-->
     <div class="row row-cols-12">
         <div class=" col-md-12 col-lg-6 "  >
-            <div id="clickedPlace"></div>
+
             <div id="map"></div>
         </div>
 
-        <div id="venueDiv" class="col-lg-6 col-md-12">
+        <div id="venueDiv" class="col-lg-6 col-md-12" data-bs-spy="scroll" data-bs-offset="0" tabindex="0">
             <div class="form-group">
                 <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants">
                 <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>
             </div>
-
+            <div id="clickedPlace"></div>
             <div id="venueList">
 
             </div>

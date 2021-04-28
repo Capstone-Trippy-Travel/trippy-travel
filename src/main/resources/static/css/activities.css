@@ -195,7 +195,8 @@ html, body, .container{
     display: flex;
 }
 #venueDiv{
-
+    overflow-y:auto;
+    height: 713px;
 
 }
 
