@@ -9,10 +9,49 @@
     <link rel="stylesheet" href="/css/activities.css">
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="stylesheet" href="/css/trial.css">
+    <link rel="stylesheet" href="/css/register.css">
 </head>
 <body>
+<!-- Modal for Activity Information -->
+<div class="modal fade right" id="modalPoll-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header" style="justify-content: center">
+                <p class="heading lead">Activity Details
+                </p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <!--Body for activity pictures-->
+            <div class="modal-body">
+                <div class="text-center activityImage">
+                    <img id="modalActivityImage">
+                    <p id="modalActivityName"></p>
+                </div>
+                <hr>
+                <!-- Second Body for activity details -->
+                <p class="text-center"><a id="modalActivityWebsite"></a></p>
+                <p class="text-center" id="modalActivityAddress">More detailed Activities here.</p><hr>
+                <p class="text-center" id="modalActivityHours">More detailed Activities here.</p><hr>
+                <div id="activityModalComments">Comments</div>
+                <!--Add comment / comments section-->
+                <div class="md-form" style="display: flex">
+                    <textarea type="text" id="modalActivityCommentInput" class="md-textarea form-control col-5" rows="2" placeholder="Add a comment.."></textarea>
+                    <button id="activityModalCommentButton">Submit</button>
+                </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<div class="container-fluid" style="margin-top: 70px">
+<div class="container-fluid">
     <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
@@ -43,26 +82,34 @@
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
             <!-- Button trigger modal -->
+            <h1 th:text="${trips.name}" class="card-title" style="text-align: center"></h1>
             <div style="text-align: center">
-                <img th:src="${trips.getTrip_profile_image()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
-            </div>
-                <h1 th:text="${trips.name}" class="card-title"></h1>
+                <img th:src="${trips.getTrip_profile_image()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." style="margin-right: 0">
+                <p class="card-text" th:text="${trips.getDescription()}"></p>
+            </div><br>
 
-                <div>
-                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get">
-                        <button type="submit" id="edit" >Edit Trip</button>
-                    </form>
-                </div>
+
+
 
             <div class="row">
-                <div class="col form-group">
+                <div class="col-6 form-group">
                     <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >
                         <input type="hidden" id="image"  name="image_url">
-                        <button id="addPicture">addPicture</button>
+                        <button id="addPicture">Add Picture</button>
                         <!--                <input class="btn" type="submit" />-->
                     </form>
                 </div>
-            </div>
+
+<!--            <div class="row">-->
+<!--                <div class="col form-group">-->
+<!--                    <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >-->
+<!--                        <input type="hidden" id="image"  name="image_url">-->
+<!--                        <button id="addPicture">addPicture</button>-->
+<!--                        &lt;!&ndash;                <input class="btn" type="submit" />&ndash;&gt;-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+
 
             <br>
             <div id="comments">
@@ -81,10 +128,15 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <textarea name="comment" placeholder="Enter comment here" id="tripCommentInput"></textarea>
-                <button type="submit" id="tripCommentButton">Submit</button>
+            <div class="input-group">
+                <input name="comment" type="text" id="tripCommentInput" class="form-control" placeholder="Enter Comment.." aria-describedby="basic-addon2">
+                <button class="logout-button" id="tripCommentButton">Submit</button>
             </div>
+
+<!--            <div class="form-group">-->
+<!--                <textarea name="comment" placeholder="Enter comment here" id="tripCommentInput"></textarea>-->
+<!--                <button type="submit" id="tripCommentButton">Submit</button>-->
+<!--            </div>-->
 
                 <!--                <div class="col">-->
                 <!--                    <br>-->

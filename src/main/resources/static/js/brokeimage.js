@@ -19,3 +19,13 @@ function replaceEmptySrc1(brokeGroup) {
         brokeGroup.src = '/imgs/group.png';
     }
 }
+const brokeTrip = document.querySelectorAll('.trip-image');
+console.log(brokeTrip)
+console.log(brokeTrip[0].src);
+
+brokeTrip.forEach(replaceEmptySrc2);
+function replaceEmptySrc2(brokeTrip) {
+    if (brokeTrip.getAttribute('src') === '') {
+        brokeTrip.src = '/imgs/gray_plane.png';
+    }
+}
