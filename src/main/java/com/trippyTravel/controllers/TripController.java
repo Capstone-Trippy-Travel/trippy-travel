@@ -43,12 +43,16 @@ public class TripController {
     }
     @GetMapping("/trip/page/{pageNumber}")
     public String SeeAllTripsPage(Model model, @PathVariable int pageNumber) {
-        int numberOfTrips=tripRepository.findAll().size();
+        int numberOfTrips=tripRepository.findTripsByVisibility().size();
         List<Trip> tripsFromDb;
+        System.out.println(numberOfTrips);
+        int startingNumber=18*(-1+pageNumber);
+        System.out.println(startingNumber);
         if (numberOfTrips-(18*(-1+pageNumber))<=18) {
-           tripsFromDb = tripRepository.findTripsByVisibility().subList((18 * (-1 + pageNumber)), numberOfTrips);
+
+           tripsFromDb = tripRepository.findTripsByVisibility().subList(startingNumber, numberOfTrips);
         } else{
-            tripsFromDb = tripRepository.findTripsByVisibility().subList((18 * (-1 + pageNumber)),(18 * (-1 + pageNumber))+18 );
+            tripsFromDb = tripRepository.findTripsByVisibility().subList(startingNumber,(18 * (-1 + pageNumber))+18 );
         }
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
