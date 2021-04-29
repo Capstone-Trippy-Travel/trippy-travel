@@ -13,5 +13,6 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
     Comment findCommentByActivity_Id(long activityId);
     boolean existsCommentByActivity_Id(long activityId);
     List<Comment> findCommentsByTrip_Id(long tripId);
+    List<Comment> findCommentsByTrip_IdOrderByCreatedAt(long tripId);
 
 }
