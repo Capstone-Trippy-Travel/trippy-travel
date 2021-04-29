@@ -75,3 +75,7 @@ button{
     text-overflow: ellipsis;
     max-width: inherit;
 }
+.required:after {
+    content:" *";
+    color: red;
+}
