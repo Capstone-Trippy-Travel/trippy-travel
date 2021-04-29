@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="stylesheet" href="/css/trial.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="/css/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/broke image.css">
 </head>
@@ -24,9 +23,6 @@
                 <div class="side-item">
                     <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="profileImage" default="static/imgs/blank-profile-picture-973460_1280.png">
                 </div>
-<!--                <div class="side-item">-->
-<!--                    <p th:text="${user.description}" ></p>-->
-<!--                </div>-->
                 <div id="friend-requests" th:if="${friendRequests.size()>0}">
                     <h5>Friend Requests</h5>
                     <div class="card" th:each="friend : ${friendRequests}" th:id="${'friendRequestCard'+friend.getId()}" >
@@ -50,33 +46,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="side-item">
+                    <p th:text="${user.description}" ></p>
+                </div>
                 <div class="col">
                     <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item" style="text-align: right; margin-top: -20px; margin-right: -14px">
                         <button class="logout-button">Edit Profile</button>
                     </form>
                 </div>
 
-<!--                <div class="side-item">-->
-<!--                    <i class='fas fa-user-friends' style='font-size:36px'></i>-->
-<!--                    <i class='fas fa-user-plus' style='font-size:36px'></i>-->
-<!--                    <i class='fas fa-user-minus' style='font-size:36px'></i>-->
-<!--                </div>-->
-<!--                <form class="navbar-form " th:action="@{}" th:method="POST">-->
-                    <div class="input-group side-item">
-                        <input type="text" class="form-control"  name="search" placeholder="Search Friends" id="searchUsers">
-                        <button class="btn-profile-go btn-primary" type="submit" style="border-radius: 3px">Go</button>
-                    </div>
-                    <div id="usersList">
 
-                    </div>
-<!--                </form>-->
-                <div class="row">
-<!--                    <div class="col" style="padding-left: 23px">-->
-<!--                        <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item">-->
-<!--                            <button class="logout-button">Edit Profile</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
+                <div class="input-group side-item">
+                    <input type="text" class="form-control"  name="search" placeholder="Search Friends" id="searchUsers">
+                    <button class="btn-profile-go btn-primary" type="submit" style="border-radius: 3px">Go</button>
                 </div>
+                <div id="usersList"></div>
+
             </div>
             <div class="col-lg-8 col-md-12 main-profile">
                 <h3 class="side-item" style="text-align: center; margin-top: 15px">Your Places</h3>
@@ -140,7 +125,6 @@
                                     <a th:href="${'/groups/'+ userGroup.getGroup().getId()}">
                                         <h5><span th:text="${userGroup.getGroup().getName()}"></span></h5>
                                         <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" style="width: 100px;height: 100px" id="groupPic" class="group-image">
-
                                     </a>
                                 </div>
                             </div>
@@ -150,7 +134,7 @@
                             <div th:each="userFriend : ${user.getFriends()}" class="item" style="max-width: 100px"><x></x>
                                 <a th:href="${'/users/'+ userFriend.getFriend().getId()}">
                                     <h5 class="text-center"><span th:text="${userFriend.getFriend().getFirstName()}"></span> </h5>
-                                    <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" id="friendPic" style="width: 100px;height: 100px" class="friend-image">
+                                    <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" id="friendPic" class="friend-image">
 
                                 </a>
                             </div>
