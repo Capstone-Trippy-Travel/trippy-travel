@@ -46,16 +46,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="side-item">
-                    <p th:text="${user.description}" ></p>
-                </div>
-                <div class="col">
-                    <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item" style="text-align: right; margin-top: -20px; margin-right: -14px">
+                <div class="col ">
+                    <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item" style="text-align: center; margin-top: -20px; margin-right: -14px">
                         <button class="logout-button">Edit Profile</button>
                     </form>
                 </div>
-
-
+                <div class="side-item">
+                    <p th:text="${user.description}" ></p>
+                </div>
                 <div class="input-group side-item">
                     <input type="text" class="form-control"  name="search" placeholder="Search Friends" id="searchUsers">
                     <button class="btn-profile-go btn-primary" type="submit" style="border-radius: 3px">Go</button>
@@ -121,9 +119,9 @@
                 <div class="tab-content" id="myTabContent2">
                     <div class="tab-pane fade show active" id="groups" role="tabpanel" aria-labelledby="groups-tab">
                             <div class="items main-item">
-                                <div th:each="userGroup : ${user.getGroupMember()}" class="item " style="max-width: 180px;">
+                                <div th:each="userGroup : ${user.getGroupMember()}" class="item " style="max-width: 120px;">
                                     <a th:href="${'/groups/'+ userGroup.getGroup().getId()}">
-                                        <h5><span th:text="${userGroup.getGroup().getName()}"></span></h5>
+                                        <h5 class="overflow"><span th:text="${userGroup.getGroup().getName()}"></span></h5>
                                         <img th:src="${userGroup.getGroup().getProfile_image()}" alt="" style="width: 100px;height: 100px" id="groupPic" class="group-image">
                                     </a>
                                 </div>
@@ -133,7 +131,7 @@
                         <div class="items main-item">
                             <div th:each="userFriend : ${user.getFriends()}" class="item" style="max-width: 100px"><x></x>
                                 <a th:href="${'/users/'+ userFriend.getFriend().getId()}">
-                                    <h5 class="text-center"><span th:text="${userFriend.getFriend().getFirstName()}"></span> </h5>
+                                    <h5 class="text-center overflow"><span th:text="${userFriend.getFriend().getFirstName()}"></span> </h5>
                                     <img th:src="${userFriend.getFriend().profile_image}" alt="." default="static/imgs/blank-profile-picture-973460_1280.png" id="friendPic" class="friend-image">
 
                                 </a>

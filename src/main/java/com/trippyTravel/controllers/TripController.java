@@ -313,8 +313,19 @@ public class TripController {
     }
 
     @PostMapping(path = "/trip/search")
-    public String searchTrip(Model viewModel, @RequestParam(name = "search") String term) {
-        viewModel.addAttribute("tripResults", tripRepository.findAllByDescriptionContainingOrNameContainingOrLocationContaining(term, term, term));
+    public String searchTrip(Model model, @RequestParam(name = "search") String term) {
+//        List<Trip> tripFromDb= tripRepository.findAll();
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
+            List<FriendList> friendRequests= new ArrayList<>();
+            model.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+        }
+        model.addAttribute("tripResults", tripRepository.findAllByDescriptionContainingOrNameContainingOrLocationContaining(term, term, term));
         return "Trip/search";
     }
 
