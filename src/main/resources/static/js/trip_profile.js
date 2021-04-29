@@ -378,7 +378,7 @@ function createVenueCard(place, marker){
 
             //add activity hours to modal
             let modalActivityHours=document.getElementById("modalActivityHours");
-            modalActivityAddress.innerText=place.hours;
+            modalActivityHours.innerText=place.hours;
 
             //make ajax call to grab latest activity comments
             retrieveActivityCommentsFromDatabase(place);
@@ -388,8 +388,14 @@ function createVenueCard(place, marker){
             activityCommentSubmit.addEventListener("click",()=>{
                 //will grab text from new comment
                 let activityCommentText=document.getElementById("modalActivityCommentInput");
-                retrieveActivityCommentsFromDatabase(place, activityCommentText.value)
-                activityCommentText.value="";
+
+                if (modalActivityName.innerText===place.place) {
+                    retrieveActivityCommentsFromDatabase(place, activityCommentText.value)
+                    activityCommentText.value = "";
+                    setTimeout(function(){
+                        addCommentToTrip(place.trip.id)
+                    },300)
+                }
             })
 
 
@@ -651,12 +657,20 @@ let tripCommentButton=document.getElementById("tripCommentButton")
 let currentTripComments=document.getElementById("comments")
 
 tripCommentButton.addEventListener("click", ()=>{
-    addCommentToTrip(tripCommentInput.value, tripId)
+    addCommentToTrip(tripId, tripCommentInput.value)
 })
 
-function addCommentToTrip(comment, tripId){
+function addCommentToTrip(tripId, comment){
+    let url="";
+
+    //if a comment is passed, it will be saved to database first, then load updated comments
+    if (comment){
+        url=`/trip/${tripId}/comments?comment=${comment}`;
+    }else{
+        url=`/trip/${tripId}/comments`;
+    }
     jQuery.ajax({
-        'url': `/trip/${tripId}/comments?comment=${comment}`,
+        'url': url,
         success: function (comments) {
             console.log(comments)
             let html="";
