@@ -361,9 +361,24 @@ function createVenueCard(place, marker){
 
     commentButton.addEventListener("click", ()=>{
         populateModalWithActivityInfo();
-        $('.modalContent').scrollTop($('.modalContent')[0].scrollHeight);
+        $('#modalContent').scrollTop($('#modalContent')[0].scrollHeight);
+        $('#activityModalComments').scrollTop($('#activityModalComments')[0].scrollHeight);
+
+
 
     })
+
+    //will loop through all reply buttons, and add event listener
+    let replyButtons=document.getElementsByClassName("activityCommentReplyButton");
+    for (let replyButton of replyButtons){
+        if (replyButton.classList.contains(place.placeId)){
+            replyButton.addEventListener("click",()=>{
+                populateModalWithActivityInfo();
+                $('#modalContent').scrollTop($('#modalContent')[0].scrollHeight);
+                $('#activityModalComments').scrollTop($('#activityModalComments')[0].scrollHeight);
+            })
+        }
+    }
 
     venueCard.addEventListener("mouseenter", ()=>{
         toggleBounce(marker)
@@ -613,26 +628,53 @@ function addCommentToTrip(tripId, comment){
             let html="";
 
             for (let comment of comments){
-                html+=`<div >
-                        <div class="row no-gutters">
-                            <div class="col-sm-2" >
-                                <img src="${comment.user.profile_image}" class="card-img-top h-100" default="/imgs/default-profile-picture.png">
-                            </div>
-                            <div class="col-sm-10">
-                                <div class="">
-                                    <div class=""><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
-                                    <div>${comment.comment_text}</div>
-                                </div>
-                            </div>
-                            
+                html+=`<div class="tripComment">
+                    <div class="row no-gutters">
+                        <div class="col-sm-2" >
+                            <img src="${comment.user.profile_image}" class="card-img-top h-100 commentProfileImage" default="/imgs/default-profile-picture.png">
                         </div>
-                        
-                    </div>`
+                        <div class="col-sm-10">
+                            <div class="">
+                                <div class=""><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
+                                <div>${comment.comment_text}</div>
+                            </div>
+                            <div class="text-center">Replies</div>
+                            <div class="activityCommentRepliesDiv">`
+                            if (comment.ajaxCallCommentReplies!=null){
+                                for (let commentReply of comment.ajaxCallCommentReplies){
+                                    html+=`<div class="activityCommentReplies row">
+                                    <div class="col-sm-2">
+                                        <img src="${commentReply[3]}"
+                                             class="card-img-top h-100 replyProfileImage" alt="...">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class=""><strong>${commentReply[1]} ${commentReply[1]}</strong></div>
+                                        <div>${commentReply[0]}</div>
+                                    </div>
+                                </div>`
+                                }
+                            }
+
+                            html+=`</div>`
+                            if (comment.ajaxCallCommentReplies!=null) {
+                                html+=`<button class="activityCommentReplyButton">Reply</button>`
+                            }
+                        html+=`</div>
+                    </div>
+                </div>`
 
             }
             currentTripComments.innerHTML=html;
             tripCommentInput.value=""
             $('#comments').scrollTop($('#comments')[0].scrollHeight);
+
+            let activityCommentsRepliesDivList=document.getElementsByClassName('activityCommentRepliesDiv')
+
+            for (let replyDiv of activityCommentsRepliesDivList){
+                $(replyDiv).scrollTop($(replyDiv)[0].scrollHeight);
+
+            }
+
 
         },
         error: function (data) {
@@ -708,6 +750,15 @@ function retrieveActivityCommentsFromDatabase(place, newComment){
 }
 
 $('#comments').scrollTop($('#comments')[0].scrollHeight);
+$('.activityCommentRepliesDiv').scrollTop($('.activityCommentRepliesDiv')[0].scrollHeight);
+
+let activityCommentsRepliesDivList=document.getElementsByClassName('activityCommentRepliesDiv')
+
+for (let replyDiv of activityCommentsRepliesDivList){
+    $(replyDiv).scrollTop($(replyDiv)[0].scrollHeight);
+
+}
+
 
 
 

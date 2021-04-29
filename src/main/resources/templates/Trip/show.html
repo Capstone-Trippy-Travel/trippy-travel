@@ -16,7 +16,7 @@
 <div class="modal fade right" id="modalPoll-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
-        <div class="modal-content">
+        <div class="modal-content" id="modalContent">
             <!--Header-->
             <div class="modal-header" style="justify-content: center">
                 <p class="heading lead">Activity Details
@@ -95,10 +95,16 @@
                 <div class="col-6 form-group">
                     <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >
                         <input type="hidden" id="image"  name="image_url">
-                        <button id="addPicture">Add Picture</button>
+                        <button id="addPicture">addPicture</button>
                         <!--                <input class="btn" type="submit" />-->
                     </form>
                 </div>
+                <div class="col-6">
+                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get">
+                        <button type="submit" id="edit" >Edit Trip</button>
+                    </form>
+                </div>
+            </div>
 
 <!--            <div class="row">-->
 <!--                <div class="col form-group">-->
@@ -112,11 +118,12 @@
 
 
             <br>
+            <h5 class="text-center">Comments</h5>
             <div id="comments">
-                <div th:each="comment : ${trips.getComments()}" >
+                <div th:each="comment : ${trips.getComments()}" class="tripComment" >
                     <div class="row no-gutters">
                         <div class="col-sm-2" >
-                            <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
+                            <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100 commentProfileImage" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
                             <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
                         </div>
                         <div class="col-sm-10">
@@ -124,6 +131,25 @@
                                 <div class=""><strong th:text="${comment.getUser().getFirstName()+ ' '+ comment.getUser().getLastName()}"></strong></div>
                                 <div th:text="${comment.getComment_text()}"></div>
                             </div>
+                            <div class="text-center" th:if="${comment.getReplies().size()>0}">Replies</div>
+                            <div class="activityCommentRepliesDiv">
+                                <div th:each="reply:${comment.getReplies()}" class="activityCommentReplies row">
+                                    <div class="col-sm-2">
+                                        <img th:src="${reply.getUser().getProfile_image()}"
+                                             class="card-img-top h-100 replyProfileImage" alt="..."
+                                             th:if="${reply.getUser().getProfile_image()!= null}">
+                                        <img src="/imgs/default-profile-picture.png" class="card-img-top h-100"
+                                             alt="..." th:if="${reply.getUser().getProfile_image()==null}">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class=""><strong
+                                                th:text="${reply.getUser().getFirstName()+ ' '+ reply.getUser().getLastName()}"></strong>
+                                        </div>
+                                        <div th:text="${reply.getComment_text()}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button data-toggle="modal" data-target="#modalPoll-1" th:class="${'activityCommentReplyButton '+ comment.getActivity().getPlaceId()}" th:if="${comment.getReplies().size()>0}">Reply</button>
                         </div>
                     </div>
                 </div>
@@ -157,10 +183,6 @@
         </main>
         </div>
     </div>
-
-
-
-</div>
     <div class="col-8" id="mapContainer">
         <div id="map" >
 
@@ -205,6 +227,8 @@
             </div>
         </div>
     </div>
+</div>
+
 </div>
     <div th:replace="fragments/footer2 :: footer"></div>
 <!--    <div th:replace="fragments/activity :: mainAct"></div>-->
