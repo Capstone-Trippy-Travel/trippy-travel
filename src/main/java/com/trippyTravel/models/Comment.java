@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,10 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     @Column()
     private Date createdAt;
+
+    public void onUpdate() {
+        createdAt = new Date();
+    }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentComment")
     @JsonBackReference
@@ -115,11 +120,28 @@ public class Comment {
 
     public void setActivity(Activity activity) { this.activity = activity; }
 
-    public Date getCreatedAt() { return createdAt; }
+    public Date getCreatedAt() {
+        return createdAt; }
 
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public List<CommentReplies> getReplies() { return replies; }
 
     public void setReplies(List<CommentReplies> replies) { this.replies = replies; }
+
+
+    public List<ArrayList<String>> getAjaxCallCommentReplies() {
+        return ajaxCallCommentReplies;
+    }
+
+    public void setAjaxCallCommentReplies(List<ArrayList<String>> ajaxCallCommentReplies) {
+        this.ajaxCallCommentReplies = ajaxCallCommentReplies;
+    }
+
+    @Transient
+    private List<ArrayList<String>> ajaxCallCommentReplies;
+
+
 }

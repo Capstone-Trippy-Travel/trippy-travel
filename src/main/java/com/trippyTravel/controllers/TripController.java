@@ -92,7 +92,9 @@ public class TripController {
     @GetMapping("/trip/{id}")
     public String showOneTrip(@PathVariable Long id, Model vModel ){
         System.out.println("numbe of images for trip: "+ tripRepository.getOne(id).getImages().size());
-        vModel.addAttribute("trips", tripRepository.getOne(id));
+        Trip trip = tripRepository.getOne(id);
+        trip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(id));
+        vModel.addAttribute("trips", trip);
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             vModel.addAttribute("friendRequests", friendRequests);
