@@ -44,8 +44,12 @@ public class TripController {
     @GetMapping("/trip/page/{pageNumber}")
     public String SeeAllTripsPage(Model model, @PathVariable int pageNumber) {
         int numberOfTrips=tripRepository.findAll().size();
-        List<Trip> tripFromDb= tripRepository.findAll().subList((18*(-1+pageNumber)), numberOfTrips);
-        model.addAttribute("trips",tripFromDb);
+        List<Trip> tripsFromDb;
+        if (numberOfTrips-(18*(-1+pageNumber))<=18) {
+           tripsFromDb = tripRepository.findTripsByVisibility().subList((18 * (-1 + pageNumber)), numberOfTrips);
+        } else{
+            tripsFromDb = tripRepository.findTripsByVisibility().subList((18 * (-1 + pageNumber)),(18 * (-1 + pageNumber))+18 );
+        }
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             model.addAttribute("friendRequests", friendRequests);
@@ -58,7 +62,7 @@ public class TripController {
             model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
         }
         System.out.println();
-        model.addAttribute("publicTrips", tripRepository.findTripsByVisibility());
+        model.addAttribute("publicTrips", tripsFromDb);
         model.addAttribute("pageNumber", pageNumber);
         double numberOfTripsDouble=(double) numberOfTrips;
         System.out.println("number of trips: "+numberOfTrips);
