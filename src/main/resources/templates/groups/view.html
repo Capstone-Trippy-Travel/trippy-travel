@@ -53,7 +53,7 @@
                 <div>
                     <h4 class="main-item">Trips</h4>
                     <div class="items main-item">
-                        <div th:each="trip : ${group.getTrip()}" class="item " style="max-width: 240px">
+                        <div th:each="trip : ${group.getTrip()}" class="item " style="max-width: 250px">
                             <a th:href="${'/trip/'+ trip.id}">
                                 <p class="overflow"><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="tripLocation"></span></p>
                                 <img th:src="${trip.getTrip_profile_image()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
@@ -63,12 +63,9 @@
                     <h4 class="main-item">Group Pictures</h4>
                     <div class=" main-item">
                         <div id="cardPic">
-
                                 <div th:each="userImage : ${groupImages}" class="group-pics">
                                     <img class="viewAll myImg" onclick="image(event)" th:src="${userImage.getImage_url()}"  data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">
                                 </div>
-
-
                         </div>
                     </div>
                     <!--                Trying picture modal-->
