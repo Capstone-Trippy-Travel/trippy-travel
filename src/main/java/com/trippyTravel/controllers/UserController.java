@@ -59,16 +59,12 @@ public class UserController {
         User existingUsername = usersRepository.findByUsername(username);
         User existingEmail = usersRepository.findByEmail(user.getEmail());
 
-
         if(existingUsername != null){
-
             validation.rejectValue("username", "user.username", "Duplicated username " + username);
         }
 
         if(existingEmail != null){
-
             validation.rejectValue("email", "user.email", "Duplicated email " + user.getEmail());
-
         }
 
         if (validation.hasErrors()) {

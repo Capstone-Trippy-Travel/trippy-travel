@@ -72,8 +72,31 @@ public class CommentController {
                 }
             }
         }
+        List<Comment> tripComments = commentDao.findCommentsByTrip_IdOrderByCreatedAt(id);
+        for (Comment tripComment: tripComments){
+            boolean commentRepliesExist=commentRepliesRepository.existsCommentRepliesByParentComment(tripComment);
+            if (commentRepliesExist){
+                List<ArrayList<String>> commentReplyList= new ArrayList<>();
+                List<CommentReplies> commentReplies=commentRepliesRepository.findCommentRepliesByParentComment(tripComment);
+                for (CommentReplies commentReply: commentReplies){
 
-        return commentDao.findCommentsByTrip_Id(id);
+                    //grabbing and saving all comment replies to array, and attching to comment
+                    ArrayList<String> commentReplyInfo = new ArrayList<>();
+                    commentReplyInfo.add(commentReply.getComment_text());
+                    commentReplyInfo.add(commentReply.getUser().getFirstName());
+                    commentReplyInfo.add(commentReply.getUser().getLastName());
+                    commentReplyInfo.add(commentReply.getUser().getProfile_image());
+                    commentReplyInfo.add(Long.toString(commentReply.getUser().getId()));
+
+                    commentReplyList.add(commentReplyInfo);
+
+                }
+                tripComment.setAjaxCallCommentReplies(commentReplyList);
+                System.out.println("number of replies on comment: "+commentReplyList);
+            }
+        }
+        return tripComments;
+
 
     }
 
@@ -90,6 +113,20 @@ public class CommentController {
             if (commentExists){
                 //grab comment if one exists
                 Comment originalActivityComment=commentDao.findCommentByActivity_Id(activity_id);
+
+                //update comment timestamp to now, so that it will populate at bottom of comments
+                System.out.println(originalActivityComment.getCreatedAt().toString());
+                originalActivityComment.onUpdate();
+                Comment updatedComment=commentDao.save(originalActivityComment);
+                System.out.println("new updated thread comment: "+originalActivityComment.getComment_text());
+                System.out.println(updatedComment.getCreatedAt().toString());
+
+
+                //creating a check list to see if comment is now at bottom of list
+                List<Comment> orderedComments=commentDao.findCommentsByTrip_IdOrderByCreatedAt(trip_id);
+                for (Comment orderedComment: orderedComments){
+                    System.out.println(orderedComment.getComment_text());
+                }
 
                 //if a comment does exist, check to see if any replies exist
                 boolean commentRepliesExist=commentRepliesRepository.existsCommentRepliesByParentComment(originalActivityComment);
