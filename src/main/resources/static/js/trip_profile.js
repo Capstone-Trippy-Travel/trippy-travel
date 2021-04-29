@@ -353,6 +353,7 @@ function createVenueCard(place, marker){
     }
 
     venueDetailsButton.addEventListener("click", ()=>{
+
             populateModalWithActivityInfo()
     })
 
