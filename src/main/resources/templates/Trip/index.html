@@ -11,8 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <script src="../../static/js/tripImage.js"></script>
-
-    <!--    <link rel="stylesheet" href="/css/activities.css">-->
 </head>
 <body id="create-group-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
@@ -45,7 +43,8 @@
                        <div class="trip-items" id="sub-group-forTrip">
                            <div id="sub-sub-group-items" class="row">
                                <div class="col-sm-10">
-                                   <a th:href="${'/groups/' + trip.getGroup().id}">                                       <div class="row">
+                                   <a th:href="${'/groups/' + trip.getGroup().id}">
+                                       <div class="row">
                                            <div class="col-sm-3">
                                                <img th:src="${trip.getGroup().getProfile_image()}" alt="" class="profile-icon-small " />
                                            </div>
@@ -103,8 +102,6 @@
 <script src="/js/tripImage.js"></script>
 <script src ="/js/alternateModal.js"></script>
 <script src="/js/notifications.js" th:inline="javascript"></script>
-
-
 
 </body>
 </html>
