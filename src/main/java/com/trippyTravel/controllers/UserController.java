@@ -73,6 +73,10 @@ public class UserController {
         if (validation.hasErrors()) {
             m.addAttribute("errors", validation);
             m.addAttribute("user", user);
+            List<FriendList> friendRequests= new ArrayList<>();
+            m.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            m.addAttribute("unreadCommentTrips", unreadCommentTrips);
             return "users/create";
         }
 
