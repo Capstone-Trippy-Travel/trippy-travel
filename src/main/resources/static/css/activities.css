@@ -89,8 +89,7 @@
     align-items: center;
     justify-content: space-evenly;
     white-space: normal;
-
-
+    border-radius: 10px;
 }
 
 .venueCard img{
@@ -198,8 +197,12 @@ html, body, .container{
 }
 #venueDiv{
     overflow-y:auto;
-    height: 713px;
+    height: 665px;
 
+}
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
 }
 
 
