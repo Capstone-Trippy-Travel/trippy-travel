@@ -85,25 +85,25 @@
                 </div>
             </ul>
         </div>
-<!--        <div class="card-body">-->
-<!--&lt;!&ndash;            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div id="tripDate" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>&ndash;&gt;-->
-<!--            &lt;!&ndash;        <p class="card-text" th:text="${trip.getDescription()}"></p>&ndash;&gt;-->
-<!--        </div>-->
+        <!--        <div class="card-body">-->
+        <!--&lt;!&ndash;            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <div id="tripDate" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>&ndash;&gt;-->
+        <!--            &lt;!&ndash;        <p class="card-text" th:text="${trip.getDescription()}"></p>&ndash;&gt;-->
+        <!--        </div>-->
     </div>
     <form class="">
         <div class="row" style="margin-top: 2px; margin-bottom: 2px;">
             <div class="col-lg-6">
-                    <label class="sr-only" for="searchValue">Address</label>
-                    <input type="text" class="form-control float-left" id="searchValue" th:value="${trip.location}">
-                    <select name="form-select" id="zoom" class="form-select">
-                        <!--            <option>Set Zoom</option>-->
-                        <option>5</option>
-                        <option selected>10</option>
-                        <option>15</option>
-                    </select>
-                    <button type="button" class="btn btn-primary btn-sm" id="searchButton">Search</button>
+                <label class="sr-only" for="searchValue">Address</label>
+                <input type="text" class="form-control float-left" id="searchValue" th:value="${trip.location}">
+                <select name="form-select" id="zoom" class="form-select">
+                    <!--            <option>Set Zoom</option>-->
+                    <option>5</option>
+                    <option selected>10</option>
+                    <option>15</option>
+                </select>
+                <button type="button" class="btn btn-primary btn-sm" id="searchButton">Search</button>
             </div>
             <div class="col-lg-6">
                 <div class="">
@@ -113,15 +113,15 @@
             </div>
         </div>
 
-<!--        <div class="form-group mr-2">-->
-<!--            <select name="form-select" id="zoom" class="form-select">-->
-<!--                &lt;!&ndash;            <option>Set Zoom</option>&ndash;&gt;-->
-<!--                <option>5</option>-->
-<!--                <option selected>10</option>-->
-<!--                <option>15</option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--        <button type="button" class="btn btn-primary" id="searchButton">Search</button>-->
+        <!--        <div class="form-group mr-2">-->
+        <!--            <select name="form-select" id="zoom" class="form-select">-->
+        <!--                &lt;!&ndash;            <option>Set Zoom</option>&ndash;&gt;-->
+        <!--                <option>5</option>-->
+        <!--                <option selected>10</option>-->
+        <!--                <option>15</option>-->
+        <!--            </select>-->
+        <!--        </div>-->
+        <!--        <button type="button" class="btn btn-primary" id="searchButton">Search</button>-->
     </form>
 
     <!--</form>-->
@@ -131,10 +131,10 @@
         </div>
 
         <div id="venueDiv" class="col-lg-6 col-md-12" data-bs-spy="scroll" data-bs-offset="0" tabindex="0">
-<!--            <div class="form-group">-->
-<!--                <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants">-->
-<!--                <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>-->
-<!--            </div>-->
+            <!--            <div class="form-group">-->
+            <!--                <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants">-->
+            <!--                <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>-->
+            <!--            </div>-->
             <div id="clickedPlace"></div>
             <div id="venueList">
 
