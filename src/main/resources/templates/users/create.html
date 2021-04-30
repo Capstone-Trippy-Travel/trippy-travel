@@ -15,7 +15,7 @@
 <hr class="rounded" style="width: 90%">
 <main class="container" style="max-width: 500px">
     <form class="col s12 myForm" th:action="@{/users/create}" th:method="POST" th:object="${user}" name="myForm">
-        <fieldset class="width-80">
+        <fieldset class="width-80" id="registerPageInputs">
             <div class="form-group">
                 <label for="first-name" class="form-label required">First Name</label>
                 <input type="text" id="first-name" name="first-name" class="form-control" th:field="*{firstName}"/>
