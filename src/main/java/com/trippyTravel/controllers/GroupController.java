@@ -20,6 +20,7 @@ public class GroupController {
     private ImageRepository imageDao;
     private FriendListRepository friendListRepository;
     private TripRepository tripRepository;
+    private CommentRepository commentRepository;
     @Value("${mapBoxToken}")
     private String mapBoxToken;
     @Value("${fileStackApiKey}")
@@ -31,7 +32,7 @@ public class GroupController {
     @Value("${googleMapsKey}")
     private String googleMapsKey;
 
-    public GroupController(GroupsRepository groupDao, ImageRepository imageDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao, FriendListRepository friendListRepository, TripRepository tripRepository) {
+    public GroupController(GroupsRepository groupDao, ImageRepository imageDao, GroupMembersRepository groupMemberDao, UsersRepository userDao, CommentRepository commentDao, FriendListRepository friendListRepository, TripRepository tripRepository, CommentRepository commentRepository) {
         this.groupDao = groupDao;
         this.groupMemberDao = groupMemberDao;
         this.userDao = userDao;
@@ -39,6 +40,7 @@ public class GroupController {
         this.friendListRepository=friendListRepository;
         this.tripRepository=tripRepository;
         this.imageDao =imageDao;
+        this.commentRepository=commentRepository;
     }
 
     //    @GetMapping(path = "/groups")
@@ -59,7 +61,11 @@ public class GroupController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         viewModel.addAttribute("groupImages", imageDao.getGroupImages(id));
         return "groups/view";
@@ -77,7 +83,11 @@ public class GroupController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         return "groups/create-group";
     }
@@ -111,7 +121,11 @@ public class GroupController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         return "groups/edit-group";
     }

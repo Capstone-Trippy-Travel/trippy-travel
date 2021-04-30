@@ -23,29 +23,29 @@
                 <div class="side-item">
                     <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="profileImage" default="static/imgs/blank-profile-picture-973460_1280.png">
                 </div>
-                <div id="friend-requests" th:if="${friendRequests.size()>0}">
-                    <h5>Friend Requests</h5>
-                    <div class="card" th:each="friend : ${friendRequests}" th:id="${'friendRequestCard'+friend.getId()}" >
-                        <div class="card" style="max-width: 500px;">
-                            <div class="row no-gutters">
-                                <div class="col-sm-5" >
-                                    <img th:src="${friend.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()!= null}">
-                                    <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()==null}">
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="card-body">
-                                        <h5 class="card-title" th:text="${friend.getUser().getFirstName()+ ' '+ friend.getUser().getLastName()}"></h5>
-                                        <p class="card-text" th:text="${friend.getUser().getUsername()}"></p>
-                                        <div class="friendRequestButtons">
-                                            <button class="approveRequest btn btn-sm btn-success" th:id="${friend.getId()}" >Approve</button>
-                                            <button class="rejectButton btn btn-sm btn-success" th:id="${friend.getId()}" >Reject</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                <div id="friend-requests" th:if="${friendRequests.size()>0}">-->
+<!--                    <h5>Friend Requests</h5>-->
+<!--                    <div class="card" th:each="friend : ${friendRequests}" th:id="${'friendRequestCard'+friend.getId()}" >-->
+<!--                        <div class="card" style="max-width: 500px;">-->
+<!--                            <div class="row no-gutters">-->
+<!--                                <div class="col-sm-5" >-->
+<!--                                    <img th:src="${friend.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()!= null}">-->
+<!--                                    <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()==null}">-->
+<!--                                </div>-->
+<!--                                <div class="col-sm-7">-->
+<!--                                    <div class="card-body">-->
+<!--                                        <h5 class="card-title" th:text="${friend.getUser().getFirstName()+ ' '+ friend.getUser().getLastName()}"></h5>-->
+<!--                                        <p class="card-text" th:text="${friend.getUser().getUsername()}"></p>-->
+<!--                                        <div class="friendRequestButtons">-->
+<!--                                            <button class="approveRequest btn btn-sm btn-success" th:id="${friend.getId()}" >Approve</button>-->
+<!--                                            <button class="rejectButton btn btn-sm btn-success" th:id="${friend.getId()}" >Reject</button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="col ">
                     <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item" style="text-align: center; margin-top: -20px; margin-right: -14px">
                         <button class="logout-button">Edit Profile</button>

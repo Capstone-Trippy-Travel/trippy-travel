@@ -63,7 +63,11 @@ public class TripController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         System.out.println();
         model.addAttribute("publicTrips", tripsFromDb);
@@ -87,7 +91,11 @@ public class TripController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         model.addAttribute("trip",tripFromDb);
         return "Trip/index";
@@ -111,7 +119,11 @@ public class TripController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             vModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            vModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            vModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
 //        vModel.addAttribute("comments", commentRepository.getOne(id));
 //        vModel.addAttribute("activity", activityRepository.getOne(1L));
@@ -164,7 +176,11 @@ public class TripController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         return "Trip/create";
     }
@@ -213,7 +229,11 @@ public class TripController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         return "Trip/edit";
     }
@@ -323,7 +343,11 @@ public class TripController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         model.addAttribute("tripResults", tripRepository.findAllByDescriptionContainingOrNameContainingOrLocationContaining(term, term, term));
         return "Trip/search";

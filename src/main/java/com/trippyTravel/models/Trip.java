@@ -146,4 +146,5 @@ public class Trip {
     public List<TripLikes> getTripLikes() { return tripLikes; }
 
     public void setTripLikes(List<TripLikes> tripLikes) { this.tripLikes = tripLikes; }
+
 }
