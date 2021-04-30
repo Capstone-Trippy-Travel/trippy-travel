@@ -13,12 +13,12 @@
 
 <body id="login-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<hr class="rounded" style="width: 90%">
+    <hr class="rounded" style="width: 90%">
 
-<main class="container" style="max-width: 500px">
-    <div class="row">
-        <div class="form-group col l8 offset-l2">
-            <div class="card-panel red accent-1" th:if="${param.error}">
+    <main class="container" style="max-width: 500px">
+        <div class="row">
+            <div class="form-group col l8 offset-l2">
+                <div class="card-panel red accent-1" th:if="${param.error}">
                 Invalid Username or Password.
             </div>
             <div class="alert" th:if="${param.logout}">
@@ -38,6 +38,8 @@
                     </div>
 
                     <br><button class="btn btn-primary btn-md btn-block" type="submit">Log In</button>
+                    <br>
+                    <a class="forgotUserName-link" th:href="${'/login/forgot_password'}">Forgot password</a>
 
                 </fieldset>
             </form>
