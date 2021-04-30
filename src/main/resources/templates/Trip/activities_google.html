@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="stylesheet" href="/css/trial.css">
     <link rel="stylesheet" href="/css/activities.css">
+    <link rel="stylesheet" href="/css/register.css">
 </head>
-<body>
+<body id="activities_google-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<div class="container-fluid" style="margin-top: 20px">
+<hr class="rounded" style="width: 90%; margin-top: unset">
+<div class="container-fluid" style="margin-top: 20px; opacity: .9">
     <form th:action="@{'/trip/'+ ${trip.id} +'/activities'}" method="post"  id="activityForm">
         <div class="input-field col s12">
             <label >Name</label>
@@ -68,22 +70,14 @@
         <br>
         <input type="submit">
     </form>
-    <div class="card text-center">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="${'/trip/'+trip.getId()}">Trip Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Add activities</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " th:href="${'/groups/'+trip.getGroup().getId()}"><span th:text="${trip.getGroup().getName()}"></span></a>
-                </li>
-                <div class="col nav-item" style="text-align: right">
-                    <div class="nav-link " th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
-                </div>
-            </ul>
+    <div class="card text-center" style="border: none; background: transparent">
+        <div class="card-body" style="text-align: center; padding-top: 0">
+            <!--            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>-->
+            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="group-name" style="color: black; background-color: transparent; background-repeat: no-repeat; border: none; cursor: pointer; overflow: hidden">
+                <h3 th:text="${trip.getGroup().getName()}"></h3>
+            </a>
+            <div id="trip-date" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
+            <!--        <p class="card-text" th:text="${trip.getDescription()}"></p>-->
         </div>
         <!--        <div class="card-body">-->
         <!--&lt;!&ndash;            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>&ndash;&gt;-->
@@ -91,24 +85,23 @@
         <!--&lt;!&ndash;            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>&ndash;&gt;-->
         <!--            &lt;!&ndash;        <p class="card-text" th:text="${trip.getDescription()}"></p>&ndash;&gt;-->
         <!--        </div>-->
-    </div>
-    <form class="">
+    </div><br><br>
+    <form class="form-group">
         <div class="row" style="margin-top: 2px; margin-bottom: 2px;">
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="display: flex">
                 <label class="sr-only" for="searchValue">Address</label>
-                <input type="text" class="form-control float-left" id="searchValue" th:value="${trip.location}">
-                <select name="form-select" id="zoom" class="form-select">
-                    <!--            <option>Set Zoom</option>-->
-                    <option>5</option>
-                    <option selected>10</option>
-                    <option>15</option>
-                </select>
-                <button type="button" class="btn btn-primary btn-sm" id="searchButton">Search</button>
+                <input type="text" class="form-control float-left" id="searchValue" th:value="${trip.location}" style="width: 40%">
+                <button type="button" class="btn btn-primary btn-sm" id="searchButton" style="max-height: 31px">Search</button>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="${'/trip/'+trip.getId()}" style="margin-left: 10px">Back to Trip Profile  ►</a>
+                    </li>
+                </ul>
             </div>
             <div class="col-lg-6">
-                <div class="">
-                    <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants">
-                    <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>
+                <div class="" style="padding-left: 11px">
+                    <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants" style="width: 40%">
+                    <button type="button" class="btn btn-primary btn-sm" id="venueButton" style="padding: 7px">Search Venue</button>
                 </div>
             </div>
         </div>
@@ -136,7 +129,7 @@
             <!--                <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>-->
             <!--            </div>-->
             <div id="clickedPlace"></div>
-            <div id="venueList">
+            <div id="venueList" style="justify-content: space-evenly">
 
             </div>
         </div>
