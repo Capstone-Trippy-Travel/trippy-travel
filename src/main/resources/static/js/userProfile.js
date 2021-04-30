@@ -103,8 +103,14 @@ function searchDatabaseForUsers(name) {
 // the searchDatabaseForUsers function.
 searchUsers.addEventListener("keyup", ()=>{
     clearTimeout(currentInterval);
-    currentInterval=setTimeout(function(){
-        searchDatabaseForUsers(searchUsers.value)
-    },500);
-
+    if (searchUsers.value!="") {
+        currentInterval = setTimeout(function () {
+            searchDatabaseForUsers(searchUsers.value)
+        }, 500);
+    } else{
+        usersList.innerHTML="";
+    }
 });
+
+
+
