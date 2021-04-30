@@ -231,6 +231,9 @@ font-size: smaller;
 #edit-profile-body{
     margin-top: 40px;
 }
+#activities_google-body {
+    background-image: url("../imgs/tt_yellow_background.jpg");
+}
 /*#addPicture{*/
 /*    background-color: dodgerblue;*/
 /*    padding: 8px;*/

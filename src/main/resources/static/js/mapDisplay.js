@@ -31,7 +31,7 @@ function initMap() {
     //creates new map
     map = new google.maps.Map(document.getElementById("map"), {
         center: tripLocation,
-        zoom: 2.25,
+        zoom: 2,
     });
 
     //loops through trip locations, and generates a marker for each

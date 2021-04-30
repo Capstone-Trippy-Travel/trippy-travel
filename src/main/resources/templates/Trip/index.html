@@ -11,8 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <script src="../../static/js/tripImage.js"></script>
-
-    <!--    <link rel="stylesheet" href="/css/activities.css">-->
 </head>
 <body id="create-group-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
@@ -45,7 +43,8 @@
                        <div class="trip-items" id="sub-group-forTrip">
                            <div id="sub-sub-group-items" class="row">
                                <div class="col-sm-10">
-                                   <a th:href="${'/groups/' + trip.getGroup().id}">                                       <div class="row">
+                                   <a th:href="${'/groups/' + trip.getGroup().id}">
+                                       <div class="row">
                                            <div class="col-sm-3">
                                                <img th:src="${trip.getGroup().getProfile_image()}" alt="" class="profile-icon-small " />
                                            </div>
@@ -67,16 +66,16 @@
        <nav aria-label="...">
            <ul class="pagination">
                <li class="page-item" th:if="${pageNumber!=1}">
-                   <a class="page-link" th:href="${'/trip/page/'+pageNumber+(-1)}" tabindex="-1">Previous</a>
+                   <a class="page-link" th:href="${'/trip/page/'+(pageNumber+(-1))}" tabindex="-1">Previous</a>
                </li>
-               <th: block th:each="i: ${#numbers.sequence(1, pageNumber)}">
-               <li class="page-item" th:if="${pageNumber!=i}"><a class="page-link" href="#" th:text="${i}"></a></li>
+               <th: block th:each="i: ${#numbers.sequence(1, numPages)}">
+               <li class="page-item" th:if="${pageNumber!=i}"><a class="page-link" th:href="${'/trip/page/'+i}" th:text="${i}"></a></li>
                <li class="page-item active" th:if="${pageNumber==i}">
-                   <a class="page-link" th:href="${'/trip/page/'+i}" th:text="${i}"> <span class="sr-only">(current)</span></a>
+                   <a class="page-link" th:text="${i}"> <span class="sr-only">(current)</span></a>
                </li>
                </th:>
                <li class="page-item">
-                   <a class="page-link" th:href="${'/trip/page/'+pageNumber+1}" th:if="${pageNumber!=numPages}">Next</a>
+                   <a class="page-link" th:href="${'/trip/page/'+(pageNumber+1)}" th:if="${pageNumber!=numPages}">Next</a>
                </li>
            </ul>
        </nav>
@@ -103,8 +102,6 @@
 <script src="/js/tripImage.js"></script>
 <script src ="/js/alternateModal.js"></script>
 <script src="/js/notifications.js" th:inline="javascript"></script>
-
-
 
 </body>
 </html>

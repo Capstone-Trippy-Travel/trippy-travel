@@ -38,9 +38,6 @@
 
 
 
-
-
-
 <!--&lt;!&ndash;    <div class="col-8" id="homeLogo">&ndash;&gt;-->
 <!--&lt;!&ndash;        <img src="img/plane_globe.png">&ndash;&gt;-->
 
@@ -68,9 +65,6 @@
 
 
 
-
-
-
 <!--&lt;!&ndash;<div sec:authorize="isAuthenticated()">&ndash;&gt;-->
 <!--&lt;!&ndash;        <h4 style="margin: 0; display: inline;">Welcome, </h4>&ndash;&gt;-->
 <!--&lt;!&ndash;        <h4 style="margin: 0; display: inline;" th:text="${#authentication.principal.username}"></h4>&ndash;&gt;-->
@@ -82,19 +76,6 @@
 <!--&lt;!&ndash;            </div>&ndash;&gt;-->
 <!--&lt;!&ndash;        </div>&ndash;&gt;-->
 <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -139,7 +120,7 @@
 <!--=======-->
 <header>
 
-<!--    <nav th:replace="fragments/navbar2 :: navbar" />-->
+
     <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 
     <!--Mask-->
@@ -147,7 +128,7 @@
         <div class="mask rgba-black-strong">
             <div class="container-fluid d-flex align-items-center justify-content-center h-100">
                 <div class="row d-flex justify-content-center text-center">
-                    <div class="col-md-10 center" style="margin-top: 40%; color: white">
+                    <div class="col-md-10 center" style="margin-top: 30%; color: white">
                         <!-- Heading -->
                         <h2 class="display-4 font-weight-bold white-text pt-5 mb-2">Trippi Travel</h2>
                         <!-- Divider -->
@@ -164,7 +145,9 @@
                             </div>
                             <div class="col">
                                 <form th:action="${'/groups/create'}" method="GET" class="button side-item">
-                                    <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Create a group!</button>
+
+                                    <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Create Group</button>
+
                                 </form>
                             </div>
                         </div>
@@ -184,8 +167,9 @@
         <!--Section: Best Features-->
         <section id="best-features" class="text-center">
             <!-- Heading -->
-            <br>
-            <h2 class="mb-5 font-weight-bold">Application Features</h2>
+
+            <h2 class="mb-5 font-weight-bold" style="margin-top: 10%;">Application Features</h2>
+
             <!--Grid row-->
             <div class="row d-flex justify-content-center mb-4">
                 <!--Grid column-->

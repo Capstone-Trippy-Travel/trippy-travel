@@ -3,7 +3,9 @@
     width: 100%;
     height: 700px;
 }
-
+/*#group-name:hover {*/
+/*    color: lightsteelblue;*/
+/*}*/
 .form-inline{
     width: 50%;
     margin-left: auto;
@@ -209,8 +211,6 @@ html, body, .container{
 }
 .commentLikeCounterDiv{
     height: 40px;
-
-
 }
 
 
@@ -227,4 +227,24 @@ html, body, .container{
     max-height: 200px;
 }
 
+.commentProfileImage{
+    max-height: 50px;
+    object-fit: contain;
+}
+.activityCommentReplies{
+    padding: 5px 0;
+}
+.activityCommentRepliesDiv{
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+#activityModalComments{
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.tripComment{
+    padding: 5px 0;
+}
 

@@ -14,7 +14,7 @@ footer{
     /*background-color: black;*/
     /*color: white;*/
     opacity: .7;
-    background: linear-gradient(transparent, black);
+    background: linear-gradient(transparent, lightgrey);
     background-size: cover;
     line-height: 1.5em;
 }
@@ -74,4 +74,38 @@ button{
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: inherit;
+}
+.required:after {
+    content:" *";
+    color: red;
+}
+.logout-button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: dodgerblue;
+}
+.logout-button:hover {
+    color: black;
+}
+.trip-image{
+    width: 250px;
+    height: 170px;
+    margin: 1px;
+    border-radius: 2%;
+    object-fit: cover;
+}
+.group-image{
+    width: 120px;
+    height: 100px;
+    margin: 1px;
+    border-radius: 2px;
+    object-fit: cover;
+}
+.friend-image{
+    width: 120px;
+    height: 100px;
+    padding: 1px;
+    border-radius: 2px;
+    object-fit: cover;
 }
