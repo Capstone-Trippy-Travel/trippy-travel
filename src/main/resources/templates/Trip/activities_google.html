@@ -12,10 +12,13 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
+<<<<<<< HEAD
 <hr class="rounded" style="width: 90%">
 <div class="container-fluid">
+=======
+<div class="container-fluid" style="margin-top: 20px">
+>>>>>>> 77e7b6c877923261db85d72b67e2ceca3f7526d1
     <form th:action="@{'/trip/'+ ${trip.id} +'/activities'}" method="post"  id="activityForm">
-
         <div class="input-field col s12">
             <label >Name</label>
             <input  type="text" name="place" id="place" />
@@ -71,6 +74,7 @@
         <br>
         <input type="submit">
     </form>
+<<<<<<< HEAD
     <div class="card-body" style="text-align: center">
         <!--            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>-->
         <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="group-name" style="color: black; background-color: transparent; background-repeat: no-repeat; border: none; cursor: pointer; overflow: hidden">
@@ -122,20 +126,82 @@
         <!--                <option>15</option>-->
         <!--            </select>-->
         <!--        </div>-->
+=======
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="${'/trip/'+trip.getId()}">Trip Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Add activities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " th:href="${'/groups/'+trip.getGroup().getId()}"><span th:text="${trip.getGroup().getName()}"></span></a>
+                </li>
+                <div class="col nav-item" style="text-align: right">
+                    <div class="nav-link " th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
+                </div>
+            </ul>
+        </div>
+<!--        <div class="card-body">-->
+<!--&lt;!&ndash;            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div id="tripDate" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>&ndash;&gt;-->
+<!--            &lt;!&ndash;        <p class="card-text" th:text="${trip.getDescription()}"></p>&ndash;&gt;-->
+<!--        </div>-->
+    </div>
+    <form class="">
+        <div class="row" style="margin-top: 2px; margin-bottom: 2px;">
+            <div class="col-lg-6">
+                    <label class="sr-only" for="searchValue">Address</label>
+                    <input type="text" class="form-control float-left" id="searchValue" th:value="${trip.location}">
+                    <select name="form-select" id="zoom" class="form-select">
+                        <!--            <option>Set Zoom</option>-->
+                        <option>5</option>
+                        <option selected>10</option>
+                        <option>15</option>
+                    </select>
+                    <button type="button" class="btn btn-primary btn-sm" id="searchButton">Search</button>
+            </div>
+            <div class="col-lg-6">
+                <div class="">
+                    <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants">
+                    <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>
+                </div>
+            </div>
+        </div>
+
+<!--        <div class="form-group mr-2">-->
+<!--            <select name="form-select" id="zoom" class="form-select">-->
+<!--                &lt;!&ndash;            <option>Set Zoom</option>&ndash;&gt;-->
+<!--                <option>5</option>-->
+<!--                <option selected>10</option>-->
+<!--                <option>15</option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--        <button type="button" class="btn btn-primary" id="searchButton">Search</button>-->
+>>>>>>> 77e7b6c877923261db85d72b67e2ceca3f7526d1
     </form>
 
     <!--</form>-->
     <div class="row row-cols-12">
         <div class=" col-md-12 col-lg-6 "  >
-
             <div id="map"></div>
         </div>
 
         <div id="venueDiv" class="col-lg-6 col-md-12" data-bs-spy="scroll" data-bs-offset="0" tabindex="0">
+<<<<<<< HEAD
             <div class="form-group">
                 <input type="text" class="form-control float-left" id="venue-search" style="width: 33%" placeholder="Restaurants, Stores..">
                 <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>
             </div>
+=======
+<!--            <div class="form-group">-->
+<!--                <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants">-->
+<!--                <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>-->
+<!--            </div>-->
+>>>>>>> 77e7b6c877923261db85d72b67e2ceca3f7526d1
             <div id="clickedPlace"></div>
             <div id="venueList">
 
