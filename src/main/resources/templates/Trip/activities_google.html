@@ -77,14 +77,20 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Add activities</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " th:href="${'/groups/'+trip.getGroup().getId()}"><span th:text="${trip.getGroup().getName()}"></span></a>
+                </li>
+                <div class="col nav-item" style="text-align: right">
+                    <div class="nav-link " th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
+                </div>
             </ul>
         </div>
-        <div class="card-body">
-<!--            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>-->
-            <div id="tripDate" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
-            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>
-            <!--        <p class="card-text" th:text="${trip.getDescription()}"></p>-->
-        </div>
+<!--        <div class="card-body">-->
+<!--&lt;!&ndash;            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div id="tripDate" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>&ndash;&gt;-->
+<!--            &lt;!&ndash;        <p class="card-text" th:text="${trip.getDescription()}"></p>&ndash;&gt;-->
+<!--        </div>-->
     </div>
     <form class="">
         <div class="row" style="margin-top: 2px; margin-bottom: 2px;">
