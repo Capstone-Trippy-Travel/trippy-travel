@@ -31,6 +31,9 @@ public class UserController {
     private GroupMembersRepository groupMembersRepository;
 
     @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -132,7 +135,11 @@ public class UserController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         viewModel.addAttribute("sessionUser", usersService.loggedInUser());
         viewModel.addAttribute("showEditControls", usersService.canEditProfile(user));
@@ -168,7 +175,11 @@ public class UserController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            viewModel.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         return "users/edit";
     }

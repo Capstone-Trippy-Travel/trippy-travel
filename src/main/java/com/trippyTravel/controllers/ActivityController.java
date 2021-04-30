@@ -71,7 +71,11 @@ public class ActivityController {
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            model.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
+            List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip unreadCommentTrip: unreadCommentTrips){
+                unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
         }
         return "Trip/activities_google";
     }

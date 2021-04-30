@@ -58,14 +58,47 @@
                                     <!-- Tab panes -->
                                     <div class="tab-content notif-tab" id="myTabContent">
                                         <div class="tab-pane fade show active" id="convo" role="tabpanel" aria-labelledby="convo-tab">
-                                            <div class="row" th:each="trip: ${unreadCommentTrips}">
+                                            <div class="row" th:each="trip: ${unreadCommentTrips}" style="max-height: 150px">
                                                 <div class="tripIdHolder" style="display: none" th:text="${trip.getId()}"></div>
                                                 <div class="col-md-3" >
-                                                    <label th:text="${trip.getName()}"></label>
+                                                    <a th:href="${'/trip/'+trip.getId()}"><label th:text="${trip.getName()}"></label></a>
                                                 </div>
-                                                <div class="col-md-9">
-                                                    <div th:each="comment:${trip.getComments()}">
-                                                        <div th:text="${comment.getComment_text()}"></div>
+                                                <div class="col-md-9" style="max-height: 150px;overflow-y: scroll;">
+<!--                                                    <div th:each="comment:${trip.getComments()}">-->
+<!--                                                        <div th:text="${comment.getComment_text()}"></div>-->
+<!--                                                    </div>-->
+                                                    <div th:each="comment : ${trip.getComments()}" class="tripComment" >
+                                                        <div class="row no-gutters">
+                                                            <div class="col-sm-2" >
+                                                                <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100 commentProfileImage" alt="..." th:if="${comment.getUser().getProfile_image()!= null}" style="max-height:50px">
+                                                                <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
+                                                            </div>
+                                                            <div class="col-sm-10">
+                                                                <div class="">
+                                                                    <div class=""><strong th:text="${comment.getUser().getFirstName()+ ' '+ comment.getUser().getLastName()}"></strong></div>
+                                                                    <div th:text="${comment.getComment_text()}"></div>
+                                                                </div>
+                                                                <div class="text-center" th:if="${comment.getReplies().size()>0}">Replies</div>
+                                                                <div class="activityCommentRepliesDiv">
+                                                                    <div th:each="reply:${comment.getReplies()}" class="activityCommentReplies row">
+                                                                        <div class="col-sm-2">
+                                                                            <img th:src="${reply.getUser().getProfile_image()}"
+                                                                                 class="card-img-top h-100 replyProfileImage" alt="..."
+                                                                                 th:if="${reply.getUser().getProfile_image()!= null}">
+                                                                            <img src="/imgs/default-profile-picture.png" class="card-img-top h-100"
+                                                                                 alt="..." th:if="${reply.getUser().getProfile_image()==null}">
+                                                                        </div>
+                                                                        <div class="col-sm-10">
+                                                                            <div class=""><strong
+                                                                                    th:text="${reply.getUser().getFirstName()+ ' '+ reply.getUser().getLastName()}"></strong>
+                                                                            </div>
+                                                                            <div th:text="${reply.getComment_text()}"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button data-toggle="modal" data-target="#modalPoll-1" th:class="${'activityCommentReplyButton '+ comment.getActivity().getPlaceId()}" th:if="${comment.getReplies().size()>0}">Reply</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
