@@ -149,7 +149,7 @@
                     </div>
                 </div>
 <!--                Trying picture modal-->
-                <div id="myModal" class="modal" >
+                <div id="myModal" class="pictureModal" >
                     <span class="close" style="position: fixed">&times;</span>
                     <div th:each="userImage : ${user.getImages()}">
                         <img class="modal-content" id="img01" th:src="${userImage.getImage_url()}" th:alt="${userImage.getDescription()}">
