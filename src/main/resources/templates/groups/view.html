@@ -14,8 +14,8 @@
 <body>
 
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<br><br><br>
-    <div class="container">
+    <div class="container" style="margin-top: -10px">
+        <hr>
         <div class="row">
             <div class="col-lg-3 col-md-12 side-profile">
                 <h3 id="heading"><span th:text="${group.name}"></span></h3>
@@ -35,12 +35,12 @@
                 <div class="row">
                     <div class="col">
                         <form th:action="${'/groups/'+ group.id +'/update'}" method="GET" class="button side-item">
-                            <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Edit Group</button>
+                            <button type="submit" class="btn btn-outline-white" style="background-color: #c23232; color: white">Edit Group</button>
                         </form>
                     </div>
                     <div class="col">
                         <form th:action="${'/trip/create'}" method="GET" class="button side-item">
-                            <button type="submit" class="btn btn-outline-white" style="background-color: #666666">Plan a Trip!</button>
+                            <button type="submit" class="btn btn-outline-white" style="background-color: #c23232; color: white" >Plan Trip</button>
                         </form>
                     </div>
                 </div>
