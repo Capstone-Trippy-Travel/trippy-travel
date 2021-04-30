@@ -3,15 +3,19 @@ import com.trippyTravel.models.FriendList;
 import com.trippyTravel.models.FriendStatus;
 import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
+import com.trippyTravel.services.EmailService;
 import com.trippyTravel.services.UserService;
+import org.apache.naming.factory.SendMailFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.trippyTravel.repositories.UsersRepository;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,12 +35,44 @@ public class AuthenticationController {
     @Autowired
     private UsersRepository usersRepository;
 
+  @Autowired
+  private EmailService emailService;
+
     @GetMapping("/login")
     public String login(Model model){
         List<FriendList> friendRequests= new ArrayList<>();
         model.addAttribute("friendRequests", friendRequests);
         List<Trip> unreadCommentTrips = new ArrayList<>();
         model.addAttribute("unreadCommentTrips", unreadCommentTrips );
+        return "login";
+    }
+    @GetMapping("/login/forgot_password")
+    public String forgotPassword(){
+
+
+        return "forgot_password";
+    }
+
+    @PostMapping("/login/forgot_username")
+
+    public String forgotPassword(@RequestParam(name = "email") String email,@RequestParam(name = "emailConfirm") String emailConfirm){
+
+        User existingEmail = usersRepository.findUsernameByEmail(email);
+        System.out.println(email + emailConfirm);
+if(email.equals(emailConfirm)){
+    if(existingEmail != null){
+        emailService.prepareAndSend1(existingEmail,email);
+        return "login";
+    }
+}
+
+//        else if (existingEmail == null)
+//        {
+//
+//           return "login"; // input testing is ommitted here to save space
+
+
+//        }
         return "login";
     }
 
@@ -68,5 +104,6 @@ public class AuthenticationController {
         m.addAttribute("unreadCommentTrips", unreadCommentTrips);
         return "users/create";
     }
+
 
 }

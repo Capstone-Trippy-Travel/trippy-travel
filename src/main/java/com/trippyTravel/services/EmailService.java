@@ -3,6 +3,7 @@ package com.trippyTravel.services;
 
 import com.trippyTravel.models.Trip;
 
+import com.trippyTravel.models.User;
 import com.trippyTravel.repositories.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,20 @@ public class EmailService {
 //        msg.setTo(trips.getGroup().getOwner().getEmail());
         msg.setSubject(subject);
         msg.setText(body);
+        try {
+            this.emailSender.send(msg);
+        } catch (MailException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void prepareAndSend1(User user,String email) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+String message = "Your Username is:";
+        msg.setFrom(from);
+        msg.setTo(email);
+        msg.setSubject(message);
+        msg.setText("Your username is " + user.getEmail());
         try {
             this.emailSender.send(msg);
         } catch (MailException ex) {
