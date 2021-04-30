@@ -18,6 +18,9 @@ span.onclick = function () {
     modal.style.display = "none";
 }
 
+// $(function () {
+//     $('#modal').modal('hide');
+// });
 //Modal for trips
 
 
