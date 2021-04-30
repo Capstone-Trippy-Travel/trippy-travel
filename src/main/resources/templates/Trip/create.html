@@ -18,8 +18,9 @@
             <div class="form-group col-12" style="padding: 0">
                 <form class="col s12 tripForm"  th:action="@{/trip/create}" th:method="POST" th:object="${trip}" name="myForm">
                     <div class ='imageP'>
+                        <img id="imagePreview" src="" alt="" style="margin: 2px" >
                         <input type="hidden" id="image"  name="trip_profile_image" th:value="${trip.getTrip_profile_image()}">
-                        <img th:src="${trip.getTrip_profile_image()}" th:if="${trip.getTrip_profile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
+<!--                        <img th:src="${trip.getTrip_profile_image()}" th:if="${trip.getTrip_profile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >-->
                     </div>
                     <div class ="imagebutton">
                         <button id="addPicture" class="button " style="margin-left: 8px">Add Trip Profile Picture</button>

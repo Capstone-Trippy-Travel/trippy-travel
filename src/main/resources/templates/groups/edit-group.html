@@ -26,14 +26,12 @@
         <div class="form-group">
             <label >Group Description</label>
             <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>
-
         </div>
         <div class="row">
             <div class="form-group col-6">
                 <label >Add a group member</label>
                 <input id="searchUsers" type="text" class="form-control" placeholder="">
                 <ul id="databaseMatches" class="list-group"></ul>
-
                 <!--        <button type="submit" class="btn btn-primary">Submit Post</button>-->
             </div>
             <div class="col-6">
@@ -45,9 +43,15 @@
             </div>
         </div>
         <div class="form-group">
-            <img id="imagePreview" src="" alt="" >
-            <input type="hidden" id="image"  name="profile_image" th:field="*{profile_image}" >
-            <button id="addPicture">Group Profile Picture</button>
+            <div class="row" style="margin-bottom: 3px">
+                <!--            <img id="imagePreview" src="" alt="" >-->
+                <img th:src="${editGroup.getProfile_image()}" th:if="${editGroup.getProfile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
+
+            </div>
+            <div class="row">
+                <input type="hidden" id="image"  name="profile_image" th:field="*{profile_image}" >
+                <button id="addPicture">Edit Profile Picture</button>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Update Group</button>
     </form>
