@@ -251,3 +251,16 @@ html, body, .container{
     padding: 5px 0;
 }
 
+.successfulSaveDiv{
+    background: #2ae62a;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    height:25%;
+
+}
+
+
+

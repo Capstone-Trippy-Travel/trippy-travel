@@ -414,7 +414,16 @@ function createVenueCard(place, marker){
 
         //add activity hours to modal
         let modalActivityHours=document.getElementById("modalActivityHours");
-        modalActivityHours.innerText=place.hours;
+
+        //will format hours to not show up in a block
+        let hoursArray=place.hours.split(",")
+        for (let i=0; i<hoursArray.length; i++){
+            modalActivityHours.innerHTML+=hoursArray[i]
+            if (i!==hoursArray.length-1){
+                modalActivityHours.innerHTML+='<br>'
+            }
+        }
+
 
         //make ajax call to grab latest activity comments
         retrieveActivityCommentsFromDatabase(place);
