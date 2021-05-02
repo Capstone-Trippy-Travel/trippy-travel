@@ -207,9 +207,9 @@
                 <!--                        <img th:src="${userImage.getImage_url()}"  class="viewAll myImg"  onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">-->
 
                 <!--                <div class="activityImageDiv">-->
-                <div th:each="userImage : ${trips.getImages()}" th:class="imageDiv">
-                    <img th:src="${userImage.getImage_url()}"  class="viewAll myImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
-                    <img th:src="${userImage.getImage_url()}" th:id="${userImage.getActivity().getPlace()}"  class="viewAll myImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()!=null}">
+                <div th:each="userImage : ${trips.getImages()}" th:class="tripImageDiv">
+                    <img th:src="${userImage.getImage_url()}"  class="viewAll myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
+                    <img th:src="${userImage.getImage_url()}" th:id="${userImage.getActivity().getPlace()}"  class="viewAll myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()!=null}">
                 </div>
                 <!--                </div>-->
                 <!--                <div th:each="activity : ${trips.getActivities()}" class="activityImageDiv" th:id = "${activity.getPlace()}">-->
