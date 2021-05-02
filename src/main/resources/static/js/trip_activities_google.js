@@ -186,7 +186,7 @@ function createVenueCard(place, index){
             placeId:place.place_id
         }, (place, status) => {
             console.log(place);
-            addActivityToDatabase(place);
+            addActivityToDatabase(place, venueCard);
         })
     })
 
@@ -248,17 +248,18 @@ function getVenueDetails(id){
         saveButton.setAttribute("class", "saveButton btn btn-success btn-sm text-center")
         saveButton.innerHTML="save"
 
-        saveButton.addEventListener("click",()=>{
 
-            addActivityToDatabase(place);
-
-        })
 
         venueDetailsCard.appendChild(exitButton);
         venueDetailsCard.appendChild(saveButton)
 
         let clickedPlace=document.getElementById("clickedPlace");
         clickedPlace.appendChild(venueDetailsCard)
+
+        saveButton.addEventListener("click",()=>{
+            addActivityToDatabase(place, clickedPlace);
+
+        })
 })
 }
 
@@ -270,7 +271,7 @@ venueButton.addEventListener("click", ()=>{
     initMap();
 })
 
-function addActivityToDatabase(place){
+function addActivityToDatabase(place, venueCard){
     let placeName=document.getElementById("place");
     placeName.value=place.name;
 
@@ -315,6 +316,18 @@ function addActivityToDatabase(place){
         {
             console.log(data);
             console.log("success!!")
+
+            let successfulSaveDiv=document.createElement("h3");
+            successfulSaveDiv.setAttribute("class", "successfulSaveDiv")
+            successfulSaveDiv.innerText="Activity Saved!"
+
+            venueCard.appendChild(successfulSaveDiv)
+
+            setInterval(function(){
+                successfulSaveDiv.style.display="none";
+            }, 1500)
+
+
         }
     });
 }
