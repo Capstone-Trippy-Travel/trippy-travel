@@ -43,3 +43,37 @@ for (let span of spanList) {
 //         image.src = '/imgs/group.png';
 //     }
 // }
+
+//will try to make all images equal size, and stretch to container
+let imageContainer = document.getElementById("activity-pics")
+let imageBox=document.getElementsByClassName("tripImageDiv")[0]
+let imageWidth=imageBox.offsetWidth;
+
+let imageContainerWidth=imageContainer.offsetWidth;
+console.log(imageContainerWidth)
+if (imageContainerWidth>750){
+    $('.tripImageDiv').css('width','33.3%')
+    imageWidth=imageBox.offsetWidth;
+    $('.tripImageDiv').css('height',imageWidth*0.8+'px')
+
+} else {
+    $('.tripImageDiv').css('height', imageWidth * 0.8 + 'px')
+}
+
+
+window.addEventListener('resize', ()=>{
+    imageContainerWidth=imageContainer.offsetWidth;
+    console.log(imageContainerWidth)
+    if (imageContainerWidth>750){
+        $('.tripImageDiv').css('width','33.3%')
+        imageWidth=imageBox.offsetWidth;
+        $('.tripImageDiv').css('height',imageWidth*0.8+'px')
+
+    } else {
+        $('.tripImageDiv').css('width','50%')
+        imageWidth = imageBox.offsetWidth;
+        $('.tripImageDiv').css('height', imageWidth * 0.8 + 'px')
+    }
+
+});
+
