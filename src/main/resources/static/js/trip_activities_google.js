@@ -127,7 +127,7 @@ function createVenueCard(place, index){
     let marker = createMarker(place);
 
         let venueCard = document.createElement("div");
-        venueCard.setAttribute("class", "card venueCard");
+        venueCard.setAttribute("class", "card venueSearchCard");
 
         //adding event listener to card, will toggle marker animation bounce.
         venueCard.addEventListener("mouseenter", ()=>{
@@ -179,6 +179,7 @@ function createVenueCard(place, index){
 
     saveButton.addEventListener("click",()=>{
         console.log("clicked saved button")
+
         clickedPlace.innerHTML="";
 
         service = new google.maps.places.PlacesService(map);
@@ -225,13 +226,27 @@ function getVenueDetails(id){
             }
         }
         html+="</div>"
-        html += `<div class="card-body">`
+        html += `<div class="card-body" style="text-align: center">`
         html += `<h5 class="card-title">${place.name}</h5>`
         html += `<p class="card-text">${place.formatted_address}</p>`
         html += `<p class="card-text">${place.rating} stars - ${place.user_ratings_total} reviews</p>`
-        html += `<p class="card-text"><a href="${place.website}">Visit Website</a></p>`
+        html += `<p class="card-text" style="color: blue"><a href="${place.website}" style="color:blue">Visit Website</a></p>`
         html += `<p class="card-text">${place.formatted_phone_number}</p>`
-        html += `<p class="card-text">${place.opening_hours.weekday_text}</p>`
+
+        //will add formatted hours
+        //will format hours to not show up in a block
+        console.log(place.opening_hours.weekday_text)
+        let hoursArray=place.opening_hours.weekday_text
+        html+='<p>'
+        for (let i=0; i<hoursArray.length; i++){
+            html+=hoursArray[i]
+            if (i!==hoursArray.length-1){
+                html+='<br>'
+            }
+        }
+        html+='</p>'
+
+        // html += `<p class="card-text">${place.opening_hours.weekday_text}</p>`
 
         venueDetailsCard.innerHTML=html;
 
