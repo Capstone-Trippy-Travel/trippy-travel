@@ -81,7 +81,7 @@
 
 </div>
 <div class="row" id="tripContainer">
-<div class="card col-4" style="width: 18rem;">
+<div class="card col-md-4 col-12" style="width: 18rem;">
     <div class="card-body">
         <div class="container" id="tripProfileInfo">
             <!--    <div class="post" th:each="image:${post.getImages()}">-->
@@ -121,7 +121,7 @@
 <!--            </div>-->
 
 
-            <br>
+            <hr>
             <h5 class="text-center">Comments</h5>
             <div id="comments">
                 <div th:each="comment : ${trips.getComments()}" class="tripComment" >
@@ -187,7 +187,7 @@
         </main>
         </div>
     </div>
-    <div class="col-8" id="mapContainer">
+    <div class="col-md-8 col-12" id="mapContainer">
         <div id="map" >
 
         </div>
@@ -208,7 +208,7 @@
 
                 <!--                <div class="activityImageDiv">-->
                 <div th:each="userImage : ${trips.getImages()}" th:class="tripImageDiv">
-                    <img th:src="${userImage.getImage_url()}"  class="viewAll myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
+                    <img th:src="${userImage.getImage_url()}"  class="myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
                     <img th:src="${userImage.getImage_url()}" th:id="${userImage.getActivity().getPlace()}"  class="viewAll myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()!=null}">
                 </div>
                 <!--                </div>-->

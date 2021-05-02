@@ -85,7 +85,7 @@
         <!--&lt;!&ndash;            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>&ndash;&gt;-->
         <!--            &lt;!&ndash;        <p class="card-text" th:text="${trip.getDescription()}"></p>&ndash;&gt;-->
         <!--        </div>-->
-    </div><br><br>
+    </div><br>
     <form class="form-group">
         <div class="row" style="margin-top: 2px; margin-bottom: 2px;">
             <div class="col-lg-6" style="display: flex">
@@ -118,18 +118,17 @@
     </form>
 
     <!--</form>-->
-    <div class="row row-cols-12">
-        <div class=" col-md-12 col-lg-6 "  >
+    <div class="row row-cols-12" style="position: relative">
+        <div class=" col-8 col-lg-6 "  >
             <div id="map"></div>
         </div>
-
-        <div id="venueDiv" class="col-lg-6 col-md-12" data-bs-spy="scroll" data-bs-offset="0" tabindex="0" style="overflow-x: hidden">
+        <div id="clickedPlace"></div>
+        <div id="venueDiv" class="col-lg-6 col-4" data-bs-spy="scroll" data-bs-offset="0" tabindex="0" style="overflow-x: hidden">
             <!--            <div class="form-group">-->
             <!--                <input type="text" class="form-control float-left" id="venue" placeholder="Restaurants">-->
             <!--                <button type="button" class="btn btn-primary btn-sm" id="venueButton">Search Venue</button>-->
             <!--            </div>-->
-            <div id="clickedPlace"></div>
-            <div id="venueList">
+            <div id="venueList" >
 
             </div>
         </div>
