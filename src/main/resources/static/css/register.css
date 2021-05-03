@@ -214,6 +214,14 @@ font-size: smaller;
     align-self: center;
     border-radius: 5%;
 }
+.imageProfile{
+   height: 200px;
+    width: 200px;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    border-radius: 5%;
+}
 .imageP{
     display: flex;
     justify-content: center;
@@ -224,6 +232,16 @@ font-size: smaller;
     display: flex;
     justify-content: center;
 
+}
+#addPicture{
+    background: none;
+    border: none;
+    color:dodgerblue;
+}
+#edit-group{
+    background: none;
+    border: none;
+    color:dodgerblue;
 }
 /*.container{*/
 /*    margin-top: 70px;*/
