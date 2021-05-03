@@ -97,14 +97,14 @@
 
             <div class="row">
                 <div class="col-6 form-group">
-                    <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >
+                    <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" th:if="${isGroupMember}" >
                         <input type="hidden" id="image"  name="image_url">
                         <button id="addPicture">addPicture</button>
                         <!--                <input class="btn" type="submit" />-->
                     </form>
                 </div>
                 <div class="col-6">
-                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get">
+                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get" th:if="${isGroupMember}">
                         <button type="submit" id="edit" >Edit Trip</button>
                     </form>
                 </div>
@@ -122,8 +122,8 @@
 
 
             <hr>
-            <h5 class="text-center">Comments</h5>
-            <div id="comments">
+            <h5 class="text-center" th:if="${isGroupMember}">Comments</h5>
+            <div id="comments" th:if="${isGroupMember}">
                 <div th:each="comment : ${trips.getComments()}" class="tripComment" >
                     <div class="row no-gutters">
                         <div class="col-sm-2" >
@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div>
-            <div class="input-group">
+            <div class="input-group" th:if="${isGroupMember}">
                 <input name="comment" type="text" id="tripCommentInput" class="form-control" placeholder="Enter Comment.." aria-describedby="basic-addon2">
                 <button class="logout-button" id="tripCommentButton">Submit</button>
             </div>
