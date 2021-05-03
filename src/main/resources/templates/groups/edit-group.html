@@ -11,9 +11,9 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <div class="container" style="margin-top: 90px">
-    <form th:action="${'/groups/'+ editGroup.id +'/update'}" th:method="post" th:object="${editGroup}">
+    <form th:action="${'/groups/'+ editGroup.id +'/update'}" th:method="post" th:object="${editGroup}" class="groupForm" name="myForm">
         <div class="form-group">
-            <label >Group Name</label>
+            <label class="required" >Group Name</label>
             <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
         </div>
         <div class="form-group"><br>
@@ -26,110 +26,46 @@
         <div class="form-group">
             <label >Group Description</label>
             <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>
-
         </div>
         <div class="row">
             <div class="form-group col-6">
                 <label >Add a group member</label>
                 <input id="searchUsers" type="text" class="form-control" placeholder="">
                 <ul id="databaseMatches" class="list-group"></ul>
-
                 <!--        <button type="submit" class="btn btn-primary">Submit Post</button>-->
             </div>
             <div class="col-6">
                 <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">
-                    <option selected="true" th:each="groupMember:${editGroup.getGroupMembers()}" th:value="${groupMember.getMember().getId()}" th:text="${groupMember.getMember().getFirstName() +' '+groupMember.getMember().getLastName()}"></option>
+                    <option selected="true" class="groupMemberOption" th:each="groupMember:${editGroup.getGroupMembers()}" th:value="${groupMember.getMember().getId()}" th:text="${groupMember.getMember().getFirstName() +' '+groupMember.getMember().getLastName()}"></option>
                 </select>
-                <h4>Current Group Members</h4>
+                <h4>New Group Members</h4>
                 <ul id="groupMembers" class="list-group"></ul>
             </div>
         </div>
         <div class="form-group">
-            <img id="imagePreview" src="" alt="" >
-            <input type="hidden" id="image"  name="profile_image" th:field="*{profile_image}" >
-            <button id="addPicture">Group Profile Picture</button>
+            <div class="row" style="margin-bottom: 3px">
+                <!--            <img id="imagePreview" src="" alt="" >-->
+                <img th:src="${editGroup.getProfile_image()}" th:if="${editGroup.getProfile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
+
+            </div>
+            <div class="row">
+                <input type="hidden" id="image"  name="profile_image" th:field="*{profile_image}" >
+                <button id="addPicture">Edit Profile Picture</button>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Update Group</button>
     </form>
 </div>
 
-
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src ="/keys.js"></script>
 <script src="/js/fileStack.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script th:inline="javascript">
-    let searchUsers= document.getElementById("searchUsers");
-    let groupMembers=document.getElementById("groupMembers");
-    let groupMembersSelectList=document.getElementById("groupMembersSelectList")
-    let currentInterval="";
-
-    //this function will search the database for the name being typed in the find a group member input
-    // It will return a list of names that can be picked in html.
-    function searchDatabaseForUsers(name) {
-        console.log("searching for "+name)
-        jQuery.ajax({
-            'url': `/users.json?name=${name}`,
-            success: function (users) {
-
-                //this will generate the html for the list of names that were found.
-                let html = '';
-                for (let i = 0; i < users.length; i++) {
-                    console.log(users[i].lastName);
-                    html += '<li class="list-group-item d-flex justify-content-between align-items-center">'+users[i].firstName+" "+users[i].lastName;
-                    html+= '<button id="addGroupMember'+i+ '" class="float-right btn btn-primary btn-sm" type="button">'+'Add to Group'+'</button>'
-                    html+= '</li>'
-                }
-                $('#databaseMatches').html(html);
-
-                //This will add an event listener to each button, waiting for the name to be picked and added to group
-                for (let i=0; i<users.length; i++){
-                    console.log(users[i].firstName + " " + users[i].lastName + " "+  users[i].username + users[i].id)
-                    let buttonId="addGroupMember"+i;
-                    console.log(buttonId)
-                    let addGroupMemberButton=document.getElementById(buttonId);
-                    console.log(addGroupMemberButton)
-                    addGroupMemberButton.addEventListener("click", ()=>{
-                        let html="";
-                        html+='<li class="list-group-item d-flex justify-content-between align-items-center">'+users[i].firstName+" "+users[i].lastName+'</li>'
-                        groupMembers.innerHTML=groupMembers.innerHTML+html;
-
-                        let newGroupMember=document.createElement("option");
-                        newGroupMember.setAttribute("value", users[i].id);
-                        newGroupMember.innerText=users[i].firstName+" "+users[i].lastName
-                        console.log("about to set field")
-                        // newGroupMember.setAttribute("field", [[${newGroupMemberIds}]] )
-                        console.log("just set field")
-                        newGroupMember.setAttribute("selected", true);
-                        groupMembersSelectList.appendChild(newGroupMember);
-                    })
-                }
-
-
-
-            },
-            error: function (data) {
-                console.log(data)
-            }
-        })
-    }
-
-    //this event listener will wait for the user to search for users to add for group, and then will run
-    // the searchDatabaseForUsers function.
-    searchUsers.addEventListener("keyup", ()=>{
-        clearTimeout(currentInterval);
-        currentInterval=setTimeout(function(){
-            searchDatabaseForUsers(searchUsers.value)
-        },500);
-
-    });
-
-</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="/js/groupMemberSearch.js"></script>
 <script src="/js/notifications.js" th:inline="javascript"></script>
+<script src="/js/validation.js" th:inline="javascript"></script>
 
 <div th:replace="fragments/footer2 :: footer"></div>
 </body>

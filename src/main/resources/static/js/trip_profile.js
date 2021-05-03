@@ -9,6 +9,7 @@ let mapContainer=document.getElementById("map");
 
 let markers=[];
 let venueCards=[];
+let modalImages=[]
 
 function geocode(search, token) {
     var baseUrl = 'https://api.mapbox.com';
@@ -279,6 +280,8 @@ function createVenueCard(place, marker){
     //creating comment button to add to card
     let commentButton=document.createElement("button");
     commentButton.setAttribute("id", "activityCommentButton")
+    commentButton.setAttribute("data-toggle", "modal")
+    commentButton.setAttribute("data-target", "#modalPoll-1")
     commentButton.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">\n' +
         '  <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>\n' +
         '</svg>'
@@ -352,69 +355,86 @@ function createVenueCard(place, marker){
     }
 
     venueDetailsButton.addEventListener("click", ()=>{
-        if (venueDetailsButton.innerText==="See Details"){
 
-            toggleBounce(marker)
-            // marker.addListener("click", toggleBounce(marker))
-            // venueCard.style.width="100%";
-            // venueCard.style.maxWidth="100%";
+            populateModalWithActivityInfo()
+    })
 
-            //adding image to modal
-            let modalActivityImage=document.getElementById("modalActivityImage")
-            modalActivityImage.setAttribute("src", place.photoURL)
+    commentButton.addEventListener("click", ()=>{
+        populateModalWithActivityInfo();
+        $('#modalContent').scrollTop($('#modalContent')[0].scrollHeight);
+        $('#activityModalComments').scrollTop($('#activityModalComments')[0].scrollHeight);
 
-            //add activity name to modal
-            let modalActivityName=document.getElementById("modalActivityName");
-            modalActivityName.innerText=place.place;
-
-            //add activity website to modal
-            let modalActivityWebsite=document.getElementById("modalActivityWebsite");
-            modalActivityWebsite.setAttribute("href", place.website);
-            modalActivityWebsite.innerText=place.website;
-
-            //add activity address to modal
-            let modalActivityAddress=document.getElementById("modalActivityAddress");
-            modalActivityAddress.innerText=place.address;
-
-            //add activity hours to modal
-            let modalActivityHours=document.getElementById("modalActivityHours");
-            modalActivityHours.innerText=place.hours;
-
-            //make ajax call to grab latest activity comments
-            retrieveActivityCommentsFromDatabase(place);
-
-            //set eventListener on comment submit button
-            let activityCommentSubmit=document.getElementById("activityModalCommentButton");
-            activityCommentSubmit.addEventListener("click",()=>{
-                //will grab text from new comment
-                let activityCommentText=document.getElementById("modalActivityCommentInput");
-
-                if (modalActivityName.innerText===place.place) {
-                    retrieveActivityCommentsFromDatabase(place, activityCommentText.value)
-                    activityCommentText.value = "";
-                    setTimeout(function(){
-                        addCommentToTrip(place.trip.id)
-                    },300)
-                }
-            })
-
-
-            // venueDetailsButton.innerText="Hide Details"
-            //  additionalVenueInfo.style.display="block"
-            showActivityImages();
-        } else{
-            toggleBounce(marker);
-            venueCard.style.width="250px";
-            venueCard.style.maxWidth="250px";
-            venueImage.setAttribute("src", "");
-            venueDetailsButton.innerText="Hide Details"
-            additionalVenueInfo.style.display="none"
-            venueDetailsButton.innerText="See Details"
-            showAllImages();
-        }
 
 
     })
+
+    //will loop through all reply buttons, and add event listener
+    let replyButtons=document.getElementsByClassName("activityCommentReplyButton");
+    for (let replyButton of replyButtons){
+        if (replyButton.classList.contains(place.placeId)){
+            replyButton.addEventListener("click",()=>{
+                populateModalWithActivityInfo();
+                $('#modalContent').scrollTop($('#modalContent')[0].scrollHeight);
+                $('#activityModalComments').scrollTop($('#activityModalComments')[0].scrollHeight);
+            })
+        }
+    }
+
+    venueCard.addEventListener("mouseenter", ()=>{
+        toggleBounce(marker)
+        showActivityImages();
+
+    })
+
+    venueCard.addEventListener("mouseleave", ()=>{
+        toggleBounce(marker)
+        showAllImages()
+    })
+
+
+
+    function populateModalWithActivityInfo(){
+
+        //will run api call to google places detail, to add latest activity image to modal
+        let modalActivityImage=document.getElementById("modalActivityImage")
+        getVenueImages(place.placeId, modalActivityImage);
+
+        //add activity name to modal
+        let modalActivityName=document.getElementById("modalActivityName");
+        modalActivityName.innerText=place.place;
+
+        //add activity website to modal
+        let modalActivityWebsite=document.getElementById("modalActivityWebsite");
+        modalActivityWebsite.setAttribute("href", place.website);
+        modalActivityWebsite.innerText=place.website;
+
+        //add activity address to modal
+        let modalActivityAddress=document.getElementById("modalActivityAddress");
+        modalActivityAddress.innerText=place.address;
+
+        //add activity hours to modal
+        let modalActivityHours=document.getElementById("modalActivityHours");
+        modalActivityHours.innerText=place.hours;
+
+        //make ajax call to grab latest activity comments
+        retrieveActivityCommentsFromDatabase(place);
+
+        //set eventListener on comment submit button
+        let activityCommentSubmit=document.getElementById("activityModalCommentButton");
+        activityCommentSubmit.addEventListener("click",()=>{
+            //will grab text from new comment
+            let activityCommentText=document.getElementById("modalActivityCommentInput");
+
+            if (modalActivityName.innerText===place.place) {
+                retrieveActivityCommentsFromDatabase(place, activityCommentText.value)
+                activityCommentText.value = "";
+                setTimeout(function(){
+                    addCommentToTrip(place.trip.id)
+                },300)
+            }
+        })
+
+    }
 
 
 
@@ -494,96 +514,28 @@ function createVenueCard(place, marker){
 
 }
 
-function getVenueDetails(id){
+function getVenueImages(id, modalImage) {
     service = new google.maps.places.PlacesService(map);
     service.getDetails({
-        placeId:id
+        placeId: id
     }, (place, status) => {
         console.log(place);
-        console.log(place.geometry.location);
-        console.log(place.geometry.location.lat)
-        console.log(place.geometry.viewport)
-        console.log(place.geometry.viewport.La.g)
-        console.log(place.geometry.viewport.Ua.g)
+        let imageUrl = ""
+        if (place.photos.length > 0) {
 
+            //will add the first image to the activity modal
+            imageUrl = place.photos[0].getUrl({maxHeight: 300});
+            modalImage.setAttribute("src", imageUrl)
 
-        let html = "";
-        let venueDetailsCard = document.createElement("div");
-        venueDetailsCard.setAttribute("class", "card");
-        html+=`<div class="cardImages">`
-        if(place.photos.length>0) {
-            for (let i=0; i<place.photos.length&&i<3; i++) {
-                imageUrl = place.photos[i].getUrl({maxHeight: 300});
-
-                html += `<img src="${imageUrl}" alt="Card image cap">`
+            //will save all modal Images, in case we want to add a carousel later.
+            for (let i = 0; i < place.photos.length; i++) {
+                modalImages.push(place.photos[0].getUrl({maxHeight: 300}));
             }
-        }
-        html+="</div>"
-        html += `<div class="card-body">`
-        html += `<h5 class="card-title">${place.name}</h5>`
-        html += `<p class="card-text">${place.formatted_address}</p>`
-        html += `<p class="card-text">${place.rating} stars - ${place.user_ratings_total} reviews</p>`
-        html += `<p class="card-text"><a href="${place.website}">Visit Website</a></p>`
-        html += `<p class="card-text">${place.formatted_phone_number}</p>`
-        html += `<p class="card-text">${place.opening_hours.weekday_text}</p>`
-html+=`<h3 id="results">
-  total: 0
-  yes: 0
-  no: 0
-</h3>
-<button type="button" id="yes-button">Click to vote yes</button>
-<button type="button" id="no-button">Click to vote no</button>`
-
-        venueDetailsCard.innerHTML=html;
-
-
-
-});
-
-    let yes = 0;
-    let no = 0;
-
-    function refreshResults () {
-            var results = document.getElementById('results');
-            results.innerHTML = 'total: ' + (yes + no);
-            results.innerHTML += '<br />yes: ' + yes;
-            results.innerHTML += '<br />no: ' + no;
+            console.log(modalImages)
         }
 
-
-
-        document.getElementById('no-button').addEventListener('click', function () {
-            no++;
-            refreshResults();
-        });
-
-
-        let exitButton=document.createElement("button");
-        exitButton.setAttribute("class", "exitButton btn btn-danger")
-        exitButton.innerHTML="close"
-        exitButton.addEventListener("click",()=>{
-            clickedPlace.innerHTML="";
-        })
-
-        let saveButton=document.createElement("button");
-        saveButton.setAttribute("class", "saveButton btn btn-success btn-sm text-center")
-        saveButton.innerHTML="save"
-
-        saveButton.addEventListener("click",()=>{
-
-            addActivityToDatabase(place);
-
-        })
-
-
-
-
-        venueDetailsCard.appendChild(exitButton);
-        venueDetailsCard.appendChild(saveButton);
-
-        let clickedPlace=document.getElementById("clickedPlace");
-        clickedPlace.appendChild(venueDetailsCard)
-    }
+    });
+}
 
 function addVoteToDatabase(vote, id, counter){
     jQuery.ajax({
@@ -676,25 +628,54 @@ function addCommentToTrip(tripId, comment){
             let html="";
 
             for (let comment of comments){
-                html+=`<div >
-                        <div class="row no-gutters">
-                            <div class="col-sm-2" >
-                                <img src="${comment.user.profile_image}" class="card-img-top h-100" default="/imgs/default-profile-picture.png">
-                            </div>
-                            <div class="col-sm-10">
-                                <div class="">
-                                    <div class=""><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
-                                    <div>${comment.comment_text}</div>
-                                </div>
-                            </div>
-                            
+                html+=`<div class="tripComment">
+                    <div class="row no-gutters">
+                        <div class="col-sm-2" >
+                            <img src="${comment.user.profile_image}" class="card-img-top h-100 commentProfileImage" default="/imgs/default-profile-picture.png">
                         </div>
-                        
-                    </div>`
+                        <div class="col-sm-10">
+                            <div class="">
+                                <div class=""><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
+                                <div>${comment.comment_text}</div>
+                            </div>
+                            <div class="text-center">Replies</div>
+                            <div class="activityCommentRepliesDiv">`
+                            if (comment.ajaxCallCommentReplies!=null){
+                                for (let commentReply of comment.ajaxCallCommentReplies){
+                                    html+=`<div class="activityCommentReplies row">
+                                    <div class="col-sm-2">
+                                        <img src="${commentReply[3]}"
+                                             class="card-img-top h-100 replyProfileImage" alt="...">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class=""><strong>${commentReply[1]} ${commentReply[1]}</strong></div>
+                                        <div>${commentReply[0]}</div>
+                                    </div>
+                                </div>`
+                                }
+                            }
+
+                            html+=`</div>`
+                            if (comment.ajaxCallCommentReplies!=null) {
+                                html+=`<button class="activityCommentReplyButton">Reply</button>`
+                            }
+                        html+=`</div>
+                    </div>
+                </div>`
 
             }
             currentTripComments.innerHTML=html;
             tripCommentInput.value=""
+            $('#comments').scrollTop($('#comments')[0].scrollHeight);
+
+            let activityCommentsRepliesDivList=document.getElementsByClassName('activityCommentRepliesDiv')
+
+            for (let replyDiv of activityCommentsRepliesDivList){
+                $(replyDiv).scrollTop($(replyDiv)[0].scrollHeight);
+
+            }
+
+
         },
         error: function (data) {
             console.log(data)
@@ -769,6 +750,15 @@ function retrieveActivityCommentsFromDatabase(place, newComment){
 }
 
 $('#comments').scrollTop($('#comments')[0].scrollHeight);
+$('.activityCommentRepliesDiv').scrollTop($('.activityCommentRepliesDiv')[0].scrollHeight);
+
+let activityCommentsRepliesDivList=document.getElementsByClassName('activityCommentRepliesDiv')
+
+for (let replyDiv of activityCommentsRepliesDivList){
+    $(replyDiv).scrollTop($(replyDiv)[0].scrollHeight);
+
+}
+
 
 
 

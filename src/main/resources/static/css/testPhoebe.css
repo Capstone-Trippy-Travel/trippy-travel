@@ -6,9 +6,6 @@ body {
 #heading{
     text-align: center;
 }
-.container-fluid{
-    /*padding: 5px;*/
-}
 .text-center{
     text-align: center;
 }
@@ -17,7 +14,7 @@ a{
     color: black;
 }
 .viewAll{
-    width: 230px;
+    width: 225px;
     height: 180px;
     margin: .5px;
     object-fit: cover;
@@ -63,7 +60,7 @@ a{
     object-fit: cover;
 }
 .side-profile{
-    padding: 20px 10px 20px 5px;
+    padding: 0px 10px 20px 5px;
     margin: 10px;
 }
 
@@ -166,6 +163,29 @@ a{
     /*background-color: rgb(0, 0, 0);*/
     /*!* Fallback color *!*/
     /*background-color: rgba(0, 0, 0, 0.9);*/
+    /* Black w/ opacity */
+}
+/* Picture Modal (background) */
+.pictureModal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
     /* Black w/ opacity */
 }
 
