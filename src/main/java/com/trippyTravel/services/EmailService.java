@@ -22,6 +22,7 @@ public class EmailService {
     @Value("${spring.mail.from}")
     private String from;
 
+
     public void prepareAndSend(Trip trips, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
@@ -43,6 +44,7 @@ String message = "Your Username is:";
         msg.setSubject(message);
         msg.setText("Your username is " + user.getUsername());
         try {
+            System.out.println("attempting to send email");
             this.emailSender.send(msg);
         } catch (MailException ex) {
             ex.printStackTrace();

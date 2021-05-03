@@ -60,6 +60,7 @@ public class AuthenticationController {
         User existingEmail = usersRepository.findUserByEmail(email);
         if (email.equals(emailConfirm)) {
             if (existingEmail != null) {
+                System.out.println("We got in here!");
                 emailService.prepareAndSend1(existingEmail, email);
                 List<FriendList> friendRequests= new ArrayList<>();
                 m.addAttribute("friendRequests", friendRequests);
