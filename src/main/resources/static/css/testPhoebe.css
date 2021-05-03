@@ -92,6 +92,8 @@ a{
 }
 .group-pics{
     float:left;
+    width:50%;
+    padding: 2px;
 }
 .group-card{
     height: 600px;
@@ -137,8 +139,10 @@ a{
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
-    height: 180px;
-    width:225px;
+    width: 100%;
+    height: 100%;
+    margin: .5px;
+    object-fit: cover;
 }
 
 .myImg:hover {
@@ -254,12 +258,12 @@ a{
     .modal-content {
         width: 100%;
     }
-    .viewAll{
-        width: 120px;
-        height: 100px;
-        margin: .5px;
-        object-fit: cover;
-    }
+    /*.viewAll{*/
+    /*    width: 120px;*/
+    /*    height: 100px;*/
+    /*    margin: .5px;*/
+    /*    object-fit: cover;*/
+    /*}*/
 
     .trip-page-pic{
         width: 120px;
@@ -269,12 +273,12 @@ a{
     }
 }
 @media only screen and (max-width: 992px) {
-    .viewAll{
-        width: 210px;
-        height: 140px;
-        margin: .5px;
-        object-fit: cover;
-    }
+    /*.viewAll{*/
+    /*    width: 210px;*/
+    /*    height: 140px;*/
+    /*    margin: .5px;*/
+    /*    object-fit: cover;*/
+    /*}*/
     .trip-image{
         width: 240px;
         height: 160px;
