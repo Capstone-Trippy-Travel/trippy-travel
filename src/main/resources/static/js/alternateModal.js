@@ -46,34 +46,76 @@ for (let span of spanList) {
 
 //will try to make all images equal size, and stretch to container
 let imageContainer = document.getElementById("activity-pics")
-let imageBox=document.getElementsByClassName("tripImageDiv")[0]
-let imageWidth=imageBox.offsetWidth;
+if (imageContainer!==null) {
+    let imageBox=document.getElementsByClassName("tripImageDiv")[0]
+    let imageWidth=imageBox.offsetWidth;
+    let imageContainerWidth = imageContainer.offsetWidth;
+    console.log(imageContainerWidth)
+    if (imageContainerWidth > 750) {
+        $('.tripImageDiv').css('width', '33.3%')
+        imageWidth = imageBox.offsetWidth;
+        $('.tripImageDiv').css('height', imageWidth * 0.8 + 'px')
 
-let imageContainerWidth=imageContainer.offsetWidth;
-console.log(imageContainerWidth)
-if (imageContainerWidth>750){
-    $('.tripImageDiv').css('width','33.3%')
-    imageWidth=imageBox.offsetWidth;
-    $('.tripImageDiv').css('height',imageWidth*0.8+'px')
+    } else {
+        $('.tripImageDiv').css('height', imageWidth * 0.8 + 'px')
+    }
+}
+//these styling changes are for user and group profile images
+let profileImagesContainer=document.getElementById("cardPic")
 
-} else {
-    $('.tripImageDiv').css('height', imageWidth * 0.8 + 'px')
+if (profileImagesContainer!==null) {
+    let profileImagesContainerWidth = profileImagesContainer.offsetWidth;
+    let imageBox=document.getElementsByClassName("group-pics")[0]
+    let imageWidth=imageBox.offsetWidth;
+    if (profileImagesContainerWidth >= 700) {
+        $('.group-pics').css('width', '33.3%')
+        let imageWidth=imageBox.offsetWidth;
+        $('.group-pics').css('height', imageWidth * 0.8 + 'px')
+
+    } else {
+        $('.group-pics').css('height', imageWidth * 0.8 + 'px')
+    }
 }
 
 
 window.addEventListener('resize', ()=>{
-    imageContainerWidth=imageContainer.offsetWidth;
-    console.log(imageContainerWidth)
-    if (imageContainerWidth>750){
-        $('.tripImageDiv').css('width','33.3%')
-        imageWidth=imageBox.offsetWidth;
-        $('.tripImageDiv').css('height',imageWidth*0.8+'px')
+    if (imageContainer!==null) {
+        let imageContainerWidth = imageContainer.offsetWidth;
+        console.log(imageContainerWidth)
+        if (imageContainerWidth > 750) {
+            $('.tripImageDiv').css('width', '33.3%')
+            let imageBox=document.getElementsByClassName("tripImageDiv")[0]
+            let imageWidth=imageBox.offsetWidth;
+            $('.tripImageDiv').css('height', imageWidth * 0.8 + 'px')
 
-    } else {
-        $('.tripImageDiv').css('width','50%')
-        imageWidth = imageBox.offsetWidth;
-        $('.tripImageDiv').css('height', imageWidth * 0.8 + 'px')
+        } else {
+            $('.tripImageDiv').css('width', '50%')
+            let imageBox=document.getElementsByClassName("tripImageDiv")[0]
+            let imageWidth=imageBox.offsetWidth;
+            $('.tripImageDiv').css('height', imageWidth * 0.8 + 'px')
+        }
     }
 
+    //will update group and user profile images size on window change
+    if (profileImagesContainer!==null) {
+        let profileImagesContainerWidth = profileImagesContainer.offsetWidth;
+        if (profileImagesContainerWidth >= 700) {
+            $('.group-pics').css('width', '33.3%')
+            let imageBox=document.getElementsByClassName("group-pics")[0]
+            let imageWidth=imageBox.offsetWidth;
+            $('.group-pics').css('height', imageWidth * 0.8 + 'px')
+
+        } else {
+            $('.group-pics').css('width', '50%')
+            let imageBox=document.getElementsByClassName("group-pics")[0]
+            let imageWidth=imageBox.offsetWidth;
+            $('.group-pics').css('height', imageWidth * 0.8 + 'px')
+        }
+    }
 });
+
+
+
+
+
 

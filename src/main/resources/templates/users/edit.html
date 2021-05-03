@@ -21,7 +21,7 @@
                     <div class ='imageP'>
                         <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
 <!--                        <img id="imagePreview" src="" alt="" >-->
-                        <input type="hidden" id="image"  name="image_url">
+                        <input type="hidden" id="image"  name="image_url" th:value="${user.getProfile_image()}">
                     </div>
                     <div class ="imagebutton">
                     <button id="addPicture" class="button " style="margin-left: 8px">Edit Picture</button>

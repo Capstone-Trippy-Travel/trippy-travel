@@ -274,7 +274,7 @@ public class TripController {
     @PostMapping("/trip/{id}/delete")
     public String DeleteTrip(@PathVariable Long id) {
         tripRepository.deleteById(id);
-        return "redirect:/trip";
+        return "redirect:/trip/page/1";
     }
 
     @RequestMapping(value="/trip.json", method=RequestMethod.GET, produces="application/json")
