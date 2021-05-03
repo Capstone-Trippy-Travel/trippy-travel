@@ -111,6 +111,11 @@ public class TripController {
         Trip trip = tripRepository.getOne(id);
         trip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(id));
         vModel.addAttribute("trips", trip);
+
+        //Will create boolean to see if user is a member of group.
+        boolean isGroupMember=false;
+
+
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             vModel.addAttribute("friendRequests", friendRequests);
@@ -124,7 +129,18 @@ public class TripController {
                 unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
             }
             vModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
+            //will loop through trip groupmembers, and see if user is a groupmember.
+            for (GroupMember groupMember: trip.getGroup().getGroupMembers()){
+                if(groupMember.getMember().getId()== loggedInuser.getId()){
+                    isGroupMember=true;
+
+                }
+            }
+
+
         }
+        vModel.addAttribute("isGroupMember", isGroupMember);
 //        vModel.addAttribute("comments", commentRepository.getOne(id));
 //        vModel.addAttribute("activity", activityRepository.getOne(1L));
 
@@ -278,13 +294,22 @@ public class TripController {
                 if (activityVote.isVote()){
                     voteCount++;
                     if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
-                        //doing nothing if you are not logged in
+                        //if you are not logged in, it will not show activity comments and votes
+                        activity.setLoggedInUserCanEditActivity(false);
                     } else{
                         //if you are logged in, will check to see if you voted
                         User loggedInUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                         if (activityVote.getUser().getId()==loggedInUser.getId()){
                             activity.setUsersPreviousVote("like");
                         }
+
+                        //will loop through activity groupMembers, check to see if user is groupMember, and give them edit access if so.
+                        for (GroupMember groupMember: activity.getTrip().getGroup().getGroupMembers()){
+                            if (groupMember.getMember().getId()==loggedInUser.getId()){
+                                activity.setLoggedInUserCanEditActivity(true);
+                            }
+                        }
+
                     }
                 } else{
                     voteCount--;
