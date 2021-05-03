@@ -47,7 +47,11 @@ public class AuthenticationController {
         return "login";
     }
     @GetMapping("/login/forgot_password")
-    public String forgotPassword(){
+    public String forgotPassword(Model m){
+        List<FriendList> friendRequests= new ArrayList<>();
+        m.addAttribute("friendRequests", friendRequests);
+        List<Trip> unreadCommentTrips = new ArrayList<>();
+        m.addAttribute("unreadCommentTrips", unreadCommentTrips);
 
 
         return "forgot_password";
