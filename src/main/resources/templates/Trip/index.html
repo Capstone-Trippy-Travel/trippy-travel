@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="stylesheet" href="/css/trial.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="/css/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <script src="../../static/js/tripImage.js"></script>
 </head>
-<body id="create-group-body">
+<body id="trip-index-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<br>
+<hr class="rounded" style="width: 90%; margin-top: unset">
 <!--    <div sec:authorize="isAuthenticated()">-->
 <!--    &lt;!&ndash;    <img src=" https://cdn.filestackcontent.com/7o0pCn7cRy2y1Ijh5xOt" alt="...">&ndash;&gt;-->
 <!--        <h2 th:text="${#authentication.principal.username}"></h2>-->
@@ -54,9 +55,9 @@
                                        </div>
                                    </a>
                                </div>
-                               <div class="col-sm-2 ">
-                                   <i class="fa fa-heart" id="heart" ></i>
-                               </div>
+<!--                               <div class="col-sm-2 ">-->
+<!--                                   <i class="fa fa-heart" id="heart" ></i>-->
+<!--                               </div>-->
                            </div>
                        </div>
                    </div>
