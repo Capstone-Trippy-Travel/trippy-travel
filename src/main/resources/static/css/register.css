@@ -231,12 +231,12 @@ font-size: smaller;
 #edit-profile-body{
     margin-top: 40px;
 }
-#activities_google-body {
-    background: linear-gradient(white, transparent, transparent, transparent, transparent, transparent, transparent), no-repeat center;
-    background-size: cover;
-    box-shadow: 0px 10px 20px -5px rgba(0,0,0,.8);
-    line-height: 1.5em;
-}
+/*#activities_google-body {*/
+/*    background: linear-gradient(white, transparent, transparent, transparent, transparent, transparent, transparent), no-repeat center;*/
+/*    background-size: cover;*/
+/*    box-shadow: 0px 10px 20px -5px rgba(0,0,0,.8);*/
+/*    line-height: 1.5em;*/
+/*}*/
 
 /*#addPicture{*/
 /*    background-color: dodgerblue;*/
