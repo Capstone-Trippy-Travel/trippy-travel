@@ -109,3 +109,9 @@ button{
     border-radius: 2px;
     object-fit: cover;
 }
+nav {
+    font-family: "Arial Rounded MT Bold";
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: small;
+}
