@@ -330,13 +330,13 @@ function createVenueCard(place, marker){
     var showActivityImages = function (event) {
         let imageDiv = document.getElementById(place.place)
         let activityPic = document.getElementById("activity-pics")
-        let activityDiv= document.getElementsByClassName("myImg")
+        let activityDiv= document.getElementsByClassName("myTripImg")
         for (let i =0;i<activityDiv.length;i++){
             let singleActivityDiv = activityDiv[i]
             if (singleActivityDiv != imageDiv){
-                singleActivityDiv.style.display = "none"
+                singleActivityDiv.closest('.tripImageDiv').style.display = "none"
             }else{
-                singleActivityDiv.style.display = "inline-block"
+                singleActivityDiv.closest('.tripImageDiv').style.display = "inline-block"
             }
         }
         activityPic.innerHTML;
@@ -346,10 +346,10 @@ function createVenueCard(place, marker){
     var showAllImages = function (event) {
         let imageDiv = document.getElementById(place.place)
         let activityPic = document.getElementById("activity-pics")
-        let activityDiv= document.getElementsByClassName("myImg")
+        let activityDiv= document.getElementsByClassName("myTripImg")
         for (let i =0;i<activityDiv.length;i++){
             let singleActivityDiv = activityDiv[i]
-            singleActivityDiv.style.display = "inline-block"
+            singleActivityDiv.closest('.tripImageDiv').style.display = "inline-block"
         }
         activityPic.innerHTML;
     }
@@ -436,7 +436,6 @@ function createVenueCard(place, marker){
 
             if (modalActivityName.innerText===place.place) {
                 retrieveActivityCommentsFromDatabase(place, activityCommentText.value)
-                activityCommentText.value = "";
                 setTimeout(function(){
                     addCommentToTrip(place.trip.id)
                 },300)
