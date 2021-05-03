@@ -244,4 +244,15 @@ public class Activity {
 
     private int commentCount;
 
+    public void setLoggedInUserCanEditActivity(boolean loggedInUserCanEditActivity) {
+        this.loggedInUserCanEditActivity = loggedInUserCanEditActivity;
+    }
+
+    public boolean isLoggedInUserCanEditActivity() {
+        return loggedInUserCanEditActivity;
+    }
+
+    private boolean loggedInUserCanEditActivity;
+
+
 }

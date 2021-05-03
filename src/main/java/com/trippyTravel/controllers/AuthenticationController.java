@@ -53,18 +53,21 @@ public class AuthenticationController {
         return "forgot_password";
     }
 
-    @PostMapping("/login/forgot_username")
+    @PostMapping("/forgot_username")
+    public String forgotUsername(Model m ,@RequestParam(name = "email") String email,@RequestParam(name = "emailConfirm") String emailConfirm) {
+        System.out.println(email);
 
-    public String forgotPassword(@RequestParam(name = "email") String email,@RequestParam(name = "emailConfirm") String emailConfirm){
-
-        User existingEmail = usersRepository.findUsernameByEmail(email);
-        System.out.println(email + emailConfirm);
-if(email.equals(emailConfirm)){
-    if(existingEmail != null){
-        emailService.prepareAndSend1(existingEmail,email);
-        return "login";
-    }
-}
+        User existingEmail = usersRepository.findUserByEmail(email);
+        if (email.equals(emailConfirm)) {
+            if (existingEmail != null) {
+                emailService.prepareAndSend1(existingEmail, email);
+                List<FriendList> friendRequests= new ArrayList<>();
+                m.addAttribute("friendRequests", friendRequests);
+                List<Trip> unreadCommentTrips = new ArrayList<>();
+                m.addAttribute("unreadCommentTrips", unreadCommentTrips);
+                return "login";
+            }
+        }
 
 //        else if (existingEmail == null)
 //        {
@@ -72,9 +75,13 @@ if(email.equals(emailConfirm)){
 //           return "login"; // input testing is ommitted here to save space
 
 
-//        }
-        return "login";
-    }
+         List<FriendList> friendRequests= new ArrayList<>();
+      m.addAttribute("friendRequests", friendRequests);
+      List<Trip> unreadCommentTrips = new ArrayList<>();
+      m.addAttribute("unreadCommentTrips", unreadCommentTrips);
+            return "forgot_password";
+         }
+
 
     @GetMapping("/async-login")
     public String asyncLogin(){

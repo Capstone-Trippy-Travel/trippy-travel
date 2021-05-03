@@ -22,7 +22,7 @@ UsersRepository extends JpaRepository<User, Long> {
 
     List<User> findByFirstNameContainingOrLastNameContainingOrUsernameContaining(String name, String name1, String name2);
 
-    @Query("select u.username from User u where u.email = ?2")
-    User findUsernameByEmail(String email);
+//    @Query("select u.username from User u where u.email = ?2")
+    User findUserByEmail(String email);
 
 }
