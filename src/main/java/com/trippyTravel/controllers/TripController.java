@@ -304,7 +304,7 @@ public class TripController {
                         }
 
                         //will loop through activity groupMembers, check to see if user is groupMember, and give them edit access if so.
-                        for (GroupMember groupMember: activity.getTrip().getGroupMembers()){
+                        for (GroupMember groupMember: activity.getTrip().getGroup().getGroupMembers()){
                             if (groupMember.getMember().getId()==loggedInUser.getId()){
                                 activity.setLoggedInUserCanEditActivity(true);
                             }
