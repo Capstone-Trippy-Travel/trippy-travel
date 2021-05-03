@@ -51,26 +51,34 @@
     </div>
 </div>
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<div class="container-fluid">
-    <div class="card text-center">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#" >Trip Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="${'/trip/'+trips.getId()}+'/activities'">Add activities</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " th:href="${'/groups/'+trips.getGroup().getId()}" ><div  th:text="${trips.getGroup().getName()}"></div></a>
-                </li>
-
-
-            </ul>
+<div class="card-body" style="text-align: center; padding-top: 0">
+    <div class="card-body" style="text-align: center; padding-top: 0">
+        <!--            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>-->
+        <div class="">
+            <a th:href="${'/trip/'+trips.getId()}" class="btn btn-primary" id=""
+               style="color: black; background-color: transparent; background-repeat: no-repeat; border: none; cursor: pointer; overflow: hidden">
+                <h3 th:text="${trips.getName()}"></h3>
+            </a>
         </div>
+        <div class="row">
+            <div class="col-6">
+                <ul class="navbar-nav mr-auto" style=" float: right; padding-right:50px; font-family: Arial Rounded MT Bold;font-size: small">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="${'/trip/'+trips.getId()+'/activities'}">Add Activities ►</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul class="navbar-nav mr-auto" style=" float: left; padding-left: 50px; font-family: Arial Rounded MT Bold;font-size: small">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="${'/groups/'+trips.getGroup().getId()}">View Group Profile ►</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--        <p class="card-text" th:text="${trip.getDescription()}"></p>-->
     </div>
 
-</div>
 <div class="row" id="tripContainer">
 <div class="card col-md-4 col-12" style="width: 18rem; border: none;">
     <form  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" th:if="${isGroupMember}" >
