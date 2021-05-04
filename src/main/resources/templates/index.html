@@ -226,48 +226,70 @@
         <!--Section: Examples-->
         <section id="examples" class="text-center">
             <!-- Heading -->
-            <h2 class="mb-5 font-weight-bold">Featured Trips</h2>
+            <h2 sec:authorize="isAnonymous()" class="mb-5 font-weight-bold">Featured User Trips</h2>
+            <h2 sec:authorize="isAuthenticated()" class="mb-5 font-weight-bold">Your Latest Trips</h2>
             <!--Grid row-->
-            <div class="row">
+            <div class="row" style="display: flex">
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="view overlay z-depth-1-half">
-                        <img src="https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712__340.jpg" class=" indexImage" alt="">
-                        <div class="mask rgba-white-slight"></div>
+                <div sec:authorize="isAuthenticated()" class="col-lg-4 col-md-6 mb-4" >
+                    <div th:each="trips : ${userTripList}" style="display: flex; flex-direction: row;">
+                        <div th:each="trip : ${trips}" style="margin-right: 18px;">
+                            <div class="view overlay z-depth-1-half">
+                                <img class=" indexImage" th:src="${trip.getTrip_profile_image()}" alt="..." style="object-fit: cover">
+                                <div class="mask rgba-white-slight"></div>
+                            </div>
+                            <a th:href="${'/trip/'+trip.id}"><h4 th:text="${trip.name}" class="my-4 font-weight-bold"style="font-weight: bold;"></h4></a>
+                            <p th:text="${trip.description}"></p>
+                        </div>
                     </div>
-                    <h4 class="my-4 font-weight-bold">Heading</h4>
-                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                        maiores nam,
-                        aperiam minima
-                        assumenda deleniti hic.</p>
+                </div>
+                <div  sec:authorize="isAnonymous()" class="col-lg-4 col-md-6 mb-4" >
+                    <div th:each="trips : ${generalTripList}" style="display: flex; flex-direction: row;">
+                        <div th:each="trip : ${trips}" style="margin-right: 18px;">
+                            <div class="view overlay z-depth-1-half">
+                                <img class=" indexImage" th:src="${trip.getTrip_profile_image()}" alt="..." style="object-fit: cover">
+                                <div class="mask rgba-white-slight"></div>
+                            </div>
+                            <a th:href="${'/trip/'+trip.id}"><h4 th:text="${trip.name}" class="my-4 font-weight-bold"style="font-weight: bold;"></h4></a>
+                            <p th:text="${trip.description}"></p>
+                        </div>
+                    </div>
+                </div>
+<!--                <div sec:authorize="isAnonymous()" >-->
+<!--                    <div th:each="publicTrips : ${#numbers.sequence( 1, 4, 1) }">-->
+<!--                        <p th:text="${ publicTrips }"></p>-->
+<!--                    </div>-->
+<!--                    <div th:each="triper,iterStat : ${publicTrips}" th:if="${iterStat.index}<5">-->
+<!--                        <p th:text="${ triper }"></p>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                </div>
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="view overlay z-depth-1-half">
-                        <img src="https://cdn.pixabay.com/photo/2016/03/04/19/36/beach-1236581__340.jpg" class=" indexImage" alt="">
-                        <div class="mask rgba-white-slight"></div>
-                    </div>
-                    <h4 class="my-4 font-weight-bold">Heading</h4>
-                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                        maiores nam,
-                        aperiam minima
-                        assumenda deleniti hic.</p>
-                </div>
-                <!--Grid column-->
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="view overlay z-depth-1-half">
-                        <img src="https://cdn.pixabay.com/photo/2017/06/26/08/43/ribblehead-viaduct-2443085__340.jpg" class=" indexImage" alt="">
-                        <div class="mask rgba-white-slight"></div>
-                    </div>
-                    <h4 class="my-4 font-weight-bold">Heading</h4>
-                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
-                        maiores nam,
-                        aperiam minima
-                        assumenda deleniti hic.</p>
-                </div>
+<!--                <div class="col-lg-4 col-md-6 mb-4">-->
+<!--                    <div class="view overlay z-depth-1-half">-->
+<!--                        <img src="https://cdn.pixabay.com/photo/2016/03/04/19/36/beach-1236581__340.jpg" class=" indexImage" alt="">-->
+<!--                        <div class="mask rgba-white-slight"></div>-->
+<!--                    </div>-->
+<!--                    <h4 class="my-4 font-weight-bold">Heading</h4>-->
+<!--                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit-->
+<!--                        maiores nam,-->
+<!--                        aperiam minima-->
+<!--                        assumenda deleniti hic.</p>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;Grid column&ndash;&gt;-->
+<!--                &lt;!&ndash;Grid column&ndash;&gt;-->
+<!--                <div class="col-lg-4 col-md-6 mb-4">-->
+<!--                    <div class="view overlay z-depth-1-half">-->
+<!--                        <img src="https://cdn.pixabay.com/photo/2017/06/26/08/43/ribblehead-viaduct-2443085__340.jpg" class=" indexImage" alt="">-->
+<!--                        <div class="mask rgba-white-slight"></div>-->
+<!--                    </div>-->
+<!--                    <h4 class="my-4 font-weight-bold">Heading</h4>-->
+<!--                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit-->
+<!--                        maiores nam,-->
+<!--                        aperiam minima-->
+<!--                        assumenda deleniti hic.</p>-->
+<!--                </div>-->
                 <!--Grid column-->
             </div>
             <!--Grid row-->

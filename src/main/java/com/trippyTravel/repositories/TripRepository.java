@@ -14,6 +14,10 @@ public interface TripRepository extends JpaRepository<Trip,Long> {
     @Query("select t from Trip t, Group g, GroupMember gm, User u where t.group=g AND gm.group=g AND gm.member=u AND u.id=?1 AND t.status=?2")
     List<Trip> findTripsByStatus(long id, String string);
 
+    @Query("select t from Trip t, Group g, GroupMember gm, User u where t.group=g AND gm.group=g AND gm.member=u AND u=?1 AND t.visibility=?2 order by t.id desc ")
+    List<Trip> findUserTrips(User user, String string);
+
+
 //    @Query("select t from Trip t where t.visibility='public'")
     List<Trip> findTripsByVisibilityOrderByIdDesc(String visibility);
 
