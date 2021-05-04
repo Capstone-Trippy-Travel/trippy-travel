@@ -374,3 +374,6 @@ a{
 .myTripImg:hover {
     opacity: 0.7;
 }
+.logo {
+    margin-right: 10px;
+}

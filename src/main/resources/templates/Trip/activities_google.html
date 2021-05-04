@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="stylesheet" href="/css/trial.css">
     <link rel="stylesheet" href="/css/activities.css">
+    <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/register.css">
 </head>
 <body id="activities_google-body">
-<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
+<nav id="activity-google-nav" th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <hr class="rounded" style="width: 90%; margin-top: unset">
 <div class="container-fluid" style="margin-top: 20px; opacity: .9">
     <form th:action="@{'/trip/'+ ${trip.id} +'/activities'}" method="post"  id="activityForm">
