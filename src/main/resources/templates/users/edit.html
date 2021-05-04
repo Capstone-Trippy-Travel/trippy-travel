@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/trial.css">
 </head>
 
-<body id="edit-profile-body">
+<body id="edit-profile-body" style="height: max-content">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 
 <main class="container">
@@ -48,7 +48,7 @@
                         <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>
                     </div>
 
-                    <input th:if="${showEditControls}" class="btn" type="submit" />
+                    <input th:if="${showEditControls}" class="btn" id="edit-p" type="submit" />
                 </form>
             </div>
             <!--<div th:replace="fragments/forms :: postsForm(@{'/posts/edit'}, true)"></div>-->
