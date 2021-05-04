@@ -41,7 +41,7 @@
                     <input class="form-control disa" id="last-name" name="last-name" th:field="*{lastName}" />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
 
-                    <label for="username" class="required" style="margin-top: .5rem; margin-bottom: 0; margin-left: 2px">User Name</label>
+                    <label for="username" class="required" style="margin-top: .5rem; margin-bottom: 0; margin-left: 2px">Username</label>
                     <input class="form-control " id="username" name="username" th:field="*{username}" required />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 
