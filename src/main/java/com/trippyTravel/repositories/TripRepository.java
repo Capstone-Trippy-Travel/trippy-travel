@@ -14,8 +14,12 @@ public interface TripRepository extends JpaRepository<Trip,Long> {
     @Query("select t from Trip t, Group g, GroupMember gm, User u where t.group=g AND gm.group=g AND gm.member=u AND u.id=?1 AND t.status=?2")
     List<Trip> findTripsByStatus(long id, String string);
 
-    @Query("select t from Trip t where t.visibility='public'")
-    List<Trip> findTripsByVisibility();
+    @Query("select t from Trip t, Group g, GroupMember gm, User u where t.group=g AND gm.group=g AND gm.member=u AND u=?1 AND t.visibility=?2 order by t.id desc ")
+    List<Trip> findUserTrips(User user, String string);
+
+
+//    @Query("select t from Trip t where t.visibility='public'")
+    List<Trip> findTripsByVisibilityOrderByIdDesc(String visibility);
 
 
 //    @Query("select t from Trip t, Group g, GroupMember gm where t.group=g AND gm.group=gm AND gm.member=?1 AND t.status=?2")
@@ -32,4 +36,6 @@ public interface TripRepository extends JpaRepository<Trip,Long> {
     List<Trip> searchTrip(@Param("term") String term);
     List<Trip> findByDescriptionContainingOrNameContainingOrLocationContaining(String term, String term1, String term2);
     List<Trip> findAllByDescriptionContainingOrNameContainingOrLocationContaining(String term, String term1, String term2);
+
+    List<Trip> findAllByOrderByIdDesc();
 }

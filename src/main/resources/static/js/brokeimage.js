@@ -29,3 +29,13 @@ function replaceEmptySrc2(brokeTrip) {
         brokeTrip.src = '/imgs/gray_plane.png';
     }
 }
+const brokeImages = document.querySelectorAll('#my-pictures');
+console.log(brokeImages)
+console.log(brokeImages[0].src);
+
+brokeImages.forEach(replaceEmptySrc3);
+function replaceEmptySrc3(brokeTrip) {
+    if (brokeTrip.getAttribute('src') === '') {
+        brokeTrip.src = '/imgs/no_user_pics.jpeg';
+    }
+}

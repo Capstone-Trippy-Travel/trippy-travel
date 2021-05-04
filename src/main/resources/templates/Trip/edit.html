@@ -11,15 +11,18 @@
     <link rel="stylesheet" href="/css/trial.css">
     <link rel="stylesheet" href="/css/register.css">
 </head>
+<body id="edit-trip-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <main class="container">
+    <fieldset id="fieldset-enter-group-info" class="col-11">
+        <div class="cartoptionbox">
     <div class="row">
         <div class="col">
             <h2>Edit Trip</h2>
         </div>
         <div class="col-last">
             <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST">
-                <button type="submit" id="delete" >Delete Trip</button>
+                <button type="submit" id="delete" class="delete-trip">Delete Trip</button>
             </form>
         </div>
     </div>
@@ -28,7 +31,7 @@
     <form class="tripForm"name="myForm" th:action="@{'/trip/'+ ${trip.id} +'/edit'}" method="post" th:object="${trip}" >
         <div class ='imageP'>
             <img th:src="${trip.getTrip_profile_image()}" th:if="${trip.getTrip_profile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
-            <input type="hidden" id="image"  name="trip_profile_image" th:value="${trip.getTrip_profile_image()}" >
+            <input type="hidden" id="image"  name="image_url trip_profile_image" th:value="${trip.getTrip_profile_image()}" >
         </div>
         <div class ="imagebutton">
             <button id="addPicture" class="button " style="margin-left: 8px">Edit Picture</button>
@@ -91,11 +94,13 @@
         <br>
 
 
-        <input class="btn btn-primary btn-block" type="submit" />
+        <input class="btn" id="edit-p" type="submit" />
 
     </form>
         </div>
     </div>
+        </div>
+    </fieldset>
 </main>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -104,5 +109,6 @@
 <script src="/js/fileStack.js"></script>
 <script src="/js/notifications.js" th:inline="javascript"></script>
 <script src="/js/validation.js" th:inline="javascript"></script>
-<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer2 :: footer"></div>
+</body>
 </html>

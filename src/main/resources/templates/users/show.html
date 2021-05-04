@@ -145,7 +145,7 @@
                 <div class=" main-item" >
                     <div id="cardPic">
                         <div th:each="userImage : ${user.getImages()}" class="group-pics ">
-                            <img  class="viewAll myImg" onclick="image(event)"  th:src="${userImage.getImage_url()}" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" >
+                            <img  class="viewAll myImg" id="my-pictures" onclick="image(event)"  th:src="${userImage.getImage_url()}" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" >
                         </div>
                     </div>
                 </div>

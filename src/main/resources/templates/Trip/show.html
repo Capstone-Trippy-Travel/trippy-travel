@@ -36,9 +36,9 @@
                 <p class="text-center"><a id="modalActivityWebsite"></a></p>
                 <p class="text-center" id="modalActivityAddress"></p><hr>
                 <p class="text-center" id="modalActivityHours"></p><hr>
-                <div id="activityModalComments">Comments</div>
+                <div id="activityModalComments" th:if="${isGroupMember}">Comments</div>
                 <!--Add comment / comments section-->
-                <div class="md-form" style="display: flex">
+                <div class="md-form" style="display: flex" th:if="${isGroupMember}">
                     <textarea type="text" id="modalActivityCommentInput" class="md-textarea form-control col-5" rows="2" placeholder="Add a comment.."></textarea>
                     <button id="activityModalCommentButton">Submit</button>
                 </div>
@@ -51,37 +51,44 @@
     </div>
 </div>
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<div class="container-fluid">
-    <div class="card text-center">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#" >Trip Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="${'/trip/'+trips.getId()}+'/activities'">Add activities</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " th:href="${'/groups/'+trips.getGroup().getId()}" ><div  th:text="${trips.getGroup().getName()}"></div></a>
-                </li>
-                <div class="col nav-item" style="text-align: right">
-                    <div class="nav-link "  th:text="${trips.getStartDate().toGMTString().substring(0,11)+ ' - '+trips.getEndDate().toGMTString().substring(0,11)}"></div>
-                </div>
-
-            </ul>
+<div class="card-body" style="text-align: center; padding-top: 0">
+    <div class="card-body" style="text-align: center; padding-top: 0">
+        <!--            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>-->
+        <div class="">
+            <a th:href="${'/trip/'+trips.getId()}" class="btn btn-primary" id=""
+               style="color: black; background-color: transparent; background-repeat: no-repeat; border: none; cursor: pointer; overflow: hidden">
+                <h3 th:text="${trips.getName()}"></h3>
+            </a>
         </div>
-        <div class="card-body">
-<!--            <a th:href="${'/trip/'+trips.getId()}" class="btn btn-primary"><div th:text="${trips.getName()}"></div></a>-->
-<!--            <div id="tripDate" th:text="${trips.getStartDate().toGMTString().substring(0,11)+ ' - '+trips.getEndDate().toGMTString().substring(0,11)}"></div>-->
-<!--            <a th:href="${'/groups/'+trips.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trips.getGroup().getName()}"></div></a>-->
-            <p class="card-text" th:text="${trips.getDescription()}"></p>
-            <div id="tripLocation" th:text="${trips.getLocation()}"></div>
+        <div class="row">
+            <div class="col-6">
+                <ul class="navbar-nav mr-auto" style=" float: right; padding-right:50px; font-family: Arial Rounded MT Bold;font-size: small">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="${'/trip/'+trips.getId()+'/activities'}">Add Activities ►</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul class="navbar-nav mr-auto" style=" float: left; padding-left: 50px; font-family: Arial Rounded MT Bold;font-size: small">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="${'/groups/'+trips.getGroup().getId()}">View Group Profile ►</a>
+                    </li>
+                </ul>
+            </div>
         </div>
+        <!--        <p class="card-text" th:text="${trip.getDescription()}"></p>-->
     </div>
 
-</div>
 <div class="row" id="tripContainer">
-<div class="card col-md-4 col-12" style="width: 18rem;">
+<div class="card col-md-4 col-12" style="width: 18rem; border: none;">
+    <form  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" th:if="${isGroupMember}" >
+        <input type="hidden" id="image"  name="image_url">
+        <button class="addPicture btn btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+            <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+            <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"></path>
+        </svg></button>        <!--                <input class="btn" type="submit" />-->
+    </form>
+
     <div class="card-body">
         <div class="container" id="tripProfileInfo">
             <!--    <div class="post" th:each="image:${post.getImages()}">-->
@@ -92,22 +99,28 @@
             <h1 th:text="${trips.name}" class="card-title" style="text-align: center"></h1>
             <div style="text-align: center">
                 <img th:src="${trips.getTrip_profile_image()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." style="margin-right: 0">
+                <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get" th:if="${isGroupMember}"class="button side-item" style="text-align: center;">
+                    <button class="logout-button">Edit Trip</button>
+                </form>
                 <p class="card-text" th:text="${trips.getDescription()}"></p>
+                <p class="card-text"  th:text="${trips.getStartDate().toGMTString().substring(0,11)+ ' - '+trips.getEndDate().toGMTString().substring(0,11)}"></p>
+                <p id="tripLocation" class="card-text" th:text="${trips.getLocation()}"></p>
             </div><br>
 
             <div class="row">
                 <div class="col-6 form-group">
-                    <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >
-                        <input type="hidden" id="image"  name="image_url">
-                        <button id="addPicture">addPicture</button>
-                        <!--                <input class="btn" type="submit" />-->
-                    </form>
+<!--                    <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" th:if="${isGroupMember}" >-->
+<!--                        <input type="hidden" id="image"  name="image_url">-->
+<!--                        <button id="addPicture">addPicture</button>-->
+<!--                        &lt;!&ndash;                <input class="btn" type="submit" />&ndash;&gt;-->
+<!--                    </form>-->
                 </div>
-                <div class="col-6">
-                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get">
-                        <button type="submit" id="edit" >Edit Trip</button>
-                    </form>
-                </div>
+<!--                <div class="col-6">-->
+<!--                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get" th:if="${isGroupMember}">-->
+<!--                        <button type="submit" id="edit" >Edit Trip</button>-->
+<!--                    </form>-->
+
+<!--                </div>-->
             </div>
 
 <!--            <div class="row">-->
@@ -122,12 +135,12 @@
 
 
             <hr>
-            <h5 class="text-center">Comments</h5>
-            <div id="comments">
+            <h5 class="text-center" th:if="${isGroupMember}">Comments</h5>
+            <div id="comments" th:if="${isGroupMember}">
                 <div th:each="comment : ${trips.getComments()}" class="tripComment" >
                     <div class="row no-gutters">
                         <div class="col-sm-2" >
-                            <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100 commentProfileImage" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
+                            <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100 commentProfileImage" id="comment-image" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
                             <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
                         </div>
                         <div class="col-sm-10">
@@ -158,7 +171,7 @@
                     </div>
                 </div>
             </div>
-            <div class="input-group">
+            <div class="input-group" th:if="${isGroupMember}">
                 <input name="comment" type="text" id="tripCommentInput" class="form-control" placeholder="Enter Comment.." aria-describedby="basic-addon2">
                 <button class="logout-button" id="tripCommentButton">Submit</button>
             </div>
@@ -208,7 +221,7 @@
 
                 <!--                <div class="activityImageDiv">-->
                 <div th:each="userImage : ${trips.getImages()}" th:class="tripImageDiv">
-                    <img th:src="${userImage.getImage_url()}"  class="myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
+                    <img th:src="${userImage.getImage_url()}"  id="myTrip" class="myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
                     <img th:src="${userImage.getImage_url()}" th:id="${userImage.getActivity().getPlace()}"  class="viewAll myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()!=null}">
                 </div>
                 <!--                </div>-->
@@ -251,6 +264,7 @@
 <script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/trip_profile.js"></script>
+<script src="/js/tripimage.js"></script>
 <!--<script src="/js/fileStack.js"></script>-->
 <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"

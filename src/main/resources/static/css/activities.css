@@ -153,11 +153,11 @@ html, body, .container{
     display: none;
 }
 
-#tripLocation{
-    position: absolute;
-    bottom: 1px;
-    right: 1px;
-}
+/*#tripLocation{*/
+/*    position: absolute;*/
+/*    bottom: 1px;*/
+/*    right: 1px;*/
+/*}*/
 
 #mapContainer #map{
     height: 400px;
@@ -199,9 +199,13 @@ html, body, .container{
 
 .addPicture{
     position: absolute;
-    top: 1px;
-    right: 1px;
-
+    top: 5px;
+    right: 5px;
+    background: #cccccc;
+    border: 1px solid black;
+    height: 35px;
+    display: flex;
+    align-items: center;
 }
 
 .venueInfo{

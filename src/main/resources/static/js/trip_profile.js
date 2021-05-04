@@ -303,21 +303,29 @@ function createVenueCard(place, marker){
     venueDetailsDiv.appendChild(venueDetailsButton)
     venueDetailsButton.innerText="See Details"
 
-    //adding filestack addPicture button
-    let fileStackButton=document.createElement("button");
-    fileStackButton.setAttribute("class", "addPicture btn btn-sm");
-    // fileStackButton.innerText="Add picture"
-    fileStackButton.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">\n' +
-        '  <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>\n' +
-        '  <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>\n' +
-        '</svg>'
 
-    cardBody.appendChild(fileStackButton)
+        let fileStackButton = document.createElement("button");
+        fileStackButton.setAttribute("class", "addPicture btn btn-sm");
+        // fileStackButton.innerText="Add picture"
+        fileStackButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">\n' +
+            '  <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>\n' +
+            '  <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>\n' +
+            '</svg>'
+//adding filestack addPicture button if user is a groupMember
+    if (place.loggedInUserCanEditActivity) {
+        cardBody.appendChild(fileStackButton)
+    }
 
 
     venueCard.appendChild(venueDetailsDiv)
     venueCard.appendChild(commentLikeCounterDiv)
-    venueCard.appendChild(voteDiv)
+
+    //will only add voteDiv if user is a groupMember
+    if (place.loggedInUserCanEditActivity) {
+        venueCard.appendChild(voteDiv)
+    }
+
+
 
 
 
@@ -426,21 +434,25 @@ function createVenueCard(place, marker){
 
 
         //make ajax call to grab latest activity comments
-        retrieveActivityCommentsFromDatabase(place);
+        if (place.loggedInUserCanEditActivity) {
 
-        //set eventListener on comment submit button
-        let activityCommentSubmit=document.getElementById("activityModalCommentButton");
-        activityCommentSubmit.addEventListener("click",()=>{
-            //will grab text from new comment
-            let activityCommentText=document.getElementById("modalActivityCommentInput");
+            retrieveActivityCommentsFromDatabase(place);
 
-            if (modalActivityName.innerText===place.place) {
-                retrieveActivityCommentsFromDatabase(place, activityCommentText.value)
-                setTimeout(function(){
-                    addCommentToTrip(place.trip.id)
-                },300)
-            }
-        })
+
+            //set eventListener on comment submit button
+            let activityCommentSubmit = document.getElementById("activityModalCommentButton");
+            activityCommentSubmit.addEventListener("click", () => {
+                //will grab text from new comment
+                let activityCommentText = document.getElementById("modalActivityCommentInput");
+
+                if (modalActivityName.innerText === place.place) {
+                    retrieveActivityCommentsFromDatabase(place, activityCommentText.value)
+                    setTimeout(function () {
+                        addCommentToTrip(place.trip.id)
+                    }, 300)
+                }
+            })
+        }
 
     }
 
@@ -452,7 +464,7 @@ function createVenueCard(place, marker){
 
     let websiteLink=document.createElement("a");
     websiteLink.setAttribute("class", "websiteDiv");
-    websiteLink.innerText=place.website
+    websiteLink.innerText="Visit Website"
     additionalVenueInfo.appendChild(websiteLink);
 
     let addressDiv=document.createElement("div");
@@ -595,18 +607,20 @@ const options = {
         console.log(callback);
     }
 }
-// This is an event listen for listening to a click on a button
-$('#addPicture').click(function (event){
-    console.log('adding picture')
+// This is an event listen for listening to a click on a button only if user is a groupMember
+if (place.loggedInUserCanEditActivity) {
+    $('#addPicture').click(function (event) {
+        console.log('adding picture')
 
-    // this is what prevents the button from submiting the form
-    event.preventDefault();
+        // this is what prevents the button from submiting the form
+        event.preventDefault();
 
-    //we use this to tell filestack to open their file picker interface.
-    // the picker method can take an argument of a options object
-    // where you can specify what you want the picker to do
-    client.picker(options).open();
-})
+        //we use this to tell filestack to open their file picker interface.
+        // the picker method can take an argument of a options object
+        // where you can specify what you want the picker to do
+        client.picker(options).open();
+    })
+}
 
 let pathUrl=window.location.pathname;
 let pathUrlArray=pathUrl.split("/");

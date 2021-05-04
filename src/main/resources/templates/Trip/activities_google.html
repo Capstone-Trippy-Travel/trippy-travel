@@ -74,10 +74,28 @@
     <div class="card text-center" style="border: none; background: transparent">
         <div class="card-body" style="text-align: center; padding-top: 0">
             <!--            <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary"><div th:text="${trip.getName()}"></div></a>-->
-            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="group-name" style="color: black; background-color: transparent; background-repeat: no-repeat; border: none; cursor: pointer; overflow: hidden">
-                <h3 th:text="${trip.getGroup().getName()}"></h3>
-            </a>
-            <div id="trip-date" th:text="${trip.getStartDate().toGMTString().substring(0,11)+ ' - '+trip.getEndDate().toGMTString().substring(0,11)}"></div>
+            <div class="">
+                <a th:href="${'/trip/'+trip.getId()}" class="btn btn-primary" id=""
+                   style="color: black; background-color: transparent; background-repeat: no-repeat; border: none; cursor: pointer; overflow: hidden">
+                    <h3 th:text="${trip.getName()}"></h3>
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <ul class="navbar-nav mr-auto" style=" float: right; padding-right:50px;">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="${'/trip/'+trip.getId()}">Back to Trip Profile  ►</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <ul class="navbar-nav mr-auto" style=" float: left; padding-left: 50px;">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="${'/groups/'+trip.getGroup().getId()}">Back to Group Profile  ►</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <!--        <p class="card-text" th:text="${trip.getDescription()}"></p>-->
         </div>
         <!--        <div class="card-body">-->
@@ -86,13 +104,9 @@
         <!--&lt;!&ndash;            <a th:href="${'/groups/'+trip.getGroup().getId()}" class="btn btn-primary" id="groupName"><div  th:text="${trip.getGroup().getName()}"></div></a>&ndash;&gt;-->
         <!--            &lt;!&ndash;        <p class="card-text" th:text="${trip.getDescription()}"></p>&ndash;&gt;-->
         <!--        </div>-->
-    </div><br>
+    </div>
     <form class="form-group">
-        <ul class="navbar-nav mr-auto" style="max-width: 140px">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="${'/trip/'+trip.getId()}">Back to Trip Profile  ►</a>
-            </li>
-        </ul>
+
         <div class="row" style="margin-top: 2px; margin-bottom: 2px;">
             <div class="col-lg-6" style="display: flex; padding-bottom: 6px">
                 <label class="sr-only" for="searchValue">Address</label>
