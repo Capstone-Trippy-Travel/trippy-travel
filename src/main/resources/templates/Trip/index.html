@@ -33,7 +33,7 @@
        <hr class="my-5">
        <div class="main-trip-page">
            <div th:each="trip : ${publicTrips}" id="main-trip-page-item">
-               <a th:href="${'/trip/'+trip.id}"><h5 th:text="${trip.name}" class="trip-items" style="font-weight: bold;"></h5></a>
+               <a th:href="${'/trip/'+trip.id}"><h5 th:text="${trip.name}" class="trip-items" style="font-weight: bold; text-align: center"></h5></a>
                <div class="card-container" >
                    <div class="front">
                        <img class="viewAll  trip-page-pic trip-items" id="trip-p" th:src="${trip.getTrip_profile_image()}" alt="...">
