@@ -135,7 +135,6 @@ public class TripController {
             for (GroupMember groupMember: trip.getGroup().getGroupMembers()){
                 if(groupMember.getMember().getId()== loggedInuser.getId()){
                     isGroupMember=true;
-
                 }
             }
 

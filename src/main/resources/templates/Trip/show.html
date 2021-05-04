@@ -64,7 +64,7 @@
                 <h3 th:text="${trips.getName()}"></h3>
             </a>
         </div>
-        <div class="row">
+        <div class="row" th:if="${isGroupMember}">
             <div class="col-6">
                 <ul class="navbar-nav mr-auto" style=" float: right; padding-right:50px; font-family: Arial Rounded MT Bold;font-size: small">
                     <li class="nav-item active">
@@ -79,6 +79,13 @@
                     </li>
                 </ul>
             </div>
+        </div>
+        <div th:if="${!isGroupMember}">
+            <ul class="navbar-nav mr-auto" style=" text-align: center; font-family: Arial Rounded MT Bold;font-size: small">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="${'/groups/'+trips.getGroup().getId()}">View Group Profile ►</a>
+                </li>
+            </ul>
         </div>
         <!--        <p class="card-text" th:text="${trip.getDescription()}"></p>-->
     </div>
@@ -101,7 +108,7 @@
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
             <!-- Button trigger modal -->
-            <h1 th:text="${trips.name}" class="card-title" style="text-align: center; margin:5px; padding:5px;"></h1>
+            <h2 th:text="${trips.name}" class="card-title" style="text-align: center; margin:5px; padding:10px;"></h2>
             <div style="text-align: center">
                 <img th:src="${trips.getTrip_profile_image()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." style="margin-right: 0">
                 <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get" th:if="${isGroupMember}"class="button side-item" style="text-align: center;">

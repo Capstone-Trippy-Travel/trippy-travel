@@ -11,6 +11,7 @@ body{
  border-radius: 2%;
  -webkit-box-shadow: 5px 5px 5px 0 rgba(0 0 0);
  height: auto;
+ position: relative;
 }
 
 #myTab .active{
@@ -90,7 +91,7 @@ body{
 .bg01 .area .street_lamp02::before{display:block;content:'';position:absolute;left:-3px;bottom:0;width:9px;height:3px;background:#fff}
 .bg01 .area .street_lamp02 .light{position:absolute;top:0;left:-3px;width:0;height:0;border:5px solid transparent;border-top-color:#eee;border-right-color:#eee;border-radius:50%;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}
 .bg01 .area .street_lamp02 .light::before{display:block;content:'';position:absolute;top:-4px;left:-4px;width:0;height:0;border:4px solid transparent;border-left-color:#f1e09d;border-bottom-color:#f1e09d;border-radius:50%}
- .cloud{position:absolute;overflow:hidden;z-index:20}
+ .cloud{position:absolute;overflow:hidden;}
  .cloud .circle{position:absolute;border-radius:50%;background:#fff}
  .cloud .circle::before, .cloud .circle::after{display:block;content:'';position:absolute;border-radius:50%;background:#fff}
  .cloud01{top:73px;left:56px;width:125px;height:49px}

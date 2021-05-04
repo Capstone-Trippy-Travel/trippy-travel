@@ -60,6 +60,9 @@ public class ActivityController {
     @GetMapping(path = "/trip/{id}/activities")
     public String tripActivities(@PathVariable Long id, Model model) {
         Trip trip = tripRepository.getOne(id);
+
+
+
         model.addAttribute("trip", trip);
         model.addAttribute("activity", new Activity());
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
@@ -67,6 +70,7 @@ public class ActivityController {
             model.addAttribute("friendRequests", friendRequests);
             List<Trip> unreadCommentTrips = new ArrayList<>();
             model.addAttribute("unreadCommentTrips", unreadCommentTrips);
+            return "Trip/activities_google";
 
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -76,6 +80,17 @@ public class ActivityController {
                 unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
             }
             model.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
+            //will check to see if user is a groupMember, and will re-route them away if not.
+            int counter=0;
+            for (GroupMember groupMember: trip.getGroup().getGroupMembers()){
+                if(groupMember.getMember().getId()== loggedInuser.getId()){
+                    counter++;
+                }
+            }
+            if (counter==0){
+                return "Trip/activities_google";
+            }
         }
         return "Trip/activities_google";
     }
