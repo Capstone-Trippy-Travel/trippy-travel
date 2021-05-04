@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/bc3d7ba1dd.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/testPhoebe.css">
+    <link rel="stylesheet" href="/css/team.css">
+    <link rel="stylesheet" href="/css/trial.css">
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
+<div class="container bootdey" style="margin-top: 30px">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="section-title mb-4 pb-2">
+                <h3 class="title mb-4">The Developers</h3>
+                <p class="text-muted para-desc mx-auto mb-0">Build responsive, mobile-first projects on the web with the world's most
+                    popular front-end component library.</p>
+            </div>
+        </div><!--end col-->
+    </div><!--end row-->
+
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+            <div class="team text-center rounded p-3 py-4">
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-fluid avatar avatar-medium shadow rounded-pill" alt="">
+                <div class="content mt-3">
+                    <h4 class="title mb-0">Name Here</h4>
+                    <small class="text-muted">Software Developer</small>
+                    <ul class="list-unstyled mt-3 social-icon social mb-0" >
+                        <a href="#" class="rounded" style="margin: 3px; color: #666666"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 3px; color: #666666"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 2px; color: #666666"><i class="fa fa-envelope fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 2px; color: #666666"><i class="fa fa-file-text fa-lg"></i></a>
+                    </ul>
+                </div>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+            <div class="team text-center rounded p-3 py-4">
+                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid avatar avatar-medium shadow rounded-pill" alt="">
+                <div class="content mt-3">
+                    <h4 class="title mb-0">Name Here</h4>
+                    <small class="text-muted">Software Developer</small>
+                    <ul class="list-unstyled mt-3 social-icon social mb-0" >
+                        <a href="#" class="rounded" style="margin: 3px; color: #666666"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 3px; color: #666666"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 2px; color: #666666"><i class="fa fa-envelope fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 2px; color: #666666"><i class="fa fa-file-text fa-lg"></i></a>
+                    </ul>
+                </div>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+            <div class="team text-center rounded p-3 py-4">
+                <img src="/imgs/avi1.png" class="img-fluid avatar avatar-medium shadow rounded-pill" alt="">
+                <div class="content mt-3">
+                    <h4 class="title mb-0">Phoebe Njoroge</h4>
+                    <small class="text-muted">Software Developer</small>
+                    <ul class="list-unstyled mt-3 social-icon social mb-0" >
+                        <a href="#" class="rounded" style="margin: 3px; color: #666666"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 3px; color: #666666"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 2px; color: #666666"><i class="fa fa-envelope fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 2px; color: #666666"><i class="fa fa-file-text fa-lg"></i></a>
+                    </ul>
+                </div>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+            <div class="team text-center rounded p-3 py-4">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-fluid avatar avatar-medium shadow rounded-pill" alt="">
+                <div class="content mt-3">
+                    <h4 class="title mb-0">Name Here</h4>
+                    <small class="text-muted">Software Developer</small>
+                    <ul class="list-unstyled mt-3 social-icon social mb-0" >
+                        <a href="#" class="rounded" style="margin: 3px; color: #666666"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 3px; color: #666666"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 2px; color: #666666"><i class="fa fa-envelope fa-lg"></i></a>
+                        <a href="#" class="rounded" style="margin: 2px; color: #666666"><i class="fa fa-file-text fa-lg"></i></a>
+                    </ul>
+                </div>
+            </div>
+        </div><!--end col-->
+    </div><!--end row-->
+    <h4 class="mb-4 font-weight-bold" style="margin-top: 10%;  text-align: center">The Trippi Travel Story</h4>
+    <!--Grid row-->
+    <section id="best-features" class="text-center">
+        <div class="row d-flex justify-content-center mb-4">
+            <!--Grid column-->
+            <div class="col-md-8">
+                <!-- Description -->
+                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores dicta ea hic,
+                    laborum neque nulla odio tempore? Consectetur dolorem esse labore mollitia,
+                    necessitatibus officia quae quibusdam saepe temporibus voluptatibus. Corporis. Take the hustle away from planning group trips using Trippi Travel.
+                    Trippi Travel brings you and your friends together, by providing space to
+                    plan and share your travel experiences. Travel should be fun, so lets plan a trip!!</a>
+                </p>
+            </div>
+            <!--Grid column-->
+        </div>
+    </section>
+    <hr>
+</div>
+<div th:replace="fragments/footer2 :: footer"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="/js/notifications.js" th:inline="javascript"></script>
+</body>
+</html>
