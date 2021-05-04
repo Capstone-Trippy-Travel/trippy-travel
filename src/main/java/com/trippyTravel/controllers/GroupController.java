@@ -51,7 +51,8 @@ public class GroupController {
 //    }
     @GetMapping(path = "/groups/{id}")
     public String viewGroup(@PathVariable Long id, Model viewModel) {
-        viewModel.addAttribute("group", groupDao.getOne(id));
+        Group group =groupDao.getOne(id);
+        viewModel.addAttribute("group",group);
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             viewModel.addAttribute("friendRequests", friendRequests);
@@ -66,6 +67,18 @@ public class GroupController {
                 unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
             }
             viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+            //will check to see if user is a groupMember, before allowing them to proceed to page.
+            int counter=0;
+            for (GroupMember groupMember: group.getGroupMembers()){
+                if (groupMember.getMember().getId()==loggedInuser.getId()){
+                    counter++;
+                }
+            }
+            if (counter==0){
+                viewModel.addAttribute("isGroupMember", false);
+            }else{
+                viewModel.addAttribute("isGroupMember", true);
+            }
         }
         viewModel.addAttribute("groupImages", imageDao.getGroupImages(id));
         return "groups/view";
@@ -88,6 +101,8 @@ public class GroupController {
                 unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
             }
             viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
+
         }
         return "groups/create-group";
     }
@@ -117,6 +132,7 @@ public class GroupController {
             viewModel.addAttribute("friendRequests", friendRequests);
             List<Trip> unreadCommentTrips = new ArrayList<>();
             viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+            return "/groups/"+id;
 
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -126,6 +142,17 @@ public class GroupController {
                 unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
             }
             viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
+            //will check to see if user is a groupMember, before allowing them to proceed to page.
+            int counter=0;
+            for (GroupMember groupMember: oneGroup.getGroupMembers()){
+                if (groupMember.getMember().getId()==loggedInuser.getId()){
+                    counter++;
+                }
+            }
+            if (counter==0){
+                return "/groups/"+id;
+            }
         }
         return "groups/edit-group";
     }

@@ -608,7 +608,6 @@ const options = {
     }
 }
 // This is an event listen for listening to a click on a button only if user is a groupMember
-if (place.loggedInUserCanEditActivity) {
     $('#addPicture').click(function (event) {
         console.log('adding picture')
 
@@ -620,7 +619,7 @@ if (place.loggedInUserCanEditActivity) {
         // where you can specify what you want the picker to do
         client.picker(options).open();
     })
-}
+
 
 let pathUrl=window.location.pathname;
 let pathUrlArray=pathUrl.split("/");

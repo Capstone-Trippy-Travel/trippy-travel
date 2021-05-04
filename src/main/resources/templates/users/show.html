@@ -48,14 +48,14 @@
 <!--                </div>-->
 
                 <div class="col ">
-                    <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item" style="text-align: center;">
+                    <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item" style="text-align: center;" th:if="${isProfileUser}">
                         <button class="logout-button">Edit Profile</button>
                     </form>
                 </div>
                 <div class="side-item">
                     <p th:text="${user.description}" ></p>
                 </div>
-                <div class="input-group side-item">
+                <div class="input-group side-item" th:if="${isProfileUser}">
                     <input type="text" class="form-control"  name="search" placeholder="Search Friends" id="searchUsers">
                     <button class="btn-profile-go " type="submit" style="border-radius: 3px; background-color: #c23232; color: white">Go!</button>
                 </div>
@@ -74,7 +74,7 @@
                     <li class="nav-item1">
                         <a class="nav-link" id="planning-tab" data-toggle="tab" href="#planning" role="tab" >Planned Trips</a>
                     </li>
-                    <div class="col" style="text-align: right">
+                    <div class="col" style="text-align: right" th:if="${isProfileUser}">
                         <form th:action="${'/trip/create'}" method="GET" class="button side-item">
                             <button class="logout-button">Create Trip</button>
                         </form>
@@ -110,7 +110,7 @@
                     <li class="nav-item">
                         <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" >Your Friends</a>
                     </li>
-                    <div class="col" style="text-align: right">
+                    <div class="col" style="text-align: right" th:if="${isProfileUser}">
                         <form th:action="${'/groups/create'}" method="GET" class="button side-item">
                             <button class="logout-button">Create Group</button>
                         </form>

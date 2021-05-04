@@ -135,9 +135,15 @@ public class UserController {
             viewModel.addAttribute("friendRequests", friendRequests);
             List<Trip> unreadCommentTrips = new ArrayList<>();
             viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+            viewModel.addAttribute("isProfileUser", false);
 
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            //will check to see if user is the owner of profile, will give them edit access if so.
+            if (loggedInuser.getId()==id){
+                viewModel.addAttribute("isProfileUser", true);
+            }
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
             List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
             for (Trip unreadCommentTrip: unreadCommentTrips){
@@ -175,9 +181,13 @@ public class UserController {
             viewModel.addAttribute("friendRequests", friendRequests);
             List<Trip> unreadCommentTrips = new ArrayList<>();
             viewModel.addAttribute("unreadCommentTrips", unreadCommentTrips);
+            return "/users/"+id;
 
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (loggedInuser.getId()!=id){
+                return "/users/"+id;
+            }
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
             List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
             for (Trip unreadCommentTrip: unreadCommentTrips){
