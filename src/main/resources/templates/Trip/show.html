@@ -140,7 +140,7 @@
                 <div th:each="comment : ${trips.getComments()}" class="tripComment" >
                     <div class="row no-gutters">
                         <div class="col-sm-2" >
-                            <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100 commentProfileImage" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
+                            <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100 commentProfileImage" id="comment-image" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
                             <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
                         </div>
                         <div class="col-sm-10">
@@ -221,7 +221,7 @@
 
                 <!--                <div class="activityImageDiv">-->
                 <div th:each="userImage : ${trips.getImages()}" th:class="tripImageDiv">
-                    <img th:src="${userImage.getImage_url()}"  class="myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
+                    <img th:src="${userImage.getImage_url()}"  id="myTrip" class="myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()==null}">
                     <img th:src="${userImage.getImage_url()}" th:id="${userImage.getActivity().getPlace()}"  class="viewAll myTripImg" onclick="image(event)" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" th:if="${userImage.getActivity()!=null}">
                 </div>
                 <!--                </div>-->
@@ -264,6 +264,7 @@
 <script src ="/keys.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="/js/trip_profile.js"></script>
+<script src="/js/tripimage.js"></script>
 <!--<script src="/js/fileStack.js"></script>-->
 <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCJoaNg_G-yrLYuvjp5SN2IIJkFa0jj5o&callback=initMap&libraries=places&v=weekly"
