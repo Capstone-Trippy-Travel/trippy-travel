@@ -80,6 +80,7 @@ public class TripController {
         model.addAttribute("numPages", Math.ceil(numberOfTripsDouble/18));
         return "Trip/index";
     }
+
     @PostMapping("/trip")
     public String index(Model model, @PathVariable Long id) {
         List<Trip> tripFromDb= tripRepository.findAll();
@@ -330,32 +331,7 @@ public class TripController {
         return activities;
     }
 
-    @GetMapping("/")
-    public String SeeAllTripsHome(Model model) {
-        List<Trip> tripFromDb= tripRepository.findAll();
-        model.addAttribute("trips",tripFromDb);
-        List<Activity> activityList=activityRepository.findAll();
-        model.addAttribute("activities",activityList);
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
-        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
-            List<FriendList> friendRequests= new ArrayList<>();
-            model.addAttribute("friendRequests", friendRequests);
-            List<Trip> unreadCommentTrips = new ArrayList<>();
-            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
 
-        } else{
-            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-            List <Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
-            for (Trip trip: unreadCommentTrips){
-                System.out.println(trip.getName());
-            }
-            model.addAttribute("unreadCommentTrips", unreadCommentTrips );
-        }
-
-        System.out.println();
-        return "index";
-    }
 
     @PostMapping(path = "/trip/search")
     public String searchTrip(Model model, @RequestParam(name = "search") String term) {
