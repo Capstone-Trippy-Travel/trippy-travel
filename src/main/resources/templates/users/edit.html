@@ -10,45 +10,51 @@
 
 <body id="edit-profile-body" style="height: max-content">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-
+<hr class="rounded" style="width: 90%; margin-top: 0">
 <main class="container">
-    <fieldset id="fieldset-enter-group-info" class="col-11">
+<!--    <div class ='imageP'>-->
+<!--        <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="imagePreview" style="height: 150px; width: 150px; margin-left: 10px" class="image " >-->
+<!--        &lt;!&ndash;                        <img id="imagePreview" src="" alt="" >&ndash;&gt;-->
+<!--        <input type="hidden" id="image"  name="image_url" th:value="${user.getProfile_image()}">-->
+<!--    </div>-->
+<!--    <div class ="imagebutton">-->
+<!--        <button id="addPicture" class="button " style="margin-left: 8px">Edit Picture</button>-->
+<!--    </div>-->
+    <fieldset id="fieldset-enter-group-info" class="col-5" style="margin: auto; margin-top: 10px; opacity: .9">
         <div class="cartoptionbox">
-
-            <h3>Edit User</h3>
             <div class="col l8 offset-l2">
                 <form class="myForm" name="myForm" th:action="@{/users/{id}/edit(id=${id})}" th:method="POST" th:object="${user}">
                     <div class ='imageP'>
-                        <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
+                        <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="imagePreview" style="height: 150px; width: 150px; opacity: 1" class="image " >
 <!--                        <img id="imagePreview" src="" alt="" >-->
                         <input type="hidden" id="image"  name="image_url" th:value="${user.getProfile_image()}">
                     </div>
                     <div class ="imagebutton">
-                    <button id="addPicture" class="button " style="margin-left: 8px">Edit Picture</button>
+                    <button id="addPicture" class="button">Edit Picture</button>
                     </div>
 
-                    <label for="firstname" class="required">Firstname</label>
+                    <label for="firstname" class="required" style="margin-top: .5rem; margin-bottom: 0; margin-left: 2px">First Name</label>
                     <input class="form-control disa" th:field="*{firstName}" id="firstname" name="first-name"/>
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
 
-                    <label for="last-name" class="required">Lastname</label>
+                    <label for="last-name" class="required" style="margin-top: .5rem; margin-bottom: 0; margin-left: 2px">Last Name</label>
                     <input class="form-control disa" id="last-name" name="last-name" th:field="*{lastName}" />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
 
-                    <label for="username" class="required">Username</label>
+                    <label for="username" class="required" style="margin-top: .5rem; margin-bottom: 0; margin-left: 2px">User Name</label>
                     <input class="form-control " id="username" name="username" th:field="*{username}" required />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 
-                    <label for="email" class="required">Email</label>
+                    <label for="email" class="required" style="margin-top: .5rem; margin-bottom: 0; margin-left: 2px">Email</label>
                     <input class="form-control" id="email" name="email" th:field="*{email}" required />
                     <p class="card-panel red darken-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 
                     <div class="form-group">
-                        <label >About You</label>
-                        <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>
-                    </div>
+                        <label style="margin-top: .5rem; margin-bottom: 0; margin-left: 2px">Description</label>
+                        <textarea class="form-control" th:field="*{description}" id="post" rows="3" name="description"></textarea>
+                    </div><br>
 
-                    <input th:if="${showEditControls}" class="btn" id="edit-p" type="submit" />
+                    <input th:if="${showEditControls}" class="btn btn-primary btn-block" id="edit-p" type="submit" style="color: white" />
                 </form>
             </div>
             <!--<div th:replace="fragments/forms :: postsForm(@{'/posts/edit'}, true)"></div>-->
