@@ -222,13 +222,13 @@ font-size: smaller;
     align-self: center;
     border-radius: 5%;
 }
-.imageP{
+.imageP,.imgPreview{
     display: flex;
     justify-content: center;
     border-radius: 5%;
 
 }
-.imagebutton{
+.imagebutton,.group-button{
     display: flex;
     justify-content: center;
 
