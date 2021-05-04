@@ -50,12 +50,12 @@ button{
 }
 @media (max-width: 768px) {
     .navbar:not(.top-nav-collapse) {
-        background-color: #24355C;
+        background-color: white;
     }
 }
 @media (min-width: 800px) and (max-width: 850px) {
     .navbar:not(.top-nav-collapse) {
-        background-color: #24355C;
+        background-color: white;
     }
 }
 .userPage-image{

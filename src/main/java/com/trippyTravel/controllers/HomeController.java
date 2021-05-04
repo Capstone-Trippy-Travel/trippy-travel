@@ -121,6 +121,25 @@ public class HomeController {
         }
         return "index";
     }
+    @GetMapping("/team")
+    public String meetTeam(@ModelAttribute User user, Model model) {
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
+            List<FriendList> friendRequests= new ArrayList<>();
+            model.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+            List <Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip trip: unreadCommentTrips){
+                System.out.println(trip.getName());
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips );
+        }
+        return "team";
+    }
 //    @GetMapping("/userTrips")
 //    public String showUserTrip(Model viewModel){
 //        List<Trip> tripsFromDb= tripRepository.findTripsByVisibilityOrderByIdDesc("public");
