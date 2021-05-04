@@ -1,0 +1,82 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    font-family: "Arial Rounded MT Bold";
+    font-size: small;
+}
+
+body {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.now{
+    background-color: #ffffff;
+
+
+    width: 500px;
+    border-radius: 5%;
+}
+form {
+    padding: .5em;
+}
+.logout-button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: dodgerblue;
+}
+.logout-button:hover {
+    color: black;
+}
+
+fieldset {
+    -webkit-box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
+    border-radius: 10px;
+    background-color: white;
+    opacity: 0.8;
+    padding: 1em;
+    margin: 1em;
+    border: 0;
+}
+
+.width-80 {
+    width: 80%;
+    margin: auto;
+    max-width: 500px;
+}
+
+.form-group {
+    width: 100%;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn {
+
+    padding: 8px;
+    /*color: dodgerblue;*/
+    border: 1px;
+    border-color: lightgray;
+}
+
+.navbar {
+    font-family: "Arial Rounded MT Bold";
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.log-button {
+    padding: 0;
+    border: none;
+    background: none;
+}
+.child-group {
+    float: left;
+    width: 50%;
+}
