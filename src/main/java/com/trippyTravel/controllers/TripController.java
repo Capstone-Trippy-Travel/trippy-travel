@@ -242,6 +242,7 @@ public class TripController {
             model.addAttribute("friendRequests", friendRequests);
             List<Trip> unreadCommentTrips = new ArrayList<>();
             model.addAttribute("unreadCommentTrips", unreadCommentTrips);
+            return "/trip/"+id;
 
         } else{
             User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -251,6 +252,17 @@ public class TripController {
                 unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
             }
             model.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
+            //will check to see if user is a groupMember, before allowing them to proceed to page.
+            int counter=0;
+            for (GroupMember groupMember: trips.getGroup().getGroupMembers()){
+                if (groupMember.getMember().getId()==loggedInuser.getId()){
+                    counter++;
+                }
+            }
+            if (counter==0){
+                return "/trip/"+id;
+            }
         }
         return "Trip/edit";
     }
@@ -291,24 +303,30 @@ public class TripController {
             //will grab all comments from this activity, and pass the quantity to the object to be passed to the page.
             activity.setCommentCount(commentRepository.findCommentsByActivity_Id(activity.getId()).size());
             int voteCount=0;
-            for (ActivityVote activityVote: activityVotes){
+
+            //will check to see if user is logged in, and will check to see if they are groupMember if so.
+            if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
+                activity.setLoggedInUserCanEditActivity(false);
+            } else{
+                //will loop through activity groupMembers, check to see if user is groupMember, and give them edit access if so.
+                for (GroupMember groupMember: activity.getTrip().getGroup().getGroupMembers()){
+                    User loggedInUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                    if (groupMember.getMember().getId()==loggedInUser.getId()){
+                        activity.setLoggedInUserCanEditActivity(true);
+                    }
+                }
+            }
+
+                for (ActivityVote activityVote: activityVotes){
                 if (activityVote.isVote()){
                     voteCount++;
                     if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
                         //if you are not logged in, it will not show activity comments and votes
-                        activity.setLoggedInUserCanEditActivity(false);
                     } else{
                         //if you are logged in, will check to see if you voted
                         User loggedInUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                         if (activityVote.getUser().getId()==loggedInUser.getId()){
                             activity.setUsersPreviousVote("like");
-                        }
-
-                        //will loop through activity groupMembers, check to see if user is groupMember, and give them edit access if so.
-                        for (GroupMember groupMember: activity.getTrip().getGroup().getGroupMembers()){
-                            if (groupMember.getMember().getId()==loggedInUser.getId()){
-                                activity.setLoggedInUserCanEditActivity(true);
-                            }
                         }
 
                     }
@@ -322,6 +340,8 @@ public class TripController {
                         if (activityVote.getUser().getId()==loggedInUser.getId()){
                             activity.setUsersPreviousVote("dislike");
                         }
+
+
                     }
                 }
             }
