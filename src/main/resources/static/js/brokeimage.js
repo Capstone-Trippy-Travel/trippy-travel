@@ -1,5 +1,5 @@
 "use strict";
-const brokeFriend = document.querySelectorAll('.friend-image');
+const brokeFriend = document.querySelectorAll('.friend-image,#profileImage');
 console.log(brokeFriend)
 console.log(brokeFriend[0].src);
 

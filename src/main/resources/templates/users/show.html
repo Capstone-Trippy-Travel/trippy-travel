@@ -8,6 +8,8 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="/css/testPhoebe.css">
     <link rel="stylesheet" href="/css/trial.css">
+<!--    <link rel="stylesheet" href="/css/register.css">-->
+    <link rel="stylesheet" href="/css/member-trips.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway:wght@400;400&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/broke image.css">
@@ -17,9 +19,9 @@
 
 <body id="profile-page-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<hr class="rounded" style="width: 90%; margin-top: unset">
+<hr class="rounded" style="width: 90%; margin-top: unset"><br>
     <div class="container">
-        <div class="row">
+        <div class="row" style="justify-content: center">
             <div class="col-lg-3 col-mg-12 side-profile">
                 <h3 th:text="${user.getFirstName()+ ' '+ user.getLastName()}" class="side-item text-center"></h3>
                 <div class="side-item">
@@ -49,13 +51,14 @@
 <!--                    </div>-->
 <!--                </div>-->
 
-                <div class="col ">
-                    <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item" style="text-align: center;" th:if="${isProfileUser}">
+                <div class="col " style="margin-top: -10px">
+                    <form th:action="${'/users/'+ user.id +'/edit'}" method="GET" class="button side-item" style="text-align: right; padding-top: 0">
+
                         <button class="logout-button">Edit Profile</button>
                     </form>
                 </div>
                 <div class="side-item">
-                    <p th:text="${user.description}" ></p>
+                    <p th:text="${user.description}" style="margin-top: 1rem; margin-bottom: 1rem"></p>
                 </div>
                 <div class="input-group side-item" th:if="${isProfileUser}">
                     <input type="text" class="form-control"  name="search" placeholder="Search Friends" id="searchUsers">

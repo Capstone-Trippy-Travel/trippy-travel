@@ -1,0 +1,72 @@
+#nav-html {
+    height: 100%;
+    width: 100%;
+    font-family: "Arial Rounded MT Bold";
+    /*font-size: small;*/
+}
+/*.navbar-brand {*/
+/*    display: inline-block;*/
+/*    padding-top: .3125rem;*/
+/*    padding-bottom: .3125rem;*/
+/*    margin-right: 1rem;*/
+/*    font-size: 1.5rem;*/
+/*    line-height: inherit;*/
+/*    white-space: nowrap;*/
+/*}*/
+.now{
+    background-color: #ffffff;
+
+
+    width: 500px;
+    border-radius: 5%;
+}
+#nav-form {
+    padding: .5em;
+}
+.logout-button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: dodgerblue;
+}
+.logout-button:hover {
+    color: black;
+}
+
+.navbar {
+    font-family: "Arial Rounded MT Bold";
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.child-group {
+    float: left;
+    width: 50%;
+}
+
+.col-md-8{
+    align-self: start;
+    margin-bottom: 20px;
+}
+
+.menu-items{
+    padding: 0;
+
+}
+
+.imagebutton{
+    display: flex;
+    justify-content: center;
+
+}
+.logo {
+    margin-right: 10px;
+    max-height: 200px;
+    max-width: 200px;
+}
+/*#trip-index-body {*/
+/*    font-size: 1.25rem;*/
+/*}*/
+/*#activities_google-body {*/
+/*    font-size: 1.5rem;*/
+/*}*/
