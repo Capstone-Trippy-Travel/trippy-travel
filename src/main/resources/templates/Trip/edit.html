@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="/css/trial.css">
     <link rel="stylesheet" href="/css/register.css">
 </head>
-<body id="edit-trip-body">
+<body id="edit-trip-body" style="height: max-content">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-<main class="container">
-    <fieldset id="fieldset-enter-group-info" class="col-11">
-        <div class="cartoptionbox">
+<main class="container" style="height: max-content">
+    <fieldset id="fieldset-enter-group-info" style="height: max-content" class="col-11">
+        <div class="cartoptionbox" style="height: max-content">
     <div class="row">
         <div class="col">
             <h2>Edit Trip</h2>
@@ -109,6 +109,7 @@
 <script src="/js/fileStack.js"></script>
 <script src="/js/notifications.js" th:inline="javascript"></script>
 <script src="/js/validation.js" th:inline="javascript"></script>
-<div th:replace="fragments/footer2 :: footer"></div>
 </body>
+<div th:replace="fragments/footer2 :: footer"></div>
+
 </html>

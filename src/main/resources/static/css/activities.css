@@ -285,6 +285,7 @@ html, body, .container{
 .successfulSaveDiv{
     background: #2ae62a;
     position: absolute;
+    color: white;
     bottom: 0;
     width: 100%;
     text-align: center;
