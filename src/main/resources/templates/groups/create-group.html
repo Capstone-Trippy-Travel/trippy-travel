@@ -15,6 +15,11 @@
     <section class="child-group">
         <fieldset id="fieldset-enter-group-info" class="col-11">
             <div class="cartoptionbox">
+                <div class="imgPreview">
+                <img id="imagePreview" src="" alt="" >
+                <input type="hidden" id="image"  name="profile_mage" th:field="*{profile_image}" >
+                <button class="group-button" id="addPicture" style="margin-left: -12px; margin-top: 2px">Group Profile Picture</button>
+                </div>
                     <div class="form-group">
                         <label class="required">Group Name</label>
                         <input type="text" class="form-control"  name="name" th:field="*{name}" />
@@ -31,9 +36,7 @@
                         <!--            <label >Group Description</label>-->
                         <textarea class="form-control form-control-sm" type="text" placeholder="Group Description.." th:field="*{description}" id="post" rows="4" name="description"></textarea>
                     </div>
-                    <img id="imagePreview" src="" alt="" >
-                    <input type="hidden" id="image"  name="profile_mage" th:field="*{profile_image}" >
-                    <button class="logout-button" id="addPicture" style="margin-left: -12px; margin-top: 2px">Group Profile Picture</button>
+
 
                     <!--        <div class="row">-->
 

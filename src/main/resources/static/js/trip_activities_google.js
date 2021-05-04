@@ -334,12 +334,13 @@ function addActivityToDatabase(place, venueCard){
 
             let successfulSaveDiv=document.createElement("h3");
             successfulSaveDiv.setAttribute("class", "successfulSaveDiv")
-            successfulSaveDiv.innerText="Activity Saved!"
+            successfulSaveDiv.innerText="✓"
 
             venueCard.appendChild(successfulSaveDiv)
 
             setInterval(function(){
                 successfulSaveDiv.style.display="none";
+                successfulSaveDiv.innerText.fontcolor("white");
             }, 1500)
 
 
