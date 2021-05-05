@@ -248,7 +248,9 @@ public class UserController {
 
     @RequestMapping(value="/users/{id}/friend-request", method=RequestMethod.POST, produces="application/json")
     public @ResponseBody FriendList sendFriendRequest(@PathVariable long id ) {
+        System.out.println("about to add a friend!");
         FriendList friendRequest=friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.getOne(id), FriendStatus.PENDING));
+        System.out.println("about to return a new added friend, and update friend request!");
         return friendRequest;
     }
 
@@ -277,12 +279,13 @@ public class UserController {
 
         //grabbing all users in database that match searched term
         List<User> users= usersRepository.findByFirstNameContainingOrLastNameContainingOrUsernameContaining(name, name, name);
-        System.out.println(users.size());
+        System.out.println("number of user matches"+users.size());
         //creating filtered list to pass to page (not including you if you searched)
         List<User> filteredUsers = new ArrayList<>();
 
         //will loop through users list created above
         for (User user: users){
+            System.out.println("name of friend:"+user.getFirstName()+" id of friend: "+ user.getId());
 
             //will not add signed in user to list
             if (user.getId()!=loggedInUser.getId()) {

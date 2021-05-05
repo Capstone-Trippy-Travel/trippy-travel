@@ -164,7 +164,7 @@ public class User {
         this.friendStatus = friendStatus;
     }
 
-    public String friendStatus;
+    public String friendStatus = "not friends";
 
     public List<TripLikes> getTripLikes() { return tripLikes; }
 

@@ -32,7 +32,7 @@ public class GroupMember {
     }
 
     @Column(name="unreadComment")
-    private boolean unreadComment;
+    private boolean unreadComment = false;
 
     @ManyToOne (optional = true)
     @JsonManagedReference
