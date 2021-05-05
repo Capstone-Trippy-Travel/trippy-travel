@@ -112,8 +112,10 @@ public class ActivityController {
         activity.setLat(lat);
         activity.setLng(lng);
         activity.setPhotoURL(photoURL);
-
-       return  activityRepository.save(activity);
+        System.out.println("about to save new activity!!");
+        Activity savedActivity=activityRepository.save(activity);
+        System.out.println("successfully saved new activity!");
+       return  savedActivity;
 
 
     }

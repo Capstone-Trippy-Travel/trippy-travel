@@ -248,7 +248,9 @@ public class UserController {
 
     @RequestMapping(value="/users/{id}/friend-request", method=RequestMethod.POST, produces="application/json")
     public @ResponseBody FriendList sendFriendRequest(@PathVariable long id ) {
+        System.out.println("about to add a friend!");
         FriendList friendRequest=friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.getOne(id), FriendStatus.PENDING));
+        System.out.println("about to return a new added friend, and update friend request!");
         return friendRequest;
     }
 
