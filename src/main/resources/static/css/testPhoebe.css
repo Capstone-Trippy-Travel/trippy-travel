@@ -381,3 +381,10 @@ a{
 .logo {
     margin-right: 10px;
 }
+.col-sm-9,.hello{
+padding-left: 5px;
+    text-align: start;
+}
+.col-sm-3{
+    padding-right: 0;
+}

@@ -651,12 +651,12 @@ function addCommentToTrip(tripId, comment){
             for (let comment of comments){
                 html+=`<div class="tripComment">
                     <div class="row no-gutters">
-                        <div class="col-sm-2" >
-                            <img src="${comment.user.profile_image}" class="card-img-top h-100 commentProfileImage" default="/imgs/default-profile-picture.png">
+                        <div class="col-sm-2"  >
+                            <img src="${comment.user.profile_image}" class="card-img-top h-100 commentProfileImage"  default="/imgs/default-profile-picture.png">
                         </div>
                         <div class="col-sm-10">
-                            <div class="">
-                                <div class=""><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
+                            <div class="" style="background-color: #f6f6f6;border-radius: 5%">
+                                <div class="" ><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
                                 <div>${comment.comment_text}</div>
                             </div>
                             <div class="text-center">Replies</div>
@@ -725,11 +725,11 @@ function retrieveActivityCommentsFromDatabase(place, newComment){
                 let comment=comments[0];
                 html+=`<div >
                         <div class="row no-gutters">
-                            <div class="col-sm-2" >
-                                <img src="${comment.parentComment.user.profile_image}" class="card-img-top h-100" default="/imgs/default-profile-picture.png">
+                            <div class="col-sm-2"  >
+                                <img src="${comment.parentComment.user.profile_image}" style="max-height: 50px;max-width: 50px;border-radius: 100%; margin-bottom: 2px" class="card-img-top h-100" default="/imgs/default-profile-picture.png">
                             </div>
                             <div class="col-sm-10">
-                                <div class="">
+                                <div class="" style="border-radius: 5%;background-color: #f6f6f6;margin-bottom: 2px">
                                     <div class=""><strong>${comment.parentComment.user.firstName} ${comment.parentComment.user.lastName}</strong></div>
                                     <div>${comment.parentComment.comment_text}</div>
                                 </div>
@@ -745,10 +745,10 @@ function retrieveActivityCommentsFromDatabase(place, newComment){
                 html+=`<div >
                         <div class="row no-gutters">
                             <div class="col-sm-2" >
-                                <img src="${comment.user.profile_image}" class="card-img-top h-100" default="/imgs/default-profile-picture.png">
+                                <img src="${comment.user.profile_image}" class="card-img-top h-100" style="max-height: 50px;max-width: 50px;border-radius: 100%;margin-bottom: 2px" default="/imgs/default-profile-picture.png">
                             </div>
                             <div class="col-sm-10">
-                                <div class="">
+                                <div class="" style="border-radius: 5%;background-color: #f6f6f6;margin-bottom: 2px">
                                     <div class=""><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
                                     <div>${comment.comment_text}</div>
                                 </div>
