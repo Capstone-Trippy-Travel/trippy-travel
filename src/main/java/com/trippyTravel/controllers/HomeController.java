@@ -82,18 +82,19 @@ public class HomeController {
             model.addAttribute("unreadCommentTrips", unreadCommentTrips);
 
 
-            List<Trip> tripsFromDb= tripRepository.findTripsByVisibilityOrderByIdDesc("public");
-            List<List<Trip>> tripFromDbLists = new LinkedList<List<Trip>>();
-            List<Trip> tempList = new LinkedList<Trip>();
-            int listSize = tripsFromDb.size();
-            for ( int i = 0; i < 3; i++ ) {
-                tempList.add( tripsFromDb.get( i ) );
-                if ( listSize == ( i+1 ) || tempList.size() == 3 ) {
-                    tripFromDbLists.add( tempList );
-                    tempList = new LinkedList<Trip>();
-                }
-            }
-            model.addAttribute( "generalTripList", tripFromDbLists );
+//            List<Trip> tripsFromDb= ;
+//            List<List<Trip>> tripFromDbLists = new LinkedList<List<Trip>>();
+//            List<Trip> tempList = new LinkedList<Trip>();
+//            int listSize = tripsFromDb.size();
+//            for ( int i = 0; i < 3; i++ ) {
+//                tempList.add( tripsFromDb.get( i ) );
+//                if ( listSize == ( i+1 ) || tempList.size() == 3 ) {
+//                    tripFromDbLists.add( tempList );
+//                    tempList = new LinkedList<Trip>();
+//                }
+//            }
+            System.out.println("returning public trips");
+            model.addAttribute( "generalTripList", tripRepository.findTripsByVisibilityOrderByIdDesc("public").subList(0,3) );
 
 
         } else{
@@ -107,19 +108,45 @@ public class HomeController {
 
             User logUser = usersService.loggedInUser();
             List<Trip> userTrip= tripRepository.findUserTrips(logUser, "public");
-            List<List<Trip>> userTripsList = new LinkedList<List<Trip>>();
-            List<Trip> userTempList = new LinkedList<Trip>();
-            int listSize2 = userTrip.size();
-            for ( int i = 0; i < 3; i++ ) {
-                userTempList.add( userTrip.get( i ) );
-                if ( listSize2 == ( i+1 ) || userTempList.size() == 3 ) {
-                    userTripsList.add( userTempList );
-                    userTempList = new LinkedList<Trip>();
-                }
+            List<Trip> userTripSub= new ArrayList<>();
+            for (int i=0; i<userTrip.size() && i<3; i++){
+                System.out.println(userTrip.get(i).getName());
+                userTripSub.add(userTrip.get(i));
             }
-            model.addAttribute( "userTripList", userTripsList );
+            System.out.println("Size of users trip list: "+ userTripSub.size());
+//            List<List<Trip>> userTripsList = new LinkedList<List<Trip>>();
+//            List<Trip> userTempList = new LinkedList<Trip>();
+//            int listSize2 = userTrip.size();
+//            for ( int i = 0; i < 3; i++ ) {
+//                userTempList.add( userTrip.get( i ) );
+//                if ( listSize2 == ( i+1 ) || userTempList.size() == 3 ) {
+//                    userTripsList.add( userTempList );
+//                    userTempList = new LinkedList<Trip>();
+//                }
+//            }
+            model.addAttribute( "userTripList", userTripSub );
         }
+        System.out.println("returning users trips");
         return "index";
+    }
+    @GetMapping("/team")
+    public String meetTeam(@ModelAttribute User user, Model model) {
+        if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
+            List<FriendList> friendRequests= new ArrayList<>();
+            model.addAttribute("friendRequests", friendRequests);
+            List<Trip> unreadCommentTrips = new ArrayList<>();
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips);
+
+        } else{
+            User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
+            List <Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
+            for (Trip trip: unreadCommentTrips){
+                System.out.println(trip.getName());
+            }
+            model.addAttribute("unreadCommentTrips", unreadCommentTrips );
+        }
+        return "team";
     }
 //    @GetMapping("/userTrips")
 //    public String showUserTrip(Model viewModel){
