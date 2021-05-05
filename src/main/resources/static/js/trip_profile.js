@@ -635,10 +635,10 @@ function createVenueCard(place, marker) {
                     html += `<div class="tripComment">
                     <div class="row no-gutters">
                         <div class="col-sm-2"  >
-                            <img src="${comment.user.profile_image}" class="card-img-top h-100 commentProfileImage"  default="/imgs/default-profile-picture.png">
+                            <img src="${comment.user.profile_image}" class="card-img-top h-100 commentProfileImage" style="max-height: 50px;max-width: 50px;border-radius: 100%;margin-bottom: 2px"  default="/imgs/default-profile-picture.png">
                         </div>
                         <div class="col-sm-10">
-                            <div class="" style="background-color: #f6f6f6;border-radius: 5%">
+                            <div class="" style="border-radius: 5%;background-color: #f6f6f6;margin-bottom: 2px">
                                 <div class="" ><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
                                 <div>${comment.comment_text}</div>
                             </div>
@@ -649,9 +649,9 @@ function createVenueCard(place, marker) {
                             html += `<div class="activityCommentReplies row">
                                     <div class="col-sm-2">
                                         <img src="${commentReply[3]}"
-                                             class="card-img-top h-100 replyProfileImage" alt="...">
+                                             class="card-img-top h-100 replyProfileImage" alt="..." style="max-height: 50px;max-width: 50px;border-radius: 100%;margin-bottom: 2px">
                                     </div>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-10" style="border-radius: 5%;background-color: #f6f6f6;margin-bottom: 2px">
                                         <div class=""><strong>${commentReply[1]} ${commentReply[1]}</strong></div>
                                         <div>${commentReply[0]}</div>
                                     </div>
@@ -687,6 +687,7 @@ function createVenueCard(place, marker) {
         })
     }
 
+
     function retrieveActivityCommentsFromDatabase(place, newComment) {
         let url = ""
         //if new comment is added, will append it to ajax url
@@ -696,17 +697,22 @@ function createVenueCard(place, marker) {
             url = `/trip/${place.trip.id}/activity/${place.id}`
         }
 
-        jQuery.ajax({
-            'url': url,
-            success: function (comments) {
-                console.log(comments)
-                //loop through comments returned from database and add them to commentsDiv
-                let html = ""
 
-                //will check to see if original comment was included in comment replies response, and will add it first if not
-                if (comments.length > 0 && comments[0].id !== 0) {
-                    let comment = comments[0];
-                    html += `<div >
+    jQuery.ajax({
+        'url': url,
+        success: function (comments) {
+            //if successful, will delete text-area comment text
+            newComment="";
+
+            console.log(comments)
+            //loop through comments returned from database and add them to commentsDiv
+            let html=""
+
+            //will check to see if original comment was included in comment replies response, and will add it first if not
+            if (comments.length>0 && comments[0].id!==0){
+                let comment=comments[0];
+                html+=`<div >
+
                         <div class="row no-gutters">
                             <div class="col-sm-2"  >
                                 <img src="${comment.parentComment.user.profile_image}" style="max-height: 50px;max-width: 50px;border-radius: 100%; margin-bottom: 2px" class="card-img-top h-100" default="/imgs/default-profile-picture.png">
