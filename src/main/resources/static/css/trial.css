@@ -22,6 +22,9 @@ footer{
 
     color: dodgerblue;
 }
+.index-trips{
+    width: calc(100% / 3);
+}
 /*.footer-link {*/
 /*    color: white;*/
 /*}*/
@@ -112,6 +115,16 @@ button{
     padding: 1px;
     border-radius: 2px;
     object-fit: cover;
+}
+.homeTripCard{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.index-trips{
+    padding-right: 5px;
+
 }
 /*nav {*/
 /*    font-family: "Arial Rounded MT Bold";*/
