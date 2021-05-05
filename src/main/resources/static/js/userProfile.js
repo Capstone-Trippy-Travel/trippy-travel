@@ -85,6 +85,7 @@ function searchDatabaseForUsers(name) {
                         },
                         error: function (data) {
                             console.log("failure")
+                            console.log ("please work")
                             console.log(data)
                         }
                     })
