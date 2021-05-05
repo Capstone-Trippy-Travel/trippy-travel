@@ -31,7 +31,7 @@
     <form class="tripForm"name="myForm" th:action="@{'/trip/'+ ${trip.id} +'/edit'}" method="post" th:object="${trip}" >
         <div class ='imageP'>
             <img th:src="${trip.getTrip_profile_image()}" th:if="${trip.getTrip_profile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
-            <input type="hidden" id="image"  name="image_url trip_profile_image" th:value="${trip.getTrip_profile_image()}" >
+            <input type="hidden" id="image"  name="trip_profile_image" th:value="${trip.getTrip_profile_image()}" >
         </div>
         <div class ="imagebutton">
             <button id="addPicture" class="button " style="margin-left: 8px">Edit Picture</button>
@@ -39,7 +39,9 @@
         <div class="input-field col s12">
             <label >Group</label>
             <select class="form-control" name="groupId">
-                <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}"></option>
+                <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}" th:if="${group.getId()==trip.getGroup().getId()}" selected></option>
+                <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}" th:if="${group.getId()!=trip.getGroup().getId()} "></option>
+
             </select><br>
         </div>
         <div class="input-field col s12 col-10" style="margin: 5px">
