@@ -246,7 +246,7 @@ public class UserController {
         return "users/friends";
     }
 
-    @RequestMapping(value="/users/{id}/friend-request", method=RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/users/{id}/friend-request", method=RequestMethod.POST, produces="application/json")
     public @ResponseBody FriendList sendFriendRequest(@PathVariable long id ) {
         FriendList friendRequest=friendListRepository.save(new FriendList(usersService.loggedInUser(), usersRepository.getOne(id), FriendStatus.PENDING));
         return friendRequest;
@@ -271,7 +271,7 @@ public class UserController {
 //        return usersRepository.findAll();
 //    }
 
-    @RequestMapping(value="/users.json", method=RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/users.json", method=RequestMethod.POST, produces="application/json")
     public @ResponseBody List<User> viewSearchedUsersWithAjax(@RequestParam("name") String name) {
         User loggedInUser = usersService.loggedInUser();
 
