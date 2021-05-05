@@ -47,6 +47,7 @@ function searchDatabaseForUsers(name) {
     console.log("searching for "+name)
     jQuery.ajax({
         'url': `/users.json?name=${name}`,
+        method: "POST",
         success: function (users) {
             console.log(users);
             //this will generate the html for the list of names that were found.
@@ -76,6 +77,7 @@ function searchDatabaseForUsers(name) {
                     console.log(buttonId)
                     jQuery.ajax({
                         'url': `/users/${buttonId}/friend-request`,
+                        method: "POST",
                         success: function (users) {
                             console.log("success!")
                             console.log(users)
@@ -83,6 +85,7 @@ function searchDatabaseForUsers(name) {
                         },
                         error: function (data) {
                             console.log("failure")
+                            console.log ("please work")
                             console.log(data)
                         }
                     })
