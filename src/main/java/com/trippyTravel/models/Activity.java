@@ -221,6 +221,7 @@ public class Activity {
         this.voteCount = voteCount;
     }
 
+    @Transient
     private int voteCount;
 
 
@@ -232,6 +233,7 @@ public class Activity {
         this.usersPreviousVote = usersPreviousVote;
     }
 
+    @Transient
     private String usersPreviousVote;
 
     public int getCommentCount() {
@@ -242,6 +244,7 @@ public class Activity {
         this.commentCount = commentCount;
     }
 
+    @Transient
     private int commentCount;
 
     public void setLoggedInUserCanEditActivity(boolean loggedInUserCanEditActivity) {
@@ -252,6 +255,7 @@ public class Activity {
         return loggedInUserCanEditActivity;
     }
 
+    @Transient
     private boolean loggedInUserCanEditActivity;
 
 
