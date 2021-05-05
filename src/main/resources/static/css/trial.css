@@ -34,7 +34,7 @@ footer{
 /*    color: black;*/
 /*}*/
 button{
-    background-color: #bbbbbb;
+    background-color: dodgerblue;
 }
 .indexImage{
     height: 200px;
@@ -61,6 +61,7 @@ button{
         background-color: white;
     }
 }
+
 .userPage-image{
     height: 100px;
     width: 100px;

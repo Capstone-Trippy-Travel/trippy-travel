@@ -7,16 +7,19 @@
 /*    color: lightsteelblue;*/
 /*}*/
 .form-inline{
-    width: 50%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     position: relative;
 }
 .addressBar{
-    width: 60%;
+    width: 100%;
 }
 .form-control{
     width: 500px;
+}
+.part1{
+    width: 100%;
 }
 .mb-3{
     padding: 5px;
@@ -233,7 +236,7 @@ html, body, .container{
 }
 #venueDiv{
     overflow-y:auto;
-    height: 665px;
+    height: 699px;
 
 }
 ::-webkit-scrollbar {

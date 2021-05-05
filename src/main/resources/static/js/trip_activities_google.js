@@ -128,7 +128,7 @@ function createVenueCard(place, index){
 
         let venueCard = document.createElement("div");
         venueCard.setAttribute("class", "card venueSearchCard");
-
+venueCard.setAttribute("style","margin-bottom: 2px;max-width:428px; margin-right:2px")
         //adding event listener to card, will toggle marker animation bounce.
         venueCard.addEventListener("mouseenter", ()=>{
             toggleBounce(marker)
@@ -163,7 +163,8 @@ function createVenueCard(place, index){
 
     let saveButton=document.createElement("button");
     saveButton.setAttribute("class", "saveButton btn btn-success btn-sm float-right ")
-    saveButton.innerHTML="save"
+    saveButton.setAttribute("style","width:78px; margin-left:2px")
+    saveButton.innerHTML="Save"
 
 
 
@@ -254,7 +255,7 @@ function getVenueDetails(id){
 
         let exitButton=document.createElement("button");
         exitButton.setAttribute("class", "exitButton btn btn-danger")
-        exitButton.innerHTML="close"
+        exitButton.innerHTML="X"
         exitButton.addEventListener("click",()=>{
             clickedPlace.innerHTML="";
         })
