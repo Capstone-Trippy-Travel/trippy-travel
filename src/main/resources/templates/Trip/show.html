@@ -147,30 +147,30 @@
 
 
             <hr>
-            <h5 class="text-center" th:if="${isGroupMember}">Comments</h5>
+            <h5 class="text-centered" th:if="${isGroupMember}">Comments</h5>
             <div id="comments" th:if="${isGroupMember}">
                 <div th:each="comment : ${trips.getComments()}" class="tripComment" >
                     <div class="row no-gutters">
-                        <div class="col-sm-2" >
+                        <div class="col-sm-2 " >
                             <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100 commentProfileImage" id="comment-image" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
                             <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${comment.getUser().getProfile_image()==null}">
                         </div>
                         <div class="col-sm-10">
-                            <div class="">
+                            <div class="userText hello">
                                 <div class=""><strong th:text="${comment.getUser().getFirstName()+ ' '+ comment.getUser().getLastName()}"></strong></div>
                                 <div th:text="${comment.getComment_text()}"></div>
                             </div>
-                            <div class="text-center" th:if="${comment.getReplies().size()>0}">Replies</div>
+                            <div class="text-centered" th:if="${comment.getReplies().size()>0}">Replies</div>
                             <div class="activityCommentRepliesDiv">
                                 <div th:each="reply:${comment.getReplies()}" class="activityCommentReplies row">
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-3">
                                         <img th:src="${reply.getUser().getProfile_image()}"
-                                             class="card-img-top h-100 replyProfileImage" alt="..."
+                                             class="card-img-top h-100 replyProfileImage" id="comment-image1" alt="..."
                                              th:if="${reply.getUser().getProfile_image()!= null}">
                                         <img src="/imgs/default-profile-picture.png" class="card-img-top h-100"
                                              alt="..." th:if="${reply.getUser().getProfile_image()==null}">
                                     </div>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-9 userText">
                                         <div class=""><strong
                                                 th:text="${reply.getUser().getFirstName()+ ' '+ reply.getUser().getLastName()}"></strong>
                                         </div>

@@ -268,7 +268,23 @@ html, body, .container{
 
 .commentProfileImage{
     max-height: 50px;
-    object-fit: contain;
+    max-width: 50px;
+
+    border-radius: 100%;
+}
+#comment-image1{
+    max-height: 50px;
+    max-width: 50px;
+border-radius: 100%;
+
+
+
+
+}
+.userText{
+    background-color: #f6f6f6;
+    border-radius: 5%;
+
 }
 .activityCommentReplies{
     padding: 5px 0;
