@@ -117,23 +117,24 @@
             <h2 sec:authorize="isAnonymous()" class="mb-5 font-weight-bold">Featured User Trips</h2>
             <h2 sec:authorize="isAuthenticated()" class="mb-5 font-weight-bold">Your Latest Trips</h2>
             <!--Grid row-->
-            <div class="row" style="display: flex">
+            <div>
                 <!--Grid column-->
-                <div sec:authorize="isAuthenticated()" class="col-lg-4 col-md-6 mb-4" >
-                    <div th:each="trips : ${userTripList}" style="display: flex; flex-direction: row;">
-                        <div th:each="trip : ${trips}" style="margin-right: 18px;">
+                <div sec:authorize="isAuthenticated()" class="homeTripCard" >
+                    <div th:each="trips : ${userTripList}" style="display: flex; flex-direction: row;" class="index-trips">
+                        <div th:each="trip : ${trips}" >
                             <div class="view overlay z-depth-1-half">
                                 <img class=" indexImage" th:src="${trip.getTrip_profile_image()}" alt="..." style="object-fit: cover">
                                 <div class="mask rgba-white-slight"></div>
                             </div>
-                            <a th:href="${'/trip/'+trip.id}"><h4 th:text="${trip.name}" class="my-4 font-weight-bold"style="font-weight: bold;"></h4></a>
+                            <a th:href="${'/trip/'+trip.id}"><h4 th:text="${trip.name}" class="my-4 font-weight-bold"style="font-weight: bold; color: #0437F2"></h4></a>
                             <p th:text="${trip.description}"></p>
                         </div>
                     </div>
                 </div>
-                <div  sec:authorize="isAnonymous()" class="col-lg-4 col-md-6 mb-4" >
-                    <div th:each="trips : ${generalTripList}" style="display: flex; flex-direction: row;">
-                        <div th:each="trip : ${trips}" style="margin-right: 18px;">
+
+                <div  sec:authorize="isAnonymous()" class="homeTripCard">
+                    <div th:each="trips : ${generalTripList}" class="index-trips" >
+                        <div th:each="trip : ${trips}" >
                             <div class="view overlay z-depth-1-half">
                                 <img class=" indexImage" th:src="${trip.getTrip_profile_image()}" alt="..." style="object-fit: cover">
                                 <div class="mask rgba-white-slight"></div>

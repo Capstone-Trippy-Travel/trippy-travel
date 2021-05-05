@@ -185,7 +185,7 @@ html, body, .container{
     max-height: 150px;
 }
 
-#activityList .venueSearchCard{
+#activityList  .venueSearchCard{
     display: inline-block;
 }
 
