@@ -1,6 +1,6 @@
 "use strict";
 
-const brokeGroup = document.querySelectorAll('.profile-icon');
+const brokeGroup = document.querySelectorAll('.profile-icon,');
 console.log(brokeGroup)
 console.log(brokeGroup[0].src);
 
