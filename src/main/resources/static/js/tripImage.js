@@ -1,7 +1,7 @@
 "use strict";
 
 
-const brokeTrip = document.querySelectorAll('#trip-p,#tripProfilePicture');
+const brokeTrip = document.querySelectorAll('#trip-p,#tripProfilePicture,.trip-page-pic');
 console.log(brokeTrip)
 console.log(brokeTrip[0].src);
 
