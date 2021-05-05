@@ -608,7 +608,7 @@ const options = {
     }
 }
 // This is an event listen for listening to a click on a button only if user is a groupMember
-    $('#addPicture').click(function (event) {
+    $('#addTripPicture').click(function (event) {
         console.log('adding picture')
 
         // this is what prevents the button from submiting the form

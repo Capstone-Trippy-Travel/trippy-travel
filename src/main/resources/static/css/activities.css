@@ -90,6 +90,8 @@
     justify-content: space-evenly;
     white-space: normal;
     border-radius: 10px;
+    background: #EEE;
+    opacity: .9;
 }
 
 .venueSearchCard{
@@ -99,6 +101,9 @@
     justify-content: space-evenly;
     white-space: normal;
     border-radius: 10px;
+    background: #EEE;
+    opacity: 0.9;
+    position: relative;
 }
 
 @media screen and (min-width:992px) {
@@ -180,7 +185,7 @@ html, body, .container{
     max-height: 150px;
 }
 
-#activityList .venueSearchCard{
+#activityList  .venueSearchCard{
     display: inline-block;
 }
 
@@ -201,7 +206,7 @@ html, body, .container{
     position: absolute;
     top: 5px;
     right: 5px;
-    background: #cccccc;
+    background: #b0d6b2;
     border: 1px solid black;
     height: 35px;
     display: flex;
