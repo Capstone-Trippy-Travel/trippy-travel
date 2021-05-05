@@ -652,10 +652,10 @@ function addCommentToTrip(tripId, comment){
                 html+=`<div class="tripComment">
                     <div class="row no-gutters">
                         <div class="col-sm-2"  >
-                            <img src="${comment.user.profile_image}" class="card-img-top h-100 commentProfileImage"  default="/imgs/default-profile-picture.png">
+                            <img src="${comment.user.profile_image}" class="card-img-top h-100 commentProfileImage" style="max-height: 50px;max-width: 50px;border-radius: 100%;margin-bottom: 2px"  default="/imgs/default-profile-picture.png">
                         </div>
                         <div class="col-sm-10">
-                            <div class="" style="background-color: #f6f6f6;border-radius: 5%">
+                            <div class="" style="border-radius: 5%;background-color: #f6f6f6;margin-bottom: 2px">
                                 <div class="" ><strong>${comment.user.firstName} ${comment.user.lastName}</strong></div>
                                 <div>${comment.comment_text}</div>
                             </div>
@@ -666,9 +666,9 @@ function addCommentToTrip(tripId, comment){
                                     html+=`<div class="activityCommentReplies row">
                                     <div class="col-sm-2">
                                         <img src="${commentReply[3]}"
-                                             class="card-img-top h-100 replyProfileImage" alt="...">
+                                             class="card-img-top h-100 replyProfileImage" alt="..." style="max-height: 50px;max-width: 50px;border-radius: 100%;margin-bottom: 2px">
                                     </div>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-10" style="border-radius: 5%;background-color: #f6f6f6;margin-bottom: 2px">
                                         <div class=""><strong>${commentReply[1]} ${commentReply[1]}</strong></div>
                                         <div>${commentReply[0]}</div>
                                     </div>
@@ -716,6 +716,9 @@ function retrieveActivityCommentsFromDatabase(place, newComment){
     jQuery.ajax({
         'url': url,
         success: function (comments) {
+            //if successful, will delete text-area comment text
+            newComment="";
+
             console.log(comments)
             //loop through comments returned from database and add them to commentsDiv
             let html=""
