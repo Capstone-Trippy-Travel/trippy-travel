@@ -300,14 +300,17 @@ public class UserController {
             if (friendExists){
                 System.out.println("finding friends");
                 FriendList friend=friendListRepository.findFriendListByFriend_IdAndUser_Id(user.getId(), loggedInUser.getId());
+                System.out.println("found friend");
                 status=friend.getStatus().name();
+                System.out.println("setting friend status");
             }
 
                 //will set status to user and pass to page
                  user.setFriendStatus(status);
-
+                System.out.println("adding friend to list");
                 filteredUsers.add(user);
             }
+            System.out.println("returning list");
         }
         return filteredUsers;
     }

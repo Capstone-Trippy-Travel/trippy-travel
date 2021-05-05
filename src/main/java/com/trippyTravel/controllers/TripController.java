@@ -292,8 +292,11 @@ public class TripController {
     @RequestMapping(value="/trip.json", method=RequestMethod.GET, produces="application/json")
     public @ResponseBody List<Activity> retrieveActivitiesWithAjax(@RequestParam("tripId") String tripId) {
         System.out.println(tripId);
+        System.out.println("about to get list of activities");
         List<Activity> activities= tripRepository.getOne(Long.parseLong(tripId)).getActivities();
+        System.out.println("number of activities: "+ activities.size());
         for (Activity activity: activities){
+            System.out.println("about to get activity votes");
             List<ActivityVote> activityVotes = activity.getActivityVotes();
 
             //will set an initial vote setting on none, then will check to see if user voted and modify accordingly.

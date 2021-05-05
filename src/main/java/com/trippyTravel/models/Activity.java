@@ -1,6 +1,7 @@
 package com.trippyTravel.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "activities")
+@JsonIgnoreProperties({"hibernateLazyInitializer","userId"})
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
