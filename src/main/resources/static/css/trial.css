@@ -126,6 +126,16 @@ button{
     padding-right: 5px;
 
 }
+@media (max-width: 800px) {
+    .index-trips {
+        flex: 50%;
+    }
+}
+@media (max-width: 800px) {
+    .index-trips {
+        flex: 100%;
+    }
+}
 /*nav {*/
 /*    font-family: "Arial Rounded MT Bold";*/
 /*    margin-left: 100px;*/
