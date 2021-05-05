@@ -61,8 +61,8 @@ fieldset {
 
     padding: 8px;
     /*color: dodgerblue;*/
-    border: 1px;
-    border-color: lightgray;
+    border-radius: 3%;
+    border: none;
 }
 
 .navbar {
