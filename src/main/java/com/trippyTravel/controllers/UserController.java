@@ -275,7 +275,8 @@ public class UserController {
 
     @RequestMapping(value="/users.json", method=RequestMethod.POST, produces="application/json")
     public @ResponseBody List<User> viewSearchedUsersWithAjax(@RequestParam("name") String name) {
-        User loggedInUser = usersService.loggedInUser();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 
         //grabbing all users in database that match searched term
         List<User> users= usersRepository.findByFirstNameContainingOrLastNameContainingOrUsernameContaining(name, name, name);
