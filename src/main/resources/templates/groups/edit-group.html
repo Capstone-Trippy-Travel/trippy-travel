@@ -10,56 +10,62 @@
     <link rel="stylesheet" href="/css/register.css">
 
 </head>
-<body id="edit-profile-body" style="height: max-content">
+<body id="edit-group-body" style="height: max-content">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
+<hr class="rounded" style="width: 90%; margin-top: unset">
 <main class="container" >
 
-    <fieldset id="fieldset-enter-group-info" class="col-11">
+    <fieldset id="fieldset-enter-group-info" class="col-8" style="margin: auto; opacity: .9">
         <div class="cartoptionbox">
     <form th:action="${'/groups/'+ editGroup.id +'/update'}" th:method="post" th:object="${editGroup}" class="groupForm" name="myForm">
-        <div class="form-group ">
+        <div class="form-group " style="margin: 0">
             <div class="row justify-content-center" style="margin-bottom: 3px">
                 <!--            <img id="imagePreview" src="" alt="" >-->
-                <img th:src="${editGroup.getProfile_image()}" th:if="${editGroup.getProfile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="imageProfile " >
+                <img th:src="${editGroup.getProfile_image()}" th:if="${editGroup.getProfile_image()}" id="imagePreview" style="height: 100px; width: 100px; margin: auto" class="imageProfile " >
 
             </div>
             <div class="row justify-content-center" >
                 <input type="hidden" id="image"  name="profile_image" th:field="*{profile_image}" >
-                <button id="addPicture">Edit Profile Picture</button>
+                <button id="addPicture">Edit Group Picture</button>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="required" >Group Name</label>
+        </div><br>
+        <div class="row">
+            <div class="form-group col-6">
+<!--        <div class="form-group">-->
+            <label class="required" style="margin-bottom: 0">Group Name</label>
             <input type="text" class="form-control" th:field="*{name}"  name="name" placeholder="">
-        </div>
-        <div class="form-group"><br>
-            <label >Group Privacy</label>
+<!--        </div>-->
+            </div>
+        <div class="col-6">
+            <label style="margin-bottom: 0; width: 100%; margin-top: .5em">Group Privacy</label>
             <select class="form-control" th:field="*{visibility}">
                 <option value="private">Private Group</option>
                 <option value="public">Public Group</option>
-            </select><br>
+            </select>
+        </div>
         </div>
         <div class="form-group">
-            <label >Group Description</label>
-            <textarea class="form-control" th:field="*{description}" id="post" rows="4" name="description"></textarea>
+            <label style="margin-bottom: 0">Group Description</label>
+            <textarea class="form-control" th:field="*{description}" id="post" rows="3" name="description"></textarea>
         </div>
         <div class="row">
             <div class="form-group col-6">
-                <label >Add a group member</label>
+                <label style="margin-bottom: 0">Add a Group Member</label>
                 <input id="searchUsers" type="text" class="form-control" placeholder="">
                 <ul id="databaseMatches" class="list-group"></ul>
                 <!--        <button type="submit" class="btn btn-primary">Submit Post</button>-->
             </div>
-            <div class="col-6">
+            <div class="col-6" style="margin-top: 6px">
+                <label style="margin: 0">New Group Members</label>
                 <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">
                     <option selected="true" class="groupMemberOption" th:each="groupMember:${editGroup.getGroupMembers()}" th:value="${groupMember.getMember().getId()}" th:text="${groupMember.getMember().getFirstName() +' '+groupMember.getMember().getLastName()}"></option>
                 </select>
-                <h4>New Group Members</h4>
+<!--                <h4>New Group Members</h4>-->
                 <ul id="groupMembers" class="list-group"></ul>
             </div>
-        </div>
+        </div><br>
 
-        <button type="submit" class="btn btn-primary" id="edit-group">Update Group</button>
+        <button type="submit" class="btn btn-primary btn-block" id="edit-group">Update Group</button>
     </form>
     </div>
     </fieldset>
@@ -75,6 +81,6 @@
 <script src="/js/notifications.js" th:inline="javascript"></script>
 <script src="/js/validation.js" th:inline="javascript"></script>
 
-<div th:replace="fragments/footer2 :: footer"></div>
+<!--<div th:replace="fragments/footer2 :: footer"></div>-->
 </body>
 </html>
