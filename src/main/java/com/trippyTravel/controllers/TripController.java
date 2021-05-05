@@ -348,6 +348,27 @@ public class TripController {
                 }
             }
             activity.setVoteCount(voteCount);
+            System.out.println(activity.getId());
+            System.out.println(activity.getAddress());
+            System.out.println(activity.getCommentCount());
+            System.out.println(activity.getDescription());
+            System.out.println(activity.getHours());
+            System.out.println(activity.getLat());
+            System.out.println(activity.getLng());
+            System.out.println(activity.getPhone());
+            System.out.println(activity.getPhotoURL());
+            System.out.println(activity.getPlace());
+            System.out.println(activity.getPlaceId());
+            System.out.println(activity.getRating());
+            System.out.println(activity.getReviews());
+            System.out.println(activity.getUsersPreviousVote());
+            System.out.println(activity.getVoteCount());
+            System.out.println(activity.getWebsite());
+            System.out.println(activity.getTrip());
+            System.out.println(activity.isLoggedInUserCanEditActivity());
+
+
+
         }
         System.out.println("about to return activities");
         return activities;

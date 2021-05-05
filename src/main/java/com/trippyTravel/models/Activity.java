@@ -257,7 +257,6 @@ public class Activity {
         return loggedInUserCanEditActivity;
     }
 
-
     private boolean loggedInUserCanEditActivity=false;
 
 
