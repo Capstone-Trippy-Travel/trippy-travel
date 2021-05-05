@@ -9,7 +9,7 @@
 </head>
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <body id="create-group-body">
-<hr class="rounded" style="width: 90%">
+<hr class="rounded" style="width: 90%; margin-top: 0">
 <form th:action="@{/groups/create}" th:method="post" th:object="${group}" class="groupForm" name="myForm">
 <section>
     <section class="child-group">

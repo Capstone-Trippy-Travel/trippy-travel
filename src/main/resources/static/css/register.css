@@ -38,7 +38,7 @@ fieldset {
     -webkit-box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
     border-radius: 10px;
     background-color: white;
-    opacity: 0.8;
+    opacity: 0.9;
     padding: 1em;
     margin: 1em;
     border: 0;
@@ -47,7 +47,7 @@ fieldset {
     -webkit-box-shadow: 7px 7px 5px 0 rgba(0,0,0,0.75);
     border-radius: 10px;
     background-color: white;
-    opacity: 0.8;
+    opacity: 0.9;
     padding: 1em;
     margin: 1em;
     border: 0;
@@ -56,7 +56,7 @@ fieldset {
     -webkit-box-shadow: -7px 7px 5px 0 rgba(0,0,0,0.75);
     border-radius: 10px;
     background-color: white;
-    opacity: 0.8;
+    opacity: 0.9;
     padding: 1em;
     margin: 1em;
     border: 0;
@@ -238,11 +238,11 @@ font-size: smaller;
     border: none;
     color:dodgerblue;
 }
-#edit-group{
-    background: none;
-    border: none;
-    color:dodgerblue;
-}
+/*#edit-group{*/
+/*    background: none;*/
+/*    border: none;*/
+/*    color:dodgerblue;*/
+/*}*/
 /*.container{*/
 /*    margin-top: 70px;*/
 /*}*/
@@ -279,7 +279,12 @@ font-size: smaller;
 }
 .delete-trip{
     border: none;
-    background: none;
-    color: red;
-
+    background: red;
+    color: white;
+}
+#edit-group-body {
+    background-image: url("../imgs/tt_two_women.jpg");
+}
+#edit-trip-body-2 {
+    background-image: url("../imgs/tt_lady_mid_pic.jpg");
 }

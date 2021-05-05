@@ -11,50 +11,53 @@
     <link rel="stylesheet" href="/css/trial.css">
     <link rel="stylesheet" href="/css/register.css">
 </head>
-<body id="edit-trip-body" style="height: max-content">
+<body id="edit-trip-body-2" style="height: max-content">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
+<hr class="rounded" style="width: 90%; margin-top: unset">
 <main class="container" style="height: max-content">
-    <fieldset id="fieldset-enter-group-info" style="height: max-content" class="col-11">
+    <fieldset id="fieldset-enter-group-info" style="height: max-content; margin: auto" class="col-7">
         <div class="cartoptionbox" style="height: max-content">
     <div class="row">
         <div class="col">
-            <h2>Edit Trip</h2>
         </div>
         <div class="col-last">
-            <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST">
-                <button type="submit" id="delete" class="delete-trip">Delete Trip</button>
-            </form>
+<!--            <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST">-->
+<!--                <button type="submit" id="delete" class="delete-trip">Delete Trip</button>-->
+<!--            </form>-->
         </div>
     </div>
     <div class="row">
         <div class="col l8 offset-l2">
     <form class="tripForm"name="myForm" th:action="@{'/trip/'+ ${trip.id} +'/edit'}" method="post" th:object="${trip}" >
         <div class ='imageP'>
-            <img th:src="${trip.getTrip_profile_image()}" th:if="${trip.getTrip_profile_image()}" id="imagePreview" style="height: 200px; width: 200px" class="image " >
+            <img th:src="${trip.getTrip_profile_image()}" th:if="${trip.getTrip_profile_image()}" id="imagePreview" style="height: 100px; width: 100px; margin: auto" class="image " >
             <input type="hidden" id="image"  name="trip_profile_image" th:value="${trip.getTrip_profile_image()}" >
         </div>
         <div class ="imagebutton">
-            <button id="addPicture" class="button " style="margin-left: 8px">Edit Picture</button>
+            <button id="addPicture" class="button ">Edit Picture</button>
         </div>
         <div class="input-field col s12">
-            <label >Group</label>
+            <label style="margin: 0">Group</label>
             <select class="form-control" name="groupId">
                 <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}" th:if="${group.getId()==trip.getGroup().getId()}" selected></option>
                 <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}" th:if="${group.getId()!=trip.getGroup().getId()} "></option>
 
             </select><br>
         </div>
-        <div class="input-field col s12 col-10" style="margin: 5px">
-            <label for="tripLocationInput" class="form-label required">location</label>
+        <div class="row" style="margin: 0; margin-bottom: 15px">
+            <div class="col-6">
+<!--        <div class="input-field col s12 col-10">-->
+            <label for="tripLocationInput" class="form-label required" style="margin: 0">Location</label>
             <input class="form-control form-control-sm" type="text" name="location" placeholder="Location" th:field="*{location}" id="tripLocationInput"/>
         </div>
-        <div class="input-field col s12 col-10" style="margin: 5px">
-            <label for="name" class="form-label required">Name</label>
+        <div class="col-6">
+            <label for="name" class="form-label required" style="margin: 0">Name</label>
             <input class="form-control form-control-sm" type="text" name="name" id="name" placeholder="Name" th:field="*{name}" />
         </div>
-        <div class="input-field col s12 col-10" style="margin: 5px">
-            <label for="description" class="form-label required">Description</label>
-            <input class="form-control form-control-sm" id="description" type="text" placeholder="Description" th:field="*{description}" />
+        </div>
+        <div class="input-field col-12">
+<!--            <label for="description" class="form-label required" style="margin: 0">Description</label>-->
+            <textarea class="form-control form-control-sm" id="description" rows="2" placeholder="Description" th:field="*{description}"></textarea>
         </div>
 
 <!--        <button id="addPicture" class="logout-button" style="margin-left: 22px">Add a Picture</button>-->
@@ -63,7 +66,7 @@
 <!--        <input type="hidden" id="image"  name="image_url">-->
 
         <div class="input-field col s12"><br>
-            <label >Trip Privacy</label>
+            <label style="margin: 0">Trip Privacy</label>
             <select class="form-control" th:field="*{visibility}">
                 <option value="" selected="selected" >Select</option>
                 <option value="private">Private Trip</option>
@@ -71,7 +74,7 @@
             </select>
         </div>
         <div class="input-field col s12"><br>
-            <label >Trip Status</label>
+            <label style="margin: 0">Trip Status</label>
             <select class="form-control" th:field="*{status}">
                 <option value="future">Future Trip</option>
                 <option value="past">Past Trip</option>
@@ -95,8 +98,12 @@
 
         <br>
 
-
-        <input class="btn" id="edit-p" type="submit" />
+        <div class="col-12" style="display:flex; padding: 0">
+        <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST">
+            <button type="submit" id="delete" class="delete-trip btn btn-danger btn-md btn-block" style="margin-right: 5px">Delete Trip</button>
+        </form>
+        <input class="btn btn-primary btn-md btn-block" id="edit-p" type="submit" style="margin-top: 0; margin-left: 5px; color: white"/>
+        </div>
 
     </form>
         </div>
@@ -112,6 +119,6 @@
 <script src="/js/notifications.js" th:inline="javascript"></script>
 <script src="/js/validation.js" th:inline="javascript"></script>
 </body>
-<div th:replace="fragments/footer2 :: footer"></div>
+<!--<div th:replace="fragments/footer2 :: footer"></div>-->
 
 </html>
