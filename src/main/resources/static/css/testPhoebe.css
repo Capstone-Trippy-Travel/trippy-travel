@@ -2,6 +2,7 @@ body {
     background-color: white;
     font-family: 'Roboto Slab', serif;
     font-size: 18px;
+    /*font-family: "Arial Rounded MT Bold";*/
 }
 #heading{
     text-align: center;
@@ -385,9 +386,9 @@ a{
 padding-left: 5px;
     text-align: start;
 }
-.col-sm-3{
+.col-sm-3 {
     padding-right: 0;
-
+}
 ::-webkit-scrollbar {
     display: none;
     overflow-y: scroll;
