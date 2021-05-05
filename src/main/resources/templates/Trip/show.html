@@ -40,10 +40,10 @@
                 <p class="text-center"><a id="modalActivityWebsite"></a></p>
                 <p class="text-center" id="modalActivityAddress"></p><hr>
                 <p class="text-center" id="modalActivityHours"></p><hr>
-                <div id="activityModalComments" th:if="${isGroupMember}">Comments</div>
+                <div id="activityModalComments"  th:if="${isGroupMember}">Comments</div>
                 <!--Add comment / comments section-->
                 <div class="md-form" style="display: flex" th:if="${isGroupMember}">
-                    <textarea type="text" id="modalActivityCommentInput" class="md-textarea form-control col-5" rows="2" placeholder="Add a comment.."></textarea>
+                    <textarea type="text" id="modalActivityCommentInput"  class="md-textarea form-control col-5" rows="2" placeholder="Add a comment.."></textarea>
                     <button id="activityModalCommentButton">Submit</button>
                 </div>
             </div>
@@ -184,7 +184,7 @@
                 </div>
             </div>
             <div class="input-group" th:if="${isGroupMember}">
-                <input name="comment" type="text" id="tripCommentInput" class="form-control" placeholder="Enter Comment.." aria-describedby="basic-addon2">
+                <input name="comment" type="text" style="margin-bottom: 2px" id="tripCommentInput" class="form-control" placeholder="Enter Comment.." aria-describedby="basic-addon2">
                 <button class="logout-button" id="tripCommentButton">Submit</button>
             </div>
 
