@@ -19,7 +19,7 @@
 <div class="modal fade right" id="modalPoll-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
-        <div class="modal-content" id="modalContent">
+        <div class="modal-content" id="modalContent" style="font-family: Arial Rounded MT Bold; font-size: small">
             <!--Header-->
             <div class="modal-header" style="justify-content: center">
                 <p class="heading lead">Activity Details
@@ -43,8 +43,8 @@
                 <!--Add comment / comments section-->
                 <div class="md-form" style="display: flex" th:if="${isGroupMember}">
 
-                    <textarea type="text" id="modalActivityCommentInput" class="md-textarea form-control" rows="2" placeholder="Add a comment.."></textarea>
-                    <button id="activityModalCommentButton">Submit</button>
+                    <textarea type="text" id="modalActivityCommentInput" class="md-textarea form-control" rows="1" placeholder="Add a comment.."></textarea>
+                    <button id="activityModalCommentButton" style="color: white; border-radius: 3px; font-size: small">Submit</button>
                 </div>
             </div>
             <!--Footer-->
