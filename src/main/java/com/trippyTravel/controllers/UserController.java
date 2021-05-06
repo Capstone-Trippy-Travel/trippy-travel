@@ -300,7 +300,7 @@ public class UserController {
             //if friend does exist, will pass the friend request status to page
             if (friendExists){
                 System.out.println("finding friends");
-                FriendList friend =friendListRepository.findFriendListsByByFriend_IdAndUser_Id(user.getId(), loggedInUser.getId()).get(0);
+                FriendList friend =friendListRepository.findFriendListsByFriend_IdAndUser_Id(user.getId(), loggedInUser.getId()).get(0);
 
                 System.out.println("found friend");
                 status=friend.getStatus().name();
