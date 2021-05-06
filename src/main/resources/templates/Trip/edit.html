@@ -39,7 +39,7 @@
         <div class="input-field col s12">
             <label style="margin: 0">Group</label>
             <select class="form-control" name="groupId">
-                <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}" th:if="${group.getId()==trip.getGroup().getId()}" selected></option>
+                <option th:text="${trip.getGroup().getName()}" th:value="${trip.getGroup().getId()}" selected></option>
                 <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}" th:if="${group.getId()!=trip.getGroup().getId()} "></option>
             </select><br>
         </div>

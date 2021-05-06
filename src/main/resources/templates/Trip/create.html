@@ -28,7 +28,8 @@
                     <div class="input-field col s12">
                         <label >Group</label>
                         <select class="form-control" name="groupId">
-                            <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}"></option>
+                            <option th:each="group: ${groups}" th:text="${group.getName()}" th:value="${group.getId()}" th:if="${group.getId()!=tripGroup.getId()}"></option>
+                            <option  th:text="${tripGroup.getName()}" th:value="${tripGroup.getId()}" selected></option>
                         </select><br>
                     </div>
                     <div class="input-field col s12 col-10" style="margin: 5px">

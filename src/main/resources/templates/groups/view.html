@@ -41,6 +41,7 @@
                     </div>
                     <div class="col">
                         <form th:action="${'/trip/create'}" method="GET" class="button side-item" th:if="${isGroupMember}">
+                            <input type="hidden" name="groupId" th:value="${group.getId()}">
                             <button type="submit" class="btn btn-outline-white" style="border-radius: 5%; border: none; background-color: dodgerblue; color: white" >Plan Trip</button>
                         </form>
                     </div>
