@@ -32,7 +32,7 @@ $(function(){
 //Create Trip Validation
 $(function(){
     $('.tripForm').on('submit', function(event){
-        if (myForm.name.value == '' || myForm.location.value == '') {
+        if (myForm.name.value == '' || myForm.location.value == '' || myForm.startDate.value == '' || myForm.endDate.value == '') {
             event.preventDefault();
             event.stopPropagation();
             alert('Please enter all required fields');

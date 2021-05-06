@@ -25,7 +25,7 @@ nbdist/
 /src/main/resources/static/js/googleCalendar.js
 /src/main/resources/application.properties
 /src/main/resources/static/js/k
-/src/main/resources/static/imgs/pnImg.JPG
+
 
 ### node ###
 package-lock.json

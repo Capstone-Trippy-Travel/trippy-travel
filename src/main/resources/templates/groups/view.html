@@ -15,10 +15,10 @@
 <body>
 
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
-    <div class="container" style="margin-top: -10px">
+    <div class="container" >
         <hr>
         <div class="row">
-            <div class="col-lg-3 col-mg-12 side-profile container" id="tripProfileInfo" style="height: fit-content">
+            <div class="col-lg-3 col-mg-12 side-profile content-container" id="tripProfileInfo" style="height: fit-content">
                 <h3 id="heading"><span th:text="${group.name}"></span></h3>
                 <object data="src/main/resources/static/imgs/group.png" type="image/png">
                     <img th:src="${group.getProfile_image()}" alt=""  id="groupPic" class="profile-image  side-item" />
@@ -46,13 +46,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-12 main-profile" >
-                <h3 class="main-item">Trip Locations</h3>
-                <div id="mapContainer">
-                    <div id="map"></div>
-                </div>
+            <div class="col-lg-8 col-md-12 main-profile content-container" >
                 <div>
-                    <h4 class="main-item">Trips</h4>
+                    <h3>Trip Locations</h3>
+                    <div id="mapContainerProfile" class="main-item container" >
+                        <div id="map"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 >Trips</h4>
+                    <hr>
                     <div class="items main-item">
                         <div th:each="trip : ${group.getTrip()}" class="item " style="max-width: 250px">
                             <a th:href="${'/trip/'+ trip.id}">
@@ -61,7 +65,9 @@
                             </a>
                         </div>
                     </div>
-                    <h4 class="main-item">Group Pictures</h4>
+
+                    <h4 >Group Pictures</h4>
+                    <hr>
                     <div class=" main-item">
                         <div id="cardPic">
                                 <div th:each="userImage : ${groupImages}" class="group-pics">

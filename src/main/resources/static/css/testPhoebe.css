@@ -397,3 +397,11 @@ padding-left: 5px;
 #tripProfileInfo{
     height:fit-content;
 }
+.content-container{
+    /*background-color: darkgrey;*/
+    background: rgb(238, 238, 238);
+    rgb(0, 0, 0) 5px 5px 5px 0px;
+    height: fit-content;
+    border-radius: 1%;
+    margin: 20px;
+}
