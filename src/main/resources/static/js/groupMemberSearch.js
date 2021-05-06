@@ -9,6 +9,7 @@ function searchDatabaseForUsers(name) {
     console.log("searching for " + name)
     jQuery.ajax({
         'url': `/users.json?name=${name}`,
+        method: "POST",
         success: function (users) {
             console.log(users);
 
@@ -85,6 +86,7 @@ function searchDatabaseForUsers(name) {
                     console.log(buttonId)
                     jQuery.ajax({
                         'url': `/users/${buttonId}/friend-request`,
+                        method: "POST",
                         success: function (users) {
                             console.log("success!")
                             console.log(users)
