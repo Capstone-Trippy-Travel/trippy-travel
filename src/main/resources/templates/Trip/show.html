@@ -95,7 +95,7 @@
 
 
     <div class="card-body">
-        <div class="container" id="tripProfileInfo">
+        <div class="container" id="tripProfileInfo" style="padding-bottom: 15px">
             <form  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" th:if="${isGroupMember}" >
                 <input type="hidden" id="image"  name="image_url">
                 <button class="addPicture btn btn-sm" id="addTripPicture" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
@@ -147,7 +147,7 @@
 
             <hr>
             <h5 class="text-centered" th:if="${isGroupMember}">Comments</h5>
-            <div id="comments" th:if="${isGroupMember}">
+            <div id="comments" style="font-size: small" th:if="${isGroupMember}">
                 <div th:each="comment : ${trips.getComments()}" class="tripComment" >
                     <div class="row no-gutters">
                         <div class="col-sm-2 " >
@@ -183,8 +183,8 @@
                 </div>
             </div>
             <div class="input-group" th:if="${isGroupMember}">
-                <input name="comment" type="text" style="margin-bottom: 2px" id="tripCommentInput" class="form-control" placeholder="Enter Comment.." aria-describedby="basic-addon2">
-                <button class="" id="tripCommentButton" style="border-radius: 5%; border: none; background-color: dodgerblue; color: white; max-height: 49px; margin-bottom: 2px">Submit</button>
+                <input name="comment" type="text" style="margin-bottom: 2px; font-size: small" id="tripCommentInput" class="form-control" placeholder="Enter Comment.." aria-describedby="basic-addon2">
+                <button class="" id="tripCommentButton" style="border-radius: 5%; border: none; background-color: dodgerblue; color: white; max-height: 49px; margin-bottom: 2px; font-size: small">Submit</button>
             </div>
 
 <!--            <div class="form-group">-->
