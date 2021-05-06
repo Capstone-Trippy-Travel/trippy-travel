@@ -20,7 +20,7 @@
 <hr class="rounded" style="width: 90%; margin-top: unset"><br>
     <div class="container">
         <div class="row" style="justify-content: center">
-            <div class="col-lg-3 col-mg-12 side-profile">
+            <div class="col-lg-3 col-mg-12 side-profile container" id="tripProfileInfo" style="height: fit-content" >
                 <h3 th:text="${user.getFirstName()+ ' '+ user.getLastName()}" class="side-item text-center"></h3>
                 <div class="side-item">
                     <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="profileImage" default="static/imgs/blank-profile-picture-973460_1280.png">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="input-group side-item" th:if="${isProfileUser}">
                     <input type="text" class="form-control"  name="search" placeholder="Search Friends" id="searchUsers">
-                    <button class="btn-profile-go " type="submit" style="border-radius: 5%; border: none; background-color: dodgerblue; color: white">Go!</button>
+                    <button class="btn-profile-go " type="submit" style="border-radius: 5%; border: none; background-color: dodgerblue; color: white">Search!</button>
                 </div>
                 <div id="usersList"></div>
 
