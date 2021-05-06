@@ -1,8 +1,8 @@
 body {
     background-color: white;
-    font-family: 'Roboto Slab', serif;
-    font-size: 18px;
-    /*font-family: "Arial Rounded MT Bold";*/
+    /*font-family: 'Roboto Slab', serif;*/
+    /*font-size: 18px;*/
+    font-family: "Arial Rounded MT Bold";
 }
 #heading{
     text-align: center;
