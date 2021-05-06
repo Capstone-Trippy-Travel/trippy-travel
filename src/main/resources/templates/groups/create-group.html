@@ -15,18 +15,18 @@
 <section>
     <section class="child-group">
         <fieldset id="fieldset-enter-group-info" class="col-11">
-            <div class="cartoptionbox">
+            <div class="cartoptionbox" style="width: 98%; margin: auto">
                 <div class="imgPreview">
                 <img id="imagePreview" src="" alt="" >
                 <input type="hidden" id="image"  name="profile_mage" th:field="*{profile_image}" >
                 <button class="group-button" id="addPicture" style="margin-left: -12px; margin-top: 2px">Group Profile Picture</button>
                 </div>
                     <div class="form-group">
-                        <label class="required">Group Name</label>
+                        <label class="required" style="margin-bottom: 0">Group Name</label>
                         <input type="text" class="form-control"  name="name" th:field="*{name}" />
                     </div>
                     <div class="input-field"><br>
-                        <label >Group Privacy</label>
+                        <label style="margin-bottom: 0">Group Privacy</label>
                         <select class="form-control" th:field="*{visibility}">
                             <option value="" selected="selected" >Select</option>
                             <option value="private">Private Group</option>
@@ -42,7 +42,7 @@
                     <!--        <div class="row">-->
 
                     <div class="form-group col-12" style="padding: 0px"><br>
-                        <label >Add a Group Member</label>
+                        <label style="margin-bottom: 0">Add a Group Member</label>
                         <input id="searchUsers" type="text" class="form-control" name="userName" placeholder="">
                         <ul id="databaseMatches" class="list-group"></ul>
                         <!--        <button type="submit" class="btn btn-primary">Submit Post</button>-->
@@ -67,7 +67,7 @@
     <section class="child-group">
         <fieldset id="fieldset-added-group-members">
             <div class="cartoptionbox">
-                <label>Added Group Members</label>
+                <label style="margin-bottom: 0">Added Group Members</label>
                 <select class="form-control"  name="groupMembersList" multiple="multiple" id="groupMembersSelectList">
 
                 </select>
