@@ -97,7 +97,9 @@
         </div><br>
 
         <br>
-
+        <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST">-->
+            <!--                <button type="submit" id="delete" class="delete-trip">Delete Trip</button>-->
+            <!--            </form>-->
         <div class="col-12" style="display:flex; padding: 0">
         <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST">
             <button type="submit" id="delete" class="delete-trip btn btn-danger btn-md btn-block" style="margin-right: 5px">Delete Trip</button>
