@@ -12,10 +12,10 @@
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <hr class="rounded" style="width: 90%">
 
-<fieldset class="col-6" id="createTripFormContainer">
+<fieldset class="col-md-6 col-sm-12" id="createTripFormContainer">
     <main class="container">
         <div class="row">
-            <div class="form-group col-12" style="padding: 0">
+            <div class="form-group col-md-12" style="padding: 0">
                 <form class="col s12 tripForm"  th:action="@{/trip/create}" th:method="POST" th:object="${trip}" name="myForm">
                     <div class ='imageP'>
                         <img id="imagePreview" src="" alt="" style="margin: 2px" >
@@ -40,9 +40,8 @@
                         <input class="form-control form-control-sm" type="text" placeholder="Name" th:field="*{name}" name="name" id="name"/>
                     </div>
                     <div class="input-field col s12 col-10" style="margin: 5px">
-                        <label for="description" class="form-label ">Description</label>
-                        <input class="form-control form-control-sm" type="text" placeholder="Description" th:field="*{description}" name="description" id="description"/>
-                    </div>
+<!--                        <label for="description" class="form-label ">Description</label>-->
+                        <textarea class="form-control form-control-sm" id="description" rows="4" placeholder="Description" th:field="*{description}"></textarea>                    </div>
 
 <!--                    <button id="addPicture" class="logout-button" style="margin-left: 22px">Add a Picture</button>-->
 
@@ -99,8 +98,8 @@
         </div>
     </main>
 </fieldset>
-<div id="createTripMapContainer" class="col-5">
-    <div id="map" style="border-radius: 10px">
+<div id="createTripMapContainer" class="col-md-5 col-sm-12">
+    <div id="map" style="border-radius: 10px; height: 635px">
 
     </div>
 </div>

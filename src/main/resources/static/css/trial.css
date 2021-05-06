@@ -121,7 +121,8 @@ button{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
+
 }
 .index-trips{
     padding-right: 5px;
