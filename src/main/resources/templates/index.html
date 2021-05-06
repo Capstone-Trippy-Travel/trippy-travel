@@ -134,9 +134,9 @@
 
                 <div  sec:authorize="isAnonymous()" class="homeTripCard">
                     <div th:each="trips : ${generalTripList}" class="index-trips" >
-                        <div th:each="trip : ${trips}" >
-                            <div class="view overlay z-depth-1-half">
-                                <img class=" indexImage" th:src="${trip.getTrip_profile_image()}" alt="..." style="object-fit: cover">
+                        <div th:each="trip : ${trips}" style="padding-right: 5px;">
+                            <div class="view overlay z-depth-1-half" >
+                                <img class=" indexImage" th:src="${trip.getTrip_profile_image()}" alt="..." style="object-fit: cover; width: 95%">
                                 <div class="mask rgba-white-slight"></div>
                             </div>
                             <a th:href="${'/trip/'+trip.id}"><h4 th:text="${trip.name}" class="my-4 font-weight-bold"style="font-weight: bold; color: #0437F2"></h4></a>
