@@ -120,7 +120,7 @@
                                                     <div class="card" style="max-width: 500px;">
                                                         <div class="row no-gutters">
                                                             <div class="col-sm-5" >
-                                                                <img th:src="${friend.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()!= null}">
+                                                                <img th:src="${friend.getUser().getProfile_image()}" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()!= null}" style="object-fit: cover; border-radius: 50%">
                                                                 <img src="/imgs/default-profile-picture.png" class="card-img-top h-100" alt="..." th:if="${friend.getUser().getProfile_image()==null}">
                                                             </div>
                                                             <div class="col-sm-7">

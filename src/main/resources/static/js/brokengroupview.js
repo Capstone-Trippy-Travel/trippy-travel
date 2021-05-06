@@ -1,6 +1,6 @@
 "use strict";
 
-const brokeGroup = document.querySelectorAll('.profile-icon,');
+const brokeGroup = document.querySelectorAll('.profile-image');
 console.log(brokeGroup)
 console.log(brokeGroup[0].src);
 
@@ -10,7 +10,17 @@ function replaceEmptySrc1(brokeGroup) {
         brokeGroup.src = '/imgs/group.png';
     }
 }
-const brokeGroup1 = document.querySelectorAll('.group-pics');
+const brokeGroup23 = document.querySelectorAll('#groupMember');
+console.log(brokeGroup23)
+console.log(brokeGroup23[0].src);
+
+brokeGroup23.forEach(replaceEmptySrc12);
+function replaceEmptySrc12(brokeGroup) {
+    if (brokeGroup.getAttribute('src') === '') {
+        brokeGroup.src = '/imgs/blank-profile-picture-973460_1280.png';
+    }
+}
+const brokeGroup1 = document.querySelectorAll('#groupPics');
 console.log(brokeGroup1)
 console.log(brokeGroup1[0].src);
 
