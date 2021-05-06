@@ -393,5 +393,7 @@ padding-left: 5px;
     display: none;
     overflow-y: scroll;
     overflow-x: scroll;
-
+}
+#tripProfileInfo{
+    height:fit-content;
 }
