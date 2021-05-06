@@ -9,6 +9,7 @@ function replaceEmptySrc(image) {
         image.src = '/imgs/blank-profile-picture-973460_1280.png';
     }
 }
+
 const brokeGroup = document.querySelectorAll('.group-image');
 console.log(brokeGroup)
 console.log(brokeGroup[0].src);
