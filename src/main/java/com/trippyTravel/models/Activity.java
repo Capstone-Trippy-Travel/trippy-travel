@@ -1,6 +1,7 @@
 package com.trippyTravel.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -19,6 +20,7 @@ public class Activity {
     private String place;
 
     @Column(name = "description")
+    @JsonIgnore
     private String description;
 
     @ManyToOne
