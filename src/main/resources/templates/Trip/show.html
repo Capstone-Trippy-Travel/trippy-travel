@@ -108,7 +108,7 @@
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
             <!-- Button trigger modal -->
-            <h3 th:text="${trips.getLocation()}" class="card-title" style="text-align: center; margin:5px; padding:10px;"></h3>
+            <h3 th:text="${trips.getLocation()}" id="tripLocation" class="card-title" style="text-align: center; margin:5px; padding:10px;"></h3>
             <div style="text-align: center">
                 <img th:src="${trips.getTrip_profile_image()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." style="margin-right: 0">
                 <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get" th:if="${isGroupMember}"class="button side-item" style="text-align: center;">

@@ -247,12 +247,18 @@ html, body, .container{
 
 .voteDiv{
     justify-content: space-evenly;
+    border-top: 1px solid black;
+    height:40px;
+    align-items: center;
 }
 .voteDiv button{
     width:100%;
+    background: transparent;
+    color: black;
+    border: none;
 }
 .commentLikeCounterDiv{
-    height: 40px;
+    height: 30px;
 }
 
 
