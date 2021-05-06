@@ -11,18 +11,18 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/}"><i class="fa fa-home"></i>Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
 <!--                <li class="nav-item">-->
 <!--                    <a class="nav-link" th:href="@{/groups}">Groups</a>-->
 <!--                </li>-->
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/trip/page/1}"><i class='fas fa-map-marked-alt'></i>Trips</a>
+                    <a class="nav-link" th:href="@{/trip/page/1}">Trips</a>
                 </li>
                 <ul sec:authorize="isAuthenticated()" class="navbar-nav mr-auto">
                     <li type="button" class="nav-item" data-toggle="modal" data-target="#myAct" id="notificationsModalButton">
                         <a class="nav-link" style="position:relative">
-                            <i class='fas fa-bell'></i>Notifications
+                            Notifications
                             <div style="height:15px;width:15px;position:absolute;top:-2px;right:-3px;border-radius:50%;background:#ff0000 " th:if="${unreadCommentTrips.size()>0 || friendRequests.size()>0}" id="modalNotificationIcon"></div>
                         </a>
                     </li>
@@ -153,7 +153,7 @@
                         <li class="nav-link" data-toggle="modal" data-target="#myPro">
                             <a class="nav-link" th:href="@{/users/profile}"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
-                    <button class="logout-button" type="submit"> <i class="fa fa-sign-out"></i>Logout</button>
+                    <button class="logout-button" type="submit"> <i class="fa fa-sign-out"></i>  Logout</button>
                 </form>
 <!--                <form sec:authorize="isAnonymous()" action="/login" th:method="get" class="d-flex">-->
 <!--                    <button class="log-button" type="submit">Login</button>-->
