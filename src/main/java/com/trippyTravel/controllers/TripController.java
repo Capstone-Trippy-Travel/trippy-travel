@@ -198,7 +198,6 @@ public class TripController {
                 unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
             }
             model.addAttribute("unreadCommentTrips", unreadCommentTrips);
-            System.out.println("groupid= "+groupId);
             if (groupId!=null) {
                 model.addAttribute("tripGroup", groupsRepository.getOne(Long.parseLong(groupId)));
             } else{
