@@ -97,17 +97,19 @@
         </div><br>
 
         <br>
-        <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST">-->
-            <!--                <button type="submit" id="delete" class="delete-trip">Delete Trip</button>-->
-            <!--            </form>-->
-        <div class="col-12" style="display:flex; padding: 0">
-        <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST">
-            <button type="submit" id="delete" class="delete-trip btn btn-danger btn-md btn-block" style="margin-right: 5px">Delete Trip</button>
-        </form>
-        <input class="btn btn-primary btn-md btn-block" id="edit-p" type="submit" style="margin-top: 0; margin-left: 5px; color: white"/>
-        </div>
 
+        <div class="col-6" style="float:left; padding: 0">
+            <input class="btn btn-primary btn-md btn-block" id="edit-p" type="submit"
+                   style="margin-top: 0; margin-left: 5px; color: white"/>
+        </div>
     </form>
+            <div class="col-6" style="float:left; padding: 0">
+                <form th:action="${'/trip/'+ trip.id +'/delete'}" method="POST" style="padding:0;">
+                 <button type="submit" id="delete" class="delete-trip btn btn-danger btn-md btn-block" style="margin-right: 5px">Delete Trip</button>
+                </form>
+            </div>
+
+
         </div>
     </div>
         </div>
