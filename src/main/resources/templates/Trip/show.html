@@ -61,7 +61,7 @@
         <div class="">
             <a th:href="${'/trip/'+trips.getId()}" class="btn btn-primary" id=""
                style="color: black; background-color: transparent; background-repeat: no-repeat; border: none; cursor: pointer; overflow: hidden">
-                <h3 th:text="${trips.getName()}"></h3>
+                <h1 th:text="${trips.getName()}"></h1>
             </a>
         </div>
         <div class="row" th:if="${isGroupMember}">
@@ -108,7 +108,7 @@
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
             <!-- Button trigger modal -->
-            <h2 th:text="${trips.name}" class="card-title" style="text-align: center; margin:5px; padding:10px;"></h2>
+            <h3 th:text="${trips.getLocation()}" class="card-title" style="text-align: center; margin:5px; padding:10px;"></h3>
             <div style="text-align: center">
                 <img th:src="${trips.getTrip_profile_image()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." style="margin-right: 0">
                 <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get" th:if="${isGroupMember}"class="button side-item" style="text-align: center;">
@@ -116,7 +116,6 @@
                 </form>
                 <p class="card-text" th:text="${trips.getDescription()}"></p>
                 <p class="card-text"  th:text="${trips.getStartDate().toGMTString().substring(0,11)+ ' - '+trips.getEndDate().toGMTString().substring(0,11)}"></p>
-                <p id="tripLocation" class="card-text" th:text="${trips.getLocation()}"></p>
             </div><br>
 
             <div class="row">

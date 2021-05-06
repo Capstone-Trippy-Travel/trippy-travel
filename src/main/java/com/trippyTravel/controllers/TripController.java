@@ -179,7 +179,8 @@ public class TripController {
 //        return "Trip/edit";
 //    }
     @GetMapping("/trip/create")
-    public String createTrip(Model model){
+    public String createTrip(Model model, @RequestParam(required = false) String groupId){
+        System.out.println("group "+ groupId);
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("trip", new Trip());
         model.addAttribute("groups", groupsRepository.findByOwner(user));
@@ -197,7 +198,13 @@ public class TripController {
                 unreadCommentTrip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(unreadCommentTrip.getId()));
             }
             model.addAttribute("unreadCommentTrips", unreadCommentTrips);
+            if (groupId!=null) {
+                model.addAttribute("tripGroup", groupsRepository.getOne(Long.parseLong(groupId)));
+            } else{
+                model.addAttribute("tripGroup", groupsRepository.findByOwner(user).get(0) );
+            }
         }
+
         return "Trip/create";
     }
     @PostMapping("/trip/create")
