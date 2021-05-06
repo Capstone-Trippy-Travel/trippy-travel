@@ -198,19 +198,23 @@ font-size: smaller;
     max-height: none;
     max-width: none;
     margin-right: auto;
+
 }
 #createTripMapContainer{
     /*height: 60%;*/
-    height: 461px;
+    height: 469px;
     float: left;
     border-radius: 10px;
     opacity: 0.99;
     padding: 1em;
     margin: 1em;
     border: 0;
+    padding-top: 0;
+
 }
 #createTripMapContainer #map{
     height: 100%;
+
 }
 
 #createTripFormContainer{
