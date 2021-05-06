@@ -28,7 +28,7 @@
                 <h4 class="side-item text-center">Group Members</h4>
                 <div class="side-item" style="margin: auto;">
                     <div th:each="groupMember : ${group.getGroupMembers()}" class="item" >
-                        <img th:src="${groupMember.getMember().getProfile_image()}" alt="" class="profile-icon"/>
+                        <img th:src="${groupMember.getMember().getProfile_image()}" alt="" id="groupMember"  class="profile-icon"/>
                         <a th:href="${'/users/'+ groupMember.member.getId()}" > <div th:text="${groupMember.getMember().getFirstName()}" class="text-center"></div></a>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <div class=" main-item">
                         <div id="cardPic">
                                 <div th:each="userImage : ${groupImages}" class="group-pics">
-                                    <img class="viewAll myImg" onclick="image(event)" th:src="${userImage.getImage_url()}"  data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">
+                                    <img class="viewAll myImg" id="groupPics" onclick="image(event)" th:src="${userImage.getImage_url()}"  data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}">
                                 </div>
                         </div>
                     </div>
