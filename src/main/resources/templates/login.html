@@ -20,7 +20,7 @@
                 <div class="card-panel red accent-1" th:if="${param.error}">
                 Invalid Username or Password.
             </div>
-            <div class="alert" th:if="${param.logout}">
+            <div class="alert" id="logoutMessage" th:if="${param.logout}">
                 You have been logged out.
             </div>
             <form class="form" th:action="@{/login}" th:method="POST" name="myForm">
