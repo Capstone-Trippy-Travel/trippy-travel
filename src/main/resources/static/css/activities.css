@@ -97,6 +97,11 @@
     opacity: .9;
 }
 
+#activityList .venueCard{
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .venueSearchCard{
     width: 100%;
     max-height: 375px;

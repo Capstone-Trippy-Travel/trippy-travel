@@ -19,6 +19,8 @@ const options = {
 
         // this lets the user see a preview of the image that they uploaded.
         $('#imagePreview').attr('src',imgURL);
+
+        //this will add image preview to user profile e
         console.log(callback);
     }
 }

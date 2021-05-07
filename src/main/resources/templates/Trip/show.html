@@ -115,39 +115,14 @@
                 </form>
                 <p class="card-text" th:text="${trips.getDescription()}"></p>
                 <p class="card-text"  th:text="${trips.getStartDate().toGMTString().substring(0,11)+ ' - '+trips.getEndDate().toGMTString().substring(0,11)}"></p>
-            </div><br>
-
-            <div class="row">
-                <div class="col-6 form-group">
-<!--                    <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" th:if="${isGroupMember}" >-->
-<!--                        <input type="hidden" id="image"  name="image_url">-->
-<!--                        <button id="addPicture">addPicture</button>-->
-<!--                        &lt;!&ndash;                <input class="btn" type="submit" />&ndash;&gt;-->
-<!--                    </form>-->
-                </div>
-<!--                <div class="col-6">-->
-<!--                    <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get" th:if="${isGroupMember}">-->
-<!--                        <button type="submit" id="edit" >Edit Trip</button>-->
-<!--                    </form>-->
-
-<!--                </div>-->
             </div>
-
-<!--            <div class="row">-->
-<!--                <div class="col form-group">-->
-<!--                    <form class="col s12"  th:action="${'/trip/'+trips.getId()}" th:method="POST" id="tripImageForm" >-->
-<!--                        <input type="hidden" id="image"  name="image_url">-->
-<!--                        <button id="addPicture">addPicture</button>-->
-<!--                        &lt;!&ndash;                <input class="btn" type="submit" />&ndash;&gt;-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
 
 
             <hr>
             <h5 class="text-centered" th:if="${isGroupMember}">Comments</h5>
             <div id="comments" style="font-size: small" th:if="${isGroupMember}">
                 <div th:each="comment : ${trips.getComments()}" class="tripComment" >
+                    <div th:if="${comment.getActivity()!=null}" th:text="${'Discussion: '+comment.getActivity().getPlace()}" style="font-style: italic;color: gray;padding-bottom: 5px;"></div>
                     <div class="row no-gutters">
                         <div class="col-sm-2 " >
                             <img th:src="${comment.getUser().getProfile_image()}" class="card-img-top h-100 commentProfileImage" id="comment-image" alt="..." th:if="${comment.getUser().getProfile_image()!= null}">
@@ -176,7 +151,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button data-toggle="modal" style="border-radius: 5%; border: none; background-color: dodgerblue; color: white"data-target="#modalPoll-1" th:class="${'activityCommentReplyButton '+ comment.getActivity().getPlaceId()}" th:if="${comment.getReplies().size()>0}">Reply</button>
+                            <button data-toggle="modal" style="border-radius: 5%; border: none; background-color: dodgerblue; color: white" data-target="#modalPoll-1" th:class="${'activityCommentReplyButton '+ comment.getActivity().getPlaceId()}" th:if="${comment.getReplies().size()>0 || comment.getActivity()!=null}">Reply</button>
                         </div>
                     </div>
                 </div>

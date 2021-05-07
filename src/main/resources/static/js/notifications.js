@@ -56,6 +56,10 @@ console.log(tripIdsArray)
 notificationsButton.addEventListener("click", ()=>{
     if (modalNotificationIcon!=null) {
         modalNotificationIcon.style.display = "none";
+        for (let i=0; i<tripIdsArray.length; i++){
+            updateUnreadCommentStatus(tripIdsArray[i])
+        }
+
     }
     let modalFadeDivs=document.getElementsByClassName("modal-backdrop")
 
@@ -72,9 +76,7 @@ closeModalButton.addEventListener("click", ()=>{
     if (commentNotificationIcon!=null) {
         commentNotificationIcon.style.display = "none";
     }
-    for (let i=0; i<tripIdsArray.length; i++){
-        updateUnreadCommentStatus(tripIdsArray[i])
-    }
+
 
 })
 
