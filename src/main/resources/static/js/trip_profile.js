@@ -418,12 +418,14 @@ function createVenueCard(place, marker) {
 
             //will format hours to not show up in a block
             let hoursArray = place.hours.split(",")
+            let hoursHtml="";
             for (let i = 0; i < hoursArray.length; i++) {
-                modalActivityHours.innerHTML += hoursArray[i]
+                hoursHtml += hoursArray[i]
                 if (i !== hoursArray.length - 1) {
-                    modalActivityHours.innerHTML += '<br>'
+                    hoursHtml += '<br>'
                 }
             }
+            modalActivityHours.innerHTML=hoursHtml;
 
 
             //make ajax call to grab latest activity comments
