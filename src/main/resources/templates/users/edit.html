@@ -26,8 +26,9 @@
             <div class="col l8 offset-l2">
                 <form class="myForm" name="myForm" th:action="@{/users/{id}/edit(id=${id})}" th:method="POST" th:object="${user}">
                     <div class ='imageP'>
-                        <img th:src="${user.getProfile_image()}" th:if="${user.getProfile_image()}" id="imagePreview" style="height: 150px; width: 150px; opacity: 1" class="image " >
-<!--                        <img id="imagePreview" src="" alt="" >-->
+                        <img th:src="${user.getProfile_image()}" id="imagePreview" style="width: 200px;height: 200px;border-radius: 50%;display: block;margin-left: auto;margin-right: auto;object-fit: cover; opacity: 1" class="image " th:if="${user.getProfile_image()!=null}" >
+                        <img src="/imgs/blank-profile-picture-973460_1280.png" id="imagePreview" style="width: 200px;height: 200px;border-radius: 50%;display: block;margin-left: auto;margin-right: auto;object-fit: cover; opacity: 1" class="image " th:if="${user.getProfile_image()==null}" >
+                        <!--                        <img id="imagePreview" src="" alt="" >-->
                         <input type="hidden" id="image"  name="image_url" th:value="${user.getProfile_image()}">
                     </div>
                     <div class ="imagebutton">

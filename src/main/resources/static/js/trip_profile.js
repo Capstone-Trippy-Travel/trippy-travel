@@ -238,7 +238,7 @@ function createVenueCard(place, marker) {
     counter.innerText = place.voteCount;
 
     let noButton = document.createElement("button");
-    noButton.setAttribute("class", "btn btn-primary btn-sm")
+    noButton.setAttribute("class", "btn btn-danger btn-sm")
     if (place.usersPreviousVote === "dislike") {
         noButton.style.color="red";
     }
@@ -406,7 +406,8 @@ function createVenueCard(place, marker) {
             //add activity website to modal
             let modalActivityWebsite = document.getElementById("modalActivityWebsite");
             modalActivityWebsite.setAttribute("href", place.website);
-            modalActivityWebsite.innerText = place.website;
+            modalActivityWebsite.innerText = 'Visit Website!';
+            modalActivityWebsite.style.color="blue";
 
             //add activity address to modal
             let modalActivityAddress = document.getElementById("modalActivityAddress");
@@ -649,8 +650,11 @@ function createVenueCard(place, marker) {
                 let html = "";
 
                 for (let comment of comments) {
-                    html += `<div class="tripComment">
-                    <div class="row no-gutters">
+                    html += `<div class="tripComment">`
+                    if (comment.activity!=null){
+                        html+=`<div style="font-style: italic;color: gray;padding-bottom: 5px;">Discussion: ${comment.activity.place}</div>`
+                    }
+                    html+=`<div class="row no-gutters">
                         <div class="col-sm-2"  >
                             <img src="${comment.user.profile_image}" class="card-img-top h-100 commentProfileImage" style="max-height: 50px;max-width: 50px;border-radius: 100%;margin-bottom: 2px"  default="/imgs/default-profile-picture.png">
                         </div>
@@ -680,12 +684,9 @@ function createVenueCard(place, marker) {
                     }
 
                     html += `</div>`
-                    if (comment.ajaxCallCommentReplies != null) {
+                    if (comment.ajaxCallCommentReplies != null || comment.activity!=null) {
 
-                        html += `<button data-toggle="modal" style="" data-target="#modalPoll-1" class="activityCommentReplyButton ChIJpVZj64-cJIYR0DNvmDpeF8Y btn btn-primary btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-reply-all" viewBox="0 0 16 16">
-  <path d="M8.098 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L8.8 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L4.114 8.254a.502.502 0 0 0-.042-.028.147.147 0 0 1 0-.252.497.497 0 0 0 .042-.028l3.984-2.933zM9.3 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z"></path>
-  <path d="M5.232 4.293a.5.5 0 0 0-.7-.106L.54 7.127a1.147 1.147 0 0 0 0 1.946l3.994 2.94a.5.5 0 1 0 .593-.805L1.114 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.5.5 0 0 0 .042-.028l4.012-2.954a.5.5 0 0 0 .106-.699z"></path>
-</svg></button>`
+                        html += `<button data-toggle="modal" style="border-radius: 5%; border: none; background-color: dodgerblue; color: white" data-target="#modalPoll-1" class="activityCommentReplyButton ChIJpVZj64-cJIYR0DNvmDpeF8Y btn btn-primary btn-sm">Reply</button>`
                     }
                     html += `</div>
                     </div>
