@@ -113,6 +113,9 @@ public class TripController {
         trip.setComments(commentRepository.findCommentsByTrip_IdOrderByCreatedAt(id));
         vModel.addAttribute("trips", trip);
 
+        //will add all trip Images to trip
+        vModel.addAttribute("images", imagesRepository.findImagesByTripOrderByIdDesc(trip));
+
         //Will create boolean to see if user is a member of group.
         boolean isGroupMember=false;
 

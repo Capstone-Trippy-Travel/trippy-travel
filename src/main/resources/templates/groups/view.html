@@ -57,10 +57,10 @@
                 </div>
 
                 <div>
-                    <h4 >Trips</h4>
+                    <h4 style="margin-left: 16px">Trips</h4>
                     <hr>
                     <div class="items main-item">
-                        <div th:each="trip : ${group.getTrip()}" class="item " style="max-width: 250px">
+                        <div th:each="trip : ${trips}" class="item " style="max-width: 250px">
                             <a th:href="${'/trip/'+ trip.id}">
                                 <p class="overflow"><span th:text="${trip.name}"> </span> in <span th:text="${trip.location}" class="tripLocation"></span></p>
                                 <img th:src="${trip.getTrip_profile_image()}" class="trip-image" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." >
@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                    <h4 >Group Pictures</h4>
+                    <h4 style="margin-left: 16px">Group Pictures</h4>
                     <hr>
                     <div class=" main-item">
                         <div id="cardPic">
@@ -80,12 +80,10 @@
                     <!--                Trying picture modal-->
                     <div id="myModal" class="pictureModal">
                         <span class="close" style="position: fixed">&times;</span>
-                        <div th:each="groupMember : ${group.getTrip()}" >
-                            <div th:each="userImage : ${groupMember.getImages()}">
+                            <div th:each="userImage : ${groupImages}">
                                 <img class="modal-content" id="img01" th:src="${userImage.getImage_url()}">
                                 <p th:text="${userImage.getDescription()}" class="text-center" style="color: white"></p>
                             </div>
-                        </div>
                     </div>
                     <!--                end modal tryout-->
                 </div>
