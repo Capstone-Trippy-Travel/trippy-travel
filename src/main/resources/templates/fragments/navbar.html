@@ -83,7 +83,7 @@
                                                                 <div class="activityCommentRepliesDiv">
                                                                     <div th:each="reply:${comment.getReplies()}" class="activityCommentReplies row">
                                                                         <div class="col-sm-2">
-                                                                            <img th:src="${reply.getUser().getProfile_image()}"
+                                                                            <img style="width: 38px" th:src="${reply.getUser().getProfile_image()}"
                                                                                  class="card-img-top h-100 replyProfileImage" alt="..."
                                                                                  th:if="${reply.getUser().getProfile_image()!= null}">
                                                                             <img src="/imgs/default-profile-picture.png" class="card-img-top h-100"
