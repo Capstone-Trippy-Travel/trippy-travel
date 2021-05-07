@@ -48,6 +48,9 @@ public class UserController {
     @Autowired
     private FriendListRepository friendListRepository;
 
+    @Autowired
+    private ImageRepository imageRepository;
+
 
     @Value("${mapBoxToken}")
     private String mapBoxToken;
@@ -115,21 +118,26 @@ public class UserController {
         System.out.println(groups.size());
         viewModel.addAttribute("groups", groups);
 
-        List<Trip> trips = new ArrayList<>();
-        for (int i=0; i<groups.size(); i++){
-            List<Trip> groupTrips = groups.get(i).getTrip();
-            for (int j=0; j<groupTrips.size(); j++){
-                trips.add(groupTrips.get(j));
-            }
-        }
-        for (int i=0; i<trips.size(); i++){
-            if (trips.get(i).getName()!=null) {
-                System.out.println(trips.get(i).getName());
-            }
-        }
+//        List<Trip> trips = new ArrayList<>();
+//        for (int i=0; i<groups.size(); i++){
+//            List<Trip> groupTrips = groups.get(i).getTrip();
+//            for (int j=0; j<groupTrips.size(); j++){
+//                trips.add(groupTrips.get(j));
+//            }
+//        }
+//        for (int i=0; i<trips.size(); i++){
+//            if (trips.get(i).getName()!=null) {
+//                System.out.println(trips.get(i).getName());
+//            }
+//        }
 
-        System.out.println(trips.size());
+        List<Trip> trips=tripRepository.findTripsByUser(user);
+
+        List<Image> images = imageRepository.findImagesByUser(user);
+
         viewModel.addAttribute("trips", trips);
+        viewModel.addAttribute("images", images);
+
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             viewModel.addAttribute("friendRequests", friendRequests);

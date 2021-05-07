@@ -53,6 +53,10 @@ public class GroupController {
     public String viewGroup(@PathVariable Long id, Model viewModel) {
         Group group =groupDao.getOne(id);
         viewModel.addAttribute("group",group);
+
+        //will pass list of trips sorted by latest to group profile
+        viewModel.addAttribute("trips", tripRepository.findTripsByGroupOrderByIdDesc(group));
+
         if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
             List<FriendList> friendRequests= new ArrayList<>();
             viewModel.addAttribute("friendRequests", friendRequests);
