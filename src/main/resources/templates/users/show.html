@@ -151,7 +151,7 @@
                 <hr>
                 <div class=" main-item" >
                     <div id="cardPic">
-                        <div th:each="userImage : ${user.getImages()}" class="group-pics ">
+                        <div th:each="userImage : ${images}" class="group-pics ">
                             <img  class="viewAll myImg" id="my-pictures" onclick="image(event)"  th:src="${userImage.getImage_url()}" data-bs-toggle="modal" data-bs-target="#exampleModal" th:alt="${userImage.getDescription()}" >
                         </div>
                     </div>
@@ -159,7 +159,7 @@
 <!--                Trying picture modal-->
                 <div id="myModal" class="pictureModal" >
                     <span class="close" style="position: fixed">&times;</span>
-                    <div th:each="userImage : ${user.getImages()}">
+                    <div th:each="userImage : ${images}">
                         <img class="modal-content" id="img01" th:src="${userImage.getImage_url()}" th:alt="${userImage.getDescription()}">
                         <p th:text="${userImage.getDescription()}" class="text-center" style="color: white"></p>
                     </div>

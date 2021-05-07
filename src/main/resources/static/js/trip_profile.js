@@ -676,7 +676,7 @@ function createVenueCard(place, marker) {
                                              class="card-img-top h-100 replyProfileImage" alt="..." style="max-height: 50px;max-width: 50px;border-radius: 100%;margin-bottom: 2px">
                                     </div>
                                     <div class="col-sm-9" style="border-radius: 5%;background-color: #f6f6f6;margin-bottom: 2px">
-                                        <div class=""><strong>${commentReply[1]} ${commentReply[1]}</strong></div>
+                                        <div class=""><strong>${commentReply[1]} ${commentReply[2]}</strong></div>
                                         <div>${commentReply[0]}</div>
                                     </div>
                                 </div>`

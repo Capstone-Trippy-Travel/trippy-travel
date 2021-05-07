@@ -1,5 +1,6 @@
 package com.trippyTravel.repositories;
 
+import com.trippyTravel.models.Group;
 import com.trippyTravel.models.Trip;
 import com.trippyTravel.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -38,4 +39,10 @@ public interface TripRepository extends JpaRepository<Trip,Long> {
     List<Trip> findAllByDescriptionContainingOrNameContainingOrLocationContaining(String term, String term1, String term2);
 
     List<Trip> findAllByOrderByIdDesc();
+
+    @Query("select t from Trip t, Group g, GroupMember gm, User u where t.group=g AND gm.group=g AND gm.member=u AND u=?1 order by t.id DESC")
+    List<Trip> findTripsByUser(User user);
+
+    List<Trip> findTripsByGroupOrderByIdDesc(Group group);
 }
+
