@@ -162,10 +162,10 @@
 <!--                    <button class="log-button" type="submit">Register</button>-->
 <!--                </form>-->
             <span sec:authorize="isAnonymous()" class="navbar-sign-in">
-                <a class="nav-link" th:href="@{/login}"> <i class="fa fa-sign-in"></i>Sign In</a>
+                <a class="nav-link" th:href="@{/login}"> <i class="fa fa-sign-in" style="margin-right: 3px"></i>     Sign In</a>
             </span>
             <span sec:authorize="isAnonymous()" class="navbar-sign-up">
-                <a class="nav-link" th:href="@{/register}"> <i class="fa fa-fw fa-user"></i>Sign Up</a>
+                <a class="nav-link" th:href="@{/register}"> <i class="fa fa-fw fa-user"></i>   Sign Up</a>
             </span>
         </div>
     </nav>
