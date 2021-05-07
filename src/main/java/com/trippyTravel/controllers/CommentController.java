@@ -164,9 +164,11 @@ public class CommentController {
             //if comment already exists, create a new comment reply
             if (commentExists){
                 Comment originalActivityComment=commentDao.findCommentByActivity_Id(activity_id);
-                commentRepliesRepository.save(new CommentReplies(comment, user, originalActivityComment));
                 commentReplies=commentRepliesRepository.findCommentRepliesByParentComment(originalActivityComment);
-
+                System.out.println("users profile image"+user.getProfile_image());
+                CommentReplies newCommentReply=commentRepliesRepository.save(new CommentReplies(comment, userDao.getOne(user.getId()), originalActivityComment));
+                System.out.println("new comment profile image" +newCommentReply.getUser().getProfile_image());
+                commentReplies.add(newCommentReply);
                 //if no comment exists, create a new comment
             }else {
                 commentReplies = new ArrayList<>();

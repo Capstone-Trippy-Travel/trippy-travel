@@ -22,7 +22,7 @@
         <div class="modal-content" id="modalContent" style="font-family: Arial Rounded MT Bold; font-size: small">
             <!--Header-->
             <div class="modal-header" style="justify-content: center">
-                <p class="heading lead" style="margin-bottom: 0">Activity Details
+                <p class="heading lead" style="margin-bottom: 0" id="modalActivityName">
                 </p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">×</span>
@@ -31,9 +31,8 @@
             <!--Body for activity pictures-->
             <div class="modal-body">
                 <div class="text-center activityImage">
-                    <img id="modalActivityImage" style="max-width: 100%">
-                    <p id="modalActivityName"></p>
-                </div>
+                    <img id="modalActivityImage" style="max-width: 80%">
+=                </div>
                 <hr>
                 <!-- Second Body for activity details -->
                 <p class="text-center"><a id="modalActivityWebsite"></a></p>
@@ -108,7 +107,7 @@
             <!--        <img th:src="${post.getImages().get(0)}" class="card-img-top"  alt="..."/>-->
 <!--            <img th:src="${trips.getImages().get(0).getImage_url()}" id="" class="img-thumbnail" alt="...">-->
             <!-- Button trigger modal -->
-            <h3 th:text="${trips.getLocation()}" id="tripLocation" class="card-title" style="text-align: center; margin:5px; padding:10px;"></h3>
+            <h3 th:text="${trips.getLocation()}" id="tripLocation" class="card-title" style="text-align: center; margin:5px; padding:10px; padding-top: 32px;"></h3>
             <div style="text-align: center">
                 <img th:src="${trips.getTrip_profile_image()}" id="tripProfilePicture" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="..." style="margin-right: 0">
                 <form th:action="${'/trip/'+ trips.id +'/edit'}" method="get" th:if="${isGroupMember}"class="button side-item" style="text-align: center;">

@@ -408,3 +408,8 @@ padding-left: 5px;
 /*#profile-page-body {*/
 /*    background-image: url("../imgs/tt_fade_to_blue.jpg");*/
 /*}*/
+
+#userProfilePageContainer .active{
+    font-size: medium;
+    border-color: #dee2e6 #dee2e6 transparent #dee2e6;
+}

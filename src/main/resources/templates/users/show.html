@@ -18,7 +18,7 @@
 <body id="profile-page-body">
 <nav th:replace="fragments/navbar :: navbar( ${friendRequests}, ${unreadCommentTrips} )"></nav>
 <hr class="rounded" style="width: 90%; margin-top: unset"><br>
-    <div class="container" >
+    <div class="container" id="userProfilePageContainer" >
         <div class="row" style="justify-content: center">
             <div class="col-lg-3 col-mg-12 side-profile content-container"  style="height: fit-content" >
                 <h3 th:text="${user.getFirstName()+ ' '+ user.getLastName()}" class="side-item text-center"></h3>

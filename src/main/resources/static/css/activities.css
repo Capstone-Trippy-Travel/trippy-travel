@@ -107,6 +107,7 @@
     background: #EEE;
     opacity: 0.9;
     position: relative;
+    padding-bottom:5px;
 }
 
 @media screen and (min-width:992px) {
@@ -209,17 +210,20 @@ html, body, .container{
     position: absolute;
     top: 5px;
     right: 5px;
-    background: #b0d6b2;
-    border: 1px solid black;
     height: 35px;
     display: flex;
     align-items: center;
+
 }
 
 .venueInfo{
     position: relative;
     padding: 10px;
 }
+#activityList .venueInfo{
+    width:100%;
+}
+
 
 .venueCardBody{
     display: flex;
@@ -259,6 +263,7 @@ html, body, .container{
 }
 .commentLikeCounterDiv{
     height: 30px;
+    margin-top: 5px;
 }
 
 
