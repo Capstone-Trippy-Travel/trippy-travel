@@ -58,8 +58,8 @@ body{margin-top:0px;}
 .team:hover {
     -webkit-transform: translateY(-7px);
     transform: translateY(-7px);
-    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    /*-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);*/
+    /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);*/
 }
 
 .team:hover .overlay {
