@@ -118,18 +118,7 @@ public class UserController {
         System.out.println(groups.size());
         viewModel.addAttribute("groups", groups);
 
-//        List<Trip> trips = new ArrayList<>();
-//        for (int i=0; i<groups.size(); i++){
-//            List<Trip> groupTrips = groups.get(i).getTrip();
-//            for (int j=0; j<groupTrips.size(); j++){
-//                trips.add(groupTrips.get(j));
-//            }
-//        }
-//        for (int i=0; i<trips.size(); i++){
-//            if (trips.get(i).getName()!=null) {
-//                System.out.println(trips.get(i).getName());
-//            }
-//        }
+
 
         List<Trip> trips=tripRepository.findTripsByUser(user);
 
