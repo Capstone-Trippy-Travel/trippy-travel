@@ -132,6 +132,7 @@ function createVenueCard(place, marker) {
 
     //creating activity name header
     let venueNameHeader = document.createElement("h5");
+    venueNameHeader.style.paddingTop="20px";
     venueNameHeader.innerText = place.place;
     venueInfo.appendChild(venueNameHeader)
 
@@ -212,7 +213,11 @@ function createVenueCard(place, marker) {
 
     //creating div to hold the comment counter
     let commentCounter = document.createElement("div")
-    commentCounter.innerText = place.commentCount + " Comments"
+    if (place.commentCount==1){
+        commentCounter.innerText = place.commentCount + " Comment"
+    } else{
+        commentCounter.innerText = place.commentCount + " Comments"
+    }
     commentCounter.setAttribute("class", "col-6 float-left")
     commentLikeCounterDiv.appendChild(commentCounter)
 
@@ -434,6 +439,19 @@ function createVenueCard(place, marker) {
 
                     if (modalActivityName.innerText === place.place) {
                         retrieveActivityCommentsFromDatabase(place, activityCommentText.value)
+
+                        //will reset comment input to nothing
+                        activityCommentText.value="";
+
+                        //will add to current comment count
+                        let currentCommentCount = Number(commentCounter.innerText.split(" ")[0])+1;
+                        if (currentCommentCount===1){
+                            commentCounter.innerText="1 Comment"
+                        } else{
+                            commentCounter.innerText=currentCommentCount+" Comments"
+                        }
+
+
                         setTimeout(function () {
                             addCommentToTrip(place.trip.id)
                         }, 300)
@@ -647,11 +665,11 @@ function createVenueCard(place, marker) {
                             <div class="activityCommentRepliesDiv">`
                         for (let commentReply of comment.ajaxCallCommentReplies) {
                             html += `<div class="activityCommentReplies row">
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-3">
                                         <img src="${commentReply[3]}"
                                              class="card-img-top h-100 replyProfileImage" alt="..." style="max-height: 50px;max-width: 50px;border-radius: 100%;margin-bottom: 2px">
                                     </div>
-                                    <div class="col-sm-10" style="border-radius: 5%;background-color: #f6f6f6;margin-bottom: 2px">
+                                    <div class="col-sm-9" style="border-radius: 5%;background-color: #f6f6f6;margin-bottom: 2px">
                                         <div class=""><strong>${commentReply[1]} ${commentReply[1]}</strong></div>
                                         <div>${commentReply[0]}</div>
                                     </div>
@@ -758,7 +776,10 @@ function createVenueCard(place, marker) {
                 let commentDiv = document.getElementById("activityModalComments")
                 commentDiv.innerHTML = html;
 
-            },
+                //will make the modal comments auto scroll to bottom.
+                $('#activityModalComments').scrollTop($('#activityModalComments')[0].scrollHeight);
+
+        },
             error: function (data) {
                 console.log(data)
             }

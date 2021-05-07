@@ -21,7 +21,7 @@
             <div class="col-lg-3 col-mg-12 side-profile content-container" id="tripProfileInfo" style="height: fit-content">
                 <h3 id="heading"><span th:text="${group.name}"></span></h3>
                 <object data="src/main/resources/static/imgs/group.png" type="image/png">
-                    <img th:src="${group.getProfile_image()}" alt=""  id="groupPic" class="profile-image  side-item" />
+                    <img th:src="${group.getProfile_image()}" alt=""  id="groupPic" class="profile-image  side-item" style="width:80%; height: auto; border-radius: 30px" />
                 </object>
                 <h4 class="side-item text-center">About Group <span th:text="${group.name}"></span></h4>
                 <p th:text="${group.description}" class="side-item "></p>

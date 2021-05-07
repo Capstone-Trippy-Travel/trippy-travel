@@ -310,7 +310,16 @@ public class TripController {
             activity.setUsersPreviousVote("none");
 
             //will grab all comments from this activity, and pass the quantity to the object to be passed to the page.
-            activity.setCommentCount(commentRepository.findCommentsByActivity_Id(activity.getId()).size());
+            List<Comment> comments=activity.getComments();
+            int totalComments=0;
+            if (comments.size()>0){
+                for (Comment activityComment: comments){
+                    totalComments++;
+                    totalComments+=activityComment.getReplies().size();
+                }
+            }
+
+            activity.setCommentCount(totalComments);
             int voteCount=0;
 
             //will check to see if user is logged in, and will check to see if they are groupMember if so.
