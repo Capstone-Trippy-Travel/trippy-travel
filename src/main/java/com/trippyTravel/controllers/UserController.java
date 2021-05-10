@@ -200,24 +200,6 @@ public class UserController {
         System.out.println("posting updated user");
         editedUser.setId(id);
 
-//        System.out.println(validation.hasErrors());
-//        if (validation.hasErrors()) {
-//            m.addAttribute("errors", validation);
-//            m.addAttribute("user", editedUser);
-//            m.addAttribute("showEditControls", checkEditAuth(editedUser));
-//            if (SecurityContextHolder.getContext().getAuthentication().getName()==null || SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser")){
-//                List<FriendList> friendRequests= new ArrayList<>();
-//                m.addAttribute("friendRequests", friendRequests);
-//                List<Trip> unreadCommentTrips = new ArrayList<>();
-//                m.addAttribute("unreadCommentTrips", unreadCommentTrips);
-//
-//            } else{
-//                User loggedInuser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//                m.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
-//                m.addAttribute("unreadCommentTrips", tripRepository.getUnreadCommentTrips(loggedInuser) );
-//            }
-//            return "users/edit";
-//        }
         System.out.println("edited user username: "+editedUser.getUsername());
         System.out.println("edited user id "+ editedUser.getId());
         String userPassword=usersRepository.getOne(id).getPassword();
@@ -265,10 +247,7 @@ public class UserController {
         return friendRequestResponse;
     }
 
-//    @GetMapping("/users.json")
-//    public @ResponseBody List<User> viewAllUsersWithAjax() {
-//        return usersRepository.findAll();
-//    }
+
 
     @RequestMapping(value="/users.json", method=RequestMethod.POST, produces="application/json")
     public @ResponseBody List<User> viewSearchedUsersWithAjax(@RequestParam("name") String name) {

@@ -43,12 +43,6 @@ public class GroupController {
         this.commentRepository=commentRepository;
     }
 
-    //    @GetMapping(path = "/groups")
-//    public String viewAllGroups(Model viewModel) {
-//        List<Group> allGroups = groupDao.findAll();
-//        viewModel.addAttribute("group", allGroups);
-//        return "groups/index";
-//    }
     @GetMapping(path = "/groups/{id}")
     public String viewGroup(@PathVariable Long id, Model viewModel) {
         Group group =groupDao.getOne(id);
