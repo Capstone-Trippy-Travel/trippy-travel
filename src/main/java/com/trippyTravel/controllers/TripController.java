@@ -144,14 +144,7 @@ public class TripController {
 
         }
         vModel.addAttribute("isGroupMember", isGroupMember);
-//        vModel.addAttribute("comments", commentRepository.getOne(id));
-//        vModel.addAttribute("activity", activityRepository.getOne(1L));
 
-//        List<Comment> commentsList = new ArrayList<>();
-//        ListIterator<Comment> commentListIterator = commentsList.listIterator();
-//        while (commentListIterator.hasNext()) {
-//            System.out.println(commentListIterator.next());
-//        }
         return "Trip/show";
     }
     @PostMapping(path = "/trip/{id}")
@@ -174,13 +167,7 @@ public class TripController {
 
         return "redirect:/trip/"+id;
     }
-    //    @GetMapping(path = "/trip/{id}/edit")
-//    public String updateTrip(@PathVariable Long id ,Model model){
-//        Trip trip=tripRepository.getOne(id);
-//        System.out.println(trip.getName());
-//        model.addAttribute("trip", trip);
-//        return "Trip/edit";
-//    }
+
     @GetMapping("/trip/create")
     public String createTrip(Model model, @RequestParam(required = false) String groupId){
         System.out.println("group "+ groupId);
@@ -219,24 +206,6 @@ public class TripController {
         Trip savedTrip= tripRepository.save(trip);
         savedTrip.setTrip_profile_image(imgUrl);
         tripRepository.save(savedTrip);
-        System.out.println();
-//        Image imageToSave = new Image(ImgUrl, user, saveTrip);
-//        System.out.println(imageToSave.getImage_url());
-//        System.out.println(imageToSave.getUser().getUsername());
-//        System.out.println("about to save image");
-//        imagesRepository.save(imageToSave);
-//        System.out.println("saved image");
-//        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        trips.setGroup(groups);
-//        Image imagesToSave= new Image(image0);
-//        Image image1ToSave= new Image(image1);
-//        imagesToSave.setPost(post);
-//        image1ToSave.setPost(post);
-//      post.setImages(imagesToSave);
-//        imageRepo.save(imagesToSave);
-//        imageRepo.save(image1ToSave);
-//        emailService.prepareAndSend(saveTrip, "new trip","hey where you wanna go");
         return "redirect:/trip/"+savedTrip.getId();
     }
     @GetMapping(path = "/trip/{id}/edit")
@@ -279,11 +248,7 @@ public class TripController {
     public String updateTripForm(@PathVariable Long id ,@ModelAttribute Trip trips, @RequestParam(name="groupId")String groupId, @RequestParam(name = "trip_profile_image",  required = false) String imgUrl) {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Group groups = groupsRepository.getOne(Long.parseLong(groupId));
-//        trips.setGroup(group);
-//        Trip saveTrip= tripRepository.save(trips);
-//        System.out.println();
-//        Image imageToSave = new Image(ImgUrl, user, saveTrip);
-//        Group groups=(Group) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         trips.setId(id);
         trips.setGroup(groups);
         Trip savedTrip = tripRepository.save(trips);

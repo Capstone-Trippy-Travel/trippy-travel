@@ -50,6 +50,7 @@ function initMap() {
 
         jQuery.ajax({
             'url': `/trip.json?tripId=${tripId}`,
+            method: "POST",
             success: function (activities) {
                 console.log(activities)
                 for (let i=0; i<activities.length; i++){

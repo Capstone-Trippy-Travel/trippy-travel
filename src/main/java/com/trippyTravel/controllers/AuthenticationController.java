@@ -74,12 +74,6 @@ public class AuthenticationController {
             }
         }
 
-//        else if (existingEmail == null)
-//        {
-//
-//           return "login"; // input testing is ommitted here to save space
-
-
          List<FriendList> friendRequests= new ArrayList<>();
       m.addAttribute("friendRequests", friendRequests);
       List<Trip> unreadCommentTrips = new ArrayList<>();
