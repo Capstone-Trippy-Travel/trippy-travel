@@ -140,7 +140,7 @@ public class UserController {
             //will check to see if user is the owner of profile, will give them edit access if so.
             if (loggedInuser.getId()==id){
                 viewModel.addAttribute("isProfileUser", true);
-            }g
+            }
             viewModel.addAttribute("friendRequests", friendListRepository.findFriendListByFriendAndStatus(loggedInuser, FriendStatus.PENDING));
             List<Trip> unreadCommentTrips=tripRepository.getUnreadCommentTrips(loggedInuser);
             for (Trip unreadCommentTrip: unreadCommentTrips){
